@@ -1,0 +1,53 @@
+{
+  "agenda": [
+    {
+      "time": "20:00",
+      "title": "Apertura y Alabanza",
+      "description": "Iniciamos con alabanza y adoración profunda a Dios.",
+      "verse": "Salmos 100:2"
+    },
+    {
+      "time": "21:30",
+      "title": "Dinámica de Integración",
+      "description": "Juegos y actividades para conocernos como cuerpo de Cristo.",
+      "verse": ""
+    },
+    {
+      "time": "22:30",
+      "title": "Primera Plenaria: El Llamado",
+      "description": "Mensaje sobre la transformación de nuestra mente.",
+      "verse": "Romanos 12:2"
+    },
+    {
+      "time": "00:00",
+      "title": "Santa Cena y Comunión",
+      "description": "Momento de reflexión y participación de la mesa del Señor.",
+      "verse": "1 Corintios 11:23-26"
+    },
+    {
+      "time": "01:30",
+      "title": "Segunda Plenaria: METANOIA",
+      "description": "Cambiando nuestra forma de vivir.",
+      "verse": "Efesios 4:23-24"
+    },
+    {
+      "time": "03:00",
+      "title": "Sorteo y Rifas (Cyber-Ticket)",
+      "description": "Sorteo de premios especiales para los asistentes.",
+      "verse": ""
+    },
+    {
+      "time": "04:30",
+      "title": "Alabanza de Cierre y Despedida",
+      "description": "Oración final y despedida.",
+      "verse": "Números 6:24-26"
+    }
+  ],
+  "secretCodes": {
+    "GUAZAPA2026": 100,
+    "METANOIA26": 150,
+    "ROMANOS12": 200,
+    "METANOIA": 50,
+    "CRISTOVIVE": 300
+  }
+}

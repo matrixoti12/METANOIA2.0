@@ -1,0 +1,6 @@
+{
+  "name": "Metanoia 2.0 - Evento Juvenil",
+  "description": "Landing page interactiva para la vigilia juvenil Metanoia 2026. Mensaje evangelístico de transformación (Romanos 12:2), Cyber Arcade de minijuegos y Photo Booth en Iglesia Pacto y Bendición, Guazapa.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
