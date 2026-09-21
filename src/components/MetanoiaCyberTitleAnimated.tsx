@@ -46,7 +46,7 @@ export const MetanoiaCyberTitleAnimated: React.FC = () => {
         {/* The 3D Arcade Title Image */}
         <div className="relative w-full overflow-hidden flex items-center justify-center p-1 sm:p-2">
           <img
-            src="/assets/metanoia-3d-title.jpg"
+            src={`${import.meta.env.BASE_URL}assets/metanoia-3d-title.jpg`}
             alt="METANOIA 2.0 3D Retro Arcade Cyberpunk Logo"
             className="w-full h-auto object-cover rounded-2xl transition-transform duration-700 group-hover:scale-[1.03]"
             style={{

@@ -6,7 +6,7 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(() => {
   return {
-    base: '/METANOIA2.0/',
+    base: './',
     plugins: [
       react(), 
       tailwindcss(),
@@ -19,7 +19,7 @@ export default defineConfig(() => {
           theme_color: '#140026',
           icons: [
             {
-              src: '/vite.svg', // Assuming default for now
+              src: 'church-logo.svg',
               sizes: '192x192',
               type: 'image/svg+xml'
             }

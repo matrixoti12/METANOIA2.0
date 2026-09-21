@@ -22,7 +22,8 @@ export const BlurText: React.FC<BlurTextProps> = ({
   rootMargin = '0px',
   onAnimationComplete,
 }) => {
-  const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const safeText = text || '';
+  const elements = animateBy === 'words' ? safeText.split(' ') : safeText.split('');
   const ref = useRef<HTMLParagraphElement>(null);
   const isInView = useInView(ref, { once: true, margin: rootMargin as any });
 
