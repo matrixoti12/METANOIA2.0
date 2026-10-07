@@ -5,7 +5,7 @@ import { playCyberClick, playCyberHover } from '../utils/audio';
 
 export const FooterSection: React.FC = () => {
   return (
-    <footer className="relative border-t border-white/10 bg-[#0a0014] text-purple-200 py-8 px-4 sm:px-8">
+    <footer className="relative border-t border-[#c3a7ff]/20 bg-[#170526] text-purple-200 py-8 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         {/* Left: Metanoia 2026 Brand */}
         <div>
@@ -13,7 +13,7 @@ export const FooterSection: React.FC = () => {
         </div>
 
         {/* Center: Slogan */}
-        <div className="font-cyber text-xs tracking-[0.25em] text-purple-300/80 uppercase">
+        <div className="font-cyber text-xs tracking-[0.25em] text-[#c3a7ff]/90 uppercase">
           UNA MENTE RENOVADA. UN FUTURO TRANSFORMADO.
         </div>
 

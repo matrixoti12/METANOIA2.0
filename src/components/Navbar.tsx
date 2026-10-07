@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0d001a]/95 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.8)] py-3'
+          ? 'bg-[#170526]/95 backdrop-blur-xl border-b border-[#c3a7ff]/20 shadow-[0_10px_35px_rgba(0,0,0,0.85)] py-3'
           : 'bg-transparent py-4 sm:py-5'
       }`}
     >
@@ -105,12 +105,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
                 onClick={() => scrollTo(item.id)}
                 onMouseEnter={() => playCyberHover('subtle')}
                 className={`relative text-xs tracking-[0.2em] font-cyber font-semibold transition-colors duration-200 py-1.5 cursor-pointer touch-manipulation select-none ${
-                  isActive ? 'text-white' : 'text-purple-300/70 hover:text-white'
+                  isActive ? 'text-white' : 'text-purple-200/70 hover:text-white'
                 }`}
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#ff007f] to-[#00f0ff] rounded-full shadow-[0_0_8px_rgba(255,0,127,0.8)]" />
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[#b01cc6] via-[#c3a7ff] to-[#f4b6ff] rounded-full shadow-[0_0_10px_rgba(195,167,255,0.9)]" />
                 )}
               </button>
             );
@@ -124,35 +124,35 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
             onClick={toggleAudio}
             onMouseEnter={() => playCyberHover('subtle')}
             title={soundOn ? 'Desactivar audio' : 'Activar efectos de audio y ambiente cyber'}
-            className="p-2.5 sm:p-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 border border-white/10 text-purple-300 hover:text-[#00f0ff] transition-all cursor-pointer focus:outline-none touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center"
+            className="p-2.5 sm:p-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 border border-[#c3a7ff]/25 text-purple-200 hover:text-[#c3a7ff] transition-all cursor-pointer focus:outline-none touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center shadow-[0_0_12px_rgba(115,11,179,0.25)]"
             aria-label="Alternar audio"
             id="audio-toggle-btn"
           >
             {soundOn ? (
-              <Volume2 className="w-4 h-4 text-[#00f0ff] animate-pulse" />
+              <Volume2 className="w-4 h-4 text-[#c3a7ff] animate-pulse" />
             ) : (
               <VolumeX className="w-4 h-4 text-purple-400" />
             )}
           </button>
 
-          {/* Mobile neon prism menu toggle button */}
+          {/* Mobile menu toggle button */}
           <button
             onClick={() => {
               playCyberClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="md:hidden p-2.5 rounded-xl bg-[#140026] active:scale-90 border border-[#00f0ff]/40 text-purple-200 hover:text-white focus:outline-none cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)] group transition-all"
-            aria-label="Abrir menú prisma"
+            className="md:hidden p-2.5 rounded-xl bg-[#1e0735] active:scale-90 border border-[#c3a7ff]/40 text-purple-200 hover:text-white focus:outline-none cursor-pointer touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center shadow-[0_0_15px_rgba(195,167,255,0.25)] group transition-all"
+            aria-label="Abrir menú"
             id="mobile-nav-toggle"
-            title="Menú Prisma Metanoia"
+            title="Menú Metanoia"
           >
             {mobileMenuOpen ? (
-              <X className="w-5 h-5 text-[#ff007f]" />
+              <X className="w-5 h-5 text-[#f4b6ff]" />
             ) : (
               <div className="relative flex items-center justify-center w-6 h-6">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#00f0ff] stroke-2 drop-shadow-[0_0_8px_#00f0ff] transition-transform duration-500 group-hover:rotate-180">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#c3a7ff] stroke-2 drop-shadow-[0_0_8px_#c3a7ff] transition-transform duration-500 group-hover:rotate-180">
                   <polygon points="12 2, 22 21, 2 21" strokeLinejoin="round" />
-                  <polygon points="12 8, 17 17, 7 17" stroke="#ff007f" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(255,0,127,0.25)" />
+                  <polygon points="12 8, 17 17, 7 17" stroke="#b01cc6" strokeWidth="1.5" strokeLinejoin="round" fill="rgba(176,28,198,0.3)" />
                 </svg>
               </div>
             )}
@@ -162,7 +162,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 mx-4 p-4 rounded-2xl bg-[#140026]/98 border border-[#ff007f]/30 backdrop-blur-2xl space-y-2 shadow-2xl animate-in fade-in slide-in-from-top-2">
+        <div className="md:hidden mt-2 mx-4 p-4 rounded-2xl bg-[#170526]/98 border border-[#c3a7ff]/30 backdrop-blur-2xl space-y-2 shadow-2xl animate-in fade-in slide-in-from-top-2">
+          <div className="flex justify-center pb-2 border-b border-purple-500/20 mb-2">
+            <MetanoiaLogo size="sm" />
+          </div>
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -171,7 +174,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
             >
               <span>{item.label}</span>
               {currentSection === item.id ? (
-                <span className="w-2 h-2 rounded-full bg-[#ff007f] shadow-[0_0_8px_#ff007f]" />
+                <span className="w-2 h-2 rounded-full bg-[#c3a7ff] shadow-[0_0_8px_#c3a7ff]" />
               ) : (
                 <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
               )}

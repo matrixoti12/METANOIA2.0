@@ -1,219 +1,157 @@
 import React from 'react';
+import { MetanoiaRefinedHeroLogo } from './MetanoiaRefinedHeroLogo';
 import { HeroCrystal3D } from './HeroCrystal3D';
-import { MetanoiaGsap3DTitle } from './MetanoiaGsap3DTitle';
-import { Camera, Gamepad2, Sparkles, MapPin, ShieldCheck, Music, Image as ImageIcon } from 'lucide-react';
-import { playCyberClick, playCyberHover, playCyberTransition } from '../utils/audio';
+import { Calendar, Clock, MapPin, Sparkles, Music, ShieldCheck, Zap } from 'lucide-react';
 
 interface HeroSectionProps {
   userName?: string;
   onOpenPosterModal?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ userName, onOpenPosterModal }) => {
-  const handleScrollTo = (id: string) => {
-    playCyberClick();
-    playCyberTransition();
-    const el = document.getElementById(id);
-    if (el) {
-      const yOffset = -70;
-      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
-
+export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
   return (
-    <section
-      id="inicio"
-      className="relative min-h-[95vh] pt-20 sm:pt-28 pb-14 sm:pb-20 px-3.5 sm:px-8 max-w-7xl mx-auto flex flex-col justify-between overflow-hidden"
-    >
-      {/* Vibrant Ambient Cyberpunk Neon Auroras matching the official poster palette */}
-      <div className="absolute top-10 left-5 w-96 h-96 bg-[#7b2cbf]/25 rounded-full blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: '6s' }} />
-      <div className="absolute top-36 right-5 w-[420px] h-[420px] bg-[#00f0ff]/18 rounded-full blur-[110px] pointer-events-none animate-pulse" style={{ animationDuration: '8s', animationDelay: '1s' }} />
-      <div className="absolute -bottom-10 left-1/3 w-80 h-80 bg-[#c084fc]/15 rounded-full blur-[90px] pointer-events-none animate-pulse" style={{ animationDuration: '7s', animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[#4a044e]/20 rounded-full blur-[130px] pointer-events-none" />
+    <section id="inicio" className="relative pt-20 sm:pt-24 pb-16 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden">
+      
+      {/* ════════════════════════════════════════════════════════════════════
+          1. LA PORTADA (LOGO REFINADO INTERACTIVO + TEMA "RELOAD")
+          ════════════════════════════════════════════════════════════════════ */}
+      <div className="min-h-[60vh] sm:min-h-[68vh] flex flex-col items-center justify-center text-center relative z-10 py-4 sm:py-6">
+        
+        {/* Lema y Palabra del Año: RELOAD */}
+        <div className="mb-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#b01cc6]/30 via-[#730bb3]/40 to-[#4331ec]/30 border border-[#c3a7ff]/50 backdrop-blur-xl shadow-[0_0_25px_rgba(195,167,255,0.4)] animate-pulse">
+          <Zap className="w-3.5 h-3.5 text-[#f4b6ff]" />
+          <span className="font-cyber text-xs tracking-[0.25em] text-[#e4c5ff] font-extrabold uppercase">
+            METANOIA 2026 // RELOAD
+          </span>
+          {userName && (
+            <>
+              <span className="text-white/40">•</span>
+              <span className="text-xs font-mono text-white/90">HOLA, {userName}</span>
+            </>
+          )}
+        </div>
 
-      {/* Floating 3D Polyhedron from official poster (Subtle 3D diorama background) */}
-      <div className="hidden lg:block absolute top-20 right-10 w-28 h-28 pointer-events-none opacity-40 animate-float" style={{ animationDuration: '7s' }}>
-        <img
-          src="/assets/crystal-polyhedron.png"
-          alt="3D Crystal"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(168,85,247,0.6)]"
-        />
-      </div>
+        {/* ── EL LOGO OFICIAL REFINADO COMO PORTADA ── */}
+        <div className="w-full max-w-3xl mx-auto px-2">
+          <MetanoiaRefinedHeroLogo />
+        </div>
 
-      <div className="hidden md:block absolute bottom-24 left-8 w-20 h-20 pointer-events-none opacity-30 animate-float" style={{ animationDuration: '9s', animationDelay: '2s' }}>
-        <img
-          src="/assets/crystal-polyhedron.png"
-          alt="3D Crystal"
-          className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(0,240,255,0.5)] rotate-45"
-        />
-      </div>
-
-      {/* Main Hero Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center my-auto relative z-10">
-        {/* Left Column: Big Typography & Dynamic Messaging */}
-        <div className="lg:col-span-7 flex flex-col justify-center text-left">
+        {/* ── Subtítulo refinado sin fuentes robóticas ── */}
+        <div className="text-center mt-4 sm:mt-6 select-none max-w-2xl mx-auto">
+          <h1 className="sr-only">METANOIA 2026 · RELOAD · Pablo Rosales</h1>
           
-          {/* Cybernetic HUD Eyebrow with personalized greeting */}
-          <div className="flex items-center gap-2 sm:gap-2.5 mb-2.5 select-none flex-wrap">
-            <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#00f0ff] animate-ping" />
-            <span className="font-mono-cyber text-[10px] sm:text-xs tracking-[0.25em] text-[#00f0ff] uppercase font-bold">
-              [ PROTOCOLO // METANOIA 2026 ]
-            </span>
-            <span className="text-white/30 font-mono text-xs">•</span>
-            {userName ? (
-              <span className="font-mono-cyber text-[10px] sm:text-xs tracking-[0.2em] text-[#c084fc] uppercase font-bold flex items-center gap-1.5 bg-purple-950/60 px-2.5 py-0.5 rounded-full border border-purple-500/40 animate-pulse">
-                <Sparkles className="w-3 h-3 text-[#c084fc]" />
-                BIENVENIDO, {userName}
-              </span>
-            ) : (
-              <span className="font-mono-cyber text-[9px] sm:text-[11px] tracking-[0.2em] text-purple-300/90 uppercase">
-                GUAZAPA • EN VIVO
-              </span>
-            )}
-          </div>
-
-          {/* MASTERCLASS GSAP 3D ARCADE RETRO-CYBER TITLE */}
-          <div className="mb-3">
-            <MetanoiaGsap3DTitle />
-          </div>
-
-          {/* Guest Artist & Speaker Highlight (Pablo Rosales) */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#160736]/90 border border-purple-500/40 backdrop-blur-md mb-3 max-w-fit shadow-[0_0_15px_rgba(168,85,247,0.25)]">
-            <Music className="w-4 h-4 text-[#f472b6] animate-pulse" />
-            <span className="font-mono-cyber text-[10px] sm:text-xs text-[#c084fc] font-bold uppercase tracking-wider">
-              EN LA MÚSICA Y PALABRA:
-            </span>
-            <span className="font-cyber text-xs sm:text-sm text-white font-extrabold tracking-wide drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
-              PABLO ROSALES
-            </span>
-          </div>
-
-          {/* Slogan & Evangelistic Subtitle */}
-          <p className="text-purple-200/90 font-body text-sm sm:text-base max-w-xl my-2 leading-relaxed">
-            Una noche consagrada para quebrar esquemas, renovar tu mente y experimentar el poder transformador de Cristo.
-            <span className="text-[#00f0ff] font-semibold block mt-1 font-mono text-xs sm:text-sm">
-              «No os conforméis a este siglo... transformaos» — Romanos 12:2
-            </span>
+          <p className="font-cyber text-base sm:text-xl md:text-2xl tracking-[0.2em] text-white uppercase font-extrabold drop-shadow-[0_0_20px_rgba(195,167,255,0.7)]">
+            NOCHE DE TRANSFORMACIÓN
           </p>
 
-          {/* Date & Core Pillars Block (OFFICIAL 28 NOVIEMBRE) */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-6 pb-4 sm:pb-6 pt-1">
-            {/* Left Block: 28 NOVIEMBRE 2026 */}
-            <div
-              className="flex flex-col select-none relative group cursor-default bg-[#10052c]/90 border border-purple-500/45 px-4 py-2.5 rounded-2xl backdrop-blur-md hover:border-[#c084fc] transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)]"
-              onMouseEnter={() => playCyberHover('subtle')}
-            >
-              <div className="flex items-center gap-3">
-                <span className="font-cyber-heavy text-4xl sm:text-5xl text-[#00f0ff] leading-none tracking-tight drop-shadow-[0_0_15px_rgba(0,240,255,0.7)]">
-                  28
-                </span>
-                <div className="flex flex-col">
-                  <span className="font-cyber text-xs sm:text-sm font-bold tracking-[0.2em] text-white uppercase">
-                    NOVIEMBRE
-                  </span>
-                  <span className="font-cyber text-xs sm:text-sm font-bold tracking-[0.25em] text-[#c084fc] uppercase drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]">
-                    2026 • 06:00 PM
+          <p className="font-body text-xs sm:text-sm md:text-base tracking-[0.16em] text-[#c3a7ff] font-semibold mt-1.5 drop-shadow-[0_0_10px_rgba(195,167,255,0.5)]">
+            SÁBADO 28 NOVIEMBRE 2026 · 06:00 PM · GUAZAPA
+          </p>
+
+          <p className="text-purple-200/80 text-xs sm:text-sm font-body italic mt-2 max-w-lg mx-auto">
+            «No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento» — Romanos 12:2
+          </p>
+        </div>
+
+        {/* Indicador suave que une la portada con el invitado y el icosaedro */}
+        <div className="mt-8 flex flex-col items-center justify-center select-none opacity-80">
+          <div className="w-5 h-7 rounded-full border-2 border-[#c3a7ff]/50 flex items-start justify-center p-1 shadow-[0_0_12px_rgba(195,167,255,0.3)]">
+            <span className="w-1 h-2 rounded-full bg-[#c3a7ff] animate-bounce" />
+          </div>
+        </div>
+      </div>
+
+      {/* ════════════════════════════════════════════════════════════════════
+          2. IMAGEN PURA DEL INVITADO (SIN RECUADROS RÍGIDOS) + ICOSAEDRO 3D
+          ════════════════════════════════════════════════════════════════════ */}
+      <div className="relative z-10 pt-4 pb-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Columna Izquierda (Cols 6): Imagen Pura de Pablo Rosales + Info Bíblica Luminous */}
+          <div className="lg:col-span-6 flex flex-col items-center lg:items-start text-center lg:text-left">
+            
+            {/* Imagen pura del invitado (sin recuadros rígidos ni dobles marcos) */}
+            <div className="relative w-full max-w-[380px] sm:max-w-[420px] mx-auto lg:mx-0 flex flex-col items-center">
+              
+              {/* Resplandor cósmico orgánico etéreo */}
+              <div className="absolute -inset-6 bg-gradient-to-tr from-[#b01cc6]/40 via-[#c3a7ff]/30 to-[#4331ec]/40 rounded-full blur-[70px] pointer-events-none opacity-80 animate-pulse" />
+
+              {/* Imagen pura con silueta orgánica y desvanecimiento suave */}
+              <div className="relative w-full aspect-[4/4.2] rounded-[40px] overflow-hidden group shadow-[0_25px_60px_rgba(23,5,38,0.7)]">
+                <img
+                  src="/assets/metanoia-poster-pablo-rosales.jpg"
+                  alt="Pablo Rosales • Ministro de la Música y la Palabra en Metanoia 2026 RELOAD"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                
+                {/* Desvanecimiento inferior orgánico para fundir con el fondo cósmico */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#170526] via-[#170526]/30 via-40% to-transparent pointer-events-none" />
+
+                {/* Sello luminoso flotante orgánico */}
+                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between px-4 py-2.5 rounded-2xl bg-[#1e0735]/80 border border-[#c3a7ff]/35 backdrop-blur-xl">
+                  <div className="flex items-center gap-2.5">
+                    <Music className="w-4 h-4 text-[#f4b6ff] animate-pulse" />
+                    <span className="font-cyber text-sm text-white font-extrabold tracking-wide uppercase">
+                      PABLO ROSALES
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-cyber text-[#e4c5ff] font-bold uppercase tracking-wider bg-[#b01cc6]/30 px-2.5 py-0.5 rounded-full border border-[#c3a7ff]/30">
+                    EN VIVO 2026
                   </span>
                 </div>
               </div>
-            </div>
 
-            {/* Right Block: Three Pillars */}
-            <div className="space-y-1 font-cyber text-xs sm:text-sm tracking-[0.16em] sm:tracking-[0.2em] font-bold text-purple-100 uppercase">
-              <div className="hover:text-[#00f0ff] transition-colors cursor-default flex items-center gap-2" onMouseEnter={() => playCyberHover('subtle')}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" /> UN ENCUENTRO REAL.
+              {/* Ficha descriptiva pura y luminosa */}
+              <div className="mt-5 w-full space-y-3">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase">
+                  <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff]" />
+                  <span>MINISTRACIÓN • ADORACIÓN PROFUNDA • PALABRA VIVA</span>
+                </div>
+
+                {/* Cita de Romanos 12:2 con diseño luminoso en tarjeta de cristal */}
+                <div className="p-4 rounded-2xl glass-card-amethyst border border-[#c3a7ff]/30 text-left">
+                  <blockquote className="font-body text-xs sm:text-sm text-purple-100 italic leading-relaxed">
+                    «No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta.»
+                  </blockquote>
+                  <span className="font-cyber text-[11px] font-bold text-[#f4b6ff] tracking-widest mt-2 block uppercase">
+                    — ROMANOS 12:2
+                  </span>
+                </div>
+
+                {/* Coordenadas esenciales del evento */}
+                <div className="grid grid-cols-2 gap-2.5 pt-1 text-left">
+                  <div className="p-3 rounded-2xl bg-[#230a42]/65 border border-[#c3a7ff]/30 backdrop-blur-md">
+                    <span className="text-[10px] font-cyber text-[#c3a7ff] block uppercase tracking-wider">FECHA</span>
+                    <span className="font-cyber text-xs sm:text-sm text-white font-bold">28 Noviembre 2026</span>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#230a42]/65 border border-[#c3a7ff]/30 backdrop-blur-md">
+                    <span className="text-[10px] font-cyber text-[#c3a7ff] block uppercase tracking-wider">HORA</span>
+                    <span className="font-cyber text-xs sm:text-sm text-[#f4b6ff] font-bold">06:00 PM</span>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#230a42]/65 border border-[#c3a7ff]/30 backdrop-blur-md">
+                    <span className="text-[10px] font-cyber text-[#c3a7ff] block uppercase tracking-wider">UBICACIÓN</span>
+                    <span className="font-cyber text-xs sm:text-sm text-white font-bold">IGLEPACBEN AD Guazapa</span>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-[#230a42]/65 border border-[#c3a7ff]/30 backdrop-blur-md">
+                    <span className="text-[10px] font-cyber text-[#c3a7ff] block uppercase tracking-wider">ACCESO</span>
+                    <span className="font-cyber text-xs sm:text-sm text-[#86efac] font-bold">Entrada Totalmente Libre</span>
+                  </div>
+                </div>
               </div>
-              <div className="hover:text-[#c084fc] transition-colors cursor-default flex items-center gap-2" onMouseEnter={() => playCyberHover('subtle')}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#c084fc]" /> UNA DECISIÓN RADICAL.
-              </div>
-              <div className="hover:text-[#f472b6] transition-colors cursor-default flex items-center gap-2" onMouseEnter={() => playCyberHover('subtle')}>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#f472b6]" /> UNA MENTE RENOVADA.
-              </div>
+
             </div>
           </div>
 
-          {/* Action Pills & Fast Navigation (Touch friendly for mobile) */}
-          <div className="space-y-3 pt-1">
-            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
-              {onOpenPosterModal && (
-                <button
-                  onClick={onOpenPosterModal}
-                  onMouseEnter={() => playCyberHover('crisp')}
-                  className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] hover:from-[#a855f7] hover:to-[#9333ea] active:scale-95 border border-purple-400 text-white text-xs font-cyber tracking-widest uppercase shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all cursor-pointer touch-manipulation min-h-[44px]"
-                  id="hero-btn-poster"
-                >
-                  <ImageIcon className="w-4 h-4 text-[#00f0ff]" />
-                  <span>AFICHE OFICIAL (PABLO ROSALES)</span>
-                </button>
-              )}
-
-              <button
-                onClick={() => handleScrollTo('proposito')}
-                onMouseEnter={() => playCyberHover('crisp')}
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 border border-purple-500/40 text-purple-200 hover:text-white text-xs font-cyber tracking-widest uppercase transition-all cursor-pointer touch-manipulation min-h-[44px]"
-                id="hero-btn-proposito"
-              >
-                <Sparkles className="w-4 h-4 text-[#00f0ff]" />
-                <span>PROPÓSITO & PALABRA</span>
-              </button>
-
-              <button
-                onClick={() => handleScrollTo('minijuegos')}
-                onMouseEnter={() => playCyberHover('crisp')}
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 border border-purple-500/40 text-purple-200 hover:text-white text-xs font-cyber tracking-widest uppercase transition-all cursor-pointer touch-manipulation min-h-[44px]"
-                id="hero-btn-minijuegos"
-              >
-                <Gamepad2 className="w-4 h-4 text-[#f472b6]" />
-                <span>CYBER ARCADE (JUEGOS)</span>
-              </button>
-
-              <button
-                onClick={() => handleScrollTo('photospot')}
-                onMouseEnter={() => playCyberHover('crisp')}
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 active:scale-95 border border-purple-500/40 text-purple-200 hover:text-white text-xs font-cyber tracking-widest uppercase transition-all cursor-pointer touch-manipulation min-h-[44px]"
-                id="hero-btn-photospot"
-              >
-                <Camera className="w-4 h-4 text-[#c084fc]" />
-                <span>PHOTO BOOTH 2026</span>
-              </button>
-            </div>
-
-            {/* Quick Badges */}
-            <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono-cyber text-purple-300/80 uppercase pt-1">
-              <span className="flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-[#00f0ff]" /> IGLEPACBEN AD Guazapa
-              </span>
-              <span>•</span>
-              <span className="flex items-center gap-1 text-[#00ff9d]">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#00ff9d]" /> Entrada Totalmente Libre
-              </span>
+          {/* Columna Derecha (Cols 6): El Icosaedro 3D que entrega textos bíblicos */}
+          <div className="lg:col-span-6 flex flex-col items-center justify-center">
+            <div className="w-full max-w-[480px]">
+              <HeroCrystal3D className="w-full" />
             </div>
           </div>
-        </div>
 
-        {/* Right Column: Floating 3D Crystal & Scripture Word Console */}
-        <div className="lg:col-span-5 relative flex flex-col items-center justify-center mt-6 lg:mt-0">
-          <HeroCrystal3D className="w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[460px]" />
         </div>
       </div>
 
-      {/* Bottom Center: Scroll Mouse Pill & Explore Label */}
-      <div className="mt-6 sm:mt-8 flex flex-col items-center justify-center text-center select-none z-10">
-        <button
-          onClick={() => handleScrollTo('proposito')}
-          onMouseEnter={() => playCyberHover('subtle')}
-          className="group flex flex-col items-center gap-2 text-purple-300/80 hover:text-white transition-colors cursor-pointer focus:outline-none touch-manipulation min-h-[44px] justify-center"
-          aria-label="Deslizar hacia propósito"
-        >
-          <div className="w-5 h-8 rounded-full border-2 border-purple-400/60 group-hover:border-[#00f0ff] flex items-start justify-center p-1 transition-colors group-hover:shadow-[0_0_15px_rgba(0,240,255,0.4)]">
-            <span className="w-1 h-2 rounded-full bg-[#00f0ff] animate-bounce shadow-[0_0_8px_#00f0ff]" />
-          </div>
-          <span className="text-[10px] sm:text-xs font-cyber tracking-[0.25em] text-purple-300/70 group-hover:text-white uppercase transition-colors">
-            DESLIZA PARA CONOCER EL MENSAJE
-          </span>
-        </button>
-      </div>
     </section>
   );
 };

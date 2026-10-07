@@ -96,18 +96,19 @@ export const ScrollWorldHud: React.FC<ScrollWorldHudProps> = ({ onOpenPosterModa
         }`}
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <div className="rounded-2xl p-2 bg-[#0d0422]/95 backdrop-blur-2xl border border-purple-500/40 shadow-[0_10px_35px_rgba(0,0,0,0.8),0_0_20px_rgba(168,85,247,0.3)] flex items-center justify-between gap-1.5">
+        <div className="rounded-2xl p-2 bg-[#170526]/95 backdrop-blur-2xl border border-[#c3a7ff]/30 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(176,28,198,0.3)] flex items-center justify-between gap-1.5">
           {/* Beat Indicator Badge */}
-          <div className="flex items-center gap-1.5 pl-2 pr-1 py-1 rounded-xl bg-purple-950/60 border border-purple-500/30 flex-shrink-0">
-            <span
-              className="w-2 h-2 rounded-full animate-ping"
-              style={{ backgroundColor: activeBeat.accentColor }}
+          <div className="flex items-center gap-1.5 pl-2 pr-2 py-1 rounded-xl bg-[#1e0735]/80 border border-[#c3a7ff]/30 flex-shrink-0">
+            <img
+              src="/assets/metanoia-emblem-square.png"
+              alt="Metanoia Logo"
+              className="w-4 h-4 object-contain filter drop-shadow-[0_0_6px_#c3a7ff]"
             />
             <span className="font-mono-cyber text-[10px] sm:text-xs font-bold text-white tracking-widest">
               {activeBeat.number}
             </span>
             <span className="text-white/40 text-[10px]">/</span>
-            <span className="font-mono-cyber text-[10px] text-purple-300 font-bold">
+            <span className="font-mono-cyber text-[10px] text-[#c3a7ff] font-bold">
               05
             </span>
           </div>
@@ -125,8 +126,8 @@ export const ScrollWorldHud: React.FC<ScrollWorldHudProps> = ({ onOpenPosterModa
                   onMouseEnter={() => playCyberHover('subtle')}
                   className={`relative p-2 rounded-xl transition-all touch-manipulation cursor-pointer min-w-[38px] min-h-[38px] flex items-center justify-center ${
                     isActive
-                      ? 'bg-purple-600/40 text-white border border-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.5)] scale-105'
-                      : 'text-purple-300/70 hover:text-white hover:bg-white/5 border border-transparent'
+                      ? 'bg-[#730bb3]/60 text-white border border-[#c3a7ff] shadow-[0_0_12px_rgba(195,167,255,0.6)] scale-105'
+                      : 'text-purple-200/70 hover:text-white hover:bg-white/5 border border-transparent'
                   }`}
                   title={`Ir a ${beat.label}`}
                   aria-label={beat.label}
@@ -144,10 +145,10 @@ export const ScrollWorldHud: React.FC<ScrollWorldHudProps> = ({ onOpenPosterModa
               onOpenPosterModal();
             }}
             onMouseEnter={() => playCyberHover('crisp')}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] hover:from-[#a855f7] hover:to-[#9333ea] text-white font-cyber text-[10px] font-bold tracking-wider uppercase border border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] flex-shrink-0 cursor-pointer min-h-[38px] touch-manipulation active:scale-95"
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-[10px] font-bold tracking-wider uppercase border border-[#c3a7ff]/50 shadow-[0_0_15px_rgba(176,28,198,0.4)] flex-shrink-0 cursor-pointer min-h-[38px] touch-manipulation active:scale-95"
             title="Ver afiche oficial del evento"
           >
-            <ImageIcon className="w-3.5 h-3.5" />
+            <ImageIcon className="w-3.5 h-3.5 text-[#f4b6ff]" />
             <span className="hidden xs:inline">AFICHE</span>
           </button>
         </div>

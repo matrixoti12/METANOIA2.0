@@ -16,8 +16,10 @@ import {
   Brain,
   Share2,
   Check,
+  Grid,
+  Lightbulb,
   Award,
-  Ticket,
+  Music,
 } from 'lucide-react';
 import {
   playCyberClick,
@@ -58,6 +60,14 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
   },
   {
     id: 2,
+    question: '¿Cuál es la palabra clave y lema oficial de METANOIA para este año 2026?',
+    scripture: 'Lema Oficial 2026',
+    options: ['RELOAD', 'RESTART', 'ONLINE', 'UPGRADE'],
+    correctIndex: 0,
+    explanation: '¡RELOAD! Reiniciar nuestra mente y corazón bajo el Espíritu Santo, desarmando la ansiedad y renovando el entendimiento.',
+  },
+  {
+    id: 3,
     question: 'Según Romanos 12:2, ¿cómo se logra la transformación del creyente?',
     scripture: 'Romanos 12:2',
     options: [
@@ -70,7 +80,7 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     explanation: '«Transformaos por medio de la renovación de vuestro entendimiento» para comprobar la buena, agradable y perfecta voluntad divina.',
   },
   {
-    id: 3,
+    id: 4,
     question: '¿Quién es el invitado especial en la música y la palabra para Metanoia 2026 en Guazapa?',
     scripture: '28 Noviembre • Guazapa',
     options: [
@@ -80,18 +90,18 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
       'Jesús Adrián Romero',
     ],
     correctIndex: 0,
-    explanation: 'Pablo Rosales ministrará en la alabanza y la predicación este 28 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa.',
+    explanation: 'Pablo Rosales ministrará en la alabanza y la predicación este sábado 28 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa.',
   },
   {
-    id: 4,
+    id: 5,
     question: '¿Qué apóstol experimentó una Metanoia radical camino a Damasco?',
     scripture: 'Hechos 9',
     options: ['Pedro', 'Tomás', 'Saulo de Tarso (Pablo)', 'Bernabé'],
     correctIndex: 2,
-    explanation: 'Saulo pasó de perseguidor a apóstol tras encontrarse personalmente con la luz de Jesucristo.',
+    explanation: 'Saulo pasó de perseguidor a apóstol tras encontrarse personalmente con la luz resucitada de Jesucristo.',
   },
   {
-    id: 5,
+    id: 6,
     question: 'Según Filipenses 4:8, ¿en qué cosas nos manda la Biblia enfocar nuestros pensamientos?',
     scripture: 'Filipenses 4:8',
     options: [
@@ -104,7 +114,7 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     explanation: 'Dios nos da un filtro mental de excelencia: enfocar nuestra mente en Su verdad, pureza y lo digno de alabanza.',
   },
   {
-    id: 6,
+    id: 7,
     question: '¿Qué promete 2 Corintios 5:17 a quien decide entregarse a Cristo?',
     scripture: '2 Corintios 5:17',
     options: [
@@ -114,10 +124,10 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
       'Que no necesitará volver a orar',
     ],
     correctIndex: 1,
-    explanation: 'En Cristo tu código es reiniciado: el pasado queda cancelado en la cruz y renaces como una nueva criatura.',
+    explanation: 'En Cristo tu vida tiene un RELOAD total: el pasado queda cancelado en la cruz y renaces como una nueva criatura.',
   },
   {
-    id: 7,
+    id: 8,
     question: '¿Con qué arma espiritual derribamos los argumentos y mentiras del enemigo?',
     scripture: '2 Corintios 10:5',
     options: [
@@ -130,7 +140,7 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     explanation: '«Derribando argumentos... y llevando cautivo todo pensamiento a la obediencia a Cristo» (2 Corintios 10:5).',
   },
   {
-    id: 8,
+    id: 9,
     question: '¿Qué consejo le dio Pablo al joven Timoteo en 1 Timoteo 4:12?',
     scripture: '1 Timoteo 4:12',
     options: [
@@ -143,81 +153,127 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     explanation: 'La juventud está llamada a ser punta de lanza: ejemplo en palabra, conducta, amor, espíritu, fe y pureza.',
   },
   {
-    id: 9,
-    question: '¿Qué profetizó Jeremías respecto a los pensamientos de Dios para nuestras vidas?',
-    scripture: 'Jeremías 29:11',
-    options: [
-      'Pensamientos de juicio estricto',
-      'Pensamientos de paz y un porvenir lleno de esperanza',
-      'Pensamientos de olvido',
-      'Pensamientos de temor',
-    ],
-    correctIndex: 1,
-    explanation: '«Porque yo sé los pensamientos que tengo acerca de vosotros: pensamientos de paz, y no de mal, para daros el fin que esperáis.»',
-  },
-  {
     id: 10,
-    question: '¿Cuál es la fecha y hora oficial del gran evento METANOIA 2026 en IGLEPACBEN AD Guazapa?',
+    question: '¿Cuál es la fecha, hora y lugar oficial de METANOIA 2026?',
     scripture: 'Gran Noche de Poder',
     options: [
-      '15 de Octubre • 07:00 PM',
-      '28 de Noviembre • 06:00 PM',
-      '10 de Diciembre • 05:00 PM',
-      '31 de Diciembre • 08:00 PM',
+      '15 de Octubre • 07:00 PM • San Salvador',
+      '28 de Noviembre • 06:00 PM • IGLEPACBEN AD Guazapa',
+      '10 de Diciembre • 05:00 PM • Santa Ana',
+      '31 de Diciembre • 08:00 PM • San Miguel',
     ],
     correctIndex: 1,
-    explanation: '¡Sábado 28 de Noviembre a las 6:00 PM! Una noche para transformar la historia de nuestra generación.',
+    explanation: '¡Sábado 28 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa! Entrada totalmente libre.',
   },
 ];
 
 /* -------------------------------------------------------------------------- */
-/* MINIGAME 2: "GUARDIÁN DEL PENSAMIENTO (FILIPENSES 4:8)"                    */
+/* CRUCIGRAMA RELOAD DATA (7x7 GRID, 5 BIBLE & EVENT WORDS)                  */
 /* -------------------------------------------------------------------------- */
 
-interface ThoughtItem {
-  id: string;
-  text: string;
-  type: 'good' | 'bad' | 'powerup';
-  x: number;
-  y: number;
-  speed: number;
+interface CrosswordClue {
+  number: number;
+  word: string;
+  direction: 'across' | 'down';
+  row: number;
+  col: number;
+  length: number;
+  hint: string;
+  reference: string;
 }
 
-const GOOD_THOUGHTS = [
-  'Verdad',
-  'Paz de Dios',
-  'Gracia',
-  'Pureza',
-  'Esperanza',
-  'Amor Ágape',
-  'Perdón',
-  'Propósito',
-  'Fe Viva',
-  'Mente de Cristo',
-  'Identidad',
-  'Gozo',
+const CROSSWORD_CLUES: CrosswordClue[] = [
+  {
+    number: 1,
+    word: 'RELOAD',
+    direction: 'down',
+    row: 0,
+    col: 2,
+    length: 6,
+    hint: 'Palabra oficial de Metanoia 2026: Reiniciar mente y corazón en Cristo.',
+    reference: 'Lema 2026',
+  },
+  {
+    number: 2,
+    word: 'MENTE',
+    direction: 'across',
+    row: 1,
+    col: 1,
+    length: 5,
+    hint: 'Lo que Romanos 12:2 manda renovar: "...por la renovación de vuestro entendimiento".',
+    reference: 'Romanos 12:2',
+  },
+  {
+    number: 3,
+    word: 'PABLO',
+    direction: 'across',
+    row: 4,
+    col: 1,
+    length: 5,
+    hint: 'Ministro de adoración y predicación invitado a Guazapa este 28 de Noviembre.',
+    reference: 'Invitado Especial',
+  },
+  {
+    number: 4,
+    word: 'FE',
+    direction: 'down',
+    row: 0,
+    col: 5,
+    length: 2,
+    hint: 'Hebreos 11:1: "Certeza de lo que se espera, convicción de lo que no se ve".',
+    reference: 'Hebreos 11:1',
+  },
+  {
+    number: 5,
+    word: 'PAZ',
+    direction: 'down',
+    row: 4,
+    col: 1,
+    length: 3,
+    hint: 'Filipenses 4:7: "Y la ___ de Dios, que sobrepasa todo entendimiento".',
+    reference: 'Filipenses 4:7',
+  },
 ];
 
-const BAD_THOUGHTS = [
-  'Ansiedad',
-  'Mentira',
-  'Rencor',
-  'Miedo',
-  'Comparación',
-  'Culpa',
-  'Orgullo',
-  'Apatía',
-  'Chisme',
-  'Envidia',
-];
+// Map 7x7 grid cells: key "r-c", value { letter, clueNumbers: number[] }
+interface CrosswordCellInfo {
+  letter: string;
+  clues: number[];
+  startNumber?: number;
+}
 
-const POWERUP_THOUGHTS = [
-  '🕊️ Espíritu Santo (+1 Escudo)',
-  '⚡ Palabra Viva (+100 Pts)',
-];
+const buildCrosswordGridMap = () => {
+  const map: Record<string, CrosswordCellInfo> = {};
+
+  CROSSWORD_CLUES.forEach((clue) => {
+    for (let i = 0; i < clue.length; i++) {
+      const r = clue.direction === 'down' ? clue.row + i : clue.row;
+      const c = clue.direction === 'across' ? clue.col + i : clue.col;
+      const key = `${r}-${c}`;
+      const char = clue.word[i];
+
+      if (!map[key]) {
+        map[key] = {
+          letter: char,
+          clues: [clue.number],
+          startNumber: i === 0 ? clue.number : undefined,
+        };
+      } else {
+        map[key].clues.push(clue.number);
+        if (i === 0) {
+          map[key].startNumber = clue.number;
+        }
+      }
+    }
+  });
+
+  return map;
+};
+
+const CROSSWORD_CELL_MAP = buildCrosswordGridMap();
 
 /* -------------------------------------------------------------------------- */
-/* MINIGAME 3: "MATRIZ DE MEMORIA BÍBLICA"                                    */
+/* MEMORY PAIRS DATA                                                          */
 /* -------------------------------------------------------------------------- */
 
 interface MemoryCard {
@@ -232,7 +288,7 @@ interface MemoryCard {
 
 const MEMORY_DEFINITIONS = [
   { pairId: 1, label: 'Romanos 12:2', icon: '📖', sub: 'Mente Renovada' },
-  { pairId: 1, label: 'Metanoia', icon: '⚡', sub: 'Giro de 180°' },
+  { pairId: 1, label: 'RELOAD', icon: '⚡', sub: 'Giro de 180°' },
   { pairId: 2, label: 'La Cruz', icon: '✝️', sub: 'Amor y Perdón' },
   { pairId: 2, label: 'Salvación', icon: '🕊️', sub: 'Gracia Gratuita' },
   { pairId: 3, label: 'Espíritu Santo', icon: '🔥', sub: 'Fuego y Poder' },
@@ -246,7 +302,132 @@ const MEMORY_DEFINITIONS = [
 ];
 
 export const CyberArcadeSection: React.FC = () => {
-  const [activeGame, setActiveGame] = useState<'trivia' | 'thoughts' | 'memory'>('trivia');
+  const [activeGame, setActiveGame] = useState<'crossword' | 'trivia' | 'memory'>('crossword');
+
+  /* ------------------------------------------------------------------------ */
+  /* CRUCIGRAMA STATE                                                         */
+  /* ------------------------------------------------------------------------ */
+  const [userLetters, setUserLetters] = useState<Record<string, string>>({});
+  const [selectedClueNumber, setSelectedClueNumber] = useState<number>(1);
+  const [selectedCellKey, setSelectedCellKey] = useState<string>('0-2');
+  const [crosswordWon, setCrosswordWon] = useState(false);
+  const [hintsUsed, setHintsUsed] = useState(0);
+  const [crosswordErrorKey, setCrosswordErrorKey] = useState<string | null>(null);
+
+  const activeClue = CROSSWORD_CLUES.find((c) => c.number === selectedClueNumber) || CROSSWORD_CLUES[0];
+
+  const handleCellSelect = (r: number, c: number) => {
+    playCyberClick();
+    const key = `${r}-${c}`;
+    if (!CROSSWORD_CELL_MAP[key]) return;
+    setSelectedCellKey(key);
+
+    const cellClues = CROSSWORD_CELL_MAP[key].clues;
+    if (cellClues.includes(selectedClueNumber)) {
+      // Keep current clue
+    } else {
+      setSelectedClueNumber(cellClues[0]);
+    }
+  };
+
+  const handleClueSelect = (clueNumber: number) => {
+    playCyberClick();
+    setSelectedClueNumber(clueNumber);
+    const clue = CROSSWORD_CLUES.find((c) => c.number === clueNumber);
+    if (clue) {
+      setSelectedCellKey(`${clue.row}-${clue.col}`);
+    }
+  };
+
+  const handleLetterInput = (char: string) => {
+    if (!selectedCellKey || !CROSSWORD_CELL_MAP[selectedCellKey]) return;
+
+    playCyberClick('confirm');
+    const upper = char.toUpperCase().slice(-1);
+    const nextLetters = { ...userLetters, [selectedCellKey]: upper };
+    setUserLetters(nextLetters);
+
+    // Auto-advance cursor along current clue
+    const [rStr, cStr] = selectedCellKey.split('-');
+    const r = parseInt(rStr, 10);
+    const c = parseInt(cStr, 10);
+
+    let nextR = r;
+    let nextC = c;
+
+    if (activeClue.direction === 'across') {
+      nextC += 1;
+    } else {
+      nextR += 1;
+    }
+
+    const nextKey = `${nextR}-${nextC}`;
+    if (CROSSWORD_CELL_MAP[nextKey] && CROSSWORD_CELL_MAP[nextKey].clues.includes(activeClue.number)) {
+      setSelectedCellKey(nextKey);
+    }
+
+    // Check complete victory
+    checkVictory(nextLetters);
+  };
+
+  const checkVictory = (letters: Record<string, string>) => {
+    const allKeys = Object.keys(CROSSWORD_CELL_MAP);
+    const allCorrect = allKeys.every((key) => {
+      const target = CROSSWORD_CELL_MAP[key].letter;
+      const user = letters[key];
+      return user && user.toUpperCase() === target;
+    });
+
+    if (allCorrect && allKeys.length > 0) {
+      playNeonChime();
+      playGameCorrect();
+      setCrosswordWon(true);
+    }
+  };
+
+  const handleRevealHint = () => {
+    if (!selectedCellKey || !CROSSWORD_CELL_MAP[selectedCellKey]) return;
+    playCyberClick();
+    const correctLetter = CROSSWORD_CELL_MAP[selectedCellKey].letter;
+    const nextLetters = { ...userLetters, [selectedCellKey]: correctLetter };
+    setUserLetters(nextLetters);
+    setHintsUsed((h) => h + 1);
+    checkVictory(nextLetters);
+  };
+
+  const handleVerifyCurrentClue = () => {
+    playCyberClick();
+    let hasError = false;
+
+    for (let i = 0; i < activeClue.length; i++) {
+      const r = activeClue.direction === 'down' ? activeClue.row + i : activeClue.row;
+      const c = activeClue.direction === 'across' ? activeClue.col + i : activeClue.col;
+      const key = `${r}-${c}`;
+      const targetChar = activeClue.word[i];
+      const userChar = userLetters[key];
+
+      if (!userChar || userChar.toUpperCase() !== targetChar) {
+        hasError = true;
+        setCrosswordErrorKey(key);
+        playGameWrong();
+        setTimeout(() => setCrosswordErrorKey(null), 1200);
+        break;
+      }
+    }
+
+    if (!hasError) {
+      playGameCorrect();
+    }
+  };
+
+  const handleResetCrossword = () => {
+    playCyberClick();
+    setUserLetters({});
+    setCrosswordWon(false);
+    setHintsUsed(0);
+    setSelectedClueNumber(1);
+    setSelectedCellKey('0-2');
+  };
 
   /* ------------------------------------------------------------------------ */
   /* TRIVIA STATE                                                             */
@@ -331,146 +512,7 @@ export const CyberArcadeSection: React.FC = () => {
   };
 
   /* ------------------------------------------------------------------------ */
-  /* THOUGHTS CATCHER GAME STATE                                              */
-  /* ------------------------------------------------------------------------ */
-  const [thoughtGameStep, setThoughtGameStep] = useState<'idle' | 'playing' | 'gameover'>('idle');
-  const [thoughtScore, setThoughtScore] = useState(0);
-  const [shields, setShields] = useState(3);
-  const [thoughtTimeLeft, setThoughtTimeLeft] = useState(30);
-  const [activeItems, setActiveItems] = useState<ThoughtItem[]>([]);
-  const [thoughtHighScore, setThoughtHighScore] = useState(() => {
-    return Number(localStorage.getItem('metanoia_thought_high') || 0);
-  });
-  const gameAreaRef = useRef<HTMLDivElement | null>(null);
-
-  const startThoughtGame = () => {
-    playCyberClick();
-    setThoughtScore(0);
-    setShields(3);
-    setThoughtTimeLeft(30);
-    setActiveItems([]);
-    setThoughtGameStep('playing');
-  };
-
-  useEffect(() => {
-    if (thoughtGameStep !== 'playing') return;
-
-    const timer = setInterval(() => {
-      setThoughtTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          setThoughtGameStep('gameover');
-          playNeonChime();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [thoughtGameStep]);
-
-  useEffect(() => {
-    if (thoughtGameStep !== 'playing') return;
-
-    const spawner = setInterval(() => {
-      setActiveItems((prev) => {
-        if (prev.length >= 6) return prev;
-        const rand = Math.random();
-        let type: 'good' | 'bad' | 'powerup' = 'good';
-        let text = '';
-
-        if (rand < 0.12) {
-          type = 'powerup';
-          text = POWERUP_THOUGHTS[Math.floor(Math.random() * POWERUP_THOUGHTS.length)];
-        } else if (rand < 0.6) {
-          type = 'good';
-          text = GOOD_THOUGHTS[Math.floor(Math.random() * GOOD_THOUGHTS.length)];
-        } else {
-          type = 'bad';
-          text = BAD_THOUGHTS[Math.floor(Math.random() * BAD_THOUGHTS.length)];
-        }
-
-        const newItem: ThoughtItem = {
-          id: `${Date.now()}-${Math.random()}`,
-          text,
-          type,
-          x: Math.floor(Math.random() * 68) + 12,
-          y: -8,
-          speed: Math.random() * 1.1 + 0.9,
-        };
-        return [...prev, newItem];
-      });
-    }, 750);
-
-    const mover = setInterval(() => {
-      setActiveItems((prev) => {
-        const next: ThoughtItem[] = [];
-        for (const item of prev) {
-          const newY = item.y + item.speed * 2.1;
-          if (newY > 93) {
-            // Bad thoughts passing safely award points
-            if (item.type === 'bad') {
-              setThoughtScore((s) => s + 25);
-            }
-          } else {
-            next.push({ ...item, y: newY });
-          }
-        }
-        return next;
-      });
-    }, 45);
-
-    return () => {
-      clearInterval(spawner);
-      clearInterval(mover);
-    };
-  }, [thoughtGameStep]);
-
-  const handleCatchThought = (item: ThoughtItem) => {
-    setActiveItems((prev) => prev.filter((i) => i.id !== item.id));
-
-    if (item.type === 'good') {
-      playGameCatch();
-      if (navigator.vibrate) navigator.vibrate(20);
-      setThoughtScore((s) => {
-        const next = s + 50;
-        if (next > thoughtHighScore) {
-          setThoughtHighScore(next);
-          localStorage.setItem('metanoia_thought_high', String(next));
-        }
-        return next;
-      });
-    } else if (item.type === 'powerup') {
-      playNeonChime();
-      if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
-      if (item.text.includes('Escudo')) {
-        setShields((prev) => Math.min(3, prev + 1));
-      }
-      setThoughtScore((s) => {
-        const next = s + 100;
-        if (next > thoughtHighScore) {
-          setThoughtHighScore(next);
-          localStorage.setItem('metanoia_thought_high', String(next));
-        }
-        return next;
-      });
-    } else {
-      playGameWrong();
-      if (navigator.vibrate) navigator.vibrate([40, 40]);
-      setShields((s) => {
-        const nextShields = s - 1;
-        if (nextShields <= 0) {
-          setThoughtGameStep('gameover');
-          playNeonChime();
-        }
-        return Math.max(0, nextShields);
-      });
-    }
-  };
-
-  /* ------------------------------------------------------------------------ */
-  /* MINIGAME 3: MATRIZ DE MEMORIA BÍBLICA                                    */
+  /* MEMORY PAIRS STATE                                                       */
   /* ------------------------------------------------------------------------ */
   const [memoryStep, setMemoryStep] = useState<'idle' | 'playing' | 'won'>('idle');
   const [memoryCards, setMemoryCards] = useState<MemoryCard[]>([]);
@@ -553,7 +595,7 @@ export const CyberArcadeSection: React.FC = () => {
               localStorage.setItem('metanoia_memory_high', String(scoreCalc));
             }
           }
-        }, 400);
+        }, 350);
       } else {
         setTimeout(() => {
           playGameWrong();
@@ -567,16 +609,9 @@ export const CyberArcadeSection: React.FC = () => {
     }
   };
 
-  const getTriviaRank = (finalScore: number) => {
-    if (finalScore >= 1400) return { title: 'Mente de Cristo Master', color: '#c084fc', desc: '¡Increíble discernimiento y sabiduría bíblica!' };
-    if (finalScore >= 900) return { title: 'Guerrero de la Fe', color: '#00f0ff', desc: 'Conocimiento sólido y entendimiento renovado.' };
-    if (finalScore >= 500) return { title: 'Discípulo en Crecimiento', color: '#f472b6', desc: '¡Vas por gran camino, continúa meditando en la Palabra!' };
-    return { title: 'Buscador de Sabiduría', color: '#a855f7', desc: '¡Sigue alimentando tu mente con la Palabra de Dios!' };
-  };
-
-  const handleShareScore = (gameName: string, gameScore: number) => {
+  const handleShareScore = (gameName: string, gameScore: number | string) => {
     playCyberClick();
-    const shareText = `🎮 ¡Acabo de lograr ${gameScore} puntos en ${gameName} en METANOIA 2026! 🔥\n¿Puedes superar mi récord? Nos vemos este 28 de Noviembre en IGLEPACBEN AD Guazapa con Pablo Rosales.`;
+    const shareText = `🎮 ¡Completé ${gameName} (${gameScore}) en METANOIA 2026 // RELOAD! 🔥\n¿Puedes superarlo? Nos vemos este sábado 28 de Noviembre en IGLEPACBEN AD Guazapa con Pablo Rosales.`;
 
     if (navigator.share) {
       navigator.share({ title: 'Récord Metanoia 2026', text: shareText, url: window.location.href }).catch(() => {});
@@ -589,23 +624,58 @@ export const CyberArcadeSection: React.FC = () => {
 
   return (
     <section id="minijuegos" className="relative py-20 px-3.5 sm:px-8 max-w-7xl mx-auto z-20">
-      {/* Section Header */}
+      
+      {/* Resplandores cósmicos de fondo */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#b01cc6]/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#730bb3]/20 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Encabezado de la Sección */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#180738] border border-purple-500/40 text-[#c084fc] text-xs font-mono-cyber tracking-[0.25em] uppercase mb-3.5 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-          <Gamepad2 className="w-4 h-4 text-[#00f0ff]" />
-          <span>CYBER ARCADE • RETOS DE FE Y MENTE</span>
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
+          <Gamepad2 className="w-4 h-4 text-[#f4b6ff]" />
+          <span>CYBER ARCADE • RELOAD ESPIRITUAL</span>
         </div>
 
-        <h2 className="cyber-metanoia-title text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
-          MINIJUEGOS <span className="text-[#c084fc] drop-shadow-[0_0_20px_rgba(192,132,252,0.8)]">METANOIA</span>
+        <h2 className="font-cyber-heavy text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
+          JUEGOS <span className="text-[#f4b6ff] drop-shadow-[0_0_20px_rgba(244,182,255,0.6)]">METANOIA</span>
         </h2>
 
-        <p className="font-body text-xs sm:text-base text-purple-200/80 max-w-xl mx-auto leading-relaxed">
-          Tres desafíos interactivos para poner a prueba tus reflejos, memoria bíblica y discernimiento espiritual para este gran encuentro del 28 de Noviembre.
-        </p>
+        <div className="relative mb-6">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#b01cc6]/10 via-[#730bb3]/20 to-[#b01cc6]/10 blur-xl rounded-2xl"></div>
+          <div className="relative p-4 sm:p-5 rounded-2xl glass-panel-luminous border border-[#c3a7ff]/30 shadow-[0_0_30px_rgba(115,11,179,0.2)] max-w-2xl mx-auto">
+            <p className="font-body text-sm sm:text-base text-purple-100 leading-relaxed">
+              Desbloquea conocimiento bíblico, completa misiones espirituales y agudiza tu entendimiento.
+              <span className="text-[#f4b6ff] font-cyber font-bold tracking-wide text-xs sm:text-sm mt-2 block uppercase">
+                Tres experiencias interactivas para prepararte para el 28 de Noviembre
+              </span>
+            </p>
+          </div>
+        </div>
 
-        {/* Game Mode Selector (Mobile Thumb-Zone Tabs) */}
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-3 mt-6 sm:mt-8 max-w-2xl mx-auto">
+        {/* Selector de Modo de Juego (Crucigrama, Trivia, Parejas) */}
+        <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6 sm:mt-8 max-w-2xl mx-auto">
+          
+          {/* Tab 1: Crucigrama */}
+          <button
+            onClick={() => {
+              if (activeGame !== 'crossword') {
+                playCyberClick();
+                playCyberTransition();
+                setActiveGame('crossword');
+              }
+            }}
+            onMouseEnter={() => playCyberHover('subtle')}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
+              activeGame === 'crossword'
+                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
+                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
+            }`}
+          >
+            <Grid className="w-4 h-4 text-[#f4b6ff]" />
+            <span>1. Crucigrama</span>
+          </button>
+
+          {/* Tab 2: Trivia */}
           <button
             onClick={() => {
               if (activeGame !== 'trivia') {
@@ -615,35 +685,17 @@ export const CyberArcadeSection: React.FC = () => {
               }
             }}
             onMouseEnter={() => playCyberHover('subtle')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-2.5 sm:px-4 sm:py-3 rounded-2xl font-cyber text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[48px] ${
+            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
               activeGame === 'trivia'
-                ? 'bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] text-white shadow-[0_0_20px_rgba(168,85,247,0.5)] border border-purple-400 scale-[1.02]'
-                : 'bg-[#12052c]/90 border border-purple-500/25 text-purple-300 hover:text-white'
+                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
+                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
             }`}
           >
-            <HelpCircle className="w-4 h-4 text-[#00f0ff]" />
-            <span>1. Trivia</span>
+            <HelpCircle className="w-4 h-4 text-[#c3a7ff]" />
+            <span>2. Preguntas</span>
           </button>
 
-          <button
-            onClick={() => {
-              if (activeGame !== 'thoughts') {
-                playCyberClick();
-                playCyberTransition();
-                setActiveGame('thoughts');
-              }
-            }}
-            onMouseEnter={() => playCyberHover('subtle')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-2.5 sm:px-4 sm:py-3 rounded-2xl font-cyber text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[48px] ${
-              activeGame === 'thoughts'
-                ? 'bg-gradient-to-r from-[#f472b6] to-[#ec4899] text-white shadow-[0_0_20px_rgba(244,114,182,0.5)] border border-pink-400 scale-[1.02]'
-                : 'bg-[#12052c]/90 border border-purple-500/25 text-purple-300 hover:text-white'
-            }`}
-          >
-            <Shield className="w-4 h-4 text-[#00f0ff]" />
-            <span>2. Guardián</span>
-          </button>
-
+          {/* Tab 3: Parejas */}
           <button
             onClick={() => {
               if (activeGame !== 'memory') {
@@ -653,48 +705,262 @@ export const CyberArcadeSection: React.FC = () => {
               }
             }}
             onMouseEnter={() => playCyberHover('subtle')}
-            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-2.5 sm:px-4 sm:py-3 rounded-2xl font-cyber text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[48px] ${
+            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
               activeGame === 'memory'
-                ? 'bg-gradient-to-r from-[#00f0ff] to-[#38bdf8] text-black font-extrabold shadow-[0_0_20px_rgba(0,240,255,0.5)] border border-cyan-300 scale-[1.02]'
-                : 'bg-[#12052c]/90 border border-purple-500/25 text-purple-300 hover:text-white'
+                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
+                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
             }`}
           >
-            <Brain className="w-4 h-4 text-[#00ff9d]" />
-            <span>3. Memoria</span>
+            <Brain className="w-4 h-4 text-[#86efac]" />
+            <span>3. Parejas</span>
           </button>
+
         </div>
       </div>
 
       {/* ==================================================================== */}
-      {/* GAME 1: TRIVIA DE LA MENTE RENOVADA                                  */}
+      {/* 1. CRUCIGRAMA BÍBLICO // RELOAD                                      */}
+      {/* ==================================================================== */}
+      {activeGame === 'crossword' && (
+        <div className="max-w-4xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+          
+          <div className="flex flex-col md:flex-row items-start justify-between gap-6">
+            
+            {/* Tablero 7x7 del Crucigrama */}
+            <div className="w-full md:w-auto flex flex-col items-center">
+              
+              <div className="inline-flex items-center gap-2 mb-3 text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/30">
+                <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff]" />
+                <span>Pistas cruzadas: Toca una celda o una pista</span>
+              </div>
+
+              {/* Grid 7x7 */}
+              <div className="p-3 rounded-2xl bg-[#170526]/85 border border-[#c3a7ff]/30 shadow-inner grid grid-cols-7 gap-1.5 sm:gap-2 select-none">
+                {Array.from({ length: 7 }).map((_, r) => (
+                  <React.Fragment key={r}>
+                    {Array.from({ length: 7 }).map((_, c) => {
+                      const key = `${r}-${c}`;
+                      const cellInfo = CROSSWORD_CELL_MAP[key];
+
+                      if (!cellInfo) {
+                        return (
+                          <div
+                            key={key}
+                            className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-[#230a42]/20 border border-transparent"
+                          />
+                        );
+                      }
+
+                      const isSelected = selectedCellKey === key;
+                      const isInActiveClue = cellInfo.clues.includes(activeClue.number);
+                      const userVal = userLetters[key] || '';
+                      const hasError = crosswordErrorKey === key;
+
+                      return (
+                        <button
+                          key={key}
+                          type="button"
+                          onClick={() => handleCellSelect(r, c)}
+                          className={`w-9 h-9 sm:w-12 sm:h-12 rounded-xl relative font-cyber text-base sm:text-xl font-extrabold flex items-center justify-center transition-all cursor-pointer touch-manipulation border ${
+                            hasError
+                              ? 'bg-rose-500/30 border-rose-500 text-rose-200 animate-bounce'
+                              : isSelected
+                              ? 'bg-[#b01cc6] border-[#f4b6ff] text-white shadow-[0_0_16px_rgba(176,28,198,0.8)] scale-105 z-10'
+                              : isInActiveClue
+                              ? 'bg-[#730bb3]/45 border-[#c3a7ff]/60 text-white'
+                              : 'bg-[#230a42]/70 border-[#c3a7ff]/30 text-purple-100 hover:border-[#c3a7ff]'
+                          }`}
+                        >
+                          {/* Número pequeño de la pista */}
+                          {cellInfo.startNumber && (
+                            <span className="absolute top-0.5 left-1 text-[9px] font-cyber font-bold text-[#f4b6ff]/90 leading-none">
+                              {cellInfo.startNumber}
+                            </span>
+                          )}
+                          <span>{userVal}</span>
+                        </button>
+                      );
+                    })}
+                  </React.Fragment>
+                ))}
+              </div>
+
+              {/* Input Virtual para Móvil & Escritorio */}
+              <div className="mt-4 w-full max-w-sm flex items-center gap-2">
+                <input
+                  type="text"
+                  maxLength={1}
+                  placeholder="Letra..."
+                  value={userLetters[selectedCellKey] || ''}
+                  onChange={(e) => handleLetterInput(e.target.value)}
+                  className="flex-1 py-2 px-3 rounded-xl bg-[#230a42]/80 border border-[#c3a7ff]/40 text-center font-cyber text-lg uppercase text-white focus:outline-none focus:border-[#f4b6ff]"
+                />
+                
+                <button
+                  onClick={handleRevealHint}
+                  className="py-2 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-[#f4b6ff] border border-[#c3a7ff]/30 font-cyber text-xs flex items-center gap-1.5 transition-all cursor-pointer"
+                  title="Revelar letra"
+                >
+                  <Lightbulb className="w-4 h-4 text-[#f4b6ff]" />
+                  <span>Pista</span>
+                </button>
+
+                <button
+                  onClick={handleVerifyCurrentClue}
+                  className="py-2 px-3 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs flex items-center gap-1.5 shadow-[0_0_12px_rgba(176,28,198,0.5)] transition-all cursor-pointer"
+                >
+                  <Check className="w-4 h-4 text-white" />
+                  <span>Comprobar</span>
+                </button>
+              </div>
+
+            </div>
+
+            {/* Pistas Horizontales & Verticales */}
+            <div className="w-full md:flex-1 space-y-4">
+              
+              <div className="p-4 rounded-2xl glass-card-amethyst border border-[#c3a7ff]/30">
+                <div className="text-xs font-cyber font-bold text-[#f4b6ff] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                  <Flame className="w-3.5 h-3.5 text-[#f4b6ff]" />
+                  <span>PISTA ACTIVA #{activeClue.number} ({activeClue.direction === 'across' ? 'HORIZONTAL' : 'VERTICAL'} • {activeClue.length} LETRAS)</span>
+                </div>
+                <p className="font-body text-sm sm:text-base text-white leading-relaxed font-semibold">
+                  {activeClue.hint}
+                </p>
+                <span className="text-[11px] font-cyber text-[#c3a7ff] block mt-1">
+                  Referencia: {activeClue.reference}
+                </span>
+              </div>
+
+              {/* Lista de Pistas */}
+              <div className="space-y-2">
+                <span className="text-xs font-cyber text-purple-300 font-bold uppercase tracking-wider block">
+                  TODAS LAS PISTAS BÍBLICAS:
+                </span>
+
+                {CROSSWORD_CLUES.map((clue) => {
+                  const isSelected = selectedClueNumber === clue.number;
+                  return (
+                    <button
+                      key={clue.number}
+                      type="button"
+                      onClick={() => handleClueSelect(clue.number)}
+                      className={`w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-2 min-h-[44px] ${
+                        isSelected
+                          ? 'bg-[#730bb3]/40 border-[#f4b6ff] text-white shadow-[0_0_14px_rgba(176,28,198,0.4)]'
+                          : 'bg-[#230a42]/50 border-[#c3a7ff]/20 text-purple-200 hover:text-white hover:border-[#c3a7ff]/50'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="w-5 h-5 rounded-lg bg-[#b01cc6]/30 border border-[#c3a7ff]/30 text-center font-cyber text-xs font-bold text-[#f4b6ff] flex items-center justify-center">
+                          {clue.number}
+                        </span>
+                        <span className="font-cyber text-xs font-bold uppercase">
+                          {clue.direction === 'across' ? 'Horiz.' : 'Vert.'} ({clue.length} l.)
+                        </span>
+                        <span className="font-body text-xs text-purple-200/90 truncate max-w-[180px] sm:max-w-xs">
+                          {clue.hint}
+                        </span>
+                      </div>
+                      <span className="text-[10px] font-cyber text-[#c3a7ff] shrink-0 font-bold">
+                        {clue.reference}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-xs font-cyber text-purple-300">
+                  Pistas usadas: <strong className="text-white">{hintsUsed}</strong>
+                </span>
+
+                <button
+                  onClick={handleResetCrossword}
+                  className="inline-flex items-center gap-1.5 text-xs font-cyber text-[#c3a7ff] hover:text-white transition-colors cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span>Reiniciar Crucigrama</span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* Modal de Victoria del Crucigrama */}
+          {crosswordWon && (
+            <div className="absolute inset-0 bg-[#170526]/95 backdrop-blur-2xl z-30 flex flex-col items-center justify-center p-6 text-center animate-fadeIn">
+              <div className="w-20 h-20 rounded-3xl bg-[#730bb3]/30 border border-[#f4b6ff] flex items-center justify-center mx-auto mb-4 text-[#f4b6ff] shadow-[0_0_35px_rgba(176,28,198,0.6)] animate-bounce">
+                <Trophy className="w-10 h-10" />
+              </div>
+
+              <span className="text-xs font-cyber text-[#f4b6ff] uppercase tracking-wider font-bold mb-1">
+                ¡CRUCIGRAMA BÍBLICO COMPLETADO!
+              </span>
+
+              <h3 className="font-cyber-heavy text-3xl sm:text-4xl text-white mb-2">
+                RELOAD EN TU MENTE
+              </h3>
+
+              <p className="font-body text-xs sm:text-sm text-purple-200/90 max-w-md mx-auto mb-6">
+                Has resuelto todos los conceptos clave de Metanoia 2026: RELOAD, MENTE, PABLO, FE y PAZ. ¡Tu entendimiento está alineado a la verdad!
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={() => handleShareScore('Crucigrama Bíblico RELOAD', '100%')}
+                  className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[46px]"
+                >
+                  {isCopied ? <Check className="w-4 h-4 text-[#86efac]" /> : <Share2 className="w-4 h-4 text-[#f4b6ff]" />}
+                  <span>{isCopied ? '¡Copiado!' : 'Compartir Victoria'}</span>
+                </button>
+
+                <button
+                  onClick={handleResetCrossword}
+                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[46px]"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  <span>JUGAR DE NUEVO</span>
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+      )}
+
+      {/* ==================================================================== */}
+      {/* 2. TRIVIA DE LA FE (PREGUNTAS BÍBLICAS)                              */}
       {/* ==================================================================== */}
       {activeGame === 'trivia' && (
-        <div className="max-w-3xl mx-auto rounded-3xl bg-[#0e0422]/95 backdrop-blur-xl border-2 border-purple-500/50 p-4 sm:p-8 shadow-[0_0_50px_rgba(168,85,247,0.25)] relative overflow-hidden">
+        <div className="max-w-3xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+          
           {triviaStep === 'idle' && (
             <div className="text-center py-6 sm:py-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#a855f7]/20 border border-purple-400/40 flex items-center justify-center mx-auto mb-5 text-[#c084fc] shadow-[0_0_25px_rgba(168,85,247,0.35)]">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#730bb3]/30 border border-[#c3a7ff]/40 flex items-center justify-center mx-auto mb-5 text-[#f4b6ff] shadow-[0_0_25px_rgba(176,28,198,0.35)]">
                 <HelpCircle className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
 
               <h3 className="font-cyber-heavy text-2xl sm:text-3xl text-white tracking-tight mb-2">
-                DESAFÍO METANOIA: TRIVIA DE LA FE
+                TRIVIA BÍBLICA: LA MENTE RENOVADA
               </h3>
               <p className="font-body text-xs sm:text-sm text-purple-200/80 max-w-md mx-auto mb-6">
-                10 preguntas sobre la renovación de la mente, Pablo Rosales y la verdad de Cristo. ¡15 segundos por pregunta con bonificación por racha!
+                10 preguntas sobre la renovación de la mente, el lema RELOAD, Pablo Rosales y la verdad de la Palabra. ¡15 segundos por pregunta!
               </p>
 
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-purple-950/60 border border-purple-500/30 text-xs font-mono-cyber text-[#00f0ff] mb-6">
-                <Trophy className="w-4 h-4 text-[#c084fc]" />
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#e4c5ff] mb-6">
+                <Trophy className="w-4 h-4 text-[#f4b6ff]" />
                 <span>RÉCORD PERSONAL: {triviaHighScore} PTS</span>
               </div>
 
               <div>
                 <button
                   onClick={startTrivia}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#9333ea] via-[#c084fc] to-[#00f0ff] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-[0_0_25px_rgba(168,85,247,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
+                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
                 >
                   <Play className="w-4 h-4 fill-white" />
-                  <span>INICIAR DESAFÍO</span>
+                  <span>INICIAR PREGUNTAS</span>
                 </button>
               </div>
             </div>
@@ -702,14 +968,14 @@ export const CyberArcadeSection: React.FC = () => {
 
           {triviaStep === 'playing' && (
             <div>
-              <div className="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-purple-500/20 text-xs font-mono-cyber">
+              <div className="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-[#c3a7ff]/20 text-xs font-cyber">
                 <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-1 rounded-lg bg-purple-950/70 border border-purple-500/40 text-[#c084fc] font-bold">
+                  <span className="px-3 py-1 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-[#e4c5ff] font-bold">
                     PREGUNTA {currentQuestionIndex + 1}/{TRIVIA_QUESTIONS.length}
                   </span>
                   {streak > 1 && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-pink-500/20 border border-pink-500/40 text-pink-300 font-bold">
-                      <Flame className="w-3.5 h-3.5 text-pink-400" />
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-[#b01cc6]/30 border border-[#f4b6ff]/40 text-[#f4b6ff] font-bold">
+                      <Flame className="w-3.5 h-3.5 text-[#f4b6ff]" />
                       <span>{streak}X RACHA</span>
                     </span>
                   )}
@@ -717,10 +983,10 @@ export const CyberArcadeSection: React.FC = () => {
 
                 <div className="flex items-center gap-3">
                   <div
-                    className={`flex items-center gap-1 px-2.5 py-1 rounded-lg border font-bold ${
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-xl border font-bold ${
                       triviaTimeLeft <= 4
                         ? 'bg-rose-500/20 border-rose-500 text-rose-300 animate-pulse'
-                        : 'bg-purple-950/60 border-purple-500/30 text-[#00f0ff]'
+                        : 'bg-[#230a42]/70 border-[#c3a7ff]/30 text-[#f4b6ff]'
                     }`}
                   >
                     <Timer className="w-3.5 h-3.5" />
@@ -728,14 +994,14 @@ export const CyberArcadeSection: React.FC = () => {
                   </div>
 
                   <div className="text-purple-200">
-                    SCORE: <span className="font-bold text-white font-mono">{score}</span>
+                    PUNTOS: <span className="font-bold text-white font-cyber">{score}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Question Header */}
+              {/* Pregunta */}
               <div className="mb-5">
-                <span className="text-[10px] font-mono-cyber text-[#c084fc] uppercase tracking-widest block mb-1 font-bold">
+                <span className="text-[10px] font-cyber text-[#c3a7ff] uppercase tracking-wider block mb-1 font-bold">
                   REFERENCIA: {question.scripture}
                 </span>
                 <h4 className="font-body text-base sm:text-xl font-bold text-white leading-snug">
@@ -743,14 +1009,14 @@ export const CyberArcadeSection: React.FC = () => {
                 </h4>
               </div>
 
-              {/* Options */}
+              {/* Opciones */}
               <div className="space-y-2.5 mb-5">
                 {question.options.map((option, idx) => {
-                  let btnStyle = 'bg-[#150734]/70 border-purple-500/30 text-purple-100 hover:bg-[#1f0a4a] hover:border-purple-400';
+                  let btnStyle = 'bg-[#230a42]/60 border-[#c3a7ff]/30 text-purple-100 hover:bg-[#2e0e56] hover:border-[#c3a7ff]';
 
                   if (isAnswerRevealed) {
                     if (idx === question.correctIndex) {
-                      btnStyle = 'bg-[#00ff9d]/20 border-[#00ff9d] text-[#00ff9d] font-bold shadow-[0_0_15px_rgba(0,255,157,0.3)]';
+                      btnStyle = 'bg-[#86efac]/20 border-[#86efac] text-[#86efac] font-bold shadow-[0_0_15px_rgba(134,239,172,0.3)]';
                     } else if (idx === selectedOption) {
                       btnStyle = 'bg-rose-500/20 border-rose-500 text-rose-300 font-bold';
                     } else {
@@ -764,11 +1030,11 @@ export const CyberArcadeSection: React.FC = () => {
                       disabled={isAnswerRevealed}
                       onClick={() => handleSelectOption(idx)}
                       onMouseEnter={() => !isAnswerRevealed && playCyberHover('crisp')}
-                      className={`w-full p-3.5 sm:p-4 rounded-xl border text-left font-body text-xs sm:text-sm transition-all flex items-center justify-between gap-3 cursor-pointer touch-manipulation min-h-[48px] ${btnStyle}`}
+                      className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left font-body text-xs sm:text-sm transition-all flex items-center justify-between gap-3 cursor-pointer touch-manipulation min-h-[48px] ${btnStyle}`}
                     >
                       <span className="font-medium">{option}</span>
                       {isAnswerRevealed && idx === question.correctIndex && (
-                        <CheckCircle2 className="w-5 h-5 text-[#00ff9d] flex-shrink-0" />
+                        <CheckCircle2 className="w-5 h-5 text-[#86efac] flex-shrink-0" />
                       )}
                       {isAnswerRevealed && idx === selectedOption && idx !== question.correctIndex && (
                         <XCircle className="w-5 h-5 text-rose-400 flex-shrink-0" />
@@ -779,8 +1045,8 @@ export const CyberArcadeSection: React.FC = () => {
               </div>
 
               {isAnswerRevealed && (
-                <div className="p-3.5 rounded-xl bg-purple-950/60 border border-purple-500/30 mb-5 text-xs sm:text-sm text-purple-200 font-body">
-                  <strong className="text-[#00f0ff] font-semibold">Explicación Bíblica:</strong> {question.explanation}
+                <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/30 mb-5 text-xs sm:text-sm text-purple-200 font-body">
+                  <strong className="text-[#f4b6ff] font-semibold">Explicación Bíblica:</strong> {question.explanation}
                 </div>
               )}
 
@@ -788,7 +1054,7 @@ export const CyberArcadeSection: React.FC = () => {
                 <div className="flex justify-end">
                   <button
                     onClick={handleNextQuestion}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#00f0ff] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:scale-105 transition-all cursor-pointer min-h-[44px]"
+                    className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer min-h-[44px]"
                   >
                     {currentQuestionIndex + 1 < TRIVIA_QUESTIONS.length ? 'SIGUIENTE PREGUNTA →' : 'VER RESULTADOS'}
                   </button>
@@ -799,45 +1065,44 @@ export const CyberArcadeSection: React.FC = () => {
 
           {triviaStep === 'results' && (
             <div className="text-center py-6 sm:py-8">
-              <div className="w-20 h-20 rounded-3xl bg-[#c084fc]/20 border border-purple-400 flex items-center justify-center mx-auto mb-4 text-[#c084fc] shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+              <div className="w-20 h-20 rounded-3xl bg-[#730bb3]/30 border border-[#f4b6ff] flex items-center justify-center mx-auto mb-4 text-[#f4b6ff] shadow-[0_0_30px_rgba(176,28,198,0.5)]">
                 <Trophy className="w-10 h-10" />
               </div>
 
-              <div className="text-xs font-mono-cyber text-[#00f0ff] uppercase tracking-widest mb-1.5 font-bold">
+              <div className="text-xs font-cyber text-[#e4c5ff] uppercase tracking-wider mb-1.5 font-bold">
                 DESAFÍO COMPLETADO
               </div>
 
               <h3 className="font-cyber-heavy text-3xl sm:text-5xl text-white mb-2">
-                {score} <span className="text-base text-purple-300">PUNTOS</span>
+                {score} <span className="text-base text-[#f4b6ff]">PUNTOS</span>
               </h3>
 
-              {(() => {
-                const rank = getTriviaRank(score);
-                return (
-                  <div className="my-5 p-4 rounded-2xl bg-[#140632] border border-purple-500/30 max-w-md mx-auto">
-                    <span className="text-[10px] font-mono-cyber text-purple-300 uppercase tracking-widest block mb-1">
-                      RANGO ESPIRITUAL
-                    </span>
-                    <h4 className="font-cyber text-lg sm:text-xl font-bold mb-1.5" style={{ color: rank.color }}>
-                      {rank.title}
-                    </h4>
-                    <p className="text-xs font-body text-purple-200/80">{rank.desc}</p>
-                  </div>
-                );
-              })()}
+              <div className="my-5 p-4 rounded-2xl glass-card-amethyst border border-[#c3a7ff]/30 max-w-md mx-auto">
+                <span className="text-[10px] font-cyber text-[#c3a7ff] uppercase tracking-wider block mb-1">
+                  DISCERNIMIENTO BÍBLICO
+                </span>
+                <h4 className="font-cyber text-lg sm:text-xl font-bold mb-1 text-[#f4b6ff]">
+                  {score >= 800 ? 'Mente Renovada Master' : 'Caminante de Fe'}
+                </h4>
+                <p className="text-xs font-body text-purple-200/80">
+                  {score >= 800
+                    ? '¡Gran entendimiento de la Palabra y la visión de Dios para esta generación!'
+                    : '¡Sigue meditando en las promesas del Señor y renueva tu mente cada día!'}
+                </p>
+              </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
-                  onClick={() => handleShareScore('Trivia de la Fe', score)}
-                  className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  onClick={() => handleShareScore('Trivia Bíblica Metanoia', score)}
+                  className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
-                  {isCopied ? <Check className="w-4 h-4 text-[#00ff9d]" /> : <Share2 className="w-4 h-4 text-[#00f0ff]" />}
+                  {isCopied ? <Check className="w-4 h-4 text-[#86efac]" /> : <Share2 className="w-4 h-4 text-[#f4b6ff]" />}
                   <span>{isCopied ? '¡Copiado!' : 'Compartir Récord'}</span>
                 </button>
 
                 <button
                   onClick={startTrivia}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>JUGAR OTRA VEZ</span>
@@ -845,171 +1110,41 @@ export const CyberArcadeSection: React.FC = () => {
               </div>
             </div>
           )}
+
         </div>
       )}
 
       {/* ==================================================================== */}
-      {/* GAME 2: GUARDIÁN DEL PENSAMIENTO                                     */}
-      {/* ==================================================================== */}
-      {activeGame === 'thoughts' && (
-        <div className="max-w-3xl mx-auto rounded-3xl bg-[#0e0422]/95 backdrop-blur-xl border-2 border-pink-500/40 p-4 sm:p-8 shadow-[0_0_50px_rgba(244,114,182,0.2)] relative overflow-hidden">
-          {thoughtGameStep === 'idle' && (
-            <div className="text-center py-6 sm:py-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-pink-500/20 border border-pink-500/40 flex items-center justify-center mx-auto mb-5 text-pink-400 shadow-[0_0_25px_rgba(244,114,182,0.35)]">
-                <Shield className="w-8 h-8 sm:w-10 sm:h-10" />
-              </div>
-
-              <h3 className="font-cyber-heavy text-2xl sm:text-3xl text-white tracking-tight mb-2">
-                GUARDIÁN DEL PENSAMIENTO
-              </h3>
-              <p className="font-body text-xs sm:text-sm text-purple-200/80 max-w-md mx-auto mb-6">
-                Basado en Filipenses 4:8. Toca únicamente los <strong className="text-[#00f0ff]">buenos pensamientos</strong> (Paz, Verdad, Fe) y los powerups del Espíritu Santo. ¡Deja pasar los pensamientos negativos!
-              </p>
-
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-purple-950/60 border border-pink-500/30 text-xs font-mono-cyber text-[#00f0ff] mb-6">
-                <Trophy className="w-4 h-4 text-pink-400" />
-                <span>RÉCORD PERSONAL: {thoughtHighScore} PTS</span>
-              </div>
-
-              <div>
-                <button
-                  onClick={startThoughtGame}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-[#00f0ff] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-[0_0_25px_rgba(244,114,182,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
-                >
-                  <Play className="w-4 h-4 fill-white" />
-                  <span>INICIAR GUARDIÁN</span>
-                </button>
-              </div>
-            </div>
-          )}
-
-          {thoughtGameStep === 'playing' && (
-            <div>
-              <div className="flex items-center justify-between pb-3.5 mb-3.5 border-b border-pink-500/20 text-xs font-mono-cyber">
-                <div className="flex items-center gap-1 text-pink-400 font-bold">
-                  <span>ESCUDOS:</span>
-                  {Array.from({ length: 3 }).map((_, i) => (
-                    <Shield
-                      key={i}
-                      className={`w-4 h-4 ${i < shields ? 'text-[#00f0ff] fill-[#00f0ff]/50' : 'text-white/20'}`}
-                    />
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <div className="text-[#00f0ff] font-bold">TIEMPO: {thoughtTimeLeft}s</div>
-                  <div className="text-[#00ff9d] font-bold font-mono">PTS: {thoughtScore}</div>
-                </div>
-              </div>
-
-              <div
-                ref={gameAreaRef}
-                className="relative w-full h-[360px] sm:h-[400px] rounded-2xl bg-[#090216] border border-purple-500/30 overflow-hidden select-none touch-none"
-              >
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(168,85,247,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,255,0.05)_1px,transparent_1px)] bg-[size:28px_28px] pointer-events-none" />
-
-                {activeItems.map((item) => {
-                  let styleClasses = 'bg-gradient-to-r from-purple-600 to-[#00f0ff] text-white border-cyan-400 shadow-[0_0_12px_rgba(0,240,255,0.5)]';
-                  if (item.type === 'powerup') {
-                    styleClasses = 'bg-gradient-to-r from-yellow-400 to-amber-600 text-black border-yellow-300 shadow-[0_0_18px_rgba(250,204,21,0.8)] font-extrabold animate-bounce';
-                  } else if (item.type === 'bad') {
-                    styleClasses = 'bg-gradient-to-r from-rose-600 to-red-800 text-white border-rose-400 shadow-[0_0_12px_rgba(244,63,94,0.5)]';
-                  }
-
-                  return (
-                    <button
-                      key={item.id}
-                      onPointerDown={() => handleCatchThought(item)}
-                      style={{
-                        left: `${item.x}%`,
-                        top: `${item.y}%`,
-                      }}
-                      className={`absolute transform -translate-x-1/2 px-3.5 py-2 rounded-xl text-[11px] sm:text-xs font-cyber font-bold tracking-wider uppercase cursor-pointer active:scale-90 transition-transform shadow-lg touch-manipulation select-none min-h-[46px] min-w-[65px] border ${styleClasses}`}
-                    >
-                      {item.text}
-                    </button>
-                  );
-                })}
-
-                {activeItems.length === 0 && (
-                  <div className="absolute inset-0 flex items-center justify-center text-xs font-mono-cyber text-purple-400/50 pointer-events-none">
-                    ESCANEANDO PENSAMIENTOS...
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          {thoughtGameStep === 'gameover' && (
-            <div className="text-center py-6 sm:py-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-pink-500/20 border border-pink-400 flex items-center justify-center mx-auto mb-4 text-pink-400 shadow-[0_0_25px_rgba(244,114,182,0.35)]">
-                <Trophy className="w-8 h-8 sm:w-10 sm:h-10" />
-              </div>
-
-              <div className="text-xs font-mono-cyber text-[#00f0ff] uppercase tracking-widest mb-1.5 font-bold">
-                RONDA FINALIZADA
-              </div>
-
-              <h3 className="font-cyber-heavy text-3xl sm:text-5xl text-white mb-2">
-                {thoughtScore} <span className="text-base text-purple-300">PUNTOS</span>
-              </h3>
-
-              <div className="p-3.5 rounded-xl bg-purple-950/60 border border-purple-500/30 max-w-md mx-auto my-5 text-xs font-body text-purple-200">
-                «Sobre toda cosa guardada, guarda tu corazón; porque de él mana la vida.» — Proverbios 4:23
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <button
-                  onClick={() => handleShareScore('Guardián del Pensamiento', thoughtScore)}
-                  className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
-                >
-                  {isCopied ? <Check className="w-4 h-4 text-[#00ff9d]" /> : <Share2 className="w-4 h-4 text-[#00f0ff]" />}
-                  <span>{isCopied ? '¡Copiado!' : 'Compartir Récord'}</span>
-                </button>
-
-                <button
-                  onClick={startThoughtGame}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(244,114,182,0.4)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span>JUGAR OTRA VEZ</span>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ==================================================================== */}
-      {/* GAME 3: MATRIZ DE MEMORIA BÍBLICA                                    */}
+      {/* 3. MATRIZ DE MEMORIA BÍBLICA (JUEGO DE PAREJAS)                      */}
       {/* ==================================================================== */}
       {activeGame === 'memory' && (
-        <div className="max-w-3xl mx-auto rounded-3xl bg-[#0e0422]/95 backdrop-blur-xl border-2 border-cyan-500/40 p-4 sm:p-8 shadow-[0_0_50px_rgba(0,240,255,0.2)] relative overflow-hidden">
+        <div className="max-w-3xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+          
           {memoryStep === 'idle' && (
             <div className="text-center py-6 sm:py-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center mx-auto mb-5 text-[#00f0ff] shadow-[0_0_25px_rgba(0,240,255,0.35)]">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-[#730bb3]/30 border border-[#86efac]/40 flex items-center justify-center mx-auto mb-5 text-[#86efac] shadow-[0_0_25px_rgba(134,239,172,0.35)]">
                 <Brain className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
 
               <h3 className="font-cyber-heavy text-2xl sm:text-3xl text-white tracking-tight mb-2">
-                MATRIZ DE MEMORIA BÍBLICA
+                PAREJAS DE LA PALABRA
               </h3>
               <p className="font-body text-xs sm:text-sm text-purple-200/80 max-w-md mx-auto mb-6">
-                Encuentra las 6 parejas de conceptos bíblicos, Pablo Rosales y promesas de Metanoia en el menor tiempo y movimientos posibles.
+                Encuentra las 6 parejas de conceptos bíblicos, Pablo Rosales y promesas de Dios en el menor tiempo y movimientos posibles.
               </p>
 
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl bg-purple-950/60 border border-cyan-500/30 text-xs font-mono-cyber text-[#00ff9d] mb-6">
-                <Trophy className="w-4 h-4 text-[#00f0ff]" />
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#86efac] mb-6">
+                <Trophy className="w-4 h-4 text-[#86efac]" />
                 <span>RÉCORD PERSONAL: {memoryHighScore} PTS</span>
               </div>
 
               <div>
                 <button
                   onClick={startMemoryGame}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#00f0ff] to-purple-600 text-black font-cyber text-xs sm:text-sm font-extrabold tracking-widest uppercase shadow-[0_0_25px_rgba(0,240,255,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
+                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
                 >
-                  <Play className="w-4 h-4 fill-black" />
-                  <span>INICIAR MATRIZ</span>
+                  <Play className="w-4 h-4 fill-white" />
+                  <span>INICIAR PAREJAS</span>
                 </button>
               </div>
             </div>
@@ -1017,20 +1152,20 @@ export const CyberArcadeSection: React.FC = () => {
 
           {memoryStep === 'playing' && (
             <div>
-              <div className="flex items-center justify-between pb-3.5 mb-5 border-b border-cyan-500/20 text-xs font-mono-cyber">
-                <div className="text-[#00ff9d] font-bold flex items-center gap-1">
+              <div className="flex items-center justify-between pb-3.5 mb-5 border-b border-[#c3a7ff]/20 text-xs font-cyber">
+                <div className="text-[#86efac] font-bold flex items-center gap-1.5">
                   <Timer className="w-3.5 h-3.5" /> {memoryTime}s
                 </div>
-                <div className="text-[#00f0ff] font-bold flex items-center gap-1">
+                <div className="text-[#f4b6ff] font-bold flex items-center gap-1.5">
                   <Layers className="w-3.5 h-3.5" /> MOV: {memoryMoves}
                 </div>
-                <div className="text-[#c084fc] font-bold">
+                <div className="text-[#e4c5ff] font-bold">
                   PAREJAS: {memoryCards.filter((c) => c.isMatched).length / 2}/6
                 </div>
               </div>
 
-              {/* 12 Cards Grid - Mobile 4x3 Optimized */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3.5">
+              {/* 12 Cards Grid */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-2.5 sm:gap-3.5">
                 {memoryCards.map((card, index) => {
                   const isVisible = card.isFlipped || card.isMatched;
 
@@ -1038,36 +1173,29 @@ export const CyberArcadeSection: React.FC = () => {
                     <button
                       key={card.id}
                       onClick={() => handleCardClick(index)}
-                      className={`h-22 xs:h-24 sm:h-28 rounded-xl border p-1.5 flex flex-col items-center justify-center text-center transition-all duration-300 cursor-pointer touch-manipulation select-none relative overflow-hidden min-h-[44px] ${
+                      className={`h-24 sm:h-28 rounded-2xl border p-2 flex flex-col items-center justify-center text-center transition-all duration-300 cursor-pointer touch-manipulation select-none relative overflow-hidden min-h-[44px] ${
                         card.isMatched
-                          ? 'bg-[#00ff9d]/20 border-[#00ff9d] text-white shadow-[0_0_15px_rgba(0,255,157,0.35)] scale-[0.98]'
+                          ? 'bg-[#86efac]/20 border-[#86efac] text-white shadow-[0_0_15px_rgba(134,239,172,0.35)] scale-[0.98]'
                           : isVisible
-                          ? 'bg-[#180538] border-cyan-400 text-white shadow-[0_0_15px_rgba(0,240,255,0.4)] scale-105'
-                          : 'bg-[#12062e] border-purple-500/30 hover:border-purple-400 text-white/30'
+                          ? 'bg-[#730bb3]/50 border-[#f4b6ff] text-white shadow-[0_0_16px_rgba(176,28,198,0.5)] scale-105'
+                          : 'bg-[#230a42]/70 border-[#c3a7ff]/30 hover:border-[#f4b6ff] text-white/40'
                       }`}
                     >
                       {isVisible ? (
                         <>
-                          <span className="text-xl sm:text-2xl mb-1">{card.icon}</span>
-                          <span className="font-cyber font-bold text-[10px] sm:text-xs tracking-wider uppercase text-white leading-tight">
+                          <span className="text-2xl sm:text-3xl mb-1">{card.icon}</span>
+                          <span className="font-cyber text-[11px] sm:text-xs text-white font-bold leading-tight">
                             {card.label}
                           </span>
-                          <span className="text-[8px] sm:text-[9px] font-mono text-[#00f0ff] mt-0.5">
+                          <span className="text-[9px] font-body text-purple-200/80 mt-0.5">
                             {card.sub}
                           </span>
                         </>
                       ) : (
-                        <div className="flex flex-col items-center justify-center gap-0.5">
-                          <img
-                            src="/assets/metanoia-logo-official.png"
-                            alt="Logo"
-                            className="w-7 h-7 object-contain opacity-60"
-                            onError={(e) => {
-                              (e.currentTarget as HTMLElement).style.display = 'none';
-                            }}
-                          />
-                          <span className="text-[7px] sm:text-[8px] font-mono-cyber text-purple-300/60 tracking-widest">
-                            METANOIA
+                        <div className="flex flex-col items-center justify-center">
+                          <Sparkles className="w-5 h-5 text-[#f4b6ff] opacity-60" />
+                          <span className="text-[9px] font-cyber tracking-widest text-[#c3a7ff] mt-1 font-bold">
+                            RELOAD
                           </span>
                         </div>
                       )}
@@ -1080,34 +1208,34 @@ export const CyberArcadeSection: React.FC = () => {
 
           {memoryStep === 'won' && (
             <div className="text-center py-6 sm:py-8">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-cyan-500/20 border border-cyan-400 flex items-center justify-center mx-auto mb-4 text-[#00f0ff] shadow-[0_0_30px_rgba(0,240,255,0.4)] animate-bounce">
-                <Trophy className="w-8 h-8 sm:w-10 sm:h-10" />
+              <div className="w-20 h-20 rounded-3xl bg-[#730bb3]/30 border border-[#86efac] flex items-center justify-center mx-auto mb-4 text-[#86efac] shadow-[0_0_30px_rgba(134,239,172,0.5)] animate-bounce">
+                <Trophy className="w-10 h-10" />
               </div>
 
-              <div className="text-xs font-mono-cyber text-[#00ff9d] uppercase tracking-widest mb-1.5 font-bold">
-                ¡MATRIZ SINCRONIZADA CON ÉXITO!
+              <div className="text-xs font-cyber text-[#86efac] uppercase tracking-wider mb-1.5 font-bold">
+                ¡EXCELENTE MEMORIA!
               </div>
 
-              <h3 className="font-cyber-heavy text-3xl sm:text-5xl text-white mb-2">
-                {Math.max(100, 1200 - memoryMoves * 25 - memoryTime * 6)} <span className="text-base text-purple-300">PUNTOS</span>
+              <h3 className="font-cyber-heavy text-3xl sm:text-4xl text-white mb-2">
+                PAREJAS COMPLETADAS
               </h3>
 
-              <p className="text-xs font-mono-cyber text-purple-200 mb-5">
-                Completado en {memoryTime} segundos y {memoryMoves} movimientos.
+              <p className="font-body text-xs sm:text-sm text-purple-200/90 max-w-md mx-auto mb-6">
+                Lo lograste en <strong className="text-white">{memoryMoves} movimientos</strong> y <strong className="text-white">{memoryTime} segundos</strong>.
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <button
-                  onClick={() => handleShareScore('Matriz de Memoria', Math.max(100, 1200 - memoryMoves * 25 - memoryTime * 6))}
-                  className="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  onClick={() => handleShareScore('Parejas Bíblicas', `${memoryMoves} mov.`)}
+                  className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-cyber text-xs font-bold uppercase tracking-wider border border-white/20 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
-                  {isCopied ? <Check className="w-4 h-4 text-[#00ff9d]" /> : <Share2 className="w-4 h-4 text-[#00f0ff]" />}
+                  {isCopied ? <Check className="w-4 h-4 text-[#86efac]" /> : <Share2 className="w-4 h-4 text-[#f4b6ff]" />}
                   <span>{isCopied ? '¡Copiado!' : 'Compartir Récord'}</span>
                 </button>
 
                 <button
                   onClick={startMemoryGame}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#00f0ff] to-purple-600 text-black font-cyber text-xs font-extrabold uppercase tracking-wider shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>JUGAR OTRA VEZ</span>
@@ -1115,8 +1243,10 @@ export const CyberArcadeSection: React.FC = () => {
               </div>
             </div>
           )}
+
         </div>
       )}
+
     </section>
   );
 };

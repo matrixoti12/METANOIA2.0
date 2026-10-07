@@ -19,9 +19,14 @@ export default defineConfig(() => {
           theme_color: '#140026',
           icons: [
             {
-              src: 'church-logo.svg',
+              src: '/assets/metanoia-emblem-square.png',
               sizes: '192x192',
-              type: 'image/svg+xml'
+              type: 'image/png'
+            },
+            {
+              src: '/assets/metanoia-logo-official-hd.png',
+              sizes: '512x512',
+              type: 'image/png'
             }
           ]
         },

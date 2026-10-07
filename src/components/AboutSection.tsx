@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Sparkles, Heart, CheckCircle2, Flame, BookOpen, Shield, Zap, ArrowRight, Sun, MessageSquareHeart } from 'lucide-react';
+import { Sparkles, Heart, CheckCircle2, Flame, BookOpen, Shield, Zap, RefreshCw, Sun, Check } from 'lucide-react';
 import { playCyberClick, playCyberHover, playNeonChime } from '../utils/audio';
 import { BlurText } from './BlurText';
 
@@ -10,55 +10,55 @@ interface BiblicalPromise {
   feeling: string;
   verse: string;
   reference: string;
-  cyberAdvice: string;
+  devotionalInsight: string;
   color: string;
 }
 
 const PROMISES: BiblicalPromise[] = [
   {
     id: 'ansiedad',
-    category: 'PAZ MENTAL',
-    feeling: 'Ansiedad o Estrés',
+    category: 'PAZ INQUEBRANTABLE',
+    feeling: 'Ansiedad o Sobrecarga',
     verse: '«Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración... Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.»',
     reference: 'Filipenses 4:6-7',
-    cyberAdvice: 'Desconecta el ruido del mundo y sincroniza tu mente con la paz del Padre.',
-    color: '#00f0ff',
+    devotionalInsight: 'Apaga el ruido de la incertidumbre y descansa en la fidelidad eterna de Dios.',
+    color: '#c3a7ff',
   },
   {
     id: 'culpa',
-    category: 'REINICIO TOTAL',
+    category: 'NUEVA IDENTIDAD',
     feeling: 'Culpa o Pasado Difícil',
     verse: '«De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas.»',
     reference: '2 Corintios 5:17',
-    cyberAdvice: 'Tu pasado fue borrado en la cruz. Cristo te da un disco duro espiritual totalmente limpio.',
-    color: '#ff007f',
+    devotionalInsight: 'Tu historia no está definida por tus errores, sino por la cruz que te perdonó.',
+    color: '#f4b6ff',
   },
   {
     id: 'amor',
-    category: 'AMOR ETERNO',
-    feeling: 'Soledad o Desamor',
+    category: 'AMOR INCONDICIONAL',
+    feeling: 'Soledad o Desánimo',
     verse: '«Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.»',
     reference: 'Juan 3:16',
-    cyberAdvice: 'No necesitas mendigar aprobación en redes sociales; el Creador del universo ya dio Su vida por ti.',
-    color: '#ffe600',
+    devotionalInsight: 'No necesitas mendigar aprobación ajena: fuiste amado y comprado a precio de sangre.',
+    color: '#e4c5ff',
   },
   {
     id: 'fuerza',
-    category: 'ENERGÍA DIVINA',
-    feeling: 'Agotamiento o Derrota',
+    category: 'FUERZA ESPIRITUAL',
+    feeling: 'Cansancio Mental',
     verse: '«Él da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas... los que esperan a Jehová tendrán nuevas fuerzas; levantarán alas como las águilas.»',
     reference: 'Isaías 40:29-31',
-    cyberAdvice: 'Cuando tu batería humana llega a 0%, el Espíritu Santo se conecta como fuente inagotable.',
-    color: '#00ff9d',
+    devotionalInsight: 'Cuando tus fuerzas se agotan, la gracia de Dios se perfecciona en tu debilidad.',
+    color: '#86efac',
   },
   {
     id: 'proposito',
-    category: 'DESTINO',
-    feeling: 'Falta de Rumbo',
+    category: 'PROPÓSITO DIVINO',
+    feeling: 'Búsqueda de Dirección',
     verse: '«Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.»',
     reference: 'Jeremías 29:11',
-    cyberAdvice: 'Tu vida no es un accidente biológico. Fuiste diseñado con un propósito eterno antes de nacer.',
-    color: '#a855f7',
+    devotionalInsight: 'Fuiste diseñado con propósito antes de la fundación del mundo. Dios no improvisa contigo.',
+    color: '#93c5fd',
   },
 ];
 
@@ -86,66 +86,71 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
     <section
       id="proposito"
       ref={sectionRef}
-      className="relative py-24 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden z-20"
+      className="relative py-20 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden z-20"
     >
-      {/* Glow Backdrops */}
-      <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#ff007f]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-[#00f0ff]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Resplandores cósmicos suaves de fondo */}
+      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#b01cc6]/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#730bb3]/20 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Top Header & Romanos 12:2 */}
+      {/* Encabezado y Romanos 12:2 */}
       <div
-        className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center transition-all duration-1000 mb-16 ${
+        className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-1000 mb-16 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}
       >
-        {/* Left Column: Heading & Purpose */}
+        {/* Columna Izquierda: Mensaje Central y Lema RELOAD */}
         <div className="lg:col-span-6 flex flex-col justify-center text-left">
-          <div className="mb-3 flex items-center gap-2">
-            <Flame className="w-4 h-4 text-[#ff007f] animate-pulse" />
-            <span className="font-cyber text-xs tracking-[0.25em] uppercase text-[#ff007f] font-bold">
-              PROPÓSITO & EVANGELIO • LA VERDAD QUE LIBERA
+          
+          {/* Badge Oficial RELOAD */}
+          <div className="mb-4 inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 shadow-[0_0_20px_rgba(195,167,255,0.3)]">
+            <RefreshCw className="w-3.5 h-3.5 text-[#f4b6ff] animate-spin" style={{ animationDuration: '8s' }} />
+            <span className="font-cyber text-xs tracking-wider uppercase text-[#e4c5ff] font-bold">
+              METANOIA 2026 // RELOAD ESPIRITUAL
             </span>
           </div>
 
           <BlurText
-            text="NO TE CONFORMES. TRANSFÓRMATE."
-            className="font-cyber-heavy text-4xl xs:text-5xl sm:text-6xl tracking-tight text-white leading-[1.05] mb-6 select-none"
+            text="REINICIA TU MENTE. TRANSFORMA TU DESTINO."
+            className="font-cyber-heavy text-3xl xs:text-4xl sm:text-5xl tracking-tight text-white leading-[1.1] mb-5 select-none"
             animateBy="words"
-            delay={0.08}
+            delay={0.06}
           />
 
-          <p className="text-base sm:text-lg text-purple-200/90 font-body leading-relaxed max-w-lg mb-5">
+          <p className="text-base sm:text-lg text-purple-200/90 font-body leading-relaxed max-w-xl mb-5">
             {userName ? (
-              <strong className="text-[#ffe600] font-semibold block mb-1">
-                {userName}, Dios tiene un plan específico para tu vida.
+              <strong className="text-[#f4b6ff] font-semibold block mb-1">
+                {userName}, Dios preparó este tiempo para renovarte.
               </strong>
             ) : null}
-            <strong className="text-white font-semibold">METANOIA 2026</strong> (Sábado 28 de Noviembre, 6:00 PM • IGLEPACBEN AD Guazapa con <span className="text-[#c084fc] font-bold">Pablo Rosales</span>) no es solo una reunión de jóvenes: es un punto de quiebre espiritual. Es el momento en que decides apagar el ruido de las redes, los temores y el conformismo para renovar tu mente en Cristo.
+            <strong className="text-white font-semibold">METANOIA: RELOAD</strong> es más que un evento de jóvenes: es el momento de hacer una pausa en el caos cotidiano, desconectar de las voces que te desgastan y permitir que el Espíritu Santo reinicie tu mente bajo el señorío de Jesucristo.
           </p>
 
           <div className="flex flex-wrap gap-2.5">
-            <div className="inline-flex items-center gap-2 text-xs font-mono-cyber text-[#00f0ff] px-3 py-1.5 rounded-lg bg-[#00f0ff]/10 border border-[#00f0ff]/30">
-              <span>GRIEGO: μετάνοια (Metanoia)</span>
+            <div className="inline-flex items-center gap-2 text-xs font-cyber text-[#e4c5ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
+              <span className="font-bold">GRIEGO: μετάνοia</span>
+              <span className="text-purple-300/70">•</span>
+              <span>Cambio Total de Pensamiento</span>
             </div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono-cyber text-[#ffe600] px-3 py-1.5 rounded-lg bg-[#ffe600]/10 border border-[#ffe600]/30">
-              <span>UN CAMBIO RADICAL DE DIRECCIÓN</span>
+            <div className="inline-flex items-center gap-2 text-xs font-cyber text-[#f4b6ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
+              <Sparkles className="w-3 h-3 text-[#f4b6ff]" />
+              <span className="font-bold">RELOAD: Giro de 180° hacia Cristo</span>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Romanos 12:2 Holographic Quote Card */}
+        {/* Columna Derecha: Tarjeta Luminous de Romanos 12:2 */}
         <div className="lg:col-span-6">
-          <div className="relative p-[1.5px] rounded-3xl bg-gradient-to-br from-[#ff007f] via-[#00f0ff] to-[#ffe600] shadow-[0_0_35px_rgba(255,0,127,0.25)]">
-            <div className="relative rounded-[23px] bg-[#140026]/95 backdrop-blur-xl p-7 sm:p-9 flex flex-col justify-between min-h-[300px] overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-[#ff007f]/15 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#00f0ff]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="relative p-[1px] rounded-3xl bg-gradient-to-br from-[#c3a7ff]/50 via-[#b01cc6]/40 to-[#4331ec]/50 shadow-[0_16px_40px_rgba(23,5,38,0.5)]">
+            <div className="relative rounded-[23px] glass-panel-luminous p-7 sm:p-9 flex flex-col justify-between min-h-[300px] overflow-hidden">
+              <div className="absolute top-0 right-0 w-44 h-44 bg-[#b01cc6]/20 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-44 h-44 bg-[#730bb3]/20 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative z-10 mb-2 select-none flex items-center justify-between">
-                <span className="font-serif text-5xl sm:text-6xl text-[#ff007f] leading-none drop-shadow-[0_0_12px_#ff007f]">
+              <div className="relative z-10 mb-3 select-none flex items-center justify-between">
+                <span className="font-serif text-5xl sm:text-6xl text-[#f4b6ff] leading-none drop-shadow-[0_0_12px_rgba(244,182,255,0.6)]">
                   “
                 </span>
-                <span className="text-xs font-mono-cyber text-[#ffe600] bg-[#ffe600]/10 px-2.5 py-1 rounded border border-[#ffe600]/30">
-                  PALABRA VIVA
+                <span className="text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/35">
+                  VERSÍCULO CLAVE METANOIA
                 </span>
               </div>
 
@@ -153,36 +158,36 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                 «No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta.»
               </blockquote>
 
-              <div className="relative z-10 pt-3 border-t border-white/10 flex items-center justify-between">
-                <cite className="font-cyber text-xs sm:text-sm font-bold tracking-[0.25em] text-[#ff007f] uppercase not-italic drop-shadow-[0_0_8px_rgba(255,0,127,0.7)] flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4 text-[#ff007f]" /> ROMANOS 12:2
+              <div className="relative z-10 pt-4 border-t border-[#c3a7ff]/20 flex items-center justify-between">
+                <cite className="font-cyber text-sm font-bold tracking-wider text-[#f4b6ff] uppercase not-italic drop-shadow-[0_0_8px_rgba(244,182,255,0.5)] flex items-center gap-2">
+                  <BookOpen className="w-4 h-4 text-[#f4b6ff]" /> ROMANOS 12:2
                 </cite>
-                <span className="text-[11px] font-mono-cyber text-[#00f0ff]">Lema Oficial Metanoia</span>
+                <span className="text-xs font-cyber text-[#c3a7ff]">Palabra de Dios</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* SECCIÓN INTERACTIVA: "REINICIA TU MENTE // SELECTOR BÍBLICO DE PROMESAS" (OFFICIAL FLYER VIOLET THEME) */}
-      <div className="mt-8 mb-16 p-6 sm:p-10 rounded-3xl bg-[#0e0422]/95 border-2 border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.25)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#a855f7]/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#00f0ff]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* SECCIÓN INTERACTIVA: "RELOAD // SELECTOR BÍBLICO DE PROMESAS" */}
+      <div className="mt-8 mb-16 p-6 sm:p-10 rounded-3xl glass-panel-luminous border border-[#c3a7ff]/30 relative overflow-hidden shadow-[0_20px_50px_rgba(18,3,30,0.5)]">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#b01cc6]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#730bb3]/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#18073b] border border-purple-500/40 text-[#c084fc] text-xs font-mono-cyber uppercase mb-3 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
-            <Zap className="w-3.5 h-3.5 text-[#00f0ff]" /> Sintoniza tu Corazón • Palabra Revelada
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#730bb3]/35 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber uppercase mb-3 shadow-[0_0_15px_rgba(195,167,255,0.25)]">
+            <Zap className="w-3.5 h-3.5 text-[#f4b6ff]" /> RELOAD Espiritual • Palabra para tu Corazón
           </div>
-          <h3 className="font-cyber-heavy text-2xl sm:text-4xl text-white mb-2">
-            ¿QUÉ ESTÁ LIBRANDO TU MENTE HOY?
+          <h3 className="font-cyber-heavy text-2xl sm:text-3xl text-white mb-2">
+            ¿QUÉ CARGA DESEAS ENTREGAR HOY?
           </h3>
           <p className="text-purple-200/90 text-xs sm:text-sm font-body">
-            Toca lo que sientes para activar la promesa bíblica exacta de Cristo para tu vida:
+            Selecciona la situación que estás viviendo para activar la promesa bíblica exacta de Cristo para tu vida:
           </p>
         </div>
 
-        {/* Emotion / Struggle Selection Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 relative z-10">
+        {/* Botones de Selección */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8 relative z-10">
           {PROMISES.map((promise) => {
             const isSelected = selectedPromise.id === promise.id;
             return (
@@ -190,15 +195,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                 key={promise.id}
                 onClick={() => handlePromiseSelect(promise)}
                 onMouseEnter={() => playCyberHover('subtle')}
-                className={`px-4 py-2.5 rounded-xl font-cyber text-xs tracking-wider uppercase transition-all cursor-pointer touch-manipulation min-h-[44px] flex items-center gap-2 ${
+                className={`px-4 py-2.5 rounded-2xl font-cyber text-xs tracking-wider transition-all cursor-pointer touch-manipulation min-h-[44px] flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] text-white font-extrabold shadow-[0_0_20px_rgba(168,85,247,0.6)] border border-purple-400 scale-105'
-                    : 'bg-[#150734]/80 text-purple-200 border border-purple-500/30 hover:border-purple-400 hover:text-white'
+                    ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-extrabold shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-105'
+                    : 'bg-[#230a42]/70 text-purple-200 border border-[#c3a7ff]/30 hover:border-[#c3a7ff]/60 hover:text-white'
                 }`}
               >
                 <span
                   className="w-2.5 h-2.5 rounded-full"
-                  style={{ backgroundColor: isSelected ? '#00f0ff' : promise.color, boxShadow: `0 0 8px ${promise.color}` }}
+                  style={{ backgroundColor: isSelected ? '#ffffff' : promise.color, boxShadow: `0 0 8px ${promise.color}` }}
                 />
                 <span>{promise.feeling}</span>
               </button>
@@ -206,135 +211,135 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
           })}
         </div>
 
-        {/* Display Card for Selected Promise (Official Flyer Palette) */}
-        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 rounded-2xl bg-[#12052e]/90 border-2 border-purple-500/50 shadow-[0_0_35px_rgba(168,85,247,0.35)] transition-all">
-          <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-purple-500/30">
-            <span
-              className="text-xs font-mono-cyber font-bold tracking-widest uppercase px-3 py-1 rounded-lg bg-purple-950/60 border border-purple-500/40 text-[#c084fc]"
-            >
-              CATEGORÍA: {selectedPromise.category}
+        {/* Tarjeta de Promesa Seleccionada */}
+        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl glass-card-amethyst border border-[#c3a7ff]/35 shadow-[0_12px_32px_rgba(15,3,25,0.4)] transition-all">
+          <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-[#c3a7ff]/20">
+            <span className="text-xs font-cyber font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-[#730bb3]/40 border border-[#c3a7ff]/35 text-[#f4b6ff]">
+              TEMA: {selectedPromise.category}
             </span>
-            <span className="text-xs font-cyber text-[#00f0ff] flex items-center gap-1.5 font-bold">
-              <BookOpen className="w-3.5 h-3.5 text-[#00f0ff]" />
+            <span className="text-xs font-cyber text-[#e4c5ff] flex items-center gap-1.5 font-bold">
+              <BookOpen className="w-3.5 h-3.5 text-[#f4b6ff]" />
               {selectedPromise.reference}
             </span>
           </div>
 
-          <p className="text-base sm:text-xl text-white font-body leading-relaxed mb-4 italic">
+          <p className="text-base sm:text-xl text-white font-body leading-relaxed mb-5 italic">
             {selectedPromise.verse}
           </p>
 
-          <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-start gap-3">
-            <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#c084fc]" />
-            <p className="text-xs sm:text-sm text-purple-200/90 font-mono">
-              <strong className="text-white">Para tu día:</strong> {selectedPromise.cyberAdvice}
+          <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/30 flex items-start gap-3">
+            <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#f4b6ff]" />
+            <p className="text-xs sm:text-sm text-purple-200/95 font-body leading-relaxed">
+              <strong className="text-white font-cyber">Para tu día:</strong> {selectedPromise.devotionalInsight}
             </p>
           </div>
         </div>
       </div>
 
-      {/* Evangelismo Metanoia: Los 3 Pasos de Salvación & Oración de Fe */}
+      {/* Los 3 Pilares de Salvación & Oración de Fe */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-6">
-        {/* 3 Pillars of Salvation */}
+        
+        {/* 3 Pasos */}
         <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Card 1 */}
-          <div className="rounded-2xl bg-[#0e001f]/90 border border-white/10 p-6 flex flex-col justify-between hover:border-[#00f0ff] transition-all">
+          {/* Pilar 1 */}
+          <div className="rounded-3xl glass-card-amethyst border border-[#c3a7ff]/30 p-6 flex flex-col justify-between hover:border-[#f4b6ff] transition-all">
             <div>
-              <div className="font-mono-cyber text-2xl font-black text-[#00f0ff] mb-2">01</div>
+              <div className="font-cyber-heavy text-2xl font-black text-[#c3a7ff] mb-2">01</div>
               <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
                 RECONOCE Y CONFIESA
               </h4>
-              <p className="font-body text-xs text-purple-200/80 leading-relaxed">
+              <p className="font-body text-xs text-purple-200/85 leading-relaxed">
                 Reconocer que hemos pecado y que lejos de Dios nuestra vida pierde el rumbo. Sincerarse delante de Él es el inicio de la sanidad.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] font-mono-cyber text-[#ffe600]">
+            <div className="mt-4 pt-3 border-t border-[#c3a7ff]/20 text-[11px] font-cyber text-[#f4b6ff]">
               1 Juan 1:9
             </div>
           </div>
 
-          {/* Card 2 */}
-          <div className="rounded-2xl bg-[#0e001f]/90 border border-[#ff007f]/40 p-6 flex flex-col justify-between shadow-[0_0_20px_rgba(255,0,127,0.15)]">
+          {/* Pilar 2 */}
+          <div className="rounded-3xl glass-card-amethyst border border-[#f4b6ff]/40 p-6 flex flex-col justify-between shadow-[0_0_20px_rgba(176,28,198,0.25)] hover:border-[#f4b6ff] transition-all">
             <div>
-              <div className="font-mono-cyber text-2xl font-black text-[#ff007f] mb-2">02</div>
+              <div className="font-cyber-heavy text-2xl font-black text-[#f4b6ff] mb-2">02</div>
               <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
-                ARREPENTIMIENTO REAL
+                METANOIA REAL
               </h4>
-              <p className="font-body text-xs text-purple-200/80 leading-relaxed">
-                Metanoia no es remordimiento pasajero; es dar media vuelta y correr a los brazos de Jesús, rindiéndole tus planes y tus heridas.
+              <p className="font-body text-xs text-purple-200/85 leading-relaxed">
+                Metanoia no es remordimiento pasajero; es dar un giro de 180° y correr a los brazos de Jesús, rindiéndole tus planes y tus heridas.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] font-mono-cyber text-[#ffe600]">
+            <div className="mt-4 pt-3 border-t border-[#c3a7ff]/20 text-[11px] font-cyber text-[#f4b6ff]">
               Hechos 3:19
             </div>
           </div>
 
-          {/* Card 3 */}
-          <div className="rounded-2xl bg-[#0e001f]/90 border border-white/10 p-6 flex flex-col justify-between hover:border-[#00ff9d] transition-all">
+          {/* Pilar 3 */}
+          <div className="rounded-3xl glass-card-amethyst border border-[#c3a7ff]/30 p-6 flex flex-col justify-between hover:border-[#86efac] transition-all">
             <div>
-              <div className="font-mono-cyber text-2xl font-black text-[#00ff9d] mb-2">03</div>
+              <div className="font-cyber-heavy text-2xl font-black text-[#86efac] mb-2">03</div>
               <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
-                NUEVO CORAZÓN
+                VIDA NUEVA // RELOAD
               </h4>
-              <p className="font-body text-xs text-purple-200/80 leading-relaxed">
+              <p className="font-body text-xs text-purple-200/85 leading-relaxed">
                 «Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros» (Ezequiel 36:26). Ahora eres hijo de Dios con vida eterna.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-white/10 text-[10px] font-mono-cyber text-[#ffe600]">
+            <div className="mt-4 pt-3 border-t border-[#c3a7ff]/20 text-[11px] font-cyber text-[#86efac]">
               Ezequiel 36:26
             </div>
           </div>
         </div>
 
         {/* Oración de Compromiso y Decisión */}
-        <div className="lg:col-span-5 rounded-3xl bg-gradient-to-b from-[#18002e] to-[#0c0018] border border-[#ff007f]/40 p-6 sm:p-8 flex flex-col justify-between shadow-[0_0_35px_rgba(255,0,127,0.2)]">
+        <div className="lg:col-span-5 rounded-3xl glass-panel-luminous border border-[#f4b6ff]/35 p-6 sm:p-8 flex flex-col justify-between shadow-[0_16px_40px_rgba(23,5,38,0.5)]">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#ff007f]/15 border border-[#ff007f]/40 flex items-center justify-center text-[#ff007f]">
-                <Heart className="w-5 h-5 fill-[#ff007f]/40" />
+              <div className="w-10 h-10 rounded-2xl bg-[#730bb3]/30 border border-[#c3a7ff]/40 flex items-center justify-center text-[#f4b6ff]">
+                <Heart className="w-5 h-5 fill-[#f4b6ff]/30" />
               </div>
               <div>
-                <span className="text-[10px] font-mono-cyber text-[#00f0ff] uppercase tracking-widest block">
+                <span className="text-[10px] font-cyber text-[#c3a7ff] uppercase tracking-wider block">
                   LLAMADO DE SALVACIÓN
                 </span>
                 <h4 className="font-cyber-heavy text-lg sm:text-xl text-white">
-                  MI ENTREGA A CRISTO
+                  MI DECISIÓN POR CRISTO
                 </h4>
               </div>
             </div>
 
             <p className="font-body text-xs sm:text-sm text-purple-200/90 mb-4">
-              {userName ? `${userName}, si ` : 'Si '}hoy anhelas que Jesús tome el timón de tu vida y limpie tu corazón, repite esta oración con fe:
+              {userName ? `${userName}, si ` : 'Si '}hoy anhelas que Jesús tome el timón de tu vida y limpie tu corazón, repite esta oración con fe sincera:
             </p>
 
-            <div className="p-4 rounded-xl bg-black/50 border border-white/10 text-purple-100 text-xs sm:text-sm leading-relaxed font-body italic space-y-2">
+            <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/25 text-purple-100 text-xs sm:text-sm leading-relaxed font-body italic space-y-2">
               <p>
                 «Señor Jesús, hoy reconozco que te necesito. Creo que moriste en la cruz por mis pecados y resucitaste al tercer día.»
               </p>
               <p>
-                «Te pido perdón por mis faltas. Te abro las puertas de mi corazón y te recibo como mi único Señor y Salvador. Escribe mi nombre en el Libro de la Vida y renuévame hoy. Amén.»
+                «Te pido perdón por mis faltas. Te abro las puertas de mi corazón y te recibo como mi Señor y Salvador. Dame un nuevo comienzo y escribe mi nombre en el Libro de la Vida. Amén.»
               </p>
             </div>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-white/10">
+          <div className="mt-5 pt-4 border-t border-[#c3a7ff]/20">
             {hasPrayed ? (
-              <div className="p-3.5 rounded-xl bg-[#00ff9d]/10 border border-[#00ff9d]/40 text-[#00ff9d] text-center font-cyber text-xs flex items-center justify-center gap-2 animate-bounce">
-                <CheckCircle2 className="w-4 h-4 text-[#00ff9d]" />
+              <div className="p-3.5 rounded-2xl bg-[#86efac]/15 border border-[#86efac]/40 text-[#86efac] text-center font-cyber text-xs flex items-center justify-center gap-2 animate-bounce">
+                <CheckCircle2 className="w-4 h-4 text-[#86efac]" />
                 <span>¡GLORIA A DIOS! HAS DADO EL PASO MÁS IMPORTANTE</span>
               </div>
             ) : (
               <button
                 onClick={handlePrayer}
                 onMouseEnter={() => playCyberHover('crisp')}
-                className="w-full py-4 px-5 rounded-xl bg-gradient-to-r from-[#ff007f] via-[#7928ca] to-[#00f0ff] text-white font-cyber text-xs font-bold tracking-widest uppercase shadow-[0_0_25px_rgba(255,0,127,0.6)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[46px]"
+                className="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[46px]"
               >
-                <Sparkles className="w-4 h-4 text-[#ffe600]" />
+                <Sparkles className="w-4 h-4 text-[#f4b6ff]" />
                 <span>CONFIRMO MI FE EN JESÚS HOY</span>
               </button>
             )}
           </div>
         </div>
+
       </div>
     </section>
   );

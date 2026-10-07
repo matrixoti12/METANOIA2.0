@@ -26,7 +26,7 @@ export default function App() {
   }, [isLoaded, profile]);
 
   return (
-    <div className="relative min-h-screen bg-[#0c031c] text-white selection:bg-[#a855f7] selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#170526] text-white selection:bg-[#b01cc6] selection:text-white overflow-x-hidden">
       {/* Name Onboarding Modal */}
       <OnboardingModal 
         isOpen={showOnboarding} 

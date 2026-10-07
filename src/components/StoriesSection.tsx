@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronLeft, ChevronRight, ArrowUpRight, Layers, BookmarkCheck, Compass } from 'lucide-react';
 import { playCyberClick, playCyberHover } from '../utils/audio';
+import { MetanoiaLogo } from './MetanoiaLogo';
 
 interface Story {
   id: string;
@@ -92,6 +93,7 @@ export const StoriesSection: React.FC = () => {
         {/* Section Header with Carousel Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div>
+            <MetanoiaLogo size="sm" className="mb-3" />
             <div className="mb-2">
               <span className="font-cyber text-xs tracking-[0.25em] uppercase text-[#ff007f] font-bold">
                 HISTORIAS REALES

@@ -60,9 +60,13 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
       >
         {/* Top Header Bar */}
         <div className="flex items-center justify-between p-3.5 sm:p-4 border-b border-purple-500/30 bg-[#160736]/80 backdrop-blur-md">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#7b2cbf] to-[#c77dff] p-[1.5px] shadow-[0_0_10px_#a855f7] flex items-center justify-center">
-              <Sparkles className="w-4 h-4 text-white" />
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-[#140026] border border-purple-500/50 shadow-[0_0_12px_rgba(168,85,247,0.5)] flex items-center justify-center p-1">
+              <img
+                src="/assets/metanoia-emblem-square.png"
+                alt="Metanoia Logo"
+                className="w-full h-full object-contain filter drop-shadow-[0_0_6px_#c77dff]"
+              />
             </div>
             <div>
               <span className="text-[10px] font-mono-cyber font-bold tracking-[0.2em] text-[#c084fc] uppercase block">

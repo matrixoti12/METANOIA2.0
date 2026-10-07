@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BlurText } from './BlurText';
+import { MetanoiaLogo } from './MetanoiaLogo';
 
 interface OnboardingModalProps {
   isOpen: boolean;
@@ -32,7 +33,8 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#ff007f]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#00f0ff]/10 rounded-full blur-2xl pointer-events-none" />
 
-            <div className="text-center mb-8 relative z-10">
+            <div className="text-center mb-8 relative z-10 flex flex-col items-center">
+              <MetanoiaLogo size="md" className="mb-4" />
               <span className="font-mono-cyber text-[#00f0ff] text-xs tracking-[0.3em] uppercase block mb-2 animate-pulse">
                 SYS.INIT // REGISTRO
               </span>

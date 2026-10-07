@@ -28,6 +28,7 @@ import {
   playCountdownBeep,
   playNeonChime,
 } from '../utils/audio';
+import { MetanoiaLogo } from './MetanoiaLogo';
 
 export type FrameId = 'neon-prime' | 'romanos-12' | 'squad-pass' | 'holo-crystal' | 'cyberwave' | 'minimal-obsidian';
 export type FilterId = 'normal' | 'cyber' | 'vivid' | 'noir' | 'golden';
@@ -542,46 +543,45 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Banner Plaque
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.9)';
-        ctx.fillRect(size * 0.16, margin * 0.5, size * 0.68, size * 0.09);
-        ctx.strokeStyle = '#C77DFF';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
+        ctx.fillRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.095);
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.16, margin * 0.5, size * 0.68, size * 0.09);
+        ctx.strokeRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.095);
 
         // Top Text
         ctx.fillStyle = '#ffffff';
-        ctx.font = `900 ${size * 0.046}px 'Orbitron', 'Russo One', sans-serif`;
+        ctx.font = `800 ${size * 0.044}px 'Outfit', 'Plus Jakarta Sans', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#C77DFF';
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.015;
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
+        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.052);
 
-        ctx.fillStyle = '#B06AE8';
-        ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.letterSpacing = '2px';
-        ctx.shadowColor = '#B06AE8';
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.019}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#b01cc6';
         ctx.shadowBlur = size * 0.01;
-        ctx.fillText('METANOIA 2.0 • PACTO Y BENDICIÓN', size / 2, margin * 0.5 + size * 0.076);
+        ctx.fillText('REINICIA TU MENTE • PABLO ROSALES', size / 2, margin * 0.5 + size * 0.078);
 
         // Bottom Plaque
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.92)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
         ctx.fillRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
 
-        // Bottom Text: Date & Location — white/lavender instead of yellow
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `800 ${size * 0.03}px 'Chakra Petch', sans-serif`;
-        ctx.shadowColor = '#C77DFF';
+        // Bottom Text: Date & Location
+        ctx.fillStyle = '#c3a7ff';
+        ctx.font = `700 ${size * 0.028}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.015;
         ctx.fillText('28 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
+        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
         ctx.shadowBlur = 0;
         ctx.fillText(
-          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'UN ENCUENTRO • UNA DECISIÓN • UNA NUEVA MENTALIDAD',
+          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'UNA DECISIÓN • UNA MENTE RENOVADA EN CRISTO',
           size / 2,
           size - margin * 1.7 + size * 0.08
         );
@@ -590,17 +590,16 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       case 'romanos-12': {
         // Romanos 12:2 Transformación Frame
-        // Violet & Lavender Edge
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.01;
-        ctx.shadowColor = '#7B2FBE';
+        ctx.shadowColor = '#b01cc6';
         ctx.shadowBlur = size * 0.03;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Corner Diamonds
         const dSize = size * 0.025;
-        ctx.fillStyle = '#C77DFF';
-        ctx.shadowColor = '#C77DFF';
+        ctx.fillStyle = '#c3a7ff';
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.02;
         [[margin, margin], [size - margin, margin], [margin, size - margin], [size - margin, size - margin]].forEach(
           ([x, y]) => {
@@ -615,36 +614,36 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         );
 
         // Top Biblical Banner
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.9)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
         ctx.fillRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
-        ctx.strokeStyle = '#C77DFF';
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `900 ${size * 0.026}px 'Chakra Petch', sans-serif`;
+        ctx.font = `800 ${size * 0.025}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText('«NO OS CONFORMÉIS A ESTE SIGLO»', size / 2, margin * 0.5 + size * 0.04);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `700 ${size * 0.022}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('SINO TRANSFORMAOS • ROMANOS 12:2', size / 2, margin * 0.5 + size * 0.075);
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
+        ctx.fillText('SINO TRANSFORMAOS • ROMANOS 12:2 // RELOAD', size / 2, margin * 0.5 + size * 0.075);
 
         // Bottom Footer Banner
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.92)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
         ctx.fillRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `900 ${size * 0.045}px 'Orbitron', 'Russo One', sans-serif`;
-        ctx.shadowColor = '#C77DFF';
+        ctx.fillStyle = '#c3a7ff';
+        ctx.font = `800 ${size * 0.042}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.02;
-        ctx.fillText('METANOIA 2026', size / 2, size - margin * 1.8 + size * 0.055);
+        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, size - margin * 1.8 + size * 0.055);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.019}px 'Chakra Petch', sans-serif`;
+        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
         ctx.shadowBlur = 0;
         ctx.fillText(
           attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 28 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
@@ -656,36 +655,36 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       case 'squad-pass': {
         // Escuadra Juvenil Tactical HUD Pass
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#730bb3';
         ctx.lineWidth = size * 0.008;
-        ctx.shadowColor = '#7B2FBE';
+        ctx.shadowColor = '#730bb3';
         ctx.shadowBlur = size * 0.02;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Caution Stripes Header
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.95)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.95)';
         ctx.fillRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
-        ctx.strokeStyle = '#C77DFF';
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.004;
         ctx.strokeRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `900 ${size * 0.038}px 'Orbitron', sans-serif`;
+        ctx.font = `800 ${size * 0.036}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA // SQUAD PASS', size / 2, margin * 0.4 + size * 0.045);
+        ctx.fillText('METANOIA // SQUAD PASS • RELOAD', size / 2, margin * 0.4 + size * 0.045);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('SYS.STATUS: RENOVADO // NIVEL: GUERRERO DE FE', size / 2, margin * 0.4 + size * 0.072);
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
+        ctx.fillText('ESTADO: MENTE RENOVADA // GUERRERO DE FE', size / 2, margin * 0.4 + size * 0.072);
 
         // Bottom Tactical Barcode & Data
-        ctx.fillStyle = 'rgba(8, 1, 24, 0.95)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.95)';
         ctx.fillRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.004;
         ctx.strokeRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
 
-        // Mock Barcode
+        // Barcode
         const barX = size * 0.1;
         const barY = size - margin * 2.1 + size * 0.02;
         const barH = size * 0.045;
@@ -697,19 +696,19 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Tactical Data on the right
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `800 ${size * 0.024}px 'Orbitron', sans-serif`;
+        ctx.fillStyle = '#c3a7ff';
+        ctx.font = `800 ${size * 0.024}px 'Outfit', sans-serif`;
         ctx.fillText('28-NOV-2026', size * 0.9, barY + size * 0.022);
-        ctx.fillStyle = '#B06AE8';
-        ctx.font = `700 ${size * 0.019}px 'Chakra Petch', sans-serif`;
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.019}px 'Outfit', sans-serif`;
         ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.042);
 
         // Custom Name below
         ctx.textAlign = 'center';
         ctx.fillStyle = '#ffffff';
-        ctx.font = `700 ${size * 0.024}px 'Chakra Petch', sans-serif`;
+        ctx.font = `700 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
-          attendeeName ? `SOLDADO: ${attendeeName.toUpperCase()}` : 'CREDENCIAL METANOIA 2.0 • PACTO Y BENDICIÓN',
+          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'CREDENCIAL METANOIA 2026 // RELOAD',
           size / 2,
           size - margin * 2.1 + size * 0.115
         );
@@ -718,23 +717,22 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       case 'holo-crystal': {
         // Holographic 3D Crystal & Violet Ring
-        // Giant circular glowing ring framing
         ctx.save();
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#730bb3';
         ctx.lineWidth = size * 0.015;
-        ctx.shadowColor = '#7B2FBE';
+        ctx.shadowColor = '#730bb3';
         ctx.shadowBlur = size * 0.04;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Inner glowing circle accent
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.4)';
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
         ctx.lineWidth = size * 0.003;
         ctx.beginPath();
         ctx.arc(size / 2, size / 2, size * 0.42, 0, Math.PI * 2);
         ctx.stroke();
 
         // HUD Crosshairs
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.6)';
+        ctx.strokeStyle = 'rgba(244, 182, 255, 0.6)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(size / 2 - 20, size / 2);
@@ -745,36 +743,36 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.restore();
 
         // Top Header
-        ctx.fillStyle = 'rgba(12, 3, 24, 0.9)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
         ctx.fillRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `900 ${size * 0.044}px 'Orbitron', 'Russo One', sans-serif`;
+        ctx.font = `800 ${size * 0.042}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#C77DFF';
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.02;
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.048);
+        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.048);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('PRISMA ESPIRITUAL // NUEVA MENTALIDAD', size / 2, margin * 0.5 + size * 0.073);
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
+        ctx.fillText('PRISMA DE TRANSFORMACIÓN • PABLO ROSALES', size / 2, margin * 0.5 + size * 0.073);
 
         // Bottom Footer
-        ctx.fillStyle = 'rgba(12, 3, 24, 0.92)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
         ctx.fillRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `800 ${size * 0.026}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('28 NOVIEMBRE • PACTO Y BENDICIÓN GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
+        ctx.fillStyle = '#c3a7ff';
+        ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
+        ctx.fillText('28 NOVIEMBRE • IGLEPACBEN AD GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
+        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
           attendeeName ? `${attendeeName.toUpperCase()} • EN SINTONÍA` : 'EXPERIENCIA DE ALABANZA, PALABRA Y PODER',
           size / 2,
@@ -787,17 +785,17 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         // Synthwave Violet Gradient
         ctx.save();
         const borderGrad = ctx.createLinearGradient(0, 0, size, size);
-        borderGrad.addColorStop(0, '#C77DFF');
-        borderGrad.addColorStop(0.5, '#7B2FBE');
-        borderGrad.addColorStop(1, '#B06AE8');
+        borderGrad.addColorStop(0, '#c3a7ff');
+        borderGrad.addColorStop(0.5, '#730bb3');
+        borderGrad.addColorStop(1, '#b01cc6');
         ctx.strokeStyle = borderGrad;
         ctx.lineWidth = size * 0.012;
-        ctx.shadowColor = '#7B2FBE';
+        ctx.shadowColor = '#730bb3';
         ctx.shadowBlur = size * 0.03;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Horizon Grid lines at bottom
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.35)';
         ctx.lineWidth = 1;
         for (let i = 1; i <= 6; i++) {
           ctx.beginPath();
@@ -808,36 +806,36 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.restore();
 
         // Top Banner
-        ctx.fillStyle = 'rgba(10, 2, 22, 0.9)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
         ctx.fillRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `900 ${size * 0.046}px 'Orbitron', sans-serif`;
+        ctx.font = `800 ${size * 0.044}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
+        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.052);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('REBOOT YOUR MIND // METANOIA 2.0', size / 2, margin * 0.5 + size * 0.076);
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
+        ctx.fillText('REINICIA TU MENTE // GUAZAPA EN VIVO', size / 2, margin * 0.5 + size * 0.076);
 
         // Bottom Banner
-        ctx.fillStyle = 'rgba(10, 2, 22, 0.92)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
         ctx.fillRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
-        ctx.strokeStyle = '#7B2FBE';
+        ctx.strokeStyle = '#b01cc6';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `800 ${size * 0.028}px 'Chakra Petch', sans-serif`;
+        ctx.fillStyle = '#c3a7ff';
+        ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
         ctx.fillText('28 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
+        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
-          attendeeName ? attendeeName.toUpperCase() : 'PACTO Y BENDICIÓN • METANOIA 2026',
+          attendeeName ? attendeeName.toUpperCase() : 'NOCHE DE ALABANZA Y TRANSFORMACIÓN',
           size / 2,
           size - margin * 1.8 + size * 0.082
         );
@@ -852,9 +850,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Lavender Corner Tick Accents
         const tick = size * 0.04;
-        ctx.strokeStyle = '#C77DFF';
+        ctx.strokeStyle = '#c3a7ff';
         ctx.lineWidth = size * 0.006;
-        ctx.shadowColor = '#C77DFF';
+        ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.015;
 
         // 4 corners
@@ -878,25 +876,25 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Minimalist Header
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(10, 2, 22, 0.88)';
-        ctx.fillRect(size * 0.2, margin * 0.45, size * 0.6, size * 0.075);
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.9)';
+        ctx.fillRect(size * 0.16, margin * 0.45, size * 0.68, size * 0.08);
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
         ctx.lineWidth = 1;
-        ctx.strokeRect(size * 0.2, margin * 0.45, size * 0.6, size * 0.075);
+        ctx.strokeRect(size * 0.16, margin * 0.45, size * 0.68, size * 0.08);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.038}px 'Orbitron', sans-serif`;
+        ctx.font = `800 ${size * 0.038}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('M E T A N O I A', size / 2, margin * 0.45 + size * 0.048);
+        ctx.fillText('M E T A N O I A // R E L O A D', size / 2, margin * 0.45 + size * 0.048);
 
-        ctx.fillStyle = '#C77DFF';
-        ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('2 0 2 6 • V I G I L I A', size / 2, margin * 0.45 + size * 0.068);
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
+        ctx.fillText('2 0 2 6 • G U A Z A P A', size / 2, margin * 0.45 + size * 0.07);
 
         // Bottom Minimalist Text
-        ctx.fillStyle = 'rgba(10, 2, 22, 0.88)';
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
         ctx.fillRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
         ctx.lineWidth = 1;
         ctx.strokeRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
 
@@ -989,18 +987,18 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   return (
     <section id="photospot" className="relative py-24 px-4 sm:px-8 max-w-7xl mx-auto z-20">
       {/* Top Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-xs font-mono-cyber tracking-[0.25em] uppercase mb-4 shadow-[0_0_15px_rgba(0,240,255,0.2)]">
-          <Sparkles className="w-3.5 h-3.5 animate-spin" />
-          <span>PHOTO-SPOT CYBER • METANOIA 2026</span>
+      <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3.5 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
+          <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff] animate-pulse" />
+          <span>PHOTO-SPOT • METANOIA 2026 // RELOAD</span>
         </div>
 
-        <h2 className="cyber-metanoia-title text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
-          CAPTURA TU <span className="text-[#00f0ff] drop-shadow-[0_0_20px_rgba(0,240,255,0.8)]">MOMENTO</span>
+        <h2 className="font-cyber-heavy text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
+          CAPTURA TU <span className="text-[#f4b6ff] drop-shadow-[0_0_20px_rgba(244,182,255,0.6)]">MOMENTO</span>
         </h2>
 
-        <p className="font-body text-sm sm:text-base text-purple-200/80 max-w-xl mx-auto">
-          Tómate una foto o sube tu imagen, selecciona tu marco cibernético oficial de Metanoia 2026 y descárgala en alta resolución para tus redes.
+        <p className="font-body text-sm sm:text-base text-purple-200/85 max-w-xl mx-auto leading-relaxed">
+          Tómate una foto o sube tu imagen, selecciona tu marco oficial de Metanoia 2026 y descárgala en alta resolución para tus redes.
         </p>
       </div>
 
@@ -1008,12 +1006,12 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Camera / Canvas Viewport (Cols 7) */}
         <div className="lg:col-span-7 flex flex-col items-center">
-          <div className="relative w-full max-w-[520px] aspect-square rounded-3xl bg-[#0c0018] border-2 border-[#00f0ff]/30 shadow-[0_0_50px_rgba(0,240,255,0.2)] overflow-hidden flex items-center justify-center p-2 group">
+          <div className="relative w-full max-w-[520px] aspect-square rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 shadow-[0_20px_50px_rgba(18,3,30,0.5)] overflow-hidden flex items-center justify-center p-2 group">
             {/* Corner Tech Decals */}
-            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#00f0ff] z-30 pointer-events-none" />
-            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#ff007f] z-30 pointer-events-none" />
-            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#00f0ff] z-30 pointer-events-none" />
-            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#ff007f] z-30 pointer-events-none" />
+            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#f4b6ff] z-30 pointer-events-none" />
+            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#c3a7ff] z-30 pointer-events-none" />
+            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-[#f4b6ff] z-30 pointer-events-none" />
+            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-[#c3a7ff] z-30 pointer-events-none" />
 
             {/* Flash Effect Layer */}
             {isFlashActive && (
@@ -1023,7 +1021,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
             {/* Countdown Overlay */}
             {countdown !== null && (
               <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-40 flex items-center justify-center pointer-events-none">
-                <span className="font-cyber-heavy text-8xl sm:text-9xl text-[#00f0ff] animate-ping drop-shadow-[0_0_30px_#00f0ff]">
+                <span className="font-cyber-heavy text-8xl sm:text-9xl text-[#f4b6ff] animate-ping drop-shadow-[0_0_30px_#f4b6ff]">
                   {countdown}
                 </span>
               </div>
@@ -1048,13 +1046,12 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
                 {/* Realtime HTML Frame Preview Overlay over live camera */}
                 <div className="absolute inset-0 pointer-events-none">
-                  {/* Subtle scanline */}
-                  <div className="w-full h-full border-4 border-dashed border-[#00f0ff]/30 rounded-2xl flex flex-col justify-between p-4">
-                    <div className="flex justify-between items-center text-xs font-mono-cyber text-[#00f0ff] bg-black/50 backdrop-blur-md px-3 py-1 rounded-md">
-                      <span>CAM // LIVE</span>
-                      <span>{selectedFrame.toUpperCase()}</span>
+                  <div className="w-full h-full border-2 border-dashed border-[#c3a7ff]/40 rounded-2xl flex flex-col justify-between p-4">
+                    <div className="flex justify-between items-center text-xs font-cyber text-[#e4c5ff] bg-[#170526]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-[#c3a7ff]/30">
+                      <span>CÁMARA EN VIVO</span>
+                      <span className="font-bold">{selectedFrame.toUpperCase()}</span>
                     </div>
-                    <div className="text-center text-xs font-cyber text-white/80 bg-black/50 backdrop-blur-md py-1 px-2 rounded-md">
+                    <div className="text-center text-xs font-cyber text-white/90 bg-[#170526]/80 backdrop-blur-md py-1.5 px-3 rounded-xl border border-[#c3a7ff]/30 self-center">
                       MARCO: {FRAMES.find((f) => f.id === selectedFrame)?.name}
                     </div>
                   </div>
@@ -1072,15 +1069,15 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
                 {/* Overlay Prompt when NO photo captured yet */}
                 {!capturedImage && (
-                  <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-20">
-                    <div className="w-16 h-16 rounded-2xl bg-[#00f0ff]/15 border border-[#00f0ff]/40 flex items-center justify-center mb-4 text-[#00f0ff] shadow-[0_0_25px_rgba(0,240,255,0.4)]">
+                  <div className="absolute inset-0 bg-[#170526]/80 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-20">
+                    <div className="w-16 h-16 rounded-2xl bg-[#730bb3]/30 border border-[#f4b6ff]/40 flex items-center justify-center mb-4 text-[#f4b6ff] shadow-[0_0_25px_rgba(176,28,198,0.4)]">
                       <Camera className="w-8 h-8" />
                     </div>
                     <h3 className="font-cyber-heavy text-xl sm:text-2xl text-white tracking-tight mb-2">
                       ¡ACTIVA TU CÁMARA O SUBE TU FOTO!
                     </h3>
-                    <p className="font-body text-xs sm:text-sm text-purple-200/80 max-w-sm mb-6">
-                      Captúrate con los marcos oficiales de Metanoia 2026 y forma parte de la generación que renueva su mente.
+                    <p className="font-body text-xs sm:text-sm text-purple-200/85 max-w-sm mb-6">
+                      Captúrate con los marcos oficiales de Metanoia 2026 // RELOAD y comparte tu testimonio.
                     </p>
 
                     <div className="flex flex-wrap items-center justify-center gap-3">
@@ -1089,7 +1086,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                           playCyberClick();
                           startCamera();
                         }}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#ff007f] to-[#7928ca] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(255,0,127,0.5)] hover:scale-105 transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer"
                       >
                         <Camera className="w-4 h-4" />
                         <span>Abrir Cámara</span>
@@ -1097,15 +1094,15 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
                       <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-cyber text-xs font-bold tracking-wider uppercase transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/15 border border-[#c3a7ff]/30 text-white font-cyber text-xs font-bold tracking-wider uppercase transition-all cursor-pointer"
                       >
-                        <Upload className="w-4 h-4 text-[#00f0ff]" />
+                        <Upload className="w-4 h-4 text-[#f4b6ff]" />
                         <span>Subir Imagen</span>
                       </button>
                     </div>
 
                     {cameraError && (
-                      <div className="mt-4 flex items-center gap-2 text-xs text-rose-300 bg-rose-950/60 border border-rose-500/30 px-3 py-2 rounded-lg max-w-sm text-left">
+                      <div className="mt-4 flex items-center gap-2 text-xs text-rose-300 bg-rose-950/60 border border-rose-500/30 px-3 py-2 rounded-xl max-w-sm text-left">
                         <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
                         <span>{cameraError}</span>
                       </div>

@@ -4,52 +4,44 @@ interface MetanoiaLogoProps {
   className?: string;
   showText?: boolean;
   year?: string;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  variant?: 'full' | 'emblem';
 }
 
 export const MetanoiaLogo: React.FC<MetanoiaLogoProps> = ({
   className = '',
-  showText = true,
-  year = '2026',
   size = 'md',
+  variant = 'full',
 }) => {
-  const iconDimensions = {
-    sm: 'h-7 sm:h-8',
-    md: 'h-9 sm:h-11',
-    lg: 'h-12 sm:h-14',
-    xl: 'h-16 sm:h-20',
+  const heightClasses = {
+    xs: 'h-6 sm:h-7',
+    sm: 'h-8 sm:h-9',
+    md: 'h-10 sm:h-12',
+    lg: 'h-14 sm:h-16',
+    xl: 'h-20 sm:h-24',
+    '2xl': 'h-28 sm:h-36',
   }[size];
 
+  const logoSrc = variant === 'emblem' 
+    ? '/assets/metanoia-emblem-square.png' 
+    : '/assets/metanoia-logo-refinado.svg';
+
   return (
-    <div className={`inline-flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
-      {/* Official High-Resolution Logo from event asset with glowing ambient aura */}
-      <div className={`relative flex items-center justify-center flex-shrink-0 group`}>
-        <div className="absolute inset-0 bg-[#a855f7]/30 rounded-full blur-md opacity-70 group-hover:opacity-100 transition-opacity" />
+    <div className={`inline-flex items-center select-none ${className}`}>
+      {/* Refined Vector Logo with vista-previa cosmic aura */}
+      <div className="relative flex items-center justify-center flex-shrink-0 group">
+        <div className="absolute inset-0 bg-[#b01cc6]/35 rounded-2xl blur-lg opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
         <img
-          src="/assets/metanoia-logo-official.png"
-          alt="Metanoia 2026 Logo"
-          className={`${iconDimensions} w-auto object-contain relative z-10 drop-shadow-[0_0_12px_rgba(168,85,247,0.7)] transition-transform duration-300 group-hover:scale-105`}
+          src={logoSrc}
+          alt="METANOIA 2026 Logo Oficial"
+          className={`${heightClasses} w-auto object-contain relative z-10 filter drop-shadow-[0_0_12px_rgba(228,197,255,0.7)] drop-shadow-[0_0_28px_rgba(176,28,198,0.45)] transition-all duration-300 group-hover:scale-105`}
           onError={(e) => {
-            // Graceful fallback to CSS vector if image fails to load
-            (e.currentTarget as HTMLElement).style.display = 'none';
-            const fallback = e.currentTarget.parentElement?.querySelector('.logo-vector-fallback');
-            if (fallback) (fallback as HTMLElement).classList.remove('hidden');
+            const target = e.currentTarget as HTMLImageElement;
+            if (!target.src.endsWith('/assets/metanoia-logo-official-hd.png')) {
+              target.src = '/assets/metanoia-logo-official-hd.png';
+            }
           }}
         />
-
-        {/* Fallback Vector */}
-        <div className="logo-vector-fallback hidden flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#7b2cbf] to-[#c77dff] p-[2px] shadow-[0_0_15px_#a855f7]">
-            <div className="w-full h-full bg-[#140026] rounded-full flex items-center justify-center text-white font-cyber text-xs">
-              M
-            </div>
-          </div>
-          {showText && (
-            <span className="font-cyber font-extrabold tracking-wider text-white text-base">
-              metanoia <span className="text-[#a855f7]">{year}</span>
-            </span>
-          )}
-        </div>
       </div>
     </div>
   );
