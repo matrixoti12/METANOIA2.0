@@ -208,6 +208,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       mediaStreamRef.current.getTracks().forEach((track) => track.stop());
       mediaStreamRef.current = null;
     }
+    if (videoRef.current) {
+      videoRef.current.srcObject = null;
+    }
     setIsCameraActive(false);
   }, []);
 
@@ -222,10 +225,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       let stream: MediaStream | null = null;
       try {
-        // Attempt 1: Standard high-res facingMode
+        // Attempt 1: Standard high-res with ideal facingMode (avoids OverconstrainedError on some devices)
         stream = await navigator.mediaDevices.getUserMedia({
           video: {
-            facingMode: mode,
+            facingMode: { ideal: mode },
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
@@ -235,11 +238,11 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         try {
           // Attempt 2: Relaxed constraints (crucial for some mobile browsers)
           stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: mode },
+            video: { facingMode: { ideal: mode } },
             audio: false,
           });
         } catch {
-          // Attempt 3: Universal fallback
+          // Attempt 3: Universal fallback (no facingMode — works on all devices)
           stream = await navigator.mediaDevices.getUserMedia({
             video: true,
             audio: false,
@@ -252,10 +255,27 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       }
 
       mediaStreamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        videoRef.current.muted = true;
-        await videoRef.current.play().catch(() => {});
+      const video = videoRef.current;
+      if (video) {
+        // Clear previous srcObject to avoid stale stream (critical on iOS Safari)
+        video.srcObject = null;
+        video.muted = true;
+        video.playsInline = true;
+        video.autoplay = true;
+        video.srcObject = stream;
+
+        // Wait for loadedmetadata before calling play() — fixes mobile race condition
+        await new Promise<void>((resolve) => {
+          if (video.readyState >= 1) {
+            resolve();
+          } else {
+            video.addEventListener('loadedmetadata', () => resolve(), { once: true });
+          }
+        });
+
+        await video.play().catch(() => {
+          // Autoplay may be blocked; user will see first frame
+        });
       }
       setIsCameraActive(true);
       setCapturedImage(null);
@@ -310,16 +330,19 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
     if (!videoRef.current) return;
     const video = videoRef.current;
+    const rawW = video.videoWidth > 0 ? video.videoWidth : 720;
+    const rawH = video.videoHeight > 0 ? video.videoHeight : 720;
+    const size = Math.max(320, Math.min(rawW, rawH));
+
     const canvas = document.createElement('canvas');
-    const size = Math.min(video.videoWidth || 720, video.videoHeight || 720);
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     // Crop center square
-    const sx = (video.videoWidth - size) / 2;
-    const sy = (video.videoHeight - size) / 2;
+    const sx = Math.max(0, (rawW - size) / 2);
+    const sy = Math.max(0, (rawH - size) / 2);
 
     // If user facing mode, flip horizontally for mirror preview
     if (facingMode === 'user') {
@@ -459,34 +482,34 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
     switch (frameId) {
       case 'neon-prime': {
-        // Cyber Neon Prime Frame
+        // Cyber Neon Prime Frame — paleta violeta/lavanda
         // Outer dark vignette
         const grad = ctx.createRadialGradient(size / 2, size / 2, size * 0.35, size / 2, size / 2, size * 0.65);
         grad.addColorStop(0, 'transparent');
-        grad.addColorStop(0.85, 'rgba(10, 0, 22, 0.4)');
-        grad.addColorStop(1, 'rgba(10, 0, 22, 0.85)');
+        grad.addColorStop(0.85, 'rgba(8, 1, 24, 0.4)');
+        grad.addColorStop(1, 'rgba(8, 1, 24, 0.85)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, size, size);
 
-        // Neon Outer border
-        ctx.strokeStyle = '#ff007f';
+        // Violeta outer border
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.007;
-        ctx.shadowColor = '#ff007f';
+        ctx.shadowColor = '#7B2FBE';
         ctx.shadowBlur = size * 0.025;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Neon Inner cyan hairline
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.8)';
+        // Lavanda inner hairline
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.8)';
         ctx.lineWidth = size * 0.003;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.015;
         ctx.strokeRect(margin + size * 0.015, margin + size * 0.015, innerSize - size * 0.03, innerSize - size * 0.03);
 
         // Corner Cyber Brackets
         const bracketLen = size * 0.08;
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#C77DFF';
         ctx.lineWidth = size * 0.008;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.03;
 
         // Top-Left
@@ -519,9 +542,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Banner Plaque
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(13, 0, 26, 0.88)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.9)';
         ctx.fillRect(size * 0.16, margin * 0.5, size * 0.68, size * 0.09);
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#C77DFF';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.16, margin * 0.5, size * 0.68, size * 0.09);
 
@@ -529,28 +552,28 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.fillStyle = '#ffffff';
         ctx.font = `900 ${size * 0.046}px 'Orbitron', 'Russo One', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.015;
         ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
 
-        ctx.fillStyle = '#ff007f';
+        ctx.fillStyle = '#B06AE8';
         ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.letterSpacing = '2px';
-        ctx.shadowColor = '#ff007f';
+        ctx.shadowColor = '#B06AE8';
         ctx.shadowBlur = size * 0.01;
         ctx.fillText('METANOIA 2.0 • PACTO Y BENDICIÓN', size / 2, margin * 0.5 + size * 0.076);
 
         // Bottom Plaque
-        ctx.fillStyle = 'rgba(13, 0, 26, 0.92)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.92)';
         ctx.fillRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
-        ctx.strokeStyle = '#ff007f';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
 
-        // Bottom Text: Date & Location
-        ctx.fillStyle = '#ffe600';
+        // Bottom Text: Date & Location — white/lavender instead of yellow
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `800 ${size * 0.03}px 'Chakra Petch', sans-serif`;
-        ctx.shadowColor = '#ffe600';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.015;
         ctx.fillText('28 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
 
@@ -567,17 +590,17 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       case 'romanos-12': {
         // Romanos 12:2 Transformación Frame
-        // Cyan & Amber Holographic Edge
-        ctx.strokeStyle = '#00f0ff';
+        // Violet & Lavender Edge
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.01;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#7B2FBE';
         ctx.shadowBlur = size * 0.03;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Corner Diamonds
         const dSize = size * 0.025;
-        ctx.fillStyle = '#ffe600';
-        ctx.shadowColor = '#ffe600';
+        ctx.fillStyle = '#C77DFF';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.02;
         [[margin, margin], [size - margin, margin], [margin, size - margin], [size - margin, size - margin]].forEach(
           ([x, y]) => {
@@ -592,31 +615,31 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         );
 
         // Top Biblical Banner
-        ctx.fillStyle = 'rgba(10, 0, 25, 0.9)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.9)';
         ctx.fillRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
-        ctx.strokeStyle = '#ffe600';
+        ctx.strokeStyle = '#C77DFF';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
 
-        ctx.fillStyle = '#ffe600';
+        ctx.fillStyle = '#ffffff';
         ctx.font = `900 ${size * 0.026}px 'Chakra Petch', sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText('«NO OS CONFORMÉIS A ESTE SIGLO»', size / 2, margin * 0.5 + size * 0.04);
 
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `700 ${size * 0.022}px 'Chakra Petch', sans-serif`;
         ctx.fillText('SINO TRANSFORMAOS • ROMANOS 12:2', size / 2, margin * 0.5 + size * 0.075);
 
         // Bottom Footer Banner
-        ctx.fillStyle = 'rgba(10, 0, 25, 0.92)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.92)';
         ctx.fillRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `900 ${size * 0.045}px 'Orbitron', 'Russo One', sans-serif`;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.02;
         ctx.fillText('METANOIA 2026', size / 2, size - margin * 1.8 + size * 0.055);
 
@@ -633,32 +656,32 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
       case 'squad-pass': {
         // Escuadra Juvenil Tactical HUD Pass
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.008;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#7B2FBE';
         ctx.shadowBlur = size * 0.02;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Caution Stripes Header
-        ctx.fillStyle = 'rgba(10, 0, 22, 0.95)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.95)';
         ctx.fillRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
-        ctx.strokeStyle = '#ff007f';
+        ctx.strokeStyle = '#C77DFF';
         ctx.lineWidth = size * 0.004;
         ctx.strokeRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = '#ffffff';
         ctx.font = `900 ${size * 0.038}px 'Orbitron', sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText('METANOIA // SQUAD PASS', size / 2, margin * 0.4 + size * 0.045);
 
-        ctx.fillStyle = '#ffe600';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.fillText('SYS.STATUS: RENOVADO // NIVEL: GUERRERO DE FE', size / 2, margin * 0.4 + size * 0.072);
 
         // Bottom Tactical Barcode & Data
-        ctx.fillStyle = 'rgba(10, 0, 22, 0.95)';
+        ctx.fillStyle = 'rgba(8, 1, 24, 0.95)';
         ctx.fillRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.004;
         ctx.strokeRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
 
@@ -674,10 +697,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Tactical Data on the right
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#ff007f';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `800 ${size * 0.024}px 'Orbitron', sans-serif`;
-        ctx.fillText('20-NOV-2026', size * 0.9, barY + size * 0.022);
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillText('28-NOV-2026', size * 0.9, barY + size * 0.022);
+        ctx.fillStyle = '#B06AE8';
         ctx.font = `700 ${size * 0.019}px 'Chakra Petch', sans-serif`;
         ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.042);
 
@@ -694,24 +717,24 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       }
 
       case 'holo-crystal': {
-        // Holographic 3D Crystal & Neon Ring
+        // Holographic 3D Crystal & Violet Ring
         // Giant circular glowing ring framing
         ctx.save();
-        ctx.strokeStyle = '#c026d3';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.015;
-        ctx.shadowColor = '#c026d3';
+        ctx.shadowColor = '#7B2FBE';
         ctx.shadowBlur = size * 0.04;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Inner glowing circle accent
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.4)';
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.4)';
         ctx.lineWidth = size * 0.003;
         ctx.beginPath();
         ctx.arc(size / 2, size / 2, size * 0.42, 0, Math.PI * 2);
         ctx.stroke();
 
         // HUD Crosshairs
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.6)';
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.6)';
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(size / 2 - 20, size / 2);
@@ -722,31 +745,31 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.restore();
 
         // Top Header
-        ctx.fillStyle = 'rgba(15, 0, 30, 0.85)';
+        ctx.fillStyle = 'rgba(12, 3, 24, 0.9)';
         ctx.fillRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
-        ctx.strokeStyle = '#c026d3';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `900 ${size * 0.044}px 'Orbitron', 'Russo One', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#c026d3';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.02;
         ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.048);
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.fillText('PRISMA ESPIRITUAL // NUEVA MENTALIDAD', size / 2, margin * 0.5 + size * 0.073);
 
         // Bottom Footer
-        ctx.fillStyle = 'rgba(15, 0, 30, 0.9)';
+        ctx.fillStyle = 'rgba(12, 3, 24, 0.92)';
         ctx.fillRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
 
-        ctx.fillStyle = '#ffe600';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `800 ${size * 0.026}px 'Chakra Petch', sans-serif`;
         ctx.fillText('28 NOVIEMBRE • PACTO Y BENDICIÓN GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
 
@@ -761,21 +784,20 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       }
 
       case 'cyberwave': {
-        // Retro Synthwave 80s/90s Grid
+        // Synthwave Violet Gradient
         ctx.save();
-        // Magenta & Cyan Dual Gradient Border
         const borderGrad = ctx.createLinearGradient(0, 0, size, size);
-        borderGrad.addColorStop(0, '#ff00aa');
-        borderGrad.addColorStop(0.5, '#7928ca');
-        borderGrad.addColorStop(1, '#00e5ff');
+        borderGrad.addColorStop(0, '#C77DFF');
+        borderGrad.addColorStop(0.5, '#7B2FBE');
+        borderGrad.addColorStop(1, '#B06AE8');
         ctx.strokeStyle = borderGrad;
         ctx.lineWidth = size * 0.012;
-        ctx.shadowColor = '#ff00aa';
+        ctx.shadowColor = '#7B2FBE';
         ctx.shadowBlur = size * 0.03;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Horizon Grid lines at bottom
-        ctx.strokeStyle = 'rgba(0, 229, 255, 0.4)';
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
         ctx.lineWidth = 1;
         for (let i = 1; i <= 6; i++) {
           ctx.beginPath();
@@ -786,29 +808,29 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.restore();
 
         // Top Banner
-        ctx.fillStyle = 'rgba(10, 0, 20, 0.88)';
+        ctx.fillStyle = 'rgba(10, 2, 22, 0.9)';
         ctx.fillRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
-        ctx.strokeStyle = '#ff00aa';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
 
-        ctx.fillStyle = '#00e5ff';
+        ctx.fillStyle = '#ffffff';
         ctx.font = `900 ${size * 0.046}px 'Orbitron', sans-serif`;
         ctx.textAlign = 'center';
         ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
 
-        ctx.fillStyle = '#ff00aa';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.fillText('REBOOT YOUR MIND // METANOIA 2.0', size / 2, margin * 0.5 + size * 0.076);
 
         // Bottom Banner
-        ctx.fillStyle = 'rgba(10, 0, 20, 0.92)';
+        ctx.fillStyle = 'rgba(10, 2, 22, 0.92)';
         ctx.fillRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
-        ctx.strokeStyle = '#00e5ff';
+        ctx.strokeStyle = '#7B2FBE';
         ctx.lineWidth = size * 0.003;
         ctx.strokeRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
 
-        ctx.fillStyle = '#ffe600';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `800 ${size * 0.028}px 'Chakra Petch', sans-serif`;
         ctx.fillText('28 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
 
@@ -828,11 +850,11 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.lineWidth = size * 0.005;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Cyan Corner Tick Accents
+        // Lavender Corner Tick Accents
         const tick = size * 0.04;
-        ctx.strokeStyle = '#00f0ff';
+        ctx.strokeStyle = '#C77DFF';
         ctx.lineWidth = size * 0.006;
-        ctx.shadowColor = '#00f0ff';
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.015;
 
         // 4 corners
@@ -856,9 +878,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Minimalist Header
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(10, 0, 20, 0.85)';
+        ctx.fillStyle = 'rgba(10, 2, 22, 0.88)';
         ctx.fillRect(size * 0.2, margin * 0.45, size * 0.6, size * 0.075);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
         ctx.lineWidth = 1;
         ctx.strokeRect(size * 0.2, margin * 0.45, size * 0.6, size * 0.075);
 
@@ -867,14 +889,14 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.textAlign = 'center';
         ctx.fillText('M E T A N O I A', size / 2, margin * 0.45 + size * 0.048);
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `700 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.fillText('2 0 2 6 • V I G I L I A', size / 2, margin * 0.45 + size * 0.068);
 
         // Bottom Minimalist Text
-        ctx.fillStyle = 'rgba(10, 0, 20, 0.85)';
+        ctx.fillStyle = 'rgba(10, 2, 22, 0.88)';
         ctx.fillRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.35)';
         ctx.lineWidth = 1;
         ctx.strokeRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
 
@@ -886,7 +908,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           size - margin * 1.6 + size * 0.04
         );
 
-        ctx.fillStyle = '#00f0ff';
+        ctx.fillStyle = '#C77DFF';
         ctx.font = `600 ${size * 0.018}px 'Chakra Petch', sans-serif`;
         ctx.fillText('28 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
         break;

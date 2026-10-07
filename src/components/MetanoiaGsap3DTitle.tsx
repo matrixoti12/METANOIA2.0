@@ -1,385 +1,396 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { Sparkles, Zap } from 'lucide-react';
-import { playCyberClick, playCyberHover, playNeonChime } from '../utils/audio';
+import { playCyberClick, playNeonChime } from '../utils/audio';
 
-interface LetterCard {
-  char: string;
-  glowColor: string;
-  accentColor: string;
-  sub: string;
-}
-
-const LETTERS: LetterCard[] = [
-  { char: 'M', glowColor: '#ffe600', accentColor: '#00f0ff', sub: '01' },
-  { char: 'E', glowColor: '#00f0ff', accentColor: '#ff007f', sub: '02' },
-  { char: 'T', glowColor: '#ff007f', accentColor: '#ffe600', sub: '03' },
-  { char: 'A', glowColor: '#00ff9d', accentColor: '#00f0ff', sub: '04' },
-  { char: 'N', glowColor: '#ffe600', accentColor: '#ff007f', sub: '05' },
-  { char: 'O', glowColor: '#00f0ff', accentColor: '#00ff9d', sub: '06' },
-  { char: 'I', glowColor: '#ff007f', accentColor: '#ffe600', sub: '07' },
-  { char: 'A', glowColor: '#ffe600', accentColor: '#00f0ff', sub: '08' },
-];
-
+/**
+ * MetanoiaGsap3DTitle
+ * Diseño moderno inspirado en el logo oficial: cerebro en burbuja violeta + tipografía
+ * orgánica/sans-serif. Paleta: violeta profundo → lavanda → blanco.
+ * NO estilo arcade "Las Vegas". Animaciones GSAP elegantes en cada elemento clave.
+ */
 export const MetanoiaGsap3DTitle: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const card20Ref = useRef<HTMLDivElement | null>(null);
-  const sparkRef = useRef<HTMLDivElement | null>(null);
-  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
-  const [poppedCardIndex, setPoppedCardIndex] = useState<number | null>(null);
-  const [is20Popped, setIs20Popped] = useState(false);
+  const badgeRef = useRef<HTMLDivElement | null>(null);
+  const metaRef = useRef<HTMLSpanElement | null>(null);
+  const noiaRef = useRef<HTMLSpanElement | null>(null);
+  const yearRef = useRef<HTMLSpanElement | null>(null);
+  const taglineRef = useRef<HTMLDivElement | null>(null);
+  const orb1Ref = useRef<HTMLDivElement | null>(null);
+  const orb2Ref = useRef<HTMLDivElement | null>(null);
+  const particlesRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Handle interactive touch / tap on any letter card
-  const handleCardInteract = (index: number) => {
+  const handleBadgeTap = () => {
     playCyberClick('confirm');
     playNeonChime();
-    setPoppedCardIndex(index);
-
-    const card = cardRefs.current[index];
-    if (card) {
+    if (badgeRef.current) {
       gsap.timeline()
-        .to(card, {
-          scale: 1.15,
-          y: -10,
-          rotationZ: (index % 2 === 0 ? 1 : -1) * 6,
-          duration: 0.15,
-          ease: 'power2.out',
-        })
-        .to(card, {
-          scale: 1,
-          y: 0,
-          rotationZ: 0,
-          duration: 0.45,
-          ease: 'elastic.out(1.2, 0.4)',
-        });
+        .to(badgeRef.current, { scale: 1.12, duration: 0.15, ease: 'power2.out' })
+        .to(badgeRef.current, { scale: 1, duration: 0.6, ease: 'elastic.out(1.2, 0.4)' });
     }
-
-    setTimeout(() => {
-      setPoppedCardIndex(null);
-    }, 500);
-  };
-
-  const handle20Interact = () => {
-    playCyberClick('confirm');
-    playNeonChime();
-    setIs20Popped(true);
-
-    if (card20Ref.current) {
-      gsap.timeline()
-        .to(card20Ref.current, {
-          scale: 1.15,
-          y: -10,
-          duration: 0.15,
-          ease: 'power2.out',
-        })
-        .to(card20Ref.current, {
-          scale: 1,
-          y: 0,
-          duration: 0.45,
-          ease: 'elastic.out(1.2, 0.4)',
-        });
-    }
-
-    setTimeout(() => {
-      setIs20Popped(false);
-    }, 500);
   };
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const allCards = [...cardRefs.current.filter(Boolean), card20Ref.current].filter(Boolean) as HTMLDivElement[];
-
     const ctx = gsap.context(() => {
-      // 1. Initial GSAP Intro: 3D Isometric Drop with Elastic Bounce
-      if (allCards.length > 0) {
-        gsap.fromTo(
-          allCards,
-          {
-            y: -40,
-            opacity: 0,
-            rotationX: 35,
-            scale: 0.85,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            rotationX: 0,
-            scale: 1,
-            duration: 1.1,
-            stagger: 0.04,
-            ease: 'elastic.out(1.1, 0.55)',
-          }
-        );
+      // ── Intro: orbs and container fade in
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1.0, ease: 'power3.out' }
+      );
 
-        // Continuous Wave Levitation (Sine-wave dance)
-        allCards.forEach((el, index) => {
-          gsap.to(el, {
-            y: index % 2 === 0 ? -5 : -2,
-            rotationZ: (index % 2 === 0 ? 1 : -1) * 1.2,
-            duration: 2.2 + (index % 4) * 0.25,
-            repeat: -1,
-            yoyo: true,
-            ease: 'sine.inOut',
-            delay: index * 0.1,
-          });
+      // ── Badge: scale entrance with bounce
+      gsap.fromTo(
+        badgeRef.current,
+        { scale: 0.4, opacity: 0, rotationY: -30 },
+        { scale: 1, opacity: 1, rotationY: 0, duration: 1.1, ease: 'elastic.out(1.0, 0.55)', delay: 0.2 }
+      );
+
+      // ── "meta" word: slide from left
+      gsap.fromTo(
+        metaRef.current,
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out', delay: 0.45 }
+      );
+
+      // ── "noia" word: slide from right
+      gsap.fromTo(
+        noiaRef.current,
+        { x: 40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.85, ease: 'power3.out', delay: 0.6 }
+      );
+
+      // ── Year badge: pop in
+      gsap.fromTo(
+        yearRef.current,
+        { scale: 0.5, opacity: 0, y: 10 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.7, ease: 'back.out(2)', delay: 0.8 }
+      );
+
+      // ── Tagline: fade up
+      gsap.fromTo(
+        taglineRef.current,
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power2.out', delay: 1.0 }
+      );
+
+      // ── Continuous: badge gentle levitation
+      gsap.to(badgeRef.current, {
+        y: -6,
+        duration: 3.2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+      // ── Continuous: "meta" shimmer
+      gsap.to(metaRef.current, {
+        y: -3,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 0.3,
+      });
+
+      // ── Continuous: "noia" shimmer counter-phase
+      gsap.to(noiaRef.current, {
+        y: -3,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 0.7,
+      });
+
+      // ── Orb ambient rotation
+      gsap.to(orb1Ref.current, {
+        x: 15,
+        y: -12,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+      gsap.to(orb2Ref.current, {
+        x: -12,
+        y: 10,
+        duration: 6.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 1.2,
+      });
+
+      // ── Floating particles
+      particlesRef.current.forEach((el, i) => {
+        if (!el) return;
+        gsap.to(el, {
+          y: -18 - (i % 3) * 8,
+          x: (i % 2 === 0 ? 1 : -1) * (8 + (i % 4) * 5),
+          opacity: 0,
+          duration: 2.5 + (i % 3) * 0.8,
+          repeat: -1,
+          delay: i * 0.4,
+          ease: 'power1.out',
         });
-      }
+      });
 
-      // 2. Optical Spark Flare roaming through cards
-      if (sparkRef.current) {
-        gsap.timeline({ repeat: -1, repeatDelay: 2.2 })
-          .set(sparkRef.current, { opacity: 0, x: -30, scale: 0.4 })
-          .to(sparkRef.current, { opacity: 1, scale: 1.2, duration: 0.2, ease: 'power2.out' })
-          .to(sparkRef.current, {
-            x: 680,
-            duration: 2.5,
-            ease: 'power1.inOut',
-          })
-          .to(sparkRef.current, { opacity: 0, scale: 0.3, duration: 0.25 });
-      }
-    }, container);
+      // ── Year pulse glow
+      gsap.to(yearRef.current, {
+        textShadow: '0 0 22px #C77DFF, 0 0 40px #7B2FBE',
+        duration: 2.0,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 1.2,
+      });
 
-    // 3. 3D Parallax Tilt based on mouse movement
+    }, containerRef);
+
+    // ── Parallax mouse tilt on desktop
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(container, {
-        rotationY: x * 14,
-        rotationX: -y * 10,
-        transformPerspective: 1000,
+      gsap.to(el, {
+        rotationY: x * 10,
+        rotationX: -y * 7,
+        transformPerspective: 1200,
         ease: 'power2.out',
-        duration: 0.5,
+        duration: 0.6,
       });
     };
-
     const handleMouseLeave = () => {
-      gsap.to(container, {
+      gsap.to(containerRef.current, {
         rotationY: 0,
         rotationX: 0,
         ease: 'power3.out',
-        duration: 1.0,
+        duration: 1.2,
       });
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    container.addEventListener('mouseleave', handleMouseLeave);
+    containerRef.current?.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       ctx.revert();
       window.removeEventListener('mousemove', handleMouseMove);
-      container.removeEventListener('mouseleave', handleMouseLeave);
+      containerRef.current?.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
+
+  // Floating particle positions
+  const PARTICLES = [
+    { x: '15%', y: '30%', size: 3, color: '#C77DFF' },
+    { x: '75%', y: '20%', size: 2, color: '#B06AE8' },
+    { x: '55%', y: '75%', size: 3.5, color: '#7B2FBE' },
+    { x: '88%', y: '60%', size: 2.5, color: '#C77DFF' },
+    { x: '10%', y: '65%', size: 2, color: '#B06AE8' },
+    { x: '40%', y: '15%', size: 4, color: '#ffffff' },
+    { x: '92%', y: '35%', size: 2, color: '#C77DFF' },
+  ];
 
   return (
     <div
       ref={containerRef}
-      className="relative select-none my-1 transform-style-3d cursor-default w-full"
-      style={{ transformStyle: 'preserve-3d' }}
+      className="relative select-none my-1 cursor-default w-full"
+      style={{ transformStyle: 'preserve-3d', opacity: 0 }}
     >
-      {/* Ambient Neon Backglow */}
-      <div className="absolute -top-10 -left-6 w-[115%] h-44 bg-gradient-to-r from-[#ffe600]/15 via-[#ff007f]/20 to-[#00f0ff]/18 blur-3xl pointer-events-none rounded-full" />
-
-      {/* Optical Spark Flare roaming along cards (desktop only) */}
+      {/* ── Ambient orbs */}
       <div
-        ref={sparkRef}
-        className="hidden md:block absolute top-1/2 left-0 w-6 h-6 -translate-y-1/2 pointer-events-none z-30 opacity-0"
-      >
-        <div className="relative w-full h-full flex items-center justify-center">
-          <div className="absolute w-8 h-0.5 bg-white shadow-[0_0_12px_#ffe600]" />
-          <div className="absolute h-8 w-0.5 bg-white shadow-[0_0_12px_#00f0ff]" />
-          <div className="w-2.5 h-2.5 rounded-full bg-white shadow-[0_0_15px_#ffe600]" />
-        </div>
-      </div>
+        ref={orb1Ref}
+        className="absolute -top-8 -left-8 w-40 h-40 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(123,47,190,0.35) 0%, transparent 70%)',
+          filter: 'blur(20px)',
+        }}
+      />
+      <div
+        ref={orb2Ref}
+        className="absolute -bottom-8 -right-4 w-36 h-36 rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, rgba(176,106,232,0.25) 0%, transparent 70%)',
+          filter: 'blur(18px)',
+        }}
+      />
 
-      {/* ========================================================================= */}
-      {/* UNIFIED 1-ROW COHESIVE DECK: METANOIA 2.0 (Identical flow Mobile & Desktop) */}
-      {/* ========================================================================= */}
-      <div className="flex items-center justify-between gap-1 xs:gap-1.5 sm:gap-2 relative z-10 w-full">
-        {/* 8 Letter Cards for M - E - T - A - N - O - I - A */}
-        {LETTERS.map((item, idx) => {
-          const isInteracted = activeCardIndex === idx || poppedCardIndex === idx;
-
-          return (
-            <div
-              key={idx}
-              ref={(el) => {
-                cardRefs.current[idx] = el;
-              }}
-              onClick={() => handleCardInteract(idx)}
-              onMouseEnter={() => {
-                setActiveCardIndex(idx);
-                playCyberHover('crisp');
-              }}
-              onMouseLeave={() => setActiveCardIndex(null)}
-              onTouchStart={() => handleCardInteract(idx)}
-              className="relative group cursor-pointer select-none touch-manipulation transition-transform flex-1 min-w-0"
-              style={{ transformStyle: 'preserve-3d' }}
-              title={`Letra ${item.char}`}
-            >
-              {/* Delicate Lens Flare on active card */}
-              {isInteracted && (
-                <div className="absolute -top-1.5 -right-1.5 w-4 h-4 pointer-events-none z-30">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <div className="absolute w-5 h-0.5 bg-white shadow-[0_0_8px_#ffe600]" />
-                    <div className="absolute h-5 w-0.5 bg-white shadow-[0_0_8px_#00f0ff]" />
-                    <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_10px_#ffe600]" />
-                  </div>
-                </div>
-              )}
-
-              {/* 3D Deep Shadow & Extruded Base */}
-              <div
-                className="absolute inset-0 translate-y-1.5 translate-x-0.5 rounded-lg xs:rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1a0033] via-[#ff007f]/40 to-[#0c0018] -z-10 blur-[2px] opacity-75"
-                style={{
-                  boxShadow: '0 8px 16px rgba(0,0,0,0.8), 0 0 10px rgba(255,0,127,0.25)',
-                }}
-              />
-
-              {/* Motion-Graphic Card Container */}
-              <div
-                className={`relative flex flex-col items-center justify-between rounded-lg xs:rounded-xl sm:rounded-2xl transition-all duration-300 border overflow-hidden w-full h-15 xs:h-18 sm:h-22 md:h-26 lg:h-28 px-0.5 sm:px-1 py-1 ${
-                  isInteracted
-                    ? 'border-[#00f0ff] -translate-y-1.5 scale-105 shadow-[0_0_25px_rgba(0,240,255,0.8)]'
-                    : 'border-[#ff007f]/50 hover:border-[#ffe600] shadow-[0_6px_16px_rgba(0,0,0,0.6)]'
-                }`}
-                style={{
-                  background: 'linear-gradient(155deg, #2d0052 0%, #15002b 45%, #0c0018 100%)',
-                  boxShadow: isInteracted
-                    ? '0 0 25px rgba(0, 240, 255, 0.7), inset 0 1px 3px rgba(255,255,255,0.5)'
-                    : 'inset 0 1px 2px rgba(255, 230, 0, 0.3), 0 6px 14px rgba(0,0,0,0.7)',
-                }}
-              >
-                {/* Internal Circuit Board Grid Lines */}
-                <div className="absolute inset-0.5 rounded-lg bg-[linear-gradient(to_right,rgba(255,230,0,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,255,0.08)_1px,transparent_1px)] bg-[size:6px_6px] pointer-events-none" />
-
-                {/* Prismatic Top Border Reflection */}
-                <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f0ff] via-50% to-[#ff007f] to-transparent opacity-85" />
-
-                {/* Card Top Micro Header: Sub index + Node dot */}
-                <div className="w-full flex items-center justify-between px-0.5 sm:px-1 pt-0.5 z-10 text-[7px] xs:text-[8px] sm:text-[9px] font-mono-cyber text-purple-300/80">
-                  <span className="hidden xs:inline">{item.sub}</span>
-                  <span
-                    className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-all ml-auto"
-                    style={{
-                      backgroundColor: isInteracted ? '#00f0ff' : item.accentColor,
-                      boxShadow: `0 0 6px ${isInteracted ? '#00f0ff' : item.accentColor}`,
-                    }}
-                  />
-                </div>
-
-                {/* Main Giant Typography Character */}
-                <div className="relative flex items-center justify-center my-auto z-10">
-                  <span
-                    className="font-cyber-heavy font-black text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-[4.2rem] text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] via-[#ffe600] to-[#ff007f] select-none leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] transition-all duration-300"
-                    style={{
-                      textShadow: isInteracted
-                        ? '0 0 20px #ffe600, 0 0 35px #00f0ff'
-                        : '0 0 10px rgba(255, 230, 0, 0.6)',
-                      WebkitTextStroke: '0.8px rgba(255, 255, 255, 0.4)',
-                    }}
-                  >
-                    {item.char}
-                  </span>
-                </div>
-
-                {/* Bottom Card Micro Decal */}
-                <div className="w-full flex items-center justify-between px-0.5 sm:px-1 pb-0.5 z-10">
-                  <span className="w-1 h-1 rounded-full bg-[#ff007f] shadow-[0_0_4px_#ff007f]" />
-                  <div className="h-[1.5px] w-2.5 sm:w-4 bg-[#00f0ff]/40 rounded-full" />
-                </div>
-
-                {/* Diagonal Laser Sheen Glint */}
-                <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
-                  <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-25 animate-title-sheen" />
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
-        {/* Dedicated Matching "2.0" Card (100% Harmonized in style, colors, gradient, and proportions) */}
+      {/* ── Floating particles */}
+      {PARTICLES.map((p, i) => (
         <div
-          ref={card20Ref}
-          onClick={handle20Interact}
-          onMouseEnter={() => playCyberHover('crisp')}
-          onTouchStart={handle20Interact}
-          className="relative group cursor-pointer select-none touch-manipulation transition-transform flex-[1.4] sm:flex-[1.45] min-w-0"
-          style={{ transformStyle: 'preserve-3d' }}
-          title="Metanoia 2.0"
-        >
-          {/* 3D Deep Shadow */}
-          <div
-            className="absolute inset-0 translate-y-1.5 translate-x-0.5 rounded-lg xs:rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#1a0033] via-[#ff007f]/40 to-[#0c0018] -z-10 blur-[2px] opacity-75"
-            style={{
-              boxShadow: '0 8px 16px rgba(0,0,0,0.8), 0 0 10px rgba(255,0,127,0.25)',
-            }}
-          />
+          key={i}
+          ref={(el) => { particlesRef.current[i] = el; }}
+          className="absolute rounded-full pointer-events-none"
+          style={{
+            left: p.x,
+            top: p.y,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
+            opacity: 0.7,
+          }}
+        />
+      ))}
 
-          {/* Motion-Graphic Card Container for 2.0 (Exact same purple glass and border as letters) */}
+      {/* ══════════════════════════════════════════════
+          MAIN COMPOSITION: Badge + Typography
+          ══════════════════════════════════════════════ */}
+      <div className="relative z-10 flex items-center justify-center gap-4 sm:gap-5">
+
+        {/* ── Brain Badge (circular, logo-inspired) */}
+        <div
+          ref={badgeRef}
+          onClick={handleBadgeTap}
+          onTouchStart={handleBadgeTap}
+          className="relative flex-shrink-0 cursor-pointer"
+          style={{ opacity: 0 }}
+          title="METANOIA 2026"
+        >
+          {/* Badge background circle with gradient */}
           <div
-            className={`relative flex flex-col items-center justify-between rounded-lg xs:rounded-xl sm:rounded-2xl transition-all duration-300 border overflow-hidden w-full h-15 xs:h-18 sm:h-22 md:h-26 lg:h-28 px-0.5 sm:px-1.5 py-1 ${
-              is20Popped
-                ? 'border-[#00f0ff] -translate-y-1.5 scale-105 shadow-[0_0_25px_rgba(0,240,255,0.9)]'
-                : 'border-[#ff007f]/50 hover:border-[#ffe600] shadow-[0_6px_16px_rgba(0,0,0,0.6)]'
-            }`}
+            className="relative w-16 h-16 xs:w-18 xs:h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center"
             style={{
-              background: 'linear-gradient(155deg, #2d0052 0%, #15002b 45%, #0c0018 100%)',
-              boxShadow: is20Popped
-                ? '0 0 25px rgba(0, 240, 255, 0.7), inset 0 1px 3px rgba(255,255,255,0.5)'
-                : 'inset 0 1px 2px rgba(255, 230, 0, 0.3), 0 6px 14px rgba(0,0,0,0.7)',
+              background: 'linear-gradient(145deg, #8B35D6 0%, #7B2FBE 45%, #5a1a9e 100%)',
+              boxShadow: '0 0 28px rgba(123,47,190,0.6), 0 0 60px rgba(176,106,232,0.25), inset 0 1px 3px rgba(255,255,255,0.3)',
+              border: '2px solid rgba(199,125,255,0.5)',
             }}
           >
-            {/* Internal Circuit Board Grid Lines */}
-            <div className="absolute inset-0.5 rounded-lg bg-[linear-gradient(to_right,rgba(255,230,0,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,240,255,0.08)_1px,transparent_1px)] bg-[size:6px_6px] pointer-events-none" />
-
-            {/* Prismatic Top Border Reflection */}
-            <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#00f0ff] via-50% to-[#ff007f] to-transparent opacity-90" />
-
-            {/* Card Top Micro Header */}
-            <div className="w-full flex items-center justify-between px-0.5 sm:px-1 pt-0.5 z-10 text-[7px] xs:text-[8px] sm:text-[9px] font-mono-cyber text-[#00f0ff] font-bold">
-              <span className="hidden xs:inline tracking-wider">VER</span>
-              <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#00f0ff] shadow-[0_0_6px_#00f0ff] ml-auto" />
-            </div>
-
-            {/* Main 2.0 Typography (Using identical Gold-to-Magenta gradient as METANOIA, perfectly centered and never clipped) */}
-            <div className="relative flex items-center justify-center my-auto z-10 w-full">
-              <span
-                className="font-cyber-heavy font-black text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-[3.4rem] text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] via-[#ffe600] to-[#ff007f] select-none leading-none drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] tracking-tight text-center"
-                style={{
-                  textShadow: is20Popped
-                    ? '0 0 20px #ffe600, 0 0 35px #00f0ff'
-                    : '0 0 10px rgba(255, 230, 0, 0.6)',
-                  WebkitTextStroke: '0.8px rgba(255, 255, 255, 0.4)',
-                }}
-              >
-                2.0
-              </span>
-            </div>
-
-            {/* Bottom Card Micro Decal */}
-            <div className="w-full flex items-center justify-between px-0.5 sm:px-1 pb-0.5 z-10">
-              <span className="w-1 h-1 rounded-full bg-[#ff007f] shadow-[0_0_4px_#ff007f]" />
-              <div className="h-[1.5px] w-3 sm:w-5 bg-[#00f0ff]/40 rounded-full" />
-            </div>
-
-            {/* Diagonal Laser Sheen */}
-            <div className="absolute inset-0 rounded-lg overflow-hidden pointer-events-none">
-              <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -skew-x-25 animate-title-sheen" />
-            </div>
+            {/* Brain SVG icon */}
+            <svg
+              viewBox="0 0 64 64"
+              className="w-8 h-8 xs:w-9 xs:h-9 sm:w-11 sm:h-11 md:w-13 md:h-13"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              {/* Left hemisphere */}
+              <path
+                d="M32 10C24 10 17 15 15 22C12 22 9 25 9 29C9 32.5 11 35.5 14 37C13.5 38 13 39.5 13 41C13 46.5 17.5 51 23 51C24.5 51 25.8 50.7 27 50.2L32 52V10Z"
+                fill="rgba(255,255,255,0.9)"
+              />
+              {/* Right hemisphere */}
+              <path
+                d="M32 10C40 10 47 15 49 22C52 22 55 25 55 29C55 32.5 53 35.5 50 37C50.5 38 51 39.5 51 41C51 46.5 46.5 51 41 51C39.5 51 38.2 50.7 37 50.2L32 52V10Z"
+                fill="rgba(255,255,255,0.9)"
+              />
+              {/* Center divide */}
+              <line x1="32" y1="10" x2="32" y2="52" stroke="rgba(176,106,232,0.6)" strokeWidth="1.5" />
+              {/* Neural details left */}
+              <path d="M22 20 Q18 26 20 32" stroke="rgba(123,47,190,0.5)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              <path d="M19 32 Q16 36 18 42" stroke="rgba(123,47,190,0.5)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              <path d="M26 16 Q22 22 24 28" stroke="rgba(123,47,190,0.4)" strokeWidth="1" fill="none" strokeLinecap="round" />
+              {/* Neural details right */}
+              <path d="M42 20 Q46 26 44 32" stroke="rgba(123,47,190,0.5)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              <path d="M45 32 Q48 36 46 42" stroke="rgba(123,47,190,0.5)" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+              <path d="M38 16 Q42 22 40 28" stroke="rgba(123,47,190,0.4)" strokeWidth="1" fill="none" strokeLinecap="round" />
+              {/* Horizontal folds */}
+              <path d="M22 29 Q27 27 32 29 Q37 31 42 29" stroke="rgba(123,47,190,0.4)" strokeWidth="1" fill="none" strokeLinecap="round" />
+              <path d="M20 38 Q26 35 32 38 Q38 41 44 38" stroke="rgba(123,47,190,0.4)" strokeWidth="1" fill="none" strokeLinecap="round" />
+              {/* Pin hook at bottom */}
+              <path d="M29 51 L32 57 L35 51" fill="rgba(255,255,255,0.85)" />
+            </svg>
           </div>
+
+          {/* Pulse ring */}
+          <div
+            className="absolute inset-0 rounded-full animate-ping"
+            style={{
+              border: '2px solid rgba(199,125,255,0.4)',
+              animationDuration: '3s',
+            }}
+          />
+        </div>
+
+        {/* ── Title typography block */}
+        <div className="flex flex-col items-start gap-0.5 relative">
+
+          {/* "meta" */}
+          <div className="flex items-baseline gap-1.5 sm:gap-2">
+            <span
+              ref={metaRef}
+              className="font-display leading-none tracking-tight select-none"
+              style={{
+                fontSize: 'clamp(2.4rem, 9vw, 5.5rem)',
+                fontWeight: 800,
+                color: '#ffffff',
+                letterSpacing: '-0.01em',
+                textShadow: '0 0 30px rgba(199,125,255,0.5), 0 2px 20px rgba(0,0,0,0.8)',
+                opacity: 0,
+              }}
+            >
+              meta
+            </span>
+            {/* Year badge — vertically beside "meta" */}
+            <span
+              ref={yearRef}
+              className="self-end mb-1 px-1.5 py-0.5 rounded-md text-[10px] xs:text-xs sm:text-sm font-black tracking-widest uppercase"
+              style={{
+                background: 'linear-gradient(135deg, #7B2FBE, #C77DFF)',
+                color: '#ffffff',
+                textShadow: '0 0 10px #C77DFF',
+                boxShadow: '0 0 16px rgba(123,47,190,0.5)',
+                letterSpacing: '0.12em',
+                opacity: 0,
+              }}
+            >
+              2026
+            </span>
+          </div>
+
+          {/* "noia" */}
+          <span
+            ref={noiaRef}
+            className="font-display leading-none tracking-tight select-none"
+            style={{
+              fontSize: 'clamp(2.4rem, 9vw, 5.5rem)',
+              fontWeight: 800,
+              letterSpacing: '-0.01em',
+              background: 'linear-gradient(135deg, #C77DFF 0%, #B06AE8 40%, #7B2FBE 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: 'none',
+              filter: 'drop-shadow(0 0 20px rgba(176,106,232,0.5))',
+              opacity: 0,
+            }}
+          >
+            noia
+          </span>
+
+          {/* Thin accent line */}
+          <div
+            className="w-full h-[2px] rounded-full mt-0.5"
+            style={{
+              background: 'linear-gradient(90deg, #7B2FBE, #C77DFF, transparent)',
+              boxShadow: '0 0 8px rgba(199,125,255,0.6)',
+            }}
+          />
         </div>
       </div>
 
-      {/* Event Sub-Badge */}
-      <div className="flex items-center gap-2 mt-2.5 sm:mt-3 pl-0.5 select-none relative z-10">
-        <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/35 text-[#00f0ff] font-mono-cyber text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-[0_0_12px_rgba(0,240,255,0.2)]">
-          <Sparkles className="w-3 h-3 text-[#c084fc]" />
+      {/* ── Event sub-tagline */}
+      <div
+        ref={taglineRef}
+        className="flex items-center gap-2 mt-3 sm:mt-4 pl-0.5 select-none relative z-10"
+        style={{ opacity: 0 }}
+      >
+        <div
+          className="flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] sm:text-xs font-bold tracking-widest uppercase"
+          style={{
+            background: 'rgba(123,47,190,0.15)',
+            borderColor: 'rgba(199,125,255,0.35)',
+            color: '#C77DFF',
+            boxShadow: '0 0 16px rgba(123,47,190,0.2)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          {/* Small brain icon */}
+          <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="9" fill="rgba(123,47,190,0.5)" />
+            <path d="M10 4C7 4 5 6 5 8.5C4 8.5 3 9.5 3 11C3 12.5 4 13.5 5.5 13.5C5.5 15 6.5 16 8 16L10 15V4Z" fill="white" opacity="0.9"/>
+            <path d="M10 4C13 4 15 6 15 8.5C16 8.5 17 9.5 17 11C17 12.5 16 13.5 14.5 13.5C14.5 15 13.5 16 12 16L10 15V4Z" fill="white" opacity="0.9"/>
+          </svg>
           <span>NOCHE DE TRANSFORMACIÓN • 28 NOVIEMBRE 2026 • 06:00 PM</span>
         </div>
       </div>
