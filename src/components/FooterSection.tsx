@@ -23,7 +23,7 @@ export const FooterSection: React.FC = () => {
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={playCyberClick}
+            onClick={() => playCyberClick()}
             onMouseEnter={() => playCyberHover('subtle')}
             className="p-3 rounded-xl hover:bg-white/10 hover:text-[#ff007f] transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Instagram"
@@ -36,7 +36,7 @@ export const FooterSection: React.FC = () => {
             href="https://tiktok.com"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={playCyberClick}
+            onClick={() => playCyberClick()}
             onMouseEnter={() => playCyberHover('subtle')}
             className="p-3 rounded-xl hover:bg-white/10 hover:text-[#00f0ff] transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="TikTok"
@@ -54,7 +54,7 @@ export const FooterSection: React.FC = () => {
             href="https://youtube.com"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={playCyberClick}
+            onClick={() => playCyberClick()}
             onMouseEnter={() => playCyberHover('subtle')}
             className="p-3 rounded-xl hover:bg-white/10 hover:text-[#ff0000] transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="YouTube"

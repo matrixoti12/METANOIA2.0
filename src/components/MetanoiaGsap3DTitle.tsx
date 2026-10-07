@@ -208,7 +208,9 @@ export const MetanoiaGsap3DTitle: React.FC = () => {
           return (
             <div
               key={idx}
-              ref={(el) => (cardRefs.current[idx] = el)}
+              ref={(el) => {
+                cardRefs.current[idx] = el;
+              }}
               onClick={() => handleCardInteract(idx)}
               onMouseEnter={() => {
                 setActiveCardIndex(idx);
@@ -377,8 +379,8 @@ export const MetanoiaGsap3DTitle: React.FC = () => {
       {/* Event Sub-Badge */}
       <div className="flex items-center gap-2 mt-2.5 sm:mt-3 pl-0.5 select-none relative z-10">
         <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/35 text-[#00f0ff] font-mono-cyber text-[10px] sm:text-xs font-bold tracking-widest uppercase shadow-[0_0_12px_rgba(0,240,255,0.2)]">
-          <Sparkles className="w-3 h-3 text-[#ffe600]" />
-          <span>NOCHE DE TRANSFORMACIÓN • 20 NOVIEMBRE 2026</span>
+          <Sparkles className="w-3 h-3 text-[#c084fc]" />
+          <span>NOCHE DE TRANSFORMACIÓN • 28 NOVIEMBRE 2026 • 06:00 PM</span>
         </div>
       </div>
     </div>

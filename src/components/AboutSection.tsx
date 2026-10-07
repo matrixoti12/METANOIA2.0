@@ -120,7 +120,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                 {userName}, Dios tiene un plan específico para tu vida.
               </strong>
             ) : null}
-            <strong className="text-white font-semibold">METANOIA 2026</strong> no es solo una reunión de jóvenes: es un punto de quiebre espiritual. Es el momento en que decides apagar el ruido de las redes, los miedos y el pecado, para escuchar la voz de Jesús.
+            <strong className="text-white font-semibold">METANOIA 2026</strong> (Sábado 28 de Noviembre, 6:00 PM • IGLEPACBEN AD Guazapa con <span className="text-[#c084fc] font-bold">Pablo Rosales</span>) no es solo una reunión de jóvenes: es un punto de quiebre espiritual. Es el momento en que decides apagar el ruido de las redes, los temores y el conformismo para renovar tu mente en Cristo.
           </p>
 
           <div className="flex flex-wrap gap-2.5">
@@ -164,24 +164,25 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
         </div>
       </div>
 
-      {/* SECCIÓN INTERACTIVA INTUITIVA: "REINICIA TU MENTE // SELECTOR BÍBLICO DE PROMESAS" */}
-      <div className="mt-8 mb-16 p-6 sm:p-10 rounded-3xl bg-[#0f0022]/90 border border-[#00f0ff]/30 shadow-[0_0_35px_rgba(0,240,255,0.15)] relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#00f0ff]/10 rounded-full blur-3xl pointer-events-none" />
+      {/* SECCIÓN INTERACTIVA: "REINICIA TU MENTE // SELECTOR BÍBLICO DE PROMESAS" (OFFICIAL FLYER VIOLET THEME) */}
+      <div className="mt-8 mb-16 p-6 sm:p-10 rounded-3xl bg-[#0e0422]/95 border-2 border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.25)] relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#a855f7]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#00f0ff]/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] text-xs font-mono-cyber uppercase mb-3">
-            <Zap className="w-3.5 h-3.5 text-[#00f0ff]" /> Sintoniza tu Corazón
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#18073b] border border-purple-500/40 text-[#c084fc] text-xs font-mono-cyber uppercase mb-3 shadow-[0_0_15px_rgba(168,85,247,0.3)]">
+            <Zap className="w-3.5 h-3.5 text-[#00f0ff]" /> Sintoniza tu Corazón • Palabra Revelada
           </div>
           <h3 className="font-cyber-heavy text-2xl sm:text-4xl text-white mb-2">
             ¿QUÉ ESTÁ LIBRANDO TU MENTE HOY?
           </h3>
-          <p className="text-purple-200/80 text-xs sm:text-sm font-body">
-            Haz clic en lo que sientes y recibe la promesa bíblica exacta que Dios tiene para ti hoy:
+          <p className="text-purple-200/90 text-xs sm:text-sm font-body">
+            Toca lo que sientes para activar la promesa bíblica exacta de Cristo para tu vida:
           </p>
         </div>
 
         {/* Emotion / Struggle Selection Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-8 relative z-10">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 relative z-10">
           {PROMISES.map((promise) => {
             const isSelected = selectedPromise.id === promise.id;
             return (
@@ -191,13 +192,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                 onMouseEnter={() => playCyberHover('subtle')}
                 className={`px-4 py-2.5 rounded-xl font-cyber text-xs tracking-wider uppercase transition-all cursor-pointer touch-manipulation min-h-[44px] flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-white text-black font-bold shadow-[0_0_20px_rgba(255,255,255,0.6)] scale-105'
-                    : 'bg-[#18002e] text-purple-200 border border-white/10 hover:border-white/30 hover:text-white'
+                    ? 'bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] text-white font-extrabold shadow-[0_0_20px_rgba(168,85,247,0.6)] border border-purple-400 scale-105'
+                    : 'bg-[#150734]/80 text-purple-200 border border-purple-500/30 hover:border-purple-400 hover:text-white'
                 }`}
               >
                 <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: promise.color }}
+                  className="w-2.5 h-2.5 rounded-full"
+                  style={{ backgroundColor: isSelected ? '#00f0ff' : promise.color, boxShadow: `0 0 8px ${promise.color}` }}
                 />
                 <span>{promise.feeling}</span>
               </button>
@@ -205,17 +206,16 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
           })}
         </div>
 
-        {/* Display Card for Selected Promise */}
-        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 rounded-2xl bg-[#140026] border-2 border-white/10 shadow-2xl transition-all">
-          <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-white/10">
+        {/* Display Card for Selected Promise (Official Flyer Palette) */}
+        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 rounded-2xl bg-[#12052e]/90 border-2 border-purple-500/50 shadow-[0_0_35px_rgba(168,85,247,0.35)] transition-all">
+          <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-purple-500/30">
             <span
-              className="text-xs font-mono-cyber font-bold tracking-widest uppercase px-3 py-1 rounded bg-white/5"
-              style={{ color: selectedPromise.color }}
+              className="text-xs font-mono-cyber font-bold tracking-widest uppercase px-3 py-1 rounded-lg bg-purple-950/60 border border-purple-500/40 text-[#c084fc]"
             >
               CATEGORÍA: {selectedPromise.category}
             </span>
-            <span className="text-xs font-cyber text-white/70 flex items-center gap-1.5 font-bold">
-              <BookOpen className="w-3.5 h-3.5" style={{ color: selectedPromise.color }} />
+            <span className="text-xs font-cyber text-[#00f0ff] flex items-center gap-1.5 font-bold">
+              <BookOpen className="w-3.5 h-3.5 text-[#00f0ff]" />
               {selectedPromise.reference}
             </span>
           </div>
@@ -224,8 +224,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
             {selectedPromise.verse}
           </p>
 
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-start gap-3">
-            <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: selectedPromise.color }} />
+          <div className="p-3.5 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-start gap-3">
+            <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#c084fc]" />
             <p className="text-xs sm:text-sm text-purple-200/90 font-mono">
               <strong className="text-white">Para tu día:</strong> {selectedPromise.cyberAdvice}
             </p>

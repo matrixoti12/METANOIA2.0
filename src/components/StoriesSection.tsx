@@ -168,7 +168,7 @@ export const StoriesSection: React.FC = () => {
               return (
                 <div
                   key={story.id}
-                  onMouseEnter={playCyberHover}
+                  onMouseEnter={() => playCyberHover('subtle')}
                   className={`rounded-3xl bg-[#140026]/80 backdrop-blur-xl p-7 sm:p-8 border ${borderStyles} transition-all duration-300 flex flex-col justify-between group min-h-[360px] hover:-translate-y-1`}
                 >
                   <div>

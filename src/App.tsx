@@ -8,11 +8,14 @@ import { StoriesSection } from './components/StoriesSection';
 import { PhotoBoothSection } from './components/PhotoBoothSection';
 import { FooterSection } from './components/FooterSection';
 import { OnboardingModal } from './components/OnboardingModal';
+import { OfficialPosterModal } from './components/OfficialPosterModal';
+import { ScrollWorldHud } from './components/ScrollWorldHud';
 import { useUserProfile } from './hooks/useUserProfile';
 
 export default function App() {
   const { profile, isLoaded, createProfile } = useUserProfile();
   const [showOnboarding, setShowOnboarding] = useState(false);
+  const [showPosterModal, setShowPosterModal] = useState(false);
 
   useEffect(() => {
     if (isLoaded && !profile) {
@@ -23,34 +26,46 @@ export default function App() {
   }, [isLoaded, profile]);
 
   return (
-    <div className="relative min-h-screen bg-[#140026] text-white selection:bg-[#ff007f] selection:text-white overflow-x-hidden">
+    <div className="relative min-h-screen bg-[#0c031c] text-white selection:bg-[#a855f7] selection:text-white overflow-x-hidden">
       {/* Name Onboarding Modal */}
       <OnboardingModal 
         isOpen={showOnboarding} 
         onComplete={createProfile} 
       />
 
-      {/* Interactive Cyber & Particle Canvas Background */}
+      {/* Official Poster High-Resolution Modal */}
+      <OfficialPosterModal
+        isOpen={showPosterModal}
+        onClose={() => setShowPosterModal(false)}
+      />
+
+      {/* Interactive Cyber & Particle Canvas Background with Official Flyer Aurora */}
       <CyberBackground />
 
       {/* Sticky Glassmorphism Header */}
       <Navbar />
 
-      {/* Main Page Content Flow */}
-      <main className="relative z-10">
-        {/* Sección 1: Hero con animaciones, conteo y personalización */}
-        <HeroSection userName={profile?.name} />
+      {/* Scroll-World Route Tracker & Mobile-First HUD Bar */}
+      <ScrollWorldHud onOpenPosterModal={() => setShowPosterModal(true)} />
 
-        {/* Sección 2: Propósito & Mensaje Evangelístico Profundo con Selector de Promesas */}
+      {/* Main Page Content Flow */}
+      <main className="relative z-10 pb-16 sm:pb-8">
+        {/* Sección 1: Hero con Pablo Rosales, fecha 28 Noviembre, 3D Crystal y Afiche */}
+        <HeroSection 
+          userName={profile?.name} 
+          onOpenPosterModal={() => setShowPosterModal(true)}
+        />
+
+        {/* Sección 2: Propósito & Mensaje Evangelístico con Selector Bíblico de Promesas */}
         <AboutSection userName={profile?.name} />
 
-        {/* Sección 3: Cyber Arcade con 3 Minijuegos (Trivia, Guardián del Pensamiento y Matriz de Memoria) */}
+        {/* Sección 3: Cyber Arcade con 3 Minijuegos Mejorados para Celular (Trivia, Guardián y Memoria) */}
         <CyberArcadeSection />
 
-        {/* Sección 4: Historias Reales de Transformación */}
+        {/* Sección 4: Historias Reales de Transformación Juvenil */}
         <StoriesSection />
 
-        {/* Sección 5: Photo Booth 2026 con controles avanzados de ajuste y encuadre */}
+        {/* Sección 5: Photo Booth 2026 con Credenciales Conmemorativas */}
         <PhotoBoothSection initialAttendeeName={profile?.name} />
       </main>
 

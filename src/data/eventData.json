@@ -1,53 +1,58 @@
 {
+  "event": {
+    "name": "METANOIA 2026",
+    "subtitle": "Noche Juvenil de Transformación Espiritual",
+    "date": "2026-11-28T18:00:00",
+    "displayDate": "28 de Noviembre de 2026",
+    "displayTime": "06:00 PM",
+    "location": "IGLEPACBEN AD Guazapa (Iglesia Pacto y Bendición AD)",
+    "specialGuest": "Pablo Rosales (En la música y la palabra)",
+    "admission": "Entrada Totalmente Libre"
+  },
   "agenda": [
     {
-      "time": "20:00",
-      "title": "Apertura y Alabanza",
-      "description": "Iniciamos con alabanza y adoración profunda a Dios.",
+      "time": "18:00",
+      "title": "Apertura de Puertas & Registro Oficial",
+      "description": "Bienvenida general, entrega de credenciales conmemorativas y acceso al Photo Booth oficial.",
+      "verse": "Salmos 100:4"
+    },
+    {
+      "time": "18:30",
+      "title": "En la Música: Alabanza & Adoración con Pablo Rosales",
+      "description": "Tiempo íntimo y poderoso de exaltación al Rey de reyes con banda en vivo.",
       "verse": "Salmos 100:2"
     },
     {
-      "time": "21:30",
-      "title": "Dinámica de Integración",
-      "description": "Juegos y actividades para conocernos como cuerpo de Cristo.",
-      "verse": ""
-    },
-    {
-      "time": "22:30",
-      "title": "Primera Plenaria: El Llamado",
-      "description": "Mensaje sobre la transformación de nuestra mente.",
+      "time": "20:00",
+      "title": "Palabra Central: «METANOIA: Rompe el Molde»",
+      "description": "Mensaje impactante de Pablo Rosales sobre la renovación radical del entendimiento.",
       "verse": "Romanos 12:2"
     },
     {
-      "time": "00:00",
-      "title": "Santa Cena y Comunión",
-      "description": "Momento de reflexión y participación de la mesa del Señor.",
-      "verse": "1 Corintios 11:23-26"
-    },
-    {
-      "time": "01:30",
-      "title": "Segunda Plenaria: METANOIA",
-      "description": "Cambiando nuestra forma de vivir.",
+      "time": "21:30",
+      "title": "Ministración & Oración de Quebrantamiento",
+      "description": "Altar abierto para quebrantar cadenas, sanidad interior y entrega total a Cristo.",
       "verse": "Efesios 4:23-24"
     },
     {
-      "time": "03:00",
-      "title": "Sorteo y Rifas (Cyber-Ticket)",
-      "description": "Sorteo de premios especiales para los asistentes.",
-      "verse": ""
+      "time": "22:30",
+      "title": "Desafíos Cyber Arcade & Premiación de Escuadras",
+      "description": "Retos en vivo de conocimiento bíblico, trivias y entrega de Cyber-Tickets.",
+      "verse": "1 Timoteo 4:12"
     },
     {
-      "time": "04:30",
-      "title": "Alabanza de Cierre y Despedida",
-      "description": "Oración final y despedida.",
+      "time": "23:30",
+      "title": "Santa Comunión & Alabanza de Cierre",
+      "description": "Oración de bendición para la juventud de Guazapa y despedida victoriosa.",
       "verse": "Números 6:24-26"
     }
   ],
   "secretCodes": {
-    "GUAZAPA2026": 100,
-    "METANOIA26": 150,
+    "PABLOROSALES": 300,
+    "GUAZAPA28": 200,
+    "METANOIA2026": 250,
     "ROMANOS12": 200,
-    "METANOIA": 50,
+    "IGLEPACBEN": 150,
     "CRISTOVIVE": 300
   }
 }

@@ -1,67 +1,87 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Sparkles, RotateCcw, X, Zap, BookOpen, Clock, Compass } from 'lucide-react';
+import {
+  Sparkles,
+  RotateCcw,
+  Clock,
+  BookOpen,
+  Share2,
+  Check,
+  Zap,
+  Flame,
+  Volume2,
+} from 'lucide-react';
 import { playCyberClick, playCyberHover, playCyberTransition, playNeonChime } from '../utils/audio';
 
-interface OracleAdvice {
+export interface OracleAdvice {
   verse: string;
   reference: string;
   theme: string;
+  declaration: string;
 }
 
-const ORACLE_ADVICES: OracleAdvice[] = [
+export const ORACLE_ADVICES: OracleAdvice[] = [
   {
-    verse: '«No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré.»',
-    reference: 'Isaías 41:10',
-    theme: 'VALENTÍA',
+    verse: '«No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta.»',
+    reference: 'Romanos 12:2',
+    theme: 'METANOIA TOTAL',
+    declaration: 'Mi mente es renovada hoy por el Espíritu Santo.',
   },
   {
     verse: '«Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús.»',
     reference: 'Filipenses 4:7',
-    theme: 'PAZ MENTAL',
-  },
-  {
-    verse: '«Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes, porque Jehová tu Dios estará contigo dondequiera que vayas.»',
-    reference: 'Josué 1:9',
-    theme: 'FORTALEZA',
+    theme: 'PAZ INQUEBRANTABLE',
+    declaration: 'La ansiedad se desarma ante la paz de Cristo.',
   },
   {
     verse: '«De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas.»',
     reference: '2 Corintios 5:17',
-    theme: 'NUEVO COMIENZO',
+    theme: 'NUEVA IDENTIDAD',
+    declaration: 'Mi pasado no define el futuro que Dios escribió para mí.',
   },
   {
-    verse: '«Clama a mí, y yo te responderé, y te enseñaré cosas grandes y ocultas que tú no conoces.»',
-    reference: 'Jeremías 33:3',
-    theme: 'DIRECCIÓN',
+    verse: '«No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré.»',
+    reference: 'Isaías 41:10',
+    theme: 'RESPALDO DIVINO',
+    declaration: 'El Creador del cielo y la tierra camina a mi lado.',
+  },
+  {
+    verse: '«Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto, todo lo justo, todo lo puro, todo lo amable... en esto pensad.»',
+    reference: 'Filipenses 4:8',
+    theme: 'FILTRO MENTAL',
+    declaration: 'Elijo alimentar mi mente solo con la verdad de Dios.',
   },
   {
     verse: '«Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal, para daros el fin que esperáis.»',
     reference: 'Jeremías 29:11',
-    theme: 'PROPÓSITO',
+    theme: 'PROPÓSITO ETERNO',
+    declaration: 'Mi destino en Cristo es de paz, victoria y gloria.',
+  },
+  {
+    verse: '«Derribando argumentos y toda altivez que se levanta contra el conocimiento de Dios, y llevando cautivo todo pensamiento a la obediencia a Cristo.»',
+    reference: '2 Corintios 10:5',
+    theme: 'AUTORIDAD ESPIRITUAL',
+    declaration: 'Tomo cautivo todo mal pensamiento bajo el señorío de Jesús.',
   },
   {
     verse: '«Todo lo puedo en Cristo que me fortalece.»',
     reference: 'Filipenses 4:13',
-    theme: 'VICTORIA',
-  },
-  {
-    verse: '«El da esfuerzo al cansado, y multiplica las fuerzas al que no tiene ningunas... los que esperan a Jehová tendrán nuevas fuerzas.»',
-    reference: 'Isaías 40:29-31',
-    theme: 'ENERGÍA SOBRENATURAL',
+    theme: 'FUERZA SOBRENATURAL',
+    declaration: 'No camino en mis fuerzas limitadas, sino en el poder de Dios.',
   },
 ];
 
 export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = '' }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wordCardRef = useRef<HTMLDivElement | null>(null);
-  const rotationSpeedRef = useRef(0.012);
+  const rotationSpeedRef = useRef(0.015);
   const [viewMode, setViewMode] = useState<'countdown' | 'word'>('countdown');
   const [currentAdvice, setCurrentAdvice] = useState<OracleAdvice>(ORACLE_ADVICES[0]);
   const [isSpinningFast, setIsSpinningFast] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  // Target date: November 20, 2026 at 6:00 PM
-  const targetDate = new Date('2026-11-20T18:00:00').getTime();
+  // Official Event Target: November 28, 2026 at 6:00 PM (18:00)
+  const targetDate = new Date('2026-11-28T18:00:00').getTime();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -90,15 +110,15 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // GSAP Crystalline entrance animation when a word is revealed
+  // Entrance animation when a word is revealed
   useEffect(() => {
     if (viewMode === 'word' && wordCardRef.current) {
       gsap.fromTo(
         wordCardRef.current,
         {
           opacity: 0,
-          scale: 0.93,
-          y: 14,
+          scale: 0.92,
+          y: 16,
           filter: 'blur(8px)',
         },
         {
@@ -113,25 +133,34 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
     }
   }, [viewMode, currentAdvice]);
 
-  // Trigger fast spin & display clean crystalline advice
+  // Trigger fast spin & reveal new word
   const handleTriggerPrism = () => {
     playCyberClick('confirm');
     playCyberTransition();
 
-    rotationSpeedRef.current = 0.28;
+    rotationSpeedRef.current = 0.35;
     setIsSpinningFast(true);
 
     const randomIndex = Math.floor(Math.random() * ORACLE_ADVICES.length);
     setCurrentAdvice(ORACLE_ADVICES[randomIndex]);
 
-    // Snappy transition
     setTimeout(() => {
       playNeonChime();
       setIsSpinningFast(false);
       setViewMode('word');
-    }, 950);
+      if (navigator.vibrate) navigator.vibrate([25, 40, 25]);
+    }, 850);
   };
 
+  const handleCopyVerse = () => {
+    playCyberClick();
+    const textToCopy = `«${currentAdvice.verse}» — ${currentAdvice.reference}\n✨ Declaración: ${currentAdvice.declaration}\n🔥 METANOIA 2026 • 28 de Noviembre | Iglepacben AD Guazapa`;
+    navigator.clipboard.writeText(textToCopy);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  // 3D Polyhedron Canvas with iridescent shader matching official poster colors
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -147,159 +176,100 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
       const rect = canvas.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      mouseX = x * 0.35;
-      mouseY = y * 0.35;
+      mouseX = x * 0.4;
+      mouseY = y * 0.4;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const x = (touch.clientX - rect.left) / rect.width - 0.5;
+        const y = (touch.clientY - rect.top) / rect.height - 0.5;
+        mouseX = x * 0.5;
+        mouseY = y * 0.5;
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = canvas.getBoundingClientRect();
-      canvas.width = (rect.width || 380) * dpr;
-      canvas.height = (rect.height || 380) * dpr;
+      canvas.width = (rect.width || 360) * dpr;
+      canvas.height = (rect.height || 360) * dpr;
     };
 
     resize();
     window.addEventListener('resize', resize);
 
+    // 3D Octahedron / Iridescent Gem Coordinates
     const vertices = [
-      { x: 0, y: -1.3, z: 0 },
-      { x: -1.1, y: 0.6, z: -0.8 },
-      { x: 1.1, y: 0.6, z: -0.8 },
-      { x: 0, y: 0.9, z: 1.2 },
-      { x: 0, y: 1.4, z: 0 },
+      { x: 0, y: -1.35, z: 0 },
+      { x: 1.15, y: 0, z: 1.15 },
+      { x: -1.15, y: 0, z: 1.15 },
+      { x: -1.15, y: 0, z: -1.15 },
+      { x: 1.15, y: 0, z: -1.15 },
+      { x: 0, y: 1.35, z: 0 },
     ];
 
     const faces = [
-      { pts: [0, 1, 3], stroke: '#00f0ff', glow: '#00f0ff' },
-      { pts: [0, 3, 2], stroke: '#ff00aa', glow: '#ff00aa' },
-      { pts: [0, 2, 1], stroke: '#0070f3', glow: '#0070f3' },
-      { pts: [4, 3, 1], stroke: '#ff007f', glow: '#ff007f' },
-      { pts: [4, 2, 3], stroke: '#00f0ff', glow: '#00f0ff' },
+      { pts: [0, 1, 2], colorShift: '#a855f7', stroke: '#c084fc', glow: '#a855f7' },
+      { pts: [0, 2, 3], colorShift: '#00f0ff', stroke: '#38bdf8', glow: '#00f0ff' },
+      { pts: [0, 3, 4], colorShift: '#9333ea', stroke: '#e879f9', glow: '#c084fc' },
+      { pts: [0, 4, 1], colorShift: '#6366f1', stroke: '#a5b4fc', glow: '#818cf8' },
+      { pts: [5, 2, 1], colorShift: '#c084fc', stroke: '#f472b6', glow: '#e879f9' },
+      { pts: [5, 3, 2], colorShift: '#38bdf8', stroke: '#00f0ff', glow: '#38bdf8' },
+      { pts: [5, 4, 3], colorShift: '#7e22ce', stroke: '#a855f7', glow: '#7e22ce' },
+      { pts: [5, 1, 4], colorShift: '#a855f7', stroke: '#c084fc', glow: '#a855f7' },
     ];
 
-    const particles = Array.from({ length: 20 }, (_, i) => ({
-      angle: (i / 20) * Math.PI * 2,
-      speed: 0.015 + (i % 3) * 0.005,
-      radiusOffset: (i % 2 === 0 ? 1 : -1) * (14 + (i % 3) * 8),
-      size: 1.5 + (i % 3) * 1.5,
-      color: i % 2 === 0 ? '#00f0ff' : '#ff007f',
-    }));
-
     const render = () => {
-      if (rotationSpeedRef.current > 0.012) {
-        rotationSpeedRef.current = Math.max(0.012, rotationSpeedRef.current * 0.96);
-      }
-
-      angle += rotationSpeedRef.current;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      const w = canvas.width;
-      const h = canvas.height;
-      const cx = w / 2;
-      const cy = h / 2 - 10 * dpr;
-      const scale = Math.min(w, h) * 0.28;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.clearRect(0, 0, w, h);
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
+      const scale = Math.min(canvas.width, canvas.height) * 0.28;
 
-      // Floor Reflection
-      const floorGrad = ctx.createRadialGradient(cx, cy + scale * 1.35, 10, cx, cy + scale * 1.35, scale * 1.6);
-      floorGrad.addColorStop(0, 'rgba(255, 0, 127, 0.35)');
-      floorGrad.addColorStop(0.35, 'rgba(0, 240, 255, 0.2)');
-      floorGrad.addColorStop(0.8, 'rgba(20, 0, 38, 0.05)');
-      floorGrad.addColorStop(1, 'transparent');
-      ctx.fillStyle = floorGrad;
-      ctx.beginPath();
-      ctx.ellipse(cx, cy + scale * 1.35, scale * 1.5, scale * 0.35, 0, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Floor grid rays
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.16)';
-      ctx.lineWidth = 1 * dpr;
-      for (let i = -4; i <= 4; i++) {
-        ctx.beginPath();
-        ctx.moveTo(cx + i * 36 * dpr, cy + scale * 1.15);
-        ctx.lineTo(cx + i * 105 * dpr, cy + scale * 1.65);
-        ctx.stroke();
+      if (rotationSpeedRef.current > 0.015) {
+        rotationSpeedRef.current *= 0.965;
       }
+      angle += rotationSpeedRef.current;
 
-      // Outer Neon Aura Rings
-      const ringRadius = scale * 1.25;
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(cx, cy, ringRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(255, 0, 127, 0.3)';
-      ctx.lineWidth = 1.5 * dpr;
-      ctx.stroke();
+      const rotY = angle + mouseX * 2.2;
+      const rotX = Math.sin(angle * 0.7) * 0.22 + mouseY * 2.0;
 
-      ctx.beginPath();
-      ctx.arc(cx, cy, ringRadius * 0.88, angle * 1.5, angle * 1.5 + Math.PI * 1.2);
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.55)';
-      ctx.lineWidth = 2 * dpr;
-      ctx.shadowColor = '#00f0ff';
-      ctx.shadowBlur = 10 * dpr;
-      ctx.stroke();
-      ctx.restore();
-
-      // Orbiting Neon Particles
-      particles.forEach((p) => {
-        p.angle += p.speed * (rotationSpeedRef.current > 0.03 ? 3.5 : 1);
-        const r = ringRadius + p.radiusOffset * dpr;
-        const px = cx + Math.cos(p.angle) * r;
-        const py = cy + Math.sin(p.angle) * (r * 0.42);
-
-        ctx.save();
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 10 * dpr;
-        ctx.beginPath();
-        ctx.arc(px, py, p.size * dpr, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      });
-
-      // 3D Matrix Math
-      const cosY = Math.cos(angle + mouseX);
-      const sinY = Math.sin(angle + mouseX);
-      const cosX = Math.cos(mouseY);
-      const sinX = Math.sin(mouseY);
-
+      // Project 3D points
       const projected = vertices.map((v) => {
-        const x1 = v.x * cosY - v.z * sinY;
-        const z1 = v.x * sinY + v.z * cosY;
-        const y2 = v.y * cosX - z1 * sinX;
-        const z2 = v.y * sinX + z1 * cosX;
-
-        const fov = 4.2;
-        const pz = z2 + fov;
-        const pScale = fov / pz;
+        let x1 = v.x * Math.cos(rotY) - v.z * Math.sin(rotY);
+        let z1 = v.x * Math.sin(rotY) + v.z * Math.cos(rotY);
+        let y2 = v.y * Math.cos(rotX) - z1 * Math.sin(rotX);
+        let z2 = v.y * Math.sin(rotX) + z1 * Math.cos(rotX);
+        const fov = 3.2;
+        const pers = fov / (fov + z2);
 
         return {
-          x: cx + x1 * scale * pScale,
-          y: cy + y2 * scale * pScale,
+          x: cx + x1 * scale * pers,
+          y: cy + y2 * scale * pers,
           z: z2,
         };
       });
 
-      // Faces Sorting
+      // Sort faces by depth
       const facesWithZ = faces.map((face) => {
+        const avgZ = (projected[face.pts[0]].z + projected[face.pts[1]].z + projected[face.pts[2]].z) / 3;
         const p0 = projected[face.pts[0]];
         const p1 = projected[face.pts[1]];
         const p2 = projected[face.pts[2]];
-
-        const avgZ = (p0.z + p1.z + p2.z) / 3;
-        const cross = (p1.x - p0.x) * (p2.y - p0.y) - (p1.y - p0.y) * (p2.x - p0.x);
-
-        return {
-          ...face,
-          avgZ,
-          isFront: cross < 0,
-        };
+        const isFront = (p1.x - p0.x) * (p2.y - p0.y) - (p1.y - p0.y) * (p2.x - p0.x) < 0;
+        return { ...face, avgZ, isFront };
       });
 
       facesWithZ.sort((a, b) => a.avgZ - b.avgZ);
 
-      // Render Crystal Faces
+      // Render Crystal Faces with poster palette
       facesWithZ.forEach((face) => {
         const p0 = projected[face.pts[0]];
         const p1 = projected[face.pts[1]];
@@ -314,24 +284,26 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
 
         const faceGrad = ctx.createLinearGradient(p0.x, p0.y, (p1.x + p2.x) / 2, (p1.y + p2.y) / 2);
         if (face.isFront) {
-          faceGrad.addColorStop(0, 'rgba(0, 240, 255, 0.85)');
-          faceGrad.addColorStop(0.5, 'rgba(255, 0, 127, 0.7)');
-          faceGrad.addColorStop(1, 'rgba(20, 0, 38, 0.85)');
+          faceGrad.addColorStop(0, 'rgba(192, 132, 252, 0.82)');
+          faceGrad.addColorStop(0.4, 'rgba(168, 85, 247, 0.65)');
+          faceGrad.addColorStop(0.8, 'rgba(0, 240, 255, 0.55)');
+          faceGrad.addColorStop(1, 'rgba(18, 7, 48, 0.9)');
         } else {
-          faceGrad.addColorStop(0, 'rgba(0, 200, 255, 0.4)');
-          faceGrad.addColorStop(1, 'rgba(20, 0, 40, 0.6)');
+          faceGrad.addColorStop(0, 'rgba(147, 51, 234, 0.35)');
+          faceGrad.addColorStop(1, 'rgba(10, 4, 30, 0.65)');
         }
 
         ctx.fillStyle = faceGrad;
         ctx.fill();
 
         ctx.strokeStyle = face.stroke;
-        ctx.lineWidth = 2.2 * dpr;
+        ctx.lineWidth = 2 * dpr;
         ctx.shadowColor = face.glow;
-        ctx.shadowBlur = 14 * dpr;
+        ctx.shadowBlur = 16 * dpr;
         ctx.stroke();
 
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+        // Facet reflection edge
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
         ctx.lineWidth = 1 * dpr;
         ctx.beginPath();
         ctx.moveTo(p0.x, p0.y);
@@ -340,14 +312,14 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
         ctx.restore();
       });
 
-      // Central Light Nodes
+      // Vertices core dots
       projected.forEach((p, idx) => {
         ctx.save();
-        ctx.fillStyle = idx === 0 ? '#00f0ff' : '#ffe600';
-        ctx.shadowColor = idx === 0 ? '#00f0ff' : '#ffe600';
-        ctx.shadowBlur = 12 * dpr;
+        ctx.fillStyle = idx === 0 ? '#00f0ff' : '#c084fc';
+        ctx.shadowColor = idx === 0 ? '#00f0ff' : '#a855f7';
+        ctx.shadowBlur = 10 * dpr;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, (idx === 0 ? 4 : 2.5) * dpr, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, (idx === 0 ? 3.5 : 2.5) * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       });
@@ -359,68 +331,122 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
   const countdownUnits = [
-    { label: 'DÍAS', value: timeLeft.days, color: '#ffe600' },
+    { label: 'DÍAS', value: timeLeft.days, color: '#c084fc' },
     { label: 'HORAS', value: timeLeft.hours, color: '#00f0ff' },
-    { label: 'MIN', value: timeLeft.minutes, color: '#ff007f' },
-    { label: 'SEG', value: timeLeft.seconds, color: '#a855f7' },
+    { label: 'MIN', value: timeLeft.minutes, color: '#f472b6' },
+    { label: 'SEG', value: timeLeft.seconds, color: '#e879f9' },
   ];
 
   return (
-    <div className={`relative flex flex-col items-center justify-center select-none ${className}`}>
-      {/* 3D Crystal Prism Interactive Canvas */}
+    <div className={`relative flex flex-col items-center justify-center select-none w-full ${className}`}>
+      {/* 3D Polyhedron Canvas with touch feedback */}
       <button
         type="button"
         onClick={handleTriggerPrism}
         onMouseEnter={() => playCyberHover('crisp')}
         disabled={isSpinningFast}
-        className="group relative cursor-pointer focus:outline-none flex flex-col items-center touch-manipulation mb-2 transition-transform"
-        aria-label="Prisma 3D"
+        className="group relative cursor-pointer focus:outline-none flex flex-col items-center touch-manipulation mb-1.5 transition-transform"
+        aria-label="Tocar el Prisma para recibir una palabra"
       >
-        <canvas
-          ref={canvasRef}
-          className={`w-full h-full max-w-[360px] sm:max-w-[400px] aspect-square object-contain transition-transform duration-500 ${
-            isSpinningFast ? 'scale-110 drop-shadow-[0_0_40px_#00f0ff]' : 'group-hover:scale-105'
-          }`}
-          style={{ filter: 'drop-shadow(0 0 25px rgba(255,0,127,0.3))' }}
-        />
+        <div className="relative">
+          {/* Ambient soft glow matching poster */}
+          <div className="absolute inset-0 bg-[#a855f7]/25 rounded-full blur-2xl pointer-events-none group-hover:bg-[#a855f7]/40 transition-colors" />
+          <canvas
+            ref={canvasRef}
+            className={`w-full h-full max-w-[320px] xs:max-w-[360px] sm:max-w-[380px] aspect-square object-contain transition-transform duration-500 relative z-10 ${
+              isSpinningFast ? 'scale-110 drop-shadow-[0_0_45px_#a855f7]' : 'group-hover:scale-105'
+            }`}
+            style={{ filter: 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.45))' }}
+          />
+        </div>
+        <span className="text-[10px] sm:text-xs font-mono-cyber font-bold tracking-widest text-purple-300/80 group-hover:text-white uppercase transition-colors flex items-center gap-1.5 bg-black/40 px-3 py-1 rounded-full border border-purple-500/30 backdrop-blur-sm shadow-[0_0_12px_rgba(168,85,247,0.3)] mt-[-10px] relative z-20">
+          <Sparkles className="w-3 h-3 text-[#c084fc] animate-pulse" />
+          <span>TOCA EL PRISMA PARA RECIBIR TU PALABRA</span>
+        </span>
       </button>
 
-      {/* CRISTALINO HUD DIV: Crystalline Glassmorphic Container */}
-      <div className="w-full max-w-[450px] mt-2 px-1">
-        <div className="crystalline-glass relative overflow-hidden rounded-2xl p-4 sm:p-5 transition-all">
-          {/* Prismatic rainbow reflection line on top border */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#00f0ff] via-30% via-[#ffe600] via-70% to-[#ff007f] to-transparent opacity-90 animate-prismatic" />
+      {/* ========================================================================= */}
+      {/* OFFICIAL FLYER HUD CARD: EXACT METANOIA POSTER PALETTE & GLASSMORPHISM    */}
+      {/* ========================================================================= */}
+      <div className="w-full max-w-[460px] mt-2 px-1">
+        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-5 transition-all bg-[#0f0728]/90 backdrop-blur-2xl border-2 border-[#a855f7]/60 shadow-[0_0_35px_rgba(168,85,247,0.35),inset_0_1px_2px_rgba(255,255,255,0.2)]">
+          {/* Neon violet top flare */}
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c084fc] via-30% via-[#00f0ff] via-70% to-[#a855f7] to-transparent opacity-95" />
 
-          {/* Diagonal crystal sheen glint */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-overlay opacity-30">
-            <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-25 animate-laser-sheen" />
+          {/* Diagonal laser sheen glint */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-overlay opacity-25">
+            <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -skew-x-25 animate-laser-sheen" />
           </div>
 
           {viewMode === 'countdown' ? (
-            /* COUNTDOWN VIEW (Crystalline Glass Style) */
-            <div className="relative z-10">
-              <div className="flex items-center justify-between gap-2 pb-2.5 mb-2.5 border-b border-white/10 text-xs font-mono-cyber">
-                <div className="flex items-center gap-1.5 text-[#ffe600] font-bold">
-                  <Clock className="w-3.5 h-3.5 text-[#ffe600] animate-spin" style={{ animationDuration: '8s' }} />
-                  <span className="tracking-wider uppercase text-[10px] sm:text-xs">Tiempo hacia el Evento</span>
+            /* =================================================================== */
+            /* COUNTDOWN & ARTIST HUD VIEW                                         */
+            /* =================================================================== */
+            <div className="relative z-10 space-y-3">
+              {/* Top Banner: Guest Artist & Speaker Badge (Matching the exact flyer pill) */}
+              <div className="flex items-center gap-2.5 p-2 rounded-xl bg-purple-950/40 border border-purple-500/30 backdrop-blur-md">
+                {/* Glowing Violet Icon Badge (As seen in the official flyer) */}
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#7b2cbf] to-[#c77dff] p-[1.5px] shadow-[0_0_15px_#a855f7] flex-shrink-0 flex items-center justify-center">
+                  <div className="w-full h-full bg-[#120732] rounded-[10px] flex items-center justify-center">
+                    <div className="w-4 h-4 rounded-md bg-white shadow-[0_0_8px_#ffffff]" />
+                  </div>
                 </div>
-                <span className="text-[10px] sm:text-[11px] text-purple-200/80 font-mono-cyber">
-                  20 NOV 2026 • 6:00 PM
-                </span>
+
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[9px] xs:text-[10px] font-mono-cyber font-bold tracking-[0.2em] text-[#c084fc] uppercase">
+                    EN LA MÚSICA Y PALABRA
+                  </span>
+                  <span className="font-cyber text-sm sm:text-base text-white tracking-wide font-extrabold truncate drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
+                    PABLO ROSALES
+                  </span>
+                </div>
+
+                <div className="ml-auto flex items-center">
+                  <span className="text-[10px] font-mono-cyber text-[#00f0ff] bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">
+                    EN VIVO
+                  </span>
+                </div>
+              </div>
+
+              {/* Middle Bar: Official Date Pill (28 | NOVIEMBRE | 06:00PM) */}
+              <div className="flex items-center justify-between gap-1.5 py-1.5 px-3 rounded-xl bg-[#09031c] border border-purple-500/35">
+                <div className="flex items-center gap-2 text-white font-cyber-heavy text-xs sm:text-sm tracking-wider">
+                  <span className="text-xl sm:text-2xl text-[#00f0ff] drop-shadow-[0_0_8px_#00f0ff] leading-none">
+                    28
+                  </span>
+                  <span className="text-white/40 font-mono">|</span>
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-widest uppercase">
+                    NOVIEMBRE
+                  </span>
+                  <span className="text-white/40 font-mono">|</span>
+                  <span className="text-xs sm:text-sm font-bold text-[#c084fc] tracking-wider">
+                    06:00PM
+                  </span>
+                </div>
+
+                <button
+                  onClick={handleTriggerPrism}
+                  className="flex items-center gap-1 text-[10px] font-mono-cyber font-bold text-[#00f0ff] hover:text-white bg-[#00f0ff]/15 hover:bg-[#00f0ff]/30 border border-[#00f0ff]/40 px-2 py-1 rounded-lg transition-all cursor-pointer"
+                  title="Recibir un versículo"
+                >
+                  <Sparkles className="w-3 h-3 text-[#c084fc]" />
+                  <span>Mensaje</span>
+                </button>
               </div>
 
               {/* 4 Crystal Countdown Blocks */}
-              <div className="grid grid-cols-4 gap-1.5 sm:gap-2.5">
+              <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
                 {countdownUnits.map((unit, i) => (
                   <div
                     key={i}
-                    className="p-2 sm:p-2.5 rounded-xl bg-white/5 border border-white/15 backdrop-blur-md text-center flex flex-col items-center justify-center transition-transform hover:scale-105 shadow-[0_4px_15px_rgba(0,0,0,0.3)]"
+                    className="p-2 sm:p-2.5 rounded-xl bg-[#150a36]/80 border border-purple-500/25 backdrop-blur-md text-center flex flex-col items-center justify-center transition-transform hover:scale-105 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
                   >
                     <span
                       className="font-cyber-heavy text-lg xs:text-xl sm:text-2xl text-white tracking-tight leading-none"
@@ -438,60 +464,77 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
                 ))}
               </div>
 
-              {/* Clean Footer Status */}
-              <div className="mt-2.5 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono-cyber text-purple-200/80">
-                <span className="flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-[#00f0ff]" /> Iglesia Pacto y Bendición
+              {/* Bottom Location Decal (EN IGLEPACBEN AD GUAZAPA) */}
+              <div className="pt-2 border-t border-purple-500/20 flex items-center justify-between text-[10px] font-mono-cyber text-purple-200/90">
+                <span className="flex items-center gap-1.5 tracking-wider uppercase font-bold text-[#c084fc]">
+                  <Flame className="w-3.5 h-3.5 text-[#00f0ff]" /> EN IGLEPACBEN AD GUAZAPA
                 </span>
-                <span className="text-[#ffe600] tracking-wider uppercase font-bold">
-                  Guazapa, San Salvador
+                <span className="text-[#00ff9d] tracking-widest uppercase font-bold">
+                  ENTRADA LIBRE
                 </span>
               </div>
             </div>
           ) : (
-            /* CRISTALINO BIBLE WORD VIEW: GSAP Animated, Prismatic Glass */
-            <div ref={wordCardRef} className="relative z-10">
+            /* =================================================================== */
+            /* PRISMA DE LA PALABRA / TEXTO REVELADO (Official Violet Theme)       */
+            /* =================================================================== */
+            <div ref={wordCardRef} className="relative z-10 space-y-3">
               {/* Header with Theme & Close */}
-              <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/15 text-xs font-mono-cyber">
+              <div className="flex items-center justify-between pb-2 border-b border-purple-500/30 text-xs font-mono-cyber">
                 <div className="flex items-center gap-1.5 text-[#00f0ff] font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-[#ffe600] animate-pulse" />
-                  <span className="tracking-wider uppercase text-[10px] sm:text-xs">
-                    PRISMA // PALABRA VIVA • {currentAdvice.theme}
+                  <div className="w-2 h-2 rounded-full bg-[#00f0ff] animate-ping" />
+                  <span className="tracking-wider uppercase text-[10px] sm:text-xs text-[#c084fc]">
+                    PALABRA DE DIOS • {currentAdvice.theme}
                   </span>
                 </div>
                 <button
                   onClick={() => setViewMode('countdown')}
                   onMouseEnter={() => playCyberHover('subtle')}
-                  className="flex items-center gap-1 text-white/70 hover:text-white px-2 py-0.5 rounded-md hover:bg-white/10 transition-colors text-[10px] cursor-pointer"
+                  className="flex items-center gap-1 text-purple-200 hover:text-white px-2 py-0.5 rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-[10px] cursor-pointer"
                   title="Volver al contador"
                 >
-                  <Clock className="w-3 h-3 text-[#ffe600]" />
+                  <Clock className="w-3 h-3 text-[#c084fc]" />
                   <span>Contador</span>
-                  <X className="w-3 h-3 ml-0.5" />
                 </button>
               </div>
 
-              {/* Crystalline Scripture Verse */}
-              <blockquote className="font-body text-xs sm:text-[13px] sm:leading-relaxed text-white font-medium italic py-1 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+              {/* Bible Scripture */}
+              <blockquote className="font-body text-xs sm:text-[13px] leading-relaxed text-white font-medium italic p-2 rounded-xl bg-purple-950/30 border border-purple-500/20 shadow-inner">
                 {currentAdvice.verse}
               </blockquote>
 
-              {/* Footnote with Reference and Spin Again Button */}
-              <div className="flex items-center justify-between gap-2 pt-2.5 mt-2 border-t border-white/15 text-xs">
-                <div className="flex items-center gap-1.5 font-cyber font-bold text-[#ffe600] text-xs">
-                  <BookOpen className="w-3.5 h-3.5 text-[#ffe600]" />
+              {/* Declaration Pill */}
+              <div className="flex items-center gap-2 p-2 rounded-xl bg-[#09031c] border border-cyan-500/30 text-[11px] font-body text-cyan-200">
+                <Zap className="w-3.5 h-3.5 text-[#00f0ff] flex-shrink-0" />
+                <span className="font-semibold">{currentAdvice.declaration}</span>
+              </div>
+
+              {/* Actions Footer */}
+              <div className="flex items-center justify-between gap-2 pt-2 border-t border-purple-500/25 text-xs">
+                <div className="flex items-center gap-1.5 font-cyber font-bold text-[#c084fc] text-xs">
+                  <BookOpen className="w-3.5 h-3.5 text-[#c084fc]" />
                   <span className="tracking-wide">{currentAdvice.reference}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
+                    onClick={handleCopyVerse}
+                    onMouseEnter={() => playCyberHover('subtle')}
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-mono-cyber text-[10px] font-bold uppercase transition-all cursor-pointer min-h-[36px]"
+                    title="Copiar versículo"
+                  >
+                    {copied ? <Check className="w-3 h-3 text-[#00ff9d]" /> : <Share2 className="w-3 h-3" />}
+                    <span>{copied ? '¡Copiado!' : 'Compartir'}</span>
+                  </button>
+
+                  <button
                     onClick={handleTriggerPrism}
                     disabled={isSpinningFast}
                     onMouseEnter={() => playCyberHover('crisp')}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 border border-white/25 text-[#00f0ff] hover:text-white font-cyber text-[10px] sm:text-[11px] font-bold uppercase transition-all cursor-pointer shadow-[0_0_15px_rgba(0,240,255,0.2)]"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] hover:from-[#a855f7] hover:to-[#9333ea] active:scale-95 text-white font-cyber text-[10px] sm:text-[11px] font-bold uppercase transition-all cursor-pointer shadow-[0_0_15px_rgba(168,85,247,0.5)] border border-purple-400 min-h-[36px]"
                   >
                     <RotateCcw className="w-3 h-3" />
-                    <span>Otra Palabra</span>
+                    <span>Otro Texto</span>
                   </button>
                 </div>
               </div>

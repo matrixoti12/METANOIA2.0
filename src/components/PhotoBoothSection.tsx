@@ -552,7 +552,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.font = `800 ${size * 0.03}px 'Chakra Petch', sans-serif`;
         ctx.shadowColor = '#ffe600';
         ctx.shadowBlur = size * 0.015;
-        ctx.fillText('20 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
+        ctx.fillText('28 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
@@ -624,7 +624,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.font = `600 ${size * 0.019}px 'Chakra Petch', sans-serif`;
         ctx.shadowBlur = 0;
         ctx.fillText(
-          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 20 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
+          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 28 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
           size / 2,
           size - margin * 1.8 + size * 0.092
         );
@@ -748,7 +748,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#ffe600';
         ctx.font = `800 ${size * 0.026}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('20 NOVIEMBRE • PACTO Y BENDICIÓN GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
+        ctx.fillText('28 NOVIEMBRE • PACTO Y BENDICIÓN GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
@@ -810,7 +810,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#ffe600';
         ctx.font = `800 ${size * 0.028}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('20 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
+        ctx.fillText('28 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Chakra Petch', sans-serif`;
@@ -888,7 +888,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#00f0ff';
         ctx.font = `600 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('20 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
+        ctx.fillText('28 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
         break;
       }
     }
@@ -1237,7 +1237,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                       playCyberClick();
                       setSelectedFrame(frame.id);
                     }}
-                    onMouseEnter={playCyberHover}
+                    onMouseEnter={() => playCyberHover('subtle')}
                     className={`relative p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[82px] ${
                       isSelected
                         ? 'bg-white/15 border-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.3)] scale-[1.02]'
@@ -1531,7 +1531,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           {/* 5. Quick Specs & Details */}
           <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-cyber text-purple-300">
             <span>Resolución: 1080 x 1080 (HD)</span>
-            <span className="text-[#00f0ff] font-bold">20 NOVIEMBRE 2026</span>
+            <span className="text-[#00f0ff] font-bold">28 NOVIEMBRE 2026</span>
           </div>
         </div>
       </div>

@@ -110,7 +110,7 @@ export const TimelineSection: React.FC = () => {
       ? events
       : events.filter((e) => e.category === activeFilter);
 
-  const toggleExpand = (id: string, e: React.MouseEvent) => {
+  const toggleExpand = (id: string, e: React.MouseEvent<HTMLElement>) => {
     triggerRipple(e);
     if (expandedId === id) {
       setExpandedId('');
