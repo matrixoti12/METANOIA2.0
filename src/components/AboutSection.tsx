@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { Sparkles, Heart, CheckCircle2, Flame, BookOpen, Shield, Zap, RefreshCw, Sun, Check } from 'lucide-react';
+import { Sparkles, Heart, CheckCircle2, BookOpen, Zap, RefreshCw } from 'lucide-react';
 import { playCyberClick, playCyberHover, playNeonChime } from '../utils/audio';
-import { BlurText } from './BlurText';
 
 interface BiblicalPromise {
   id: string;
@@ -89,8 +88,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
       className="relative py-20 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden z-20"
     >
       {/* Resplandores cósmicos suaves de fondo */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#b01cc6]/15 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#730bb3]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Encabezado y Romanos 12:2 */}
       <div
@@ -102,19 +99,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
         <div className="lg:col-span-6 flex flex-col justify-center text-left">
           
           {/* Badge Oficial RELOAD */}
-          <div className="mb-4 inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 shadow-[0_0_20px_rgba(195,167,255,0.3)]">
+          <div className="section-label mb-4 inline-flex items-center gap-2 self-start">
             <RefreshCw className="w-3.5 h-3.5 text-[#f4b6ff] animate-spin" style={{ animationDuration: '8s' }} />
-            <span className="font-cyber text-xs tracking-wider uppercase text-[#e4c5ff] font-bold">
-              METANOIA 2026 // RELOAD ESPIRITUAL
+            <span className="font-cyber text-xs text-[#e4c5ff] font-bold">
+              El propósito de Metanoia
             </span>
           </div>
 
-          <BlurText
-            text="REINICIA TU MENTE. TRANSFORMA TU DESTINO."
-            className="font-cyber-heavy text-3xl xs:text-4xl sm:text-5xl tracking-tight text-white leading-[1.1] mb-5 select-none"
-            animateBy="words"
-            delay={0.06}
-          />
+          <h2 className="section-heading mb-6">Reinicia tu mente.<br />Transforma tu destino.</h2>
 
           <p className="text-base sm:text-lg text-purple-200/90 font-body leading-relaxed max-w-xl mb-5">
             {userName ? (
@@ -126,12 +118,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
           </p>
 
           <div className="flex flex-wrap gap-2.5">
-            <div className="inline-flex items-center gap-2 text-xs font-cyber text-[#e4c5ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
-              <span className="font-bold">GRIEGO: μετάνοia</span>
+            <div className="info-tag inline-flex items-center gap-2 text-xs font-cyber text-[#e4c5ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
+              <span className="font-bold">GRIEGO: μετάνοια</span>
               <span className="text-purple-300/70">•</span>
               <span>Cambio Total de Pensamiento</span>
             </div>
-            <div className="inline-flex items-center gap-2 text-xs font-cyber text-[#f4b6ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
+            <div className="info-tag inline-flex items-center gap-2 text-xs font-cyber text-[#f4b6ff] px-3.5 py-1.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30">
               <Sparkles className="w-3 h-3 text-[#f4b6ff]" />
               <span className="font-bold">RELOAD: Giro de 180° hacia Cristo</span>
             </div>
@@ -140,21 +132,19 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
 
         {/* Columna Derecha: Tarjeta Luminous de Romanos 12:2 */}
         <div className="lg:col-span-6">
-          <div className="relative p-[1px] rounded-3xl bg-gradient-to-br from-[#c3a7ff]/50 via-[#b01cc6]/40 to-[#4331ec]/50 shadow-[0_16px_40px_rgba(23,5,38,0.5)]">
-            <div className="relative rounded-[23px] glass-panel-luminous p-7 sm:p-9 flex flex-col justify-between min-h-[300px] overflow-hidden">
-              <div className="absolute top-0 right-0 w-44 h-44 bg-[#b01cc6]/20 rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-44 h-44 bg-[#730bb3]/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="scripture-shell">
+            <div className="scripture-feature relative content-surface p-7 sm:p-9 flex flex-col justify-between min-h-[300px] overflow-hidden">
 
               <div className="relative z-10 mb-3 select-none flex items-center justify-between">
                 <span className="font-serif text-5xl sm:text-6xl text-[#f4b6ff] leading-none drop-shadow-[0_0_12px_rgba(244,182,255,0.6)]">
                   “
                 </span>
-                <span className="text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/35">
-                  VERSÍCULO CLAVE METANOIA
+                <span className="info-tag text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/35">
+                  Nuestra inspiración
                 </span>
               </div>
 
-              <blockquote className="relative z-10 font-body text-base sm:text-xl text-purple-100 font-medium leading-relaxed tracking-wide mb-6">
+              <blockquote className="relative z-10 font-body text-base sm:text-xl text-purple-100 font-normal leading-relaxed mb-6">
                 «No os conforméis a este siglo, sino transformaos por medio de la renovación de vuestro entendimiento, para que comprobéis cuál sea la buena voluntad de Dios, agradable y perfecta.»
               </blockquote>
 
@@ -170,16 +160,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
       </div>
 
       {/* SECCIÓN INTERACTIVA: "RELOAD // SELECTOR BÍBLICO DE PROMESAS" */}
-      <div className="mt-8 mb-16 p-6 sm:p-10 rounded-3xl glass-panel-luminous border border-[#c3a7ff]/30 relative overflow-hidden shadow-[0_20px_50px_rgba(18,3,30,0.5)]">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#b01cc6]/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#730bb3]/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="mt-8 mb-16 p-6 sm:p-10 content-surface relative overflow-hidden">
 
         <div className="relative z-10 text-center max-w-2xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#730bb3]/35 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber uppercase mb-3 shadow-[0_0_15px_rgba(195,167,255,0.25)]">
-            <Zap className="w-3.5 h-3.5 text-[#f4b6ff]" /> RELOAD Espiritual • Palabra para tu Corazón
+          <div className="info-tag inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#730bb3]/35 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber uppercase mb-3 shadow-[0_0_15px_rgba(195,167,255,0.25)]">
+            <Zap className="w-3.5 h-3.5 text-[#f4b6ff]" /> Una palabra para tu corazón
           </div>
           <h3 className="font-cyber-heavy text-2xl sm:text-3xl text-white mb-2">
-            ¿QUÉ CARGA DESEAS ENTREGAR HOY?
+            ¿Qué carga deseas entregar hoy?
           </h3>
           <p className="text-purple-200/90 text-xs sm:text-sm font-body">
             Selecciona la situación que estás viviendo para activar la promesa bíblica exacta de Cristo para tu vida:
@@ -197,7 +185,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                 onMouseEnter={() => playCyberHover('subtle')}
                 className={`px-4 py-2.5 rounded-2xl font-cyber text-xs tracking-wider transition-all cursor-pointer touch-manipulation min-h-[44px] flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-extrabold shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-105'
+                    ? 'choice-selected text-white'
                     : 'bg-[#230a42]/70 text-purple-200 border border-[#c3a7ff]/30 hover:border-[#c3a7ff]/60 hover:text-white'
                 }`}
               >
@@ -212,9 +200,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
         </div>
 
         {/* Tarjeta de Promesa Seleccionada */}
-        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl glass-card-amethyst border border-[#c3a7ff]/35 shadow-[0_12px_32px_rgba(15,3,25,0.4)] transition-all">
+        <div className="relative z-10 max-w-3xl mx-auto p-6 sm:p-8 content-inset transition-all">
           <div className="flex items-center justify-between gap-4 mb-4 pb-3 border-b border-[#c3a7ff]/20">
-            <span className="text-xs font-cyber font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-[#730bb3]/40 border border-[#c3a7ff]/35 text-[#f4b6ff]">
+            <span className="info-tag text-xs font-cyber font-bold tracking-wider uppercase px-3 py-1 rounded-full bg-[#730bb3]/40 border border-[#c3a7ff]/35 text-[#f4b6ff]">
               TEMA: {selectedPromise.category}
             </span>
             <span className="text-xs font-cyber text-[#e4c5ff] flex items-center gap-1.5 font-bold">
@@ -227,7 +215,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
             {selectedPromise.verse}
           </p>
 
-          <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/30 flex items-start gap-3">
+          <div className="promise-insight flex items-start gap-3">
             <Sparkles className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#f4b6ff]" />
             <p className="text-xs sm:text-sm text-purple-200/95 font-body leading-relaxed">
               <strong className="text-white font-cyber">Para tu día:</strong> {selectedPromise.devotionalInsight}
@@ -240,13 +228,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mt-6">
         
         {/* 3 Pasos */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="salvation-steps lg:col-span-7 content-surface">
           {/* Pilar 1 */}
-          <div className="rounded-3xl glass-card-amethyst border border-[#c3a7ff]/30 p-6 flex flex-col justify-between hover:border-[#f4b6ff] transition-all">
+          <div className="salvation-step p-6">
             <div>
               <div className="font-cyber-heavy text-2xl font-black text-[#c3a7ff] mb-2">01</div>
-              <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
-                RECONOCE Y CONFIESA
+              <h4 className="font-cyber text-sm font-bold text-white mb-2">
+                Reconoce y confiesa
               </h4>
               <p className="font-body text-xs text-purple-200/85 leading-relaxed">
                 Reconocer que hemos pecado y que lejos de Dios nuestra vida pierde el rumbo. Sincerarse delante de Él es el inicio de la sanidad.
@@ -258,11 +246,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
           </div>
 
           {/* Pilar 2 */}
-          <div className="rounded-3xl glass-card-amethyst border border-[#f4b6ff]/40 p-6 flex flex-col justify-between shadow-[0_0_20px_rgba(176,28,198,0.25)] hover:border-[#f4b6ff] transition-all">
+          <div className="salvation-step p-6">
             <div>
               <div className="font-cyber-heavy text-2xl font-black text-[#f4b6ff] mb-2">02</div>
-              <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
-                METANOIA REAL
+              <h4 className="font-cyber text-sm font-bold text-white mb-2">
+                Un cambio real
               </h4>
               <p className="font-body text-xs text-purple-200/85 leading-relaxed">
                 Metanoia no es remordimiento pasajero; es dar un giro de 180° y correr a los brazos de Jesús, rindiéndole tus planes y tus heridas.
@@ -274,11 +262,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
           </div>
 
           {/* Pilar 3 */}
-          <div className="rounded-3xl glass-card-amethyst border border-[#c3a7ff]/30 p-6 flex flex-col justify-between hover:border-[#86efac] transition-all">
+          <div className="salvation-step p-6">
             <div>
               <div className="font-cyber-heavy text-2xl font-black text-[#86efac] mb-2">03</div>
-              <h4 className="font-cyber text-sm font-bold text-white uppercase tracking-wider mb-2">
-                VIDA NUEVA // RELOAD
+              <h4 className="font-cyber text-sm font-bold text-white mb-2">
+                Una vida nueva
               </h4>
               <p className="font-body text-xs text-purple-200/85 leading-relaxed">
                 «Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros» (Ezequiel 36:26). Ahora eres hijo de Dios con vida eterna.
@@ -291,7 +279,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
         </div>
 
         {/* Oración de Compromiso y Decisión */}
-        <div className="lg:col-span-5 rounded-3xl glass-panel-luminous border border-[#f4b6ff]/35 p-6 sm:p-8 flex flex-col justify-between shadow-[0_16px_40px_rgba(23,5,38,0.5)]">
+        <div className="lg:col-span-5 content-surface p-6 sm:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-2xl bg-[#730bb3]/30 border border-[#c3a7ff]/40 flex items-center justify-center text-[#f4b6ff]">
@@ -302,7 +290,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
                   LLAMADO DE SALVACIÓN
                 </span>
                 <h4 className="font-cyber-heavy text-lg sm:text-xl text-white">
-                  MI DECISIÓN POR CRISTO
+                  Mi decisión por Cristo
                 </h4>
               </div>
             </div>
@@ -311,7 +299,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
               {userName ? `${userName}, si ` : 'Si '}hoy anhelas que Jesús tome el timón de tu vida y limpie tu corazón, repite esta oración con fe sincera:
             </p>
 
-            <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/25 text-purple-100 text-xs sm:text-sm leading-relaxed font-body italic space-y-2">
+            <div className="content-inset p-4 text-purple-100 text-xs sm:text-sm leading-relaxed font-body italic space-y-2">
               <p>
                 «Señor Jesús, hoy reconozco que te necesito. Creo que moriste en la cruz por mis pecados y resucitaste al tercer día.»
               </p>
@@ -323,7 +311,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
 
           <div className="mt-5 pt-4 border-t border-[#c3a7ff]/20">
             {hasPrayed ? (
-              <div className="p-3.5 rounded-2xl bg-[#86efac]/15 border border-[#86efac]/40 text-[#86efac] text-center font-cyber text-xs flex items-center justify-center gap-2 animate-bounce">
+              <div className="info-tag p-3.5 rounded-2xl bg-[#86efac]/15 border border-[#86efac]/40 text-[#86efac] text-center font-cyber text-xs flex items-center justify-center gap-2 animate-bounce">
                 <CheckCircle2 className="w-4 h-4 text-[#86efac]" />
                 <span>¡GLORIA A DIOS! HAS DADO EL PASO MÁS IMPORTANTE</span>
               </div>
@@ -331,10 +319,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
               <button
                 onClick={handlePrayer}
                 onMouseEnter={() => playCyberHover('crisp')}
-                className="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[46px]"
+                className="event-action w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[46px]"
               >
                 <Sparkles className="w-4 h-4 text-[#f4b6ff]" />
-                <span>CONFIRMO MI FE EN JESÚS HOY</span>
+                <span>Confirmo mi fe en Jesús</span>
               </button>
             )}
           </div>

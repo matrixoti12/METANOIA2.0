@@ -70,15 +70,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
   };
 
   const navItems = [
-    { id: 'inicio', label: 'INICIO' },
-    { id: 'proposito', label: 'PROPÓSITO' },
-    { id: 'minijuegos', label: 'MINIJUEGOS' },
-    { id: 'photospot', label: 'PHOTO BOOTH' },
+    { id: 'inicio', label: 'Inicio' },
+    { id: 'proposito', label: 'Propósito' },
+    { id: 'minijuegos', label: 'Juegos' },
+    { id: 'photospot', label: 'Fotos' },
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`site-header fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? 'bg-[#170526]/95 backdrop-blur-xl border-b border-[#c3a7ff]/20 shadow-[0_10px_35px_rgba(0,0,0,0.85)] py-3'
           : 'bg-transparent py-4 sm:py-5'

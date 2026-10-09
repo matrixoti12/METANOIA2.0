@@ -9,7 +9,6 @@ import {
   Check,
   Zap,
   Flame,
-  Volume2,
 } from 'lucide-react';
 import { playCyberClick, playCyberHover, playCyberTransition, playNeonChime } from '../utils/audio';
 
@@ -366,58 +365,41 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
             style={{ filter: 'drop-shadow(0 0 25px rgba(168, 85, 247, 0.45))' }}
           />
         </div>
-        <span className="text-[11px] sm:text-xs font-cyber font-bold tracking-wider text-[#e4c5ff] group-hover:text-white uppercase transition-colors flex items-center gap-2 bg-[#230a42]/80 px-4 py-1.5 rounded-full border border-[#c3a7ff]/40 backdrop-blur-md shadow-[0_0_18px_rgba(195,167,255,0.35)] mt-[-10px] relative z-20">
+        <span className="prism-invitation text-[11px] sm:text-xs font-cyber font-bold tracking-wider text-[#e4c5ff] group-hover:text-white transition-colors flex items-center gap-2 mt-[-10px] relative z-20">
           <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff] animate-pulse" />
-          <span>TOCA EL ICOSAEDRO PARA RECIBIR TU PALABRA</span>
+          <span>Toca el cristal y recibe una palabra</span>
         </span>
       </button>
 
-      {/* ========================================================================= */}
-      {/* OFFICIAL HUD CARD: LUMINOUS FROSTED GLASS & MODERN OUTFIT TYPOGRAPHY       */}
-      {/* ========================================================================= */}
-      <div className="w-full max-w-[460px] mt-2 px-1">
-        <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-5 transition-all glass-panel-luminous border border-[#c3a7ff]/35 shadow-[0_16px_40px_rgba(18,3,30,0.5)]">
-          {/* Neon violet top flare */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#f4b6ff] via-30% via-[#c3a7ff] via-70% to-[#b01cc6] to-transparent opacity-95" />
-
-          {/* Diagonal laser sheen glint */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-overlay opacity-20">
-            <div className="w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-25 animate-laser-sheen" />
-          </div>
-
+      <div className="content-surface event-countdown w-full max-w-[460px] mt-2 px-1">
           {viewMode === 'countdown' ? (
             /* =================================================================== */
             /* COUNTDOWN & ARTIST HUD VIEW                                         */
             /* =================================================================== */
-            <div className="relative z-10 space-y-3">
+            <div className="relative z-10 space-y-4">
               {/* Top Banner: Guest Artist & Speaker Badge */}
-              <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-[#1e0735]/70 border border-[#c3a7ff]/30 backdrop-blur-md">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#730bb3] to-[#b01cc6] p-[1.5px] shadow-[0_0_15px_rgba(176,28,198,0.5)] flex-shrink-0 flex items-center justify-center">
-                  <div className="w-full h-full bg-[#170526] rounded-[10px] flex items-center justify-center">
-                    <Sparkles className="w-4 h-4 text-[#f4b6ff]" />
-                  </div>
-                </div>
-
+              <div className="event-artist flex items-center gap-3 py-2">
+                <Sparkles className="w-5 h-5 text-[#f4b6ff] flex-shrink-0" />
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[10px] font-cyber font-semibold tracking-wider text-[#c3a7ff] uppercase">
-                    EN LA MÚSICA Y PALABRA
+                  <span className="text-[10px] sm:text-[11px] font-cyber font-semibold tracking-[0.12em] text-[#c3a7ff] uppercase">
+                    En la música y la palabra
                   </span>
-                  <span className="font-cyber-heavy text-sm sm:text-base text-white tracking-wide truncate drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]">
-                    PABLO ROSALES
+                  <span className="font-display text-lg sm:text-xl text-white tracking-[0.015em] truncate">
+                    Pablo Rosales
                   </span>
                 </div>
 
                 <div className="ml-auto flex items-center">
-                  <span className="text-[10px] font-cyber text-[#e4c5ff] bg-[#b01cc6]/20 border border-[#c3a7ff]/40 px-2.5 py-0.5 rounded-full uppercase font-bold tracking-wider">
+                  <span className="text-[10px] font-cyber text-[#e4c5ff] uppercase font-bold tracking-[0.14em]">
                     EN VIVO
                   </span>
                 </div>
               </div>
 
               {/* Middle Bar: Official Date Pill (28 | NOVIEMBRE | 06:00PM) */}
-              <div className="flex items-center justify-between gap-1.5 py-2 px-3.5 rounded-2xl bg-[#170526]/85 border border-[#c3a7ff]/30">
+              <div className="event-date-line flex flex-wrap items-center justify-between gap-1.5 py-3">
                 <div className="flex items-center gap-2 text-white font-cyber text-xs sm:text-sm tracking-wide">
-                  <span className="text-xl sm:text-2xl text-[#f4b6ff] drop-shadow-[0_0_8px_rgba(244,182,255,0.6)] leading-none font-extrabold">
+                  <span className="text-2xl sm:text-3xl text-[#f4b6ff] leading-none font-extrabold">
                     28
                   </span>
                   <span className="text-white/40 font-body">|</span>
@@ -432,7 +414,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
 
                 <button
                   onClick={handleTriggerPrism}
-                  className="flex items-center gap-1.5 text-[11px] font-cyber font-bold text-[#f4b6ff] hover:text-white bg-[#b01cc6]/25 hover:bg-[#b01cc6]/40 border border-[#c3a7ff]/40 px-2.5 py-1 rounded-xl transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 text-[11px] font-cyber font-bold text-[#f4b6ff] hover:text-white border-b border-[#c3a7ff]/45 px-1 py-1 transition-colors cursor-pointer"
                   title="Recibir un versículo del icosaedro"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff]" />
@@ -441,15 +423,14 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
               </div>
 
               {/* 4 Crystal Countdown Blocks */}
-              <div className="grid grid-cols-4 gap-2">
+              <div className="event-countdown-units grid grid-cols-4 divide-x divide-[#c3a7ff]/20 py-3">
                 {countdownUnits.map((unit, i) => (
                   <div
                     key={i}
-                    className="p-2.5 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/25 backdrop-blur-md text-center flex flex-col items-center justify-center transition-transform hover:scale-105 shadow-[0_4px_12px_rgba(0,0,0,0.35)]"
+                    className="text-center flex flex-col items-center justify-center px-1"
                   >
                     <span
-                      className="font-cyber-heavy text-lg xs:text-xl sm:text-2xl text-white tracking-tight leading-none"
-                      style={{ textShadow: `0 0 10px rgba(195,167,255,0.7)` }}
+                      className="countdown-number text-white"
                     >
                       {String(unit.value).padStart(2, '0')}
                     </span>
@@ -463,7 +444,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
               </div>
 
               {/* Bottom Location Decal (EN IGLEPACBEN AD GUAZAPA) */}
-              <div className="pt-2 border-t border-[#c3a7ff]/20 flex items-center justify-between text-[11px] font-cyber text-purple-200/90">
+              <div className="event-location-line pt-3 flex flex-wrap gap-2 items-center justify-between text-[11px] font-cyber text-purple-200/90">
                 <span className="flex items-center gap-1.5 tracking-wide uppercase font-bold text-[#c3a7ff]">
                   <Flame className="w-3.5 h-3.5 text-[#f4b6ff]" /> EN IGLEPACBEN AD GUAZAPA
                 </span>
@@ -476,7 +457,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
             /* =================================================================== */
             /* PRISMA DE LA PALABRA / TEXTO REVELADO (Luminous Violet Theme)       */
             /* =================================================================== */
-            <div ref={wordCardRef} className="relative z-10 space-y-3">
+            <div ref={wordCardRef} className="event-word relative z-10 space-y-3">
               {/* Header with Theme & Close */}
               <div className="flex items-center justify-between pb-2 border-b border-[#c3a7ff]/30 text-xs font-cyber">
                 <div className="flex items-center gap-2 text-[#f4b6ff] font-bold">
@@ -497,12 +478,12 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
               </div>
 
               {/* Bible Scripture */}
-              <blockquote className="font-body text-xs sm:text-[13px] leading-relaxed text-white font-medium italic p-3 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/30 shadow-inner">
+              <blockquote className="font-body text-sm sm:text-base leading-relaxed text-white/95 font-medium italic pl-4 border-l border-[#c3a7ff]/50">
                 {currentAdvice.verse}
               </blockquote>
 
               {/* Declaration Pill */}
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-[11px] font-body text-[#e4c5ff]">
+              <div className="flex items-center gap-2 py-2 border-y border-[#c3a7ff]/20 text-[11px] font-body text-[#e4c5ff]">
                 <Zap className="w-3.5 h-3.5 text-[#f4b6ff] flex-shrink-0" />
                 <span className="font-semibold">{currentAdvice.declaration}</span>
               </div>
@@ -529,7 +510,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
                     onClick={handleTriggerPrism}
                     disabled={isSpinningFast}
                     onMouseEnter={() => playCyberHover('crisp')}
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] hover:from-[#c3a7ff] hover:to-[#b01cc6] active:scale-95 text-white font-cyber text-[10px] sm:text-[11px] font-bold uppercase transition-all cursor-pointer shadow-[0_0_15px_rgba(176,28,198,0.5)] border border-[#c3a7ff]/40 min-h-[36px]"
+                    className="event-action inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] hover:from-[#c3a7ff] hover:to-[#b01cc6] active:scale-95 text-white font-cyber text-[10px] sm:text-[11px] font-bold uppercase transition-all cursor-pointer shadow-[0_0_15px_rgba(176,28,198,0.5)] border border-[#c3a7ff]/40 min-h-[36px]"
                   >
                     <RotateCcw className="w-3 h-3" />
                     <span>Otro Texto</span>
@@ -538,7 +519,6 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
               </div>
             </div>
           )}
-        </div>
       </div>
     </div>
   );

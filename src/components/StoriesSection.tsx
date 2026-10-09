@@ -21,31 +21,31 @@ export const StoriesSection: React.FC = () => {
   const stories: Story[] = [
     {
       id: '1',
-      title: 'DE VACÍO A PROPÓSITO',
+      title: 'De vacío a propósito',
       description: 'Encontré dirección cuando decidí entregar mi vida a Dios. Hoy vivo con propósito y esperanza.',
       tag: '#IDENTIDAD',
       colorScheme: 'magenta',
-      icon: <ArrowUpRight className="w-6 h-6 text-[#ff007f]" />,
+      icon: <ArrowUpRight className="w-6 h-6 text-[#c4b5fd]" />,
     },
     {
       id: '2',
-      title: 'DE ANSIEDAD A PAZ',
+      title: 'De ansiedad a paz',
       description: 'Dejé de cargar con todo. Su paz cambió mis días y mis decisiones.',
       tag: '#RENOVACIÓN',
       colorScheme: 'cyan',
-      icon: <Layers className="w-6 h-6 text-[#00f0ff]" />,
+      icon: <Layers className="w-6 h-6 text-[#a9dff3]" />,
     },
     {
       id: '3',
-      title: 'DE MIEDO A FE',
+      title: 'De miedo a fe',
       description: 'Decidí confiar y avanzar. Hoy camino con fe, no con temor.',
       tag: '#VALENTÍA',
       colorScheme: 'yellow',
-      icon: <BookmarkCheck className="w-6 h-6 text-[#ffe600]" />,
+      icon: <BookmarkCheck className="w-6 h-6 text-[#d8c5f1]" />,
     },
     {
       id: '4',
-      title: 'DE CAOS A CLARIDAD',
+      title: 'De caos a claridad',
       description: 'Dios renovó mis pensamientos y me dio una visión clara para mi futuro y mi familia.',
       tag: '#TRANSFORMACIÓN',
       colorScheme: 'purple',
@@ -95,14 +95,14 @@ export const StoriesSection: React.FC = () => {
           <div>
             <MetanoiaLogo size="sm" className="mb-3" />
             <div className="mb-2">
-              <span className="font-cyber text-xs tracking-[0.25em] uppercase text-[#ff007f] font-bold">
+              <span className="font-cyber text-xs tracking-[0.25em] uppercase text-[#c4b5fd] font-bold">
                 HISTORIAS REALES
               </span>
             </div>
-            <h2 className="font-cyber-heavy text-3xl xs:text-4xl sm:text-5xl tracking-tight text-white leading-tight select-none">
-              <div>LA MISMA DECISIÓN.</div>
-              <div className="text-[#ffe600] drop-shadow-[0_0_20px_rgba(255,230,0,0.5)]">
-                NUEVAS HISTORIAS.
+            <h2 className="section-heading">
+              <div>La misma decisión.</div>
+              <div className="text-white">
+                Nuevas historias.
               </div>
             </h2>
           </div>
@@ -113,7 +113,7 @@ export const StoriesSection: React.FC = () => {
               onClick={handlePrev}
               onMouseEnter={() => playCyberHover('crisp')}
               aria-label="Historia anterior"
-              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white flex items-center justify-center hover:border-[#ff007f] hover:text-[#ff007f] hover:shadow-[0_0_15px_rgba(255,0,127,0.4)] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px]"
+              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white flex items-center justify-center hover:border-[#c4b5fd] hover:text-[#c4b5fd] hover:shadow-[0_0_15px_rgba(255,0,127,0.4)] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px]"
               id="stories-prev-btn"
             >
               <ChevronLeft className="w-5 h-5" />
@@ -122,7 +122,7 @@ export const StoriesSection: React.FC = () => {
               onClick={handleNext}
               onMouseEnter={() => playCyberHover('crisp')}
               aria-label="Historia siguiente"
-              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white flex items-center justify-center hover:border-[#00f0ff] hover:text-[#00f0ff] hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px]"
+              className="w-12 h-12 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-white flex items-center justify-center hover:border-[#a9dff3] hover:text-[#a9dff3] hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px]"
               id="stories-next-btn"
             >
               <ChevronRight className="w-5 h-5" />
@@ -138,32 +138,32 @@ export const StoriesSection: React.FC = () => {
         >
           {/* Desktop Grid (3 visible cards) / Slider on mobile */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {stories.slice(0, 3).map((story, index) => {
+            {Array.from({ length: 3 }, (_, offset) => stories[(currentIndex + offset) % stories.length]).map((story, index) => {
               const borderStyles = {
-                magenta: 'border-[#ff007f]/30 hover:border-[#ff007f]/80 shadow-[0_0_25px_rgba(255,0,127,0.15)]',
-                cyan: 'border-[#00f0ff]/30 hover:border-[#00f0ff]/80 shadow-[0_0_25px_rgba(0,240,255,0.15)]',
-                yellow: 'border-[#ffe600]/30 hover:border-[#ffe600]/80 shadow-[0_0_25px_rgba(255,230,0,0.15)]',
+                magenta: 'border-[#c4b5fd]/30 hover:border-[#c4b5fd]/80 shadow-[0_0_25px_rgba(255,0,127,0.15)]',
+                cyan: 'border-[#a9dff3]/30 hover:border-[#a9dff3]/80 shadow-[0_0_25px_rgba(0,240,255,0.15)]',
+                yellow: 'border-[#d8c5f1]/30 hover:border-[#d8c5f1]/80 shadow-[0_0_25px_rgba(255,230,0,0.15)]',
                 purple: 'border-[#a855f7]/30 hover:border-[#a855f7]/80 shadow-[0_0_25px_rgba(168,85,247,0.15)]',
               }[story.colorScheme];
 
               const iconBgStyles = {
-                magenta: 'bg-[#ff007f]/15 border-[#ff007f]/40 shadow-[0_0_15px_rgba(255,0,127,0.3)]',
-                cyan: 'bg-[#00f0ff]/15 border-[#00f0ff]/40 shadow-[0_0_15px_rgba(0,240,255,0.3)]',
-                yellow: 'bg-[#ffe600]/15 border-[#ffe600]/40 shadow-[0_0_15px_rgba(255,230,0,0.3)]',
+                magenta: 'bg-[#c4b5fd]/15 border-[#c4b5fd]/40 shadow-[0_0_15px_rgba(255,0,127,0.3)]',
+                cyan: 'bg-[#a9dff3]/15 border-[#a9dff3]/40 shadow-[0_0_15px_rgba(0,240,255,0.3)]',
+                yellow: 'bg-[#d8c5f1]/15 border-[#d8c5f1]/40 shadow-[0_0_15px_rgba(255,230,0,0.3)]',
                 purple: 'bg-[#a855f7]/15 border-[#a855f7]/40 shadow-[0_0_15px_rgba(168,85,247,0.3)]',
               }[story.colorScheme];
 
               const quoteColor = {
-                magenta: 'text-[#ff007f]',
-                cyan: 'text-[#00f0ff]',
-                yellow: 'text-[#ffe600]',
+                magenta: 'text-[#c4b5fd]',
+                cyan: 'text-[#a9dff3]',
+                yellow: 'text-[#d8c5f1]',
                 purple: 'text-[#a855f7]',
               }[story.colorScheme];
 
               const tagStyles = {
-                magenta: 'text-[#ff007f] border-[#ff007f]/40 bg-[#ff007f]/10',
-                cyan: 'text-[#00f0ff] border-[#00f0ff]/40 bg-[#00f0ff]/10',
-                yellow: 'text-[#ffe600] border-[#ffe600]/40 bg-[#ffe600]/10',
+                magenta: 'text-[#c4b5fd] border-[#c4b5fd]/40 bg-[#c4b5fd]/10',
+                cyan: 'text-[#a9dff3] border-[#a9dff3]/40 bg-[#a9dff3]/10',
+                yellow: 'text-[#d8c5f1] border-[#d8c5f1]/40 bg-[#d8c5f1]/10',
                 purple: 'text-[#a855f7] border-[#a855f7]/40 bg-[#a855f7]/10',
               }[story.colorScheme];
 
@@ -171,7 +171,9 @@ export const StoriesSection: React.FC = () => {
                 <div
                   key={story.id}
                   onMouseEnter={() => playCyberHover('subtle')}
-                  className={`rounded-3xl bg-[#140026]/80 backdrop-blur-xl p-7 sm:p-8 border ${borderStyles} transition-all duration-300 flex flex-col justify-between group min-h-[360px] hover:-translate-y-1`}
+                  className={`content-surface story-card p-7 sm:p-8 border ${borderStyles} transition-all duration-300 flex-col justify-between group min-h-[360px] hover:-translate-y-1 ${
+                    index > 0 ? 'hidden md:flex' : 'flex'
+                  }`}
                 >
                   <div>
                     {/* Glowing Circular Icon from image */}
@@ -212,6 +214,21 @@ export const StoriesSection: React.FC = () => {
                 </div>
               );
             })}
+          </div>
+
+          {/* Mobile pagination dots */}
+          <div className="flex md:hidden items-center justify-center gap-2 mt-6">
+            {stories.map((s, idx) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setCurrentIndex(idx)}
+                aria-label={`Ir a historia ${idx + 1}`}
+                className={`h-2 rounded-full transition-all cursor-pointer ${
+                  currentIndex === idx ? 'w-6 bg-[#f0c3ff]' : 'w-2 bg-white/25 hover:bg-white/50'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>

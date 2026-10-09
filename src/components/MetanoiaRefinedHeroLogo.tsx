@@ -8,12 +8,15 @@ export const MetanoiaRefinedHeroLogo: React.FC<MetanoiaRefinedHeroLogoProps> = (
   className = '',
 }) => {
   return (
-    <div className={`relative flex items-center justify-center ${className}`}>
-      {/* Ambient background aura glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#b01cc6]/35 via-[#c3a7ff]/25 to-[#4331ec]/30 rounded-full blur-[65px] pointer-events-none opacity-80 animate-pulse" style={{ animationDuration: '6s' }} />
+    <div className={`hero-logo-stage relative flex items-center justify-center ${className}`}>
+      <div className="hero-logo-halo" aria-hidden="true" />
+      <div className="hero-logo-orbit hero-logo-orbit-primary" aria-hidden="true" />
+      <div className="hero-logo-orbit hero-logo-orbit-secondary" aria-hidden="true" />
+      <span className="hero-logo-star hero-logo-star-one" aria-hidden="true" />
+      <span className="hero-logo-star hero-logo-star-two" aria-hidden="true" />
 
       <svg
-        className="hero-perspective w-full max-w-[580px] sm:max-w-[680px] md:max-w-[750px] h-auto overflow-visible select-none drop-shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-transform duration-100 ease-out"
+        className="hero-perspective hero-logo-mark relative z-10 w-full max-w-[580px] sm:max-w-[680px] md:max-w-[750px] h-auto overflow-visible select-none transition-transform duration-100 ease-out"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="40 20 675 320"
         role="img"

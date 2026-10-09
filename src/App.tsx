@@ -26,7 +26,7 @@ export default function App() {
   }, [isLoaded, profile]);
 
   return (
-    <div className="relative min-h-screen bg-[#170526] text-white selection:bg-[#b01cc6] selection:text-white overflow-x-hidden">
+    <div className="metanoia-site relative min-h-screen bg-[#7022b8] text-white selection:bg-[#b01cc6] selection:text-white overflow-x-hidden">
       {/* Name Onboarding Modal */}
       <OnboardingModal 
         isOpen={showOnboarding} 
@@ -39,7 +39,7 @@ export default function App() {
         onClose={() => setShowPosterModal(false)}
       />
 
-      {/* Interactive Cyber & Particle Canvas Background with Official Flyer Aurora */}
+      {/* Original animated artwork, adapted to desktop and portrait screens */}
       <CyberBackground />
 
       {/* Sticky Glassmorphism Header */}

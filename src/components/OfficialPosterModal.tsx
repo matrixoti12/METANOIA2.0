@@ -55,7 +55,7 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg bg-[#0e0422] rounded-3xl border-2 border-purple-500/60 shadow-[0_0_50px_rgba(168,85,247,0.4)] overflow-hidden flex flex-col max-h-[92vh]"
+        className="content-surface relative w-full max-w-lg overflow-hidden flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header Bar */}
@@ -126,7 +126,7 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
           <button
             onClick={handleDownload}
             onMouseEnter={() => playCyberHover('crisp')}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] hover:from-[#a855f7] hover:to-[#9333ea] text-white font-cyber text-xs font-bold uppercase transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-purple-400 cursor-pointer min-h-[44px]"
+            className="event-action flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#9333ea] to-[#7b2cbf] hover:from-[#a855f7] hover:to-[#9333ea] text-white font-cyber text-xs font-bold uppercase transition-all shadow-[0_0_15px_rgba(168,85,247,0.4)] border border-purple-400 cursor-pointer min-h-[44px]"
           >
             <Download className="w-4 h-4" />
             <span>Descargar Afiche</span>

@@ -27,24 +27,20 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
           exit={{ opacity: 0 }}
           className="fixed inset-0 z-50 flex items-center justify-center bg-[#140026]/95 backdrop-blur-md p-4"
         >
-          <div className="max-w-md w-full bg-[#1c0036] border border-[#00f0ff]/30 p-8 rounded-xl shadow-[0_0_30px_rgba(0,240,255,0.15)] relative overflow-hidden">
-            {/* Cyber Accents */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00f0ff] to-[#ff007f]" />
-            <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#ff007f]/10 rounded-full blur-2xl pointer-events-none" />
-            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-[#00f0ff]/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="content-surface max-w-md w-full p-8 relative overflow-hidden">
 
             <div className="text-center mb-8 relative z-10 flex flex-col items-center">
               <MetanoiaLogo size="md" className="mb-4" />
-              <span className="font-mono-cyber text-[#00f0ff] text-xs tracking-[0.3em] uppercase block mb-2 animate-pulse">
-                SYS.INIT // REGISTRO
+              <span className="font-body text-[#c4b5fd] text-sm block mb-2">
+                Bienvenido a Metanoia
               </span>
               <BlurText
-                text="INSERTE SU NOMBRE DE OPERADOR"
+                text="¿Cómo te llamas?"
                 className="text-2xl sm:text-3xl font-cyber-heavy text-white mb-2 justify-center"
                 delay={0.2}
               />
-              <p className="text-sm text-purple-300 font-mono mt-4">
-                Necesitas identificarte para obtener tu boleto virtual y acceder a la red Metanoia.
+              <p className="text-sm text-purple-200 font-body mt-4">
+                Escribe tu nombre para personalizar tu experiencia y tus fotos del evento.
               </p>
             </div>
 
@@ -53,8 +49,10 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="EJ. JUAN PÉREZ"
-                className="w-full bg-[#140026] border-b-2 border-[#00f0ff] text-white p-4 font-mono text-center outline-none focus:border-[#ff007f] transition-colors uppercase tracking-widest placeholder:text-white/20"
+                placeholder="Tu nombre"
+                aria-label="Tu nombre"
+                autoComplete="given-name"
+                className="w-full border text-white p-4 font-body text-center transition-colors placeholder:text-white/40"
                 autoFocus
                 maxLength={25}
               />
@@ -62,9 +60,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
               <button
                 type="submit"
                 disabled={name.trim().length < 2}
-                className="mt-4 bg-gradient-to-r from-[#ff007f] to-[#00f0ff] text-white font-cyber font-bold py-4 rounded-lg tracking-widest uppercase hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,0,127,0.3)]"
+                className="event-action mt-4 bg-gradient-to-r from-[#ff007f] to-[#00f0ff] text-white font-cyber font-bold py-4 rounded-lg tracking-widest uppercase hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,0,127,0.3)]"
               >
-                ENTRAR AL SISTEMA
+                Entrar a Metanoia
               </button>
             </form>
           </div>

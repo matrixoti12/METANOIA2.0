@@ -96,7 +96,7 @@ export const ScrollWorldHud: React.FC<ScrollWorldHudProps> = ({ onOpenPosterModa
         }`}
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}
       >
-        <div className="rounded-2xl p-2 bg-[#170526]/95 backdrop-blur-2xl border border-[#c3a7ff]/30 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(176,28,198,0.3)] flex items-center justify-between gap-1.5">
+        <div className="route-dock rounded-2xl p-2 bg-[#170526]/95 backdrop-blur-2xl border border-[#c3a7ff]/30 shadow-[0_10px_35px_rgba(0,0,0,0.85),0_0_20px_rgba(176,28,198,0.3)] flex items-center justify-between gap-1.5">
           {/* Beat Indicator Badge */}
           <div className="flex items-center gap-1.5 pl-2 pr-2 py-1 rounded-xl bg-[#1e0735]/80 border border-[#c3a7ff]/30 flex-shrink-0">
             <img
@@ -145,7 +145,7 @@ export const ScrollWorldHud: React.FC<ScrollWorldHudProps> = ({ onOpenPosterModa
               onOpenPosterModal();
             }}
             onMouseEnter={() => playCyberHover('crisp')}
-            className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-[10px] font-bold tracking-wider uppercase border border-[#c3a7ff]/50 shadow-[0_0_15px_rgba(176,28,198,0.4)] flex-shrink-0 cursor-pointer min-h-[38px] touch-manipulation active:scale-95"
+            className="event-action flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] hover:from-[#c3a7ff] hover:to-[#b01cc6] text-white font-cyber text-[10px] font-bold tracking-wider uppercase border border-[#c3a7ff]/50 shadow-[0_0_15px_rgba(176,28,198,0.4)] flex-shrink-0 cursor-pointer min-h-[38px] touch-manipulation active:scale-95"
             title="Ver afiche oficial del evento"
           >
             <ImageIcon className="w-3.5 h-3.5 text-[#f4b6ff]" />

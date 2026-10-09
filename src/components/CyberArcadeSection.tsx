@@ -5,7 +5,6 @@ import {
   Flame,
   RotateCcw,
   Sparkles,
-  Shield,
   HelpCircle,
   Timer,
   CheckCircle2,
@@ -18,7 +17,6 @@ import {
   Check,
   Grid,
   Lightbulb,
-  Award,
   Music,
 } from 'lucide-react';
 import {
@@ -626,23 +624,21 @@ export const CyberArcadeSection: React.FC = () => {
     <section id="minijuegos" className="relative py-20 px-3.5 sm:px-8 max-w-7xl mx-auto z-20">
       
       {/* Resplandores cósmicos de fondo */}
-      <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#b01cc6]/15 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#730bb3]/20 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Encabezado de la Sección */}
       <div className="text-center max-w-3xl mx-auto mb-10">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
+        <div className="info-tag inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
           <Gamepad2 className="w-4 h-4 text-[#f4b6ff]" />
-          <span>CYBER ARCADE • RELOAD ESPIRITUAL</span>
+          <span>Aprende, juega y comparte</span>
         </div>
 
-        <h2 className="font-cyber-heavy text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
-          JUEGOS <span className="text-[#f4b6ff] drop-shadow-[0_0_20px_rgba(244,182,255,0.6)]">METANOIA</span>
+        <h2 className="section-heading mb-4">
+          Juega y descubre
         </h2>
 
         <div className="relative mb-6">
           <div className="absolute inset-0 bg-gradient-to-r from-[#b01cc6]/10 via-[#730bb3]/20 to-[#b01cc6]/10 blur-xl rounded-2xl"></div>
-          <div className="relative p-4 sm:p-5 rounded-2xl glass-panel-luminous border border-[#c3a7ff]/30 shadow-[0_0_30px_rgba(115,11,179,0.2)] max-w-2xl mx-auto">
+          <div className="section-description relative max-w-2xl mx-auto">
             <p className="font-body text-sm sm:text-base text-purple-100 leading-relaxed">
               Desbloquea conocimiento bíblico, completa misiones espirituales y agudiza tu entendimiento.
               <span className="text-[#f4b6ff] font-cyber font-bold tracking-wide text-xs sm:text-sm mt-2 block uppercase">
@@ -667,8 +663,8 @@ export const CyberArcadeSection: React.FC = () => {
             onMouseEnter={() => playCyberHover('subtle')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
               activeGame === 'crossword'
-                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
-                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
+                ? 'choice-selected text-white'
+                : 'content-inset border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
             }`}
           >
             <Grid className="w-4 h-4 text-[#f4b6ff]" />
@@ -687,8 +683,8 @@ export const CyberArcadeSection: React.FC = () => {
             onMouseEnter={() => playCyberHover('subtle')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
               activeGame === 'trivia'
-                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
-                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
+                ? 'choice-selected text-white'
+                : 'content-inset border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
             }`}
           >
             <HelpCircle className="w-4 h-4 text-[#c3a7ff]" />
@@ -707,8 +703,8 @@ export const CyberArcadeSection: React.FC = () => {
             onMouseEnter={() => playCyberHover('subtle')}
             className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
               activeGame === 'memory'
-                ? 'bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white shadow-[0_0_22px_rgba(176,28,198,0.6)] border border-[#f4b6ff] scale-[1.02]'
-                : 'glass-card-amethyst border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
+                ? 'choice-selected text-white'
+                : 'content-inset border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
             }`}
           >
             <Brain className="w-4 h-4 text-[#86efac]" />
@@ -722,14 +718,14 @@ export const CyberArcadeSection: React.FC = () => {
       {/* 1. CRUCIGRAMA BÍBLICO // RELOAD                                      */}
       {/* ==================================================================== */}
       {activeGame === 'crossword' && (
-        <div className="max-w-4xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+        <div className="max-w-4xl mx-auto content-surface p-5 sm:p-8 relative overflow-hidden">
           
           <div className="flex flex-col md:flex-row items-start justify-between gap-6">
             
             {/* Tablero 7x7 del Crucigrama */}
             <div className="w-full md:w-auto flex flex-col items-center">
               
-              <div className="inline-flex items-center gap-2 mb-3 text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/30">
+              <div className="info-tag inline-flex items-center gap-2 mb-3 text-xs font-cyber text-[#e4c5ff] bg-[#730bb3]/30 px-3 py-1 rounded-full border border-[#c3a7ff]/30">
                 <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff]" />
                 <span>Pistas cruzadas: Toca una celda o una pista</span>
               </div>
@@ -807,7 +803,7 @@ export const CyberArcadeSection: React.FC = () => {
 
                 <button
                   onClick={handleVerifyCurrentClue}
-                  className="py-2 px-3 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs flex items-center gap-1.5 shadow-[0_0_12px_rgba(176,28,198,0.5)] transition-all cursor-pointer"
+                  className="event-action py-2 px-3 rounded-xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs flex items-center gap-1.5 shadow-[0_0_12px_rgba(176,28,198,0.5)] transition-all cursor-pointer"
                 >
                   <Check className="w-4 h-4 text-white" />
                   <span>Comprobar</span>
@@ -819,7 +815,7 @@ export const CyberArcadeSection: React.FC = () => {
             {/* Pistas Horizontales & Verticales */}
             <div className="w-full md:flex-1 space-y-4">
               
-              <div className="p-4 rounded-2xl glass-card-amethyst border border-[#c3a7ff]/30">
+              <div className="p-4 content-inset">
                 <div className="text-xs font-cyber font-bold text-[#f4b6ff] uppercase tracking-wider mb-2 flex items-center gap-1.5">
                   <Flame className="w-3.5 h-3.5 text-[#f4b6ff]" />
                   <span>PISTA ACTIVA #{activeClue.number} ({activeClue.direction === 'across' ? 'HORIZONTAL' : 'VERTICAL'} • {activeClue.length} LETRAS)</span>
@@ -845,24 +841,24 @@ export const CyberArcadeSection: React.FC = () => {
                       key={clue.number}
                       type="button"
                       onClick={() => handleClueSelect(clue.number)}
-                      className={`w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between gap-2 min-h-[44px] ${
+                      className={`crossword-clue-row w-full p-2.5 rounded-xl border text-left transition-all cursor-pointer flex items-start justify-between gap-2 min-h-[44px] ${
                         isSelected
                           ? 'bg-[#730bb3]/40 border-[#f4b6ff] text-white shadow-[0_0_14px_rgba(176,28,198,0.4)]'
                           : 'bg-[#230a42]/50 border-[#c3a7ff]/20 text-purple-200 hover:text-white hover:border-[#c3a7ff]/50'
                       }`}
                     >
-                      <div className="flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-lg bg-[#b01cc6]/30 border border-[#c3a7ff]/30 text-center font-cyber text-xs font-bold text-[#f4b6ff] flex items-center justify-center">
+                      <div className="crossword-clue-main min-w-0 flex flex-1 items-start gap-2">
+                        <span className="info-tag w-5 h-5 rounded-lg bg-[#b01cc6]/30 border border-[#c3a7ff]/30 text-center font-cyber text-xs font-bold text-[#f4b6ff] flex items-center justify-center">
                           {clue.number}
                         </span>
-                        <span className="font-cyber text-xs font-bold uppercase">
+                        <span className="crossword-clue-direction shrink-0 font-cyber text-xs font-bold uppercase">
                           {clue.direction === 'across' ? 'Horiz.' : 'Vert.'} ({clue.length} l.)
                         </span>
-                        <span className="font-body text-xs text-purple-200/90 truncate max-w-[180px] sm:max-w-xs">
+                        <span className="crossword-clue-hint min-w-0 flex-1 font-body text-xs text-purple-200/90">
                           {clue.hint}
                         </span>
                       </div>
-                      <span className="text-[10px] font-cyber text-[#c3a7ff] shrink-0 font-bold">
+                      <span className="crossword-clue-reference max-w-[34%] shrink-0 text-right text-[10px] font-cyber text-[#c3a7ff] font-bold">
                         {clue.reference}
                       </span>
                     </button>
@@ -918,7 +914,7 @@ export const CyberArcadeSection: React.FC = () => {
 
                 <button
                   onClick={handleResetCrossword}
-                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[46px]"
+                  className="event-action px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[46px]"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>JUGAR DE NUEVO</span>
@@ -934,7 +930,7 @@ export const CyberArcadeSection: React.FC = () => {
       {/* 2. TRIVIA DE LA FE (PREGUNTAS BÍBLICAS)                              */}
       {/* ==================================================================== */}
       {activeGame === 'trivia' && (
-        <div className="max-w-3xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+        <div className="trivia-panel max-w-3xl mx-auto content-surface p-5 sm:p-8 relative overflow-hidden">
           
           {triviaStep === 'idle' && (
             <div className="text-center py-6 sm:py-8">
@@ -949,7 +945,7 @@ export const CyberArcadeSection: React.FC = () => {
                 10 preguntas sobre la renovación de la mente, el lema RELOAD, Pablo Rosales y la verdad de la Palabra. ¡15 segundos por pregunta!
               </p>
 
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#e4c5ff] mb-6">
+              <div className="info-tag inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#e4c5ff] mb-6">
                 <Trophy className="w-4 h-4 text-[#f4b6ff]" />
                 <span>RÉCORD PERSONAL: {triviaHighScore} PTS</span>
               </div>
@@ -957,7 +953,7 @@ export const CyberArcadeSection: React.FC = () => {
               <div>
                 <button
                   onClick={startTrivia}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
+                  className="event-action px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
                 >
                   <Play className="w-4 h-4 fill-white" />
                   <span>INICIAR PREGUNTAS</span>
@@ -968,7 +964,7 @@ export const CyberArcadeSection: React.FC = () => {
 
           {triviaStep === 'playing' && (
             <div>
-              <div className="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-[#c3a7ff]/20 text-xs font-cyber">
+              <div className="trivia-status flex items-center justify-between gap-2 pb-4 mb-5 border-b border-[#c3a7ff]/20 text-xs font-cyber">
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-1 rounded-xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-[#e4c5ff] font-bold">
                     PREGUNTA {currentQuestionIndex + 1}/{TRIVIA_QUESTIONS.length}
@@ -1004,7 +1000,7 @@ export const CyberArcadeSection: React.FC = () => {
                 <span className="text-[10px] font-cyber text-[#c3a7ff] uppercase tracking-wider block mb-1 font-bold">
                   REFERENCIA: {question.scripture}
                 </span>
-                <h4 className="font-body text-base sm:text-xl font-bold text-white leading-snug">
+                <h4 className="trivia-question-title font-body text-base sm:text-xl font-bold text-white leading-snug">
                   {question.question}
                 </h4>
               </div>
@@ -1032,7 +1028,7 @@ export const CyberArcadeSection: React.FC = () => {
                       onMouseEnter={() => !isAnswerRevealed && playCyberHover('crisp')}
                       className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left font-body text-xs sm:text-sm transition-all flex items-center justify-between gap-3 cursor-pointer touch-manipulation min-h-[48px] ${btnStyle}`}
                     >
-                      <span className="font-medium">{option}</span>
+                      <span className="trivia-option-label font-medium">{option}</span>
                       {isAnswerRevealed && idx === question.correctIndex && (
                         <CheckCircle2 className="w-5 h-5 text-[#86efac] flex-shrink-0" />
                       )}
@@ -1045,7 +1041,7 @@ export const CyberArcadeSection: React.FC = () => {
               </div>
 
               {isAnswerRevealed && (
-                <div className="p-4 rounded-2xl bg-[#170526]/80 border border-[#c3a7ff]/30 mb-5 text-xs sm:text-sm text-purple-200 font-body">
+                <div className="trivia-explanation content-inset p-4 mb-5 text-xs sm:text-sm text-purple-200 font-body">
                   <strong className="text-[#f4b6ff] font-semibold">Explicación Bíblica:</strong> {question.explanation}
                 </div>
               )}
@@ -1054,7 +1050,7 @@ export const CyberArcadeSection: React.FC = () => {
                 <div className="flex justify-end">
                   <button
                     onClick={handleNextQuestion}
-                    className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer min-h-[44px]"
+                    className="event-action px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer min-h-[44px]"
                   >
                     {currentQuestionIndex + 1 < TRIVIA_QUESTIONS.length ? 'SIGUIENTE PREGUNTA →' : 'VER RESULTADOS'}
                   </button>
@@ -1077,7 +1073,7 @@ export const CyberArcadeSection: React.FC = () => {
                 {score} <span className="text-base text-[#f4b6ff]">PUNTOS</span>
               </h3>
 
-              <div className="my-5 p-4 rounded-2xl glass-card-amethyst border border-[#c3a7ff]/30 max-w-md mx-auto">
+              <div className="my-5 p-4 content-inset max-w-md mx-auto">
                 <span className="text-[10px] font-cyber text-[#c3a7ff] uppercase tracking-wider block mb-1">
                   DISCERNIMIENTO BÍBLICO
                 </span>
@@ -1102,7 +1098,7 @@ export const CyberArcadeSection: React.FC = () => {
 
                 <button
                   onClick={startTrivia}
-                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  className="event-action px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>JUGAR OTRA VEZ</span>
@@ -1118,7 +1114,7 @@ export const CyberArcadeSection: React.FC = () => {
       {/* 3. MATRIZ DE MEMORIA BÍBLICA (JUEGO DE PAREJAS)                      */}
       {/* ==================================================================== */}
       {activeGame === 'memory' && (
-        <div className="max-w-3xl mx-auto rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 p-5 sm:p-8 shadow-[0_20px_50px_rgba(18,3,30,0.5)] relative overflow-hidden">
+        <div className="max-w-3xl mx-auto content-surface p-5 sm:p-8 relative overflow-hidden">
           
           {memoryStep === 'idle' && (
             <div className="text-center py-6 sm:py-8">
@@ -1133,7 +1129,7 @@ export const CyberArcadeSection: React.FC = () => {
                 Encuentra las 6 parejas de conceptos bíblicos, Pablo Rosales y promesas de Dios en el menor tiempo y movimientos posibles.
               </p>
 
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#86efac] mb-6">
+              <div className="info-tag inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#230a42]/70 border border-[#c3a7ff]/30 text-xs font-cyber text-[#86efac] mb-6">
                 <Trophy className="w-4 h-4 text-[#86efac]" />
                 <span>RÉCORD PERSONAL: {memoryHighScore} PTS</span>
               </div>
@@ -1141,7 +1137,7 @@ export const CyberArcadeSection: React.FC = () => {
               <div>
                 <button
                   onClick={startMemoryGame}
-                  className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
+                  className="event-action px-8 py-3.5 rounded-2xl bg-gradient-to-r from-[#b01cc6] via-[#730bb3] to-[#4331ec] text-white font-cyber text-xs sm:text-sm font-extrabold tracking-wider uppercase shadow-[0_0_25px_rgba(176,28,198,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2.5 mx-auto min-h-[48px]"
                 >
                   <Play className="w-4 h-4 fill-white" />
                   <span>INICIAR PAREJAS</span>
@@ -1235,7 +1231,7 @@ export const CyberArcadeSection: React.FC = () => {
 
                 <button
                   onClick={startMemoryGame}
-                  className="px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
+                  className="event-action px-6 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer flex items-center gap-2 min-h-[44px]"
                 >
                   <RotateCcw className="w-4 h-4" />
                   <span>JUGAR OTRA VEZ</span>

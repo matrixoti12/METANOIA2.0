@@ -5,7 +5,7 @@ import { playCyberClick, playCyberHover } from '../utils/audio';
 
 export const FooterSection: React.FC = () => {
   return (
-    <footer className="relative border-t border-[#c3a7ff]/20 bg-[#170526] text-purple-200 py-8 px-4 sm:px-8">
+    <footer className="site-footer relative border-t border-[#c3a7ff]/20 text-purple-200 py-8 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         {/* Left: Metanoia 2026 Brand */}
         <div>

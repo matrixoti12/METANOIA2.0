@@ -14,13 +14,11 @@ import {
   CheckCircle,
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { useRipple } from '../hooks/useRipple';
 import { playCyberClick, playCyberHover, playNeonChime } from '../utils/audio';
 import { TimelineEvent } from '../types';
 
 export const TimelineSection: React.FC = () => {
   const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.1 });
-  const { triggerRipple, RippleElements } = useRipple('yellow');
   const [expandedId, setExpandedId] = useState<string>('bloque-1');
   const [activeFilter, setActiveFilter] = useState<string>('todos');
 
@@ -110,8 +108,7 @@ export const TimelineSection: React.FC = () => {
       ? events
       : events.filter((e) => e.category === activeFilter);
 
-  const toggleExpand = (id: string, e: React.MouseEvent<HTMLElement>) => {
-    triggerRipple(e);
+  const toggleExpand = (id: string) => {
     if (expandedId === id) {
       setExpandedId('');
       playCyberClick();
@@ -159,8 +156,7 @@ export const TimelineSection: React.FC = () => {
           ].map((tab) => (
             <button
               key={tab.id}
-              onClick={(e) => {
-                triggerRipple(e, '#00f0ff');
+              onClick={() => {
                 setActiveFilter(tab.id);
                 playCyberClick();
               }}
@@ -233,7 +229,7 @@ export const TimelineSection: React.FC = () => {
 
                 {/* Event Card Content */}
                 <div
-                  onClick={(e) => toggleExpand(item.id, e)}
+                  onClick={() => toggleExpand(item.id)}
                   className={`flex-1 rounded-2xl glass-panel p-4 sm:p-6 transition-all duration-300 cursor-pointer text-left relative overflow-hidden ${
                     isExpanded
                       ? `${accentClasses.border} ring-1 ring-white/30`
@@ -241,8 +237,6 @@ export const TimelineSection: React.FC = () => {
                   }`}
                   id={`timeline-card-${item.id}`}
                 >
-                  <RippleElements />
-
                   {/* Top Bar: Time & Tags */}
                   <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                     <div className="flex items-center gap-2">

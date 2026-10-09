@@ -9,7 +9,6 @@ import {
   Share2,
   Sliders,
   RefreshCw,
-  Eye,
   AlertCircle,
   Zap,
   Maximize2,
@@ -959,7 +958,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           await navigator.share({
             files: [file],
             title: 'Mi Foto Metanoia 2026',
-            text: '¡Listos para METANOIA 2.0! 20 de noviembre en Guazapa.',
+            text: '¡Listos para METANOIA 2026! 28 de noviembre en Guazapa.',
           });
         } else {
           // Clipboard fallback
@@ -988,13 +987,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
     <section id="photospot" className="relative py-24 px-4 sm:px-8 max-w-7xl mx-auto z-20">
       {/* Top Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3.5 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
+        <div className="info-tag inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#730bb3]/30 border border-[#c3a7ff]/40 text-[#e4c5ff] text-xs font-cyber tracking-wider uppercase mb-3.5 shadow-[0_0_18px_rgba(195,167,255,0.3)]">
           <Sparkles className="w-3.5 h-3.5 text-[#f4b6ff] animate-pulse" />
-          <span>PHOTO-SPOT • METANOIA 2026 // RELOAD</span>
+          <span>Tu foto de Metanoia 2026</span>
         </div>
 
-        <h2 className="font-cyber-heavy text-4xl xs:text-5xl sm:text-6xl text-white tracking-tight leading-none mb-3">
-          CAPTURA TU <span className="text-[#f4b6ff] drop-shadow-[0_0_20px_rgba(244,182,255,0.6)]">MOMENTO</span>
+        <h2 className="section-heading mb-4">
+          Llévate el recuerdo
         </h2>
 
         <p className="font-body text-sm sm:text-base text-purple-200/85 max-w-xl mx-auto leading-relaxed">
@@ -1006,7 +1005,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Camera / Canvas Viewport (Cols 7) */}
         <div className="lg:col-span-7 flex flex-col items-center">
-          <div className="relative w-full max-w-[520px] aspect-square rounded-3xl glass-panel-luminous border border-[#c3a7ff]/35 shadow-[0_20px_50px_rgba(18,3,30,0.5)] overflow-hidden flex items-center justify-center p-2 group">
+          <div className="relative w-full max-w-[520px] aspect-square content-surface overflow-hidden flex items-center justify-center p-2 group">
             {/* Corner Tech Decals */}
             <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#f4b6ff] z-30 pointer-events-none" />
             <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-[#c3a7ff] z-30 pointer-events-none" />
@@ -1047,11 +1046,11 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                 {/* Realtime HTML Frame Preview Overlay over live camera */}
                 <div className="absolute inset-0 pointer-events-none">
                   <div className="w-full h-full border-2 border-dashed border-[#c3a7ff]/40 rounded-2xl flex flex-col justify-between p-4">
-                    <div className="flex justify-between items-center text-xs font-cyber text-[#e4c5ff] bg-[#170526]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-[#c3a7ff]/30">
+                    <div className="info-tag flex justify-between items-center text-xs font-cyber text-[#e4c5ff] bg-[#170526]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-[#c3a7ff]/30">
                       <span>CÁMARA EN VIVO</span>
                       <span className="font-bold">{selectedFrame.toUpperCase()}</span>
                     </div>
-                    <div className="text-center text-xs font-cyber text-white/90 bg-[#170526]/80 backdrop-blur-md py-1.5 px-3 rounded-xl border border-[#c3a7ff]/30 self-center">
+                    <div className="info-tag text-center text-xs font-cyber text-white/90 bg-[#170526]/80 backdrop-blur-md py-1.5 px-3 rounded-xl border border-[#c3a7ff]/30 self-center">
                       MARCO: {FRAMES.find((f) => f.id === selectedFrame)?.name}
                     </div>
                   </div>
@@ -1086,7 +1085,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                           playCyberClick();
                           startCamera();
                         }}
-                        className="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer"
+                        className="event-action inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer"
                       >
                         <Camera className="w-4 h-4" />
                         <span>Abrir Cámara</span>
@@ -1131,7 +1130,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   onClick={toggleFacingMode}
                   onMouseEnter={() => playCyberHover('subtle')}
                   title="Cambiar cámara"
-                  className="p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-purple-200 hover:text-[#00f0ff] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="p-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-purple-200 hover:text-[#a9dff3] transition-all cursor-pointer focus:outline-none touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
                 >
                   <RefreshCw className="w-5 h-5" />
                 </button>
@@ -1141,7 +1140,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   onClick={initiateCapture}
                   onMouseEnter={() => playCyberHover('crisp')}
                   disabled={countdown !== null}
-                  className="flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#ff007f] via-[#c026d3] to-[#00f0ff] text-white font-cyber text-sm font-extrabold tracking-widest uppercase shadow-[0_0_25px_rgba(255,0,127,0.6)] hover:shadow-[0_0_35px_rgba(255,0,127,0.8)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[48px]"
+                  className="event-action flex-1 py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#c4b5fd] via-[#c026d3] to-[#a9dff3] text-white font-cyber text-sm font-extrabold tracking-widest uppercase shadow-[0_0_25px_rgba(255,0,127,0.6)] hover:shadow-[0_0_35px_rgba(255,0,127,0.8)] active:scale-95 transition-all cursor-pointer flex items-center justify-center gap-2 touch-manipulation min-h-[48px]"
                 >
                   <Camera className="w-5 h-5" />
                   <span>TOMAR FOTO (3s)</span>
@@ -1168,7 +1167,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   onMouseEnter={() => playCyberHover('crisp')}
                   className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-purple-200 hover:text-white text-xs font-cyber tracking-wider uppercase transition-all cursor-pointer touch-manipulation min-h-[44px]"
                 >
-                  <Camera className="w-4 h-4 text-[#00f0ff]" />
+                  <Camera className="w-4 h-4 text-[#a9dff3]" />
                   <span>{capturedImage ? 'Tomar Otra' : 'Abrir Cámara'}</span>
                 </button>
 
@@ -1181,7 +1180,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   onMouseEnter={() => playCyberHover('crisp')}
                   className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-purple-200 hover:text-white text-xs font-cyber tracking-wider uppercase transition-all cursor-pointer touch-manipulation min-h-[44px]"
                 >
-                  <Upload className="w-4 h-4 text-[#ff007f]" />
+                  <Upload className="w-4 h-4 text-[#c4b5fd]" />
                   <span>Subir Foto</span>
                 </button>
 
@@ -1192,7 +1191,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   disabled={!capturedImage || isDownloading}
                   className={`flex-1 flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-cyber text-xs font-bold tracking-wider uppercase transition-all cursor-pointer touch-manipulation min-h-[44px] ${
                     capturedImage
-                      ? 'bg-gradient-to-r from-[#00f0ff] to-[#ff007f] text-white shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] hover:scale-[1.02]'
+                      ? 'bg-gradient-to-r from-[#a9dff3] to-[#c4b5fd] text-white shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] hover:scale-[1.02]'
                       : 'bg-white/5 border border-white/10 text-white/40 cursor-not-allowed'
                   }`}
                 >
@@ -1206,7 +1205,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     onClick={handleShare}
                     onMouseEnter={() => playCyberHover('subtle')}
                     title="Compartir o Copiar"
-                    className="p-3 rounded-xl bg-[#00f0ff]/15 hover:bg-[#00f0ff]/25 border border-[#00f0ff]/40 text-[#00f0ff] hover:text-white transition-all cursor-pointer shadow-[0_0_12px_rgba(0,240,255,0.2)] touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
+                    className="p-3 rounded-xl bg-[#a9dff3]/15 hover:bg-[#a9dff3]/25 border border-[#a9dff3]/40 text-[#a9dff3] hover:text-white transition-all cursor-pointer shadow-[0_0_12px_rgba(0,240,255,0.2)] touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
                   >
                     {isCopied ? <Check className="w-5 h-5 text-green-400" /> : <Share2 className="w-5 h-5" />}
                   </button>
@@ -1219,7 +1218,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         {/* Right Column: Marco & Filter Selectors & Customization (Cols 5) */}
         <div className="lg:col-span-5 flex flex-col gap-6 text-left">
           {/* 1. Custom Name / Squad Input */}
-          <div className="p-5 rounded-2xl bg-[#0e001f]/80 backdrop-blur-xl border border-white/10 shadow-lg">
+          <div className="content-surface p-5">
             <label className="flex items-center justify-between text-xs font-cyber tracking-wider text-purple-200 mb-2 uppercase">
               <span className="flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-[#ffe600]" />
@@ -1233,17 +1232,17 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
               placeholder="Ej. Jonathan • Escuadra Alpha"
               value={customName}
               onChange={(e) => setCustomName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/25 text-sm focus:outline-none focus:border-[#00f0ff] focus:shadow-[0_0_15px_rgba(0,240,255,0.25)] transition-all font-body"
+              className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/15 text-white placeholder:text-white/25 text-sm focus:outline-none focus:border-[#a9dff3] focus:shadow-[0_0_15px_rgba(0,240,255,0.25)] transition-all font-body"
             />
           </div>
 
           {/* 2. Frames Selector */}
-          <div className="p-5 rounded-2xl bg-[#0e001f]/80 backdrop-blur-xl border border-white/10 shadow-lg">
+          <div className="content-surface p-5">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-cyber tracking-wider text-purple-200 uppercase font-bold">
                 Elige tu Estilo de Marco (6)
               </span>
-              <span className="text-[11px] font-mono-cyber text-[#00f0ff]">METANOIA 2026</span>
+              <span className="text-[11px] font-mono-cyber text-[#a9dff3]">METANOIA 2026</span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -1259,7 +1258,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     onMouseEnter={() => playCyberHover('subtle')}
                     className={`relative p-3 rounded-xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[82px] ${
                       isSelected
-                        ? 'bg-white/15 border-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.3)] scale-[1.02]'
+                        ? 'bg-white/15 border-[#a9dff3] shadow-[0_0_15px_rgba(0,240,255,0.3)] scale-[1.02]'
                         : 'bg-white/5 border-white/10 hover:border-white/25 hover:bg-white/8'
                     }`}
                   >
@@ -1289,10 +1288,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           </div>
 
           {/* 3. Photo Filters Selector */}
-          <div className="p-5 rounded-2xl bg-[#0e001f]/80 backdrop-blur-xl border border-white/10 shadow-lg">
+          <div className="content-surface p-5">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-cyber tracking-wider text-purple-200 uppercase font-bold flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5 text-[#ff007f]" />
+                <Sliders className="w-3.5 h-3.5 text-[#c4b5fd]" />
                 <span>Filtro de Foto</span>
               </span>
             </div>
@@ -1309,7 +1308,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     }}
                     className={`py-2 px-2 rounded-lg border text-center text-[11px] font-cyber tracking-wider transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-[#ff007f]/25 border-[#ff007f] text-white shadow-[0_0_10px_rgba(255,0,127,0.35)]'
+                        ? 'bg-[#c4b5fd]/25 border-[#c4b5fd] text-white shadow-[0_0_10px_rgba(255,0,127,0.35)]'
                         : 'bg-white/5 border-white/10 text-purple-300 hover:border-white/20'
                     }`}
                   >
@@ -1321,9 +1320,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           </div>
 
           {/* 4. Streamlined One-Tap Quick Actions Toolbar (Ultra-compact & Mobile-friendly) */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-[#0e001f]/85 backdrop-blur-xl border border-[#00f0ff]/30 shadow-lg">
+          <div className="content-surface p-4 sm:p-5">
             <div className="flex items-center justify-between mb-2.5">
-              <span className="text-xs font-cyber tracking-wider text-[#00f0ff] uppercase font-bold flex items-center gap-1.5">
+              <span className="text-xs font-cyber tracking-wider text-[#a9dff3] uppercase font-bold flex items-center gap-1.5">
                 <Zap className="w-3.5 h-3.5 text-[#ffe600]" />
                 <span>Acciones Rápidas de Encuadre</span>
               </span>
@@ -1345,10 +1344,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                 type="button"
                 onClick={handleQuickFill}
                 onMouseEnter={() => playCyberHover('subtle')}
-                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/15 border border-white/10 hover:border-[#00f0ff]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
+                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#a9dff3]/15 border border-white/10 hover:border-[#a9dff3]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
                 title="Llenar todo el marco con la foto"
               >
-                <Maximize2 className="w-4 h-4 text-[#00f0ff]" />
+                <Maximize2 className="w-4 h-4 text-[#a9dff3]" />
                 <span>Llenar</span>
               </button>
 
@@ -1357,10 +1356,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                 type="button"
                 onClick={handleQuickFit}
                 onMouseEnter={() => playCyberHover('subtle')}
-                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#00f0ff]/15 border border-white/10 hover:border-[#00f0ff]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
+                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#a9dff3]/15 border border-white/10 hover:border-[#a9dff3]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
                 title="Ajustar foto completa dentro del marco"
               >
-                <Minimize2 className="w-4 h-4 text-[#00f0ff]" />
+                <Minimize2 className="w-4 h-4 text-[#a9dff3]" />
                 <span>Ajustar</span>
               </button>
 
@@ -1381,10 +1380,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                 type="button"
                 onClick={handleQuickRotate}
                 onMouseEnter={() => playCyberHover('subtle')}
-                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#ff007f]/15 border border-white/10 hover:border-[#ff007f]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
+                className="py-2 px-1.5 rounded-xl bg-white/5 hover:bg-[#c4b5fd]/15 border border-white/10 hover:border-[#c4b5fd]/40 text-purple-200 hover:text-white flex flex-col items-center justify-center gap-1 cursor-pointer transition-all text-[10px] font-cyber tracking-wider uppercase active:scale-95"
                 title="Girar foto 90 grados"
               >
-                <RotateCcw className="w-4 h-4 text-[#ff007f]" />
+                <RotateCcw className="w-4 h-4 text-[#c4b5fd]" />
                 <span>Girar 90°</span>
               </button>
 
@@ -1454,7 +1453,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                 className="w-full flex items-center justify-between text-[11px] font-mono-cyber text-purple-300 hover:text-white transition-colors cursor-pointer py-1"
               >
                 <span className="flex items-center gap-1.5">
-                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#00f0ff]" />
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-[#a9dff3]" />
                   <span>Ajustes Finos Manuales ({zoom.toFixed(2)}x, {panX}px, {panY}px)</span>
                 </span>
                 {showFineAdjustments ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -1466,7 +1465,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                   <div>
                     <div className="flex justify-between mb-1 text-[10px]">
                       <span className="text-purple-300">ZOOM EXACTO:</span>
-                      <span className="text-[#00f0ff] font-bold">{zoom.toFixed(2)}x</span>
+                      <span className="text-[#a9dff3] font-bold">{zoom.toFixed(2)}x</span>
                     </div>
                     <input
                       type="range"
@@ -1475,7 +1474,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                       step="0.05"
                       value={zoom}
                       onChange={(e) => setZoom(parseFloat(e.target.value))}
-                      className="w-full accent-[#00f0ff] cursor-pointer"
+                      className="w-full accent-[#a9dff3] cursor-pointer"
                     />
                   </div>
 
@@ -1484,7 +1483,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     <div>
                       <div className="flex justify-between mb-1 text-[10px]">
                         <span className="text-purple-300">MOVER X:</span>
-                        <span className="text-[#ff007f]">{panX}px</span>
+                        <span className="text-[#c4b5fd]">{panX}px</span>
                       </div>
                       <input
                         type="range"
@@ -1492,7 +1491,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                         max="160"
                         value={panX}
                         onChange={(e) => setPanX(parseInt(e.target.value))}
-                        className="w-full accent-[#ff007f] cursor-pointer"
+                        className="w-full accent-[#c4b5fd] cursor-pointer"
                       />
                     </div>
                     <div>
@@ -1548,9 +1547,9 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           </div>
 
           {/* 5. Quick Specs & Details */}
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-cyber text-purple-300">
+          <div className="info-tag p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-cyber text-purple-300">
             <span>Resolución: 1080 x 1080 (HD)</span>
-            <span className="text-[#00f0ff] font-bold">28 NOVIEMBRE 2026</span>
+            <span className="text-[#a9dff3] font-bold">28 NOVIEMBRE 2026</span>
           </div>
         </div>
       </div>

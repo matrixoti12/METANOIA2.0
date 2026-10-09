@@ -1,0 +1,184 @@
+/* Shared visual language across information, games, photos and overlays. */
+.metanoia-site {
+  --event-surface: rgba(75, 22, 130, .87);
+  --event-line: rgba(234, 202, 255, .24);
+  --event-muted: #ead5ff;
+  --event-accent: #f0c3ff;
+  isolation: isolate;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  color: #f5f4fc;
+}
+.metanoia-site .font-cyber,
+.metanoia-site .font-mono-cyber { font-family: 'Outfit', sans-serif; letter-spacing: .015em; font-weight: 500; }
+.metanoia-site .font-cyber-heavy,
+.metanoia-site .font-display { font-family: 'Outfit', sans-serif; font-weight: 600; letter-spacing: -.025em; }
+.metanoia-site .section-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.2rem, 4.3vw, 3.7rem);
+  font-weight: 600;
+  line-height: 1.09;
+  letter-spacing: -.035em;
+  color: #f5f4fc;
+  text-wrap: balance;
+}
+.metanoia-site main > section { scroll-margin-top: 90px; }
+.metanoia-site main p.font-body { font-size: clamp(.875rem, 1.15vw, 1rem); line-height: 1.8; }
+.metanoia-site main h3.font-cyber-heavy { line-height: 1.2; text-wrap: balance; }
+.metanoia-site .content-surface {
+  background: linear-gradient(145deg, rgba(122, 44, 179, .84), var(--event-surface) 70%);
+  border: 1px solid var(--event-line);
+  border-radius: 22px;
+  box-shadow: 0 12px 30px -24px rgba(52, 6, 92, .38), inset 0 1px rgba(233, 233, 255, .035);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.metanoia-site .content-inset {
+  background: rgba(228, 170, 255, .12);
+  border: 1px solid rgba(230, 199, 255, .16);
+  border-radius: 12px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.metanoia-site .content-surface .content-inset { background: rgba(95, 22, 147, .24); }
+.metanoia-site .hero-details { padding: clamp(20px, 3vw, 28px); }
+.metanoia-site .event-countdown { padding: clamp(20px, 3vw, 28px); margin-top: 24px; }
+.metanoia-site .event-scripture { border: 0; padding-left: 0; font-size: .94rem; line-height: 1.8; text-shadow: none; }
+.metanoia-site .event-editorial-kicker { font: 500 .8rem/1.5 'Outfit', sans-serif; letter-spacing: 0; text-transform: none; color: var(--event-accent); }
+.metanoia-site .event-facts { gap: 0 20px; border-color: var(--event-line); }
+.metanoia-site .event-fact { border-color: var(--event-line); }
+.metanoia-site .event-fact dt { font: 400 .75rem/1.5 'Outfit', sans-serif; letter-spacing: .01em; text-transform: none; color: var(--event-muted); }
+.metanoia-site .event-fact dd { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 500; }
+.metanoia-site .event-artist { gap: 14px; padding: 0 0 20px; border-color: var(--event-line); }
+.metanoia-site .event-artist > div > span:first-child { font-size: .75rem; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--event-muted); }
+.metanoia-site .event-artist .font-display { font-size: 1.5rem; margin-top: 3px; }
+.metanoia-site .event-date-line { border-color: var(--event-line); }
+.metanoia-site .event-location-line { border-color: var(--event-line); font-size: .7rem; }
+.metanoia-site .event-location-line span { letter-spacing: 0; text-transform: none; font-weight: 500; }
+.metanoia-site .countdown-number { font: 500 clamp(1.6rem, 3.3vw, 2.65rem)/1.15 'Outfit', sans-serif; font-variant-numeric: tabular-nums; letter-spacing: -.045em; }
+.metanoia-site .event-countdown-units { padding-block: 16px 20px; }
+.metanoia-site .event-countdown-units > div > span:last-child { margin-top: 8px; color: var(--event-muted); font-size: .65rem; font-weight: 400; letter-spacing: .1em; }
+.metanoia-site .prism-invitation { font-size: .75rem; letter-spacing: 0; font-weight: 400; text-shadow: none; }
+.metanoia-site .hero-headline { font-weight: 500; letter-spacing: -.02em; text-shadow: none; }
+.metanoia-site .guest-portrait { border-radius: 24px; box-shadow: none; }
+.metanoia-site .guest-caption { background: rgba(100,31,153,.86); border-color: var(--event-line); border-radius: 12px; }
+.metanoia-site .scripture-feature { border-radius: 38px 22px 22px 22px; }
+.metanoia-site .scripture-feature blockquote { font-family: 'Outfit', sans-serif; font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.65; letter-spacing: -.01em; }
+.metanoia-site .scripture-feature cite { text-shadow: none; filter: none; text-transform: none; font-weight: 500; }
+.metanoia-site .section-label { color: var(--event-accent); font-weight: 500; }
+.metanoia-site .salvation-step + .salvation-step { border-top: 1px solid var(--event-line); }
+.metanoia-site .salvation-step > div:first-child { display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; }
+.metanoia-site .salvation-step > div:first-child > div { grid-row: 1 / span 2; font-size: 1.3rem; color: var(--event-accent); }
+.metanoia-site .salvation-step :is(h4, p) { grid-column: 2; }
+.metanoia-site .salvation-step h4 { font-size: 1.05rem; font-weight: 500; }
+.metanoia-site .salvation-step > div:last-child { margin: 10px 0 0 48px; padding: 0; border: 0; }
+.metanoia-site .promise-insight { border-top: 1px solid var(--event-line); padding-top: 18px; }
+.metanoia-site .story-card { min-height: 310px; }
+.metanoia-site .story-card h3 { font-size: 1.2rem; letter-spacing: -.015em; font-weight: 500; }
+.metanoia-site .info-tag {
+  background: rgba(213,151,251,.16);
+  border-color: rgba(234,202,255,.24);
+  border-radius: 8px;
+  box-shadow: none;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: none;
+}
+.metanoia-site .choice-selected { background: #932bd2; border: 1px solid #e2b3ff; border-radius: 12px; box-shadow: none; }
+.metanoia-site .event-action {
+  background: linear-gradient(115deg, #a626cc, #7430d3);
+  border: 1px solid rgba(226,211,255,.28);
+  border-radius: 12px;
+  color: white;
+  box-shadow: none;
+  font-weight: 500;
+  letter-spacing: .02em;
+  text-transform: none;
+  transition: background .2s, border-color .2s, transform 160ms cubic-bezier(.23,1,.32,1);
+}
+.metanoia-site .event-action:active { transform: scale(.98); }
+@media (hover: hover) and (pointer: fine) {
+  .metanoia-site .event-action:hover { background: linear-gradient(115deg, #b63cdb, #8743e4); border-color: #f0c3ff; }
+}
+.metanoia-site :is(button, a, input):focus-visible { outline: 2px solid #f0c3ff; outline-offset: 4px; }
+.metanoia-site input:not([type='range']):not([type='file']) {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  background: rgba(74,20,118,.66);
+  border-color: rgba(234,202,255,.3);
+  border-radius: 10px;
+  color: #f5f4fc;
+}
+.metanoia-site .site-header { background: rgba(89,27,149,.82); backdrop-filter: blur(20px); box-shadow: none; }
+.metanoia-site .site-header nav button { font-size: .82rem; letter-spacing: 0; }
+.metanoia-site .route-dock { background: rgba(99,30,155,.93); border-color: var(--event-line); box-shadow: 0 8px 24px rgba(0,0,0,.22); }
+.metanoia-site .site-footer { background: rgba(84,24,140,.8); padding-bottom: 100px; }
+.metanoia-site .site-footer .font-cyber { letter-spacing: .05em; font-size: .7rem; }
+
+/* Original artwork: full-screen video, without generated floating geometry. */
+.ambient-scene { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; background: linear-gradient(135deg, #7922c8, #b82dd9 48%, #4830bd); contain: strict; }
+.ambient-video, .ambient-poster, .ambient-poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.ambient-video { display: block; transform: translateZ(0); backface-visibility: hidden; will-change: transform; contain: strict; }
+.ambient-poster { display: block; contain: strict; }
+.ambient-vignette { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(67,10,115,.08), rgba(64,10,104,.17)); }
+.metanoia-site .section-heading, .metanoia-site .hero-headline { text-shadow: 0 2px 18px rgba(65,9,103,.55); }
+.metanoia-site .section-description { text-shadow: 0 1px 10px rgba(65,9,103,.7); }
+.metanoia-site .background-playback {
+  position: fixed; right: 18px; bottom: 100px; z-index: 40;
+  display: grid; place-items: center; width: 40px; height: 40px;
+  border: 1px solid rgba(239,210,255,.45); border-radius: 50%;
+  background: rgba(106,34,161,.8); color: white; backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
+}
+.metanoia-site .background-playback:hover {
+  background: rgba(139, 45, 210, 0.95);
+  border-color: #f0c3ff;
+  transform: scale(1.08);
+}
+.metanoia-site .background-playback:active {
+  transform: scale(0.92);
+}
+.metanoia-site .trivia-panel .trivia-question-title,
+.metanoia-site .trivia-panel .trivia-option-label,
+.metanoia-site .trivia-panel .trivia-explanation {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+}
+.metanoia-site .trivia-panel .trivia-question-title { text-wrap: balance; }
+.metanoia-site .trivia-panel .trivia-option-label { flex: 1 1 auto; }
+.metanoia-site .trivia-panel .trivia-status { min-width: 0; flex-wrap: wrap; }
+.metanoia-site .crossword-clue-row { min-width: 0; }
+.metanoia-site .crossword-clue-main,
+.metanoia-site .crossword-clue-hint { min-width: 0; }
+.metanoia-site .crossword-clue-hint {
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+  white-space: normal;
+}
+.metanoia-site .crossword-clue-reference {
+  overflow-wrap: anywhere;
+  white-space: normal;
+  line-height: 1.3;
+}
+@media (max-width: 640px) {
+  /* Lift the portrait artwork so its central form sits behind the hero logo. */
+  .ambient-video,
+  .ambient-poster { transform: translate3d(0, -14%, 0) scale(1.08); }
+  .metanoia-site .section-heading { font-size: clamp(2rem, 8.7vw, 2.7rem); }
+  .metanoia-site .content-surface { border-radius: 18px; }
+  .metanoia-site .content-surface { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .metanoia-site .site-header { backdrop-filter: none; }
+  .metanoia-site .event-countdown { margin-top: 18px; }
+  .metanoia-site .event-date-line { row-gap: 14px; }
+  .metanoia-site .trivia-panel { padding: 18px 16px; }
+  .metanoia-site .trivia-panel .trivia-status { align-items: flex-start; }
+  .metanoia-site .crossword-clue-row { gap: 8px; }
+  .metanoia-site .crossword-clue-direction { max-width: 82px; line-height: 1.25; }
+  .metanoia-site .crossword-clue-reference { max-width: 30%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .metanoia-site .animate-pulse, .metanoia-site .animate-bounce, .metanoia-site .animate-ping { animation: none; }
+}
