@@ -18,6 +18,7 @@ import {
   Grid,
   Lightbulb,
   Music,
+  Search,
 } from 'lucide-react';
 import {
   playCyberClick,
@@ -28,6 +29,7 @@ import {
   playGameCatch,
   playNeonChime,
 } from '../utils/audio';
+import { WordSearchGame } from './WordSearchGame';
 
 /* -------------------------------------------------------------------------- */
 /* TRIVIA QUESTIONS DATA (EXPANDED TO 10 HIGH-IMPACT QUESTIONS)               */
@@ -300,7 +302,7 @@ const MEMORY_DEFINITIONS = [
 ];
 
 export const CyberArcadeSection: React.FC = () => {
-  const [activeGame, setActiveGame] = useState<'crossword' | 'trivia' | 'memory'>('crossword');
+  const [activeGame, setActiveGame] = useState<'crossword' | 'trivia' | 'memory' | 'wordsearch'>('crossword');
 
   /* ------------------------------------------------------------------------ */
   /* CRUCIGRAMA STATE                                                         */
@@ -642,14 +644,14 @@ export const CyberArcadeSection: React.FC = () => {
             <p className="font-body text-sm sm:text-base text-purple-100 leading-relaxed">
               Desbloquea conocimiento bíblico, completa misiones espirituales y agudiza tu entendimiento.
               <span className="text-[#f4b6ff] font-cyber font-bold tracking-wide text-xs sm:text-sm mt-2 block uppercase">
-                Tres experiencias interactivas para prepararte para el 28 de Noviembre
+                Cuatro experiencias interactivas para prepararte para el 28 de Noviembre
               </span>
             </p>
           </div>
         </div>
 
-        {/* Selector de Modo de Juego (Crucigrama, Trivia, Parejas) */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 mt-6 sm:mt-8 max-w-2xl mx-auto">
+        {/* Selector de Modo de Juego */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-6 sm:mt-8 max-w-4xl mx-auto">
           
           {/* Tab 1: Crucigrama */}
           <button
@@ -709,6 +711,26 @@ export const CyberArcadeSection: React.FC = () => {
           >
             <Brain className="w-4 h-4 text-[#86efac]" />
             <span>3. Parejas</span>
+          </button>
+
+          {/* Tab 4: Sopa de letras */}
+          <button
+            onClick={() => {
+              if (activeGame !== 'wordsearch') {
+                playCyberClick();
+                playCyberTransition();
+                setActiveGame('wordsearch');
+              }
+            }}
+            onMouseEnter={() => playCyberHover('subtle')}
+            className={`flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 p-3 rounded-2xl font-cyber text-xs font-bold uppercase tracking-wider transition-all cursor-pointer touch-manipulation min-h-[50px] ${
+              activeGame === 'wordsearch'
+                ? 'choice-selected text-white'
+                : 'content-inset border border-[#c3a7ff]/30 text-purple-200 hover:text-white'
+            }`}
+          >
+            <Search className="w-4 h-4 text-[#f4b6ff]" />
+            <span>4. Sopa</span>
           </button>
 
         </div>
@@ -1242,6 +1264,9 @@ export const CyberArcadeSection: React.FC = () => {
 
         </div>
       )}
+
+      {/* 4. SOPA DE LETRAS: CÓDIGO RELOAD */}
+      {activeGame === 'wordsearch' && <WordSearchGame />}
 
     </section>
   );

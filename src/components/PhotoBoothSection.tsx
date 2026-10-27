@@ -109,6 +109,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   const [selectedFilter, setSelectedFilter] = useState<FilterId>('cyber');
   const [customName, setCustomName] = useState(initialAttendeeName || '');
   const [isCameraActive, setIsCameraActive] = useState(false);
+  const [isCameraStarting, setIsCameraStarting] = useState(false);
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('user');
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -200,6 +201,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const cameraCaptureInputRef = useRef<HTMLInputElement | null>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // Stop camera stream helper
@@ -218,74 +220,87 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   const startCamera = async (mode: 'user' | 'environment' = facingMode) => {
     stopCameraStream();
     setCameraError(null);
+    setIsCameraStarting(true);
     try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        throw new Error('Tu navegador no soporta acceso directo a la cámara.');
+      if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
+        cameraCaptureInputRef.current?.click();
+        setCameraError('Se abrió la cámara del teléfono como alternativa. Si no aparece, revisa el permiso de cámara del navegador.');
+        return;
       }
 
       let stream: MediaStream | null = null;
-      try {
-        // Attempt 1: Standard high-res with ideal facingMode (avoids OverconstrainedError on some devices)
-        stream = await navigator.mediaDevices.getUserMedia({
+      let lastCameraError: unknown = null;
+      const cameraConstraints: MediaStreamConstraints[] = [
+        {
           video: {
             facingMode: { ideal: mode },
             width: { ideal: 1280 },
             height: { ideal: 720 },
           },
           audio: false,
-        });
-      } catch {
+        },
+        { video: { facingMode: { ideal: mode } }, audio: false },
+        { video: true, audio: false },
+      ];
+
+      for (const constraints of cameraConstraints) {
         try {
-          // Attempt 2: Relaxed constraints (crucial for some mobile browsers)
-          stream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: { ideal: mode } },
-            audio: false,
-          });
-        } catch {
-          // Attempt 3: Universal fallback (no facingMode — works on all devices)
-          stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: false,
-          });
+          stream = await navigator.mediaDevices.getUserMedia(constraints);
+          break;
+        } catch (error) {
+          lastCameraError = error;
+          const errorName = error instanceof DOMException ? error.name : '';
+          if (errorName === 'NotAllowedError' || errorName === 'SecurityError') throw error;
         }
       }
 
       if (!stream) {
-        throw new Error('No se pudo inicializar la cámara.');
+        throw lastCameraError || new Error('No se pudo inicializar la cámara.');
       }
 
       mediaStreamRef.current = stream;
       const video = videoRef.current;
-      if (video) {
-        // Clear previous srcObject to avoid stale stream (critical on iOS Safari)
-        video.srcObject = null;
-        video.muted = true;
-        video.playsInline = true;
-        video.autoplay = true;
-        video.srcObject = stream;
-
-        // Wait for loadedmetadata before calling play() — fixes mobile race condition
-        await new Promise<void>((resolve) => {
-          if (video.readyState >= 1) {
-            resolve();
-          } else {
-            video.addEventListener('loadedmetadata', () => resolve(), { once: true });
-          }
-        });
-
-        await video.play().catch(() => {
-          // Autoplay may be blocked; user will see first frame
-        });
+      if (!video) {
+        throw new Error('No se encontró el visor de cámara.');
       }
+
+      // The video element stays mounted even while hidden. This is essential on iOS:
+      // previously the ref did not exist until after the stream had already started.
+      video.srcObject = null;
+      video.muted = true;
+      video.playsInline = true;
+      video.autoplay = true;
+      video.srcObject = stream;
       setIsCameraActive(true);
       setCapturedImage(null);
+
+      await Promise.race([
+        new Promise<void>((resolve) => {
+          if (video.readyState >= 1) resolve();
+          else video.addEventListener('loadedmetadata', () => resolve(), { once: true });
+        }),
+        new Promise<void>((resolve) => window.setTimeout(resolve, 4000)),
+      ]);
+
+      await video.play().catch(() => {
+        setCameraError('Toca el visor una vez si la imagen no comienza automáticamente.');
+      });
     } catch (err: unknown) {
-      const errorMsg =
-        err instanceof Error
-          ? err.message
-          : 'No se pudo acceder a la cámara. Revisa los permisos o sube una foto.';
+      if (mediaStreamRef.current) stopCameraStream();
+      const errorName = err instanceof DOMException ? err.name : '';
+      const errorMsg = errorName === 'NotAllowedError' || errorName === 'SecurityError'
+        ? 'El permiso de cámara está bloqueado. Actívalo en los ajustes del navegador o usa “Cámara del teléfono”.'
+        : errorName === 'NotFoundError' || errorName === 'DevicesNotFoundError'
+        ? 'No se detectó una cámara disponible en este dispositivo.'
+        : errorName === 'NotReadableError' || errorName === 'TrackStartError'
+        ? 'Otra aplicación está usando la cámara. Ciérrala e intenta de nuevo.'
+        : err instanceof Error
+        ? err.message
+        : 'No se pudo acceder a la cámara. Revisa los permisos o sube una foto.';
       setCameraError(errorMsg);
       setIsCameraActive(false);
+    } finally {
+      setIsCameraStarting(false);
     }
   };
 
@@ -361,6 +376,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    e.target.value = '';
     playCyberClick();
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -1026,9 +1042,8 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
               </div>
             )}
 
-            {/* CASE 1: Live Video Camera Stream */}
-            {isCameraActive && (
-              <div className="relative w-full h-full rounded-2xl overflow-hidden">
+            {/* CASE 1: Live Video Camera Stream. Kept mounted for reliable mobile refs. */}
+              <div className={`relative w-full h-full rounded-2xl overflow-hidden ${isCameraActive ? 'block' : 'hidden'}`}>
                 <video
                   ref={videoRef}
                   autoPlay
@@ -1041,6 +1056,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     filter:
                       FILTERS.find((f) => f.id === selectedFilter)?.cssFilter || 'none',
                   }}
+                  onClick={() => videoRef.current?.play().catch(() => {})}
                 />
 
                 {/* Realtime HTML Frame Preview Overlay over live camera */}
@@ -1055,6 +1071,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     </div>
                   </div>
                 </div>
+              </div>
+
+            {isCameraStarting && (
+              <div className="absolute inset-2 z-40 rounded-2xl bg-[#170526]/90 backdrop-blur-md flex flex-col items-center justify-center text-center p-6" role="status" aria-live="polite">
+                <RefreshCw className="w-9 h-9 text-[#f4b6ff] animate-spin mb-3" />
+                <span className="font-cyber text-sm font-bold text-white">Iniciando cámara…</span>
+                <span className="font-body text-xs text-purple-200/80 mt-1">Acepta el permiso cuando aparezca.</span>
               </div>
             )}
 
@@ -1083,12 +1106,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                       <button
                         onClick={() => {
                           playCyberClick();
-                          startCamera();
+                          void startCamera();
                         }}
+                        disabled={isCameraStarting}
                         className="event-action inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-[#b01cc6] to-[#730bb3] text-white font-cyber text-xs font-bold tracking-wider uppercase shadow-[0_0_20px_rgba(176,28,198,0.5)] hover:scale-105 transition-all cursor-pointer"
                       >
                         <Camera className="w-4 h-4" />
-                        <span>Abrir Cámara</span>
+                        <span>{isCameraStarting ? 'Abriendo…' : 'Abrir Cámara'}</span>
                       </button>
 
                       <button
@@ -1101,9 +1125,18 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
                     </div>
 
                     {cameraError && (
-                      <div className="mt-4 flex items-center gap-2 text-xs text-rose-300 bg-rose-950/60 border border-rose-500/30 px-3 py-2 rounded-xl max-w-sm text-left">
-                        <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400" />
-                        <span>{cameraError}</span>
+                      <div className="mt-4 text-xs text-rose-200 bg-rose-950/60 border border-rose-500/30 px-3 py-2.5 rounded-xl max-w-sm text-left">
+                        <div className="flex items-start gap-2">
+                          <AlertCircle className="w-4 h-4 flex-shrink-0 text-rose-400 mt-0.5" />
+                          <span>{cameraError}</span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => cameraCaptureInputRef.current?.click()}
+                          className="mt-2 ml-6 text-white font-cyber font-bold underline underline-offset-4 hover:text-[#f4b6ff] min-h-[32px]"
+                        >
+                          Usar cámara del teléfono
+                        </button>
                       </div>
                     )}
                   </div>
@@ -1119,6 +1152,14 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
               ref={fileInputRef}
               type="file"
               accept="image/*"
+              className="hidden"
+              onChange={handleFileUpload}
+            />
+            <input
+              ref={cameraCaptureInputRef}
+              type="file"
+              accept="image/*"
+              capture={facingMode}
               className="hidden"
               onChange={handleFileUpload}
             />

@@ -59,7 +59,7 @@ export default function App() {
         {/* Sección 2: Propósito & Mensaje Evangelístico con Selector Bíblico de Promesas */}
         <AboutSection userName={profile?.name} />
 
-        {/* Sección 3: Cyber Arcade con 3 Minijuegos Mejorados para Celular (Trivia, Guardián y Memoria) */}
+        {/* Sección 3: Cyber Arcade con 4 minijuegos optimizados para celular */}
         <CyberArcadeSection />
 
         {/* Sección 4: Historias Reales de Transformación Juvenil */}
