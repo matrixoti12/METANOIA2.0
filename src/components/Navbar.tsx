@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
       setScrolled(window.scrollY > 40);
 
       // Detect active section
-      const sections = ['inicio', 'proposito', 'minijuegos', 'photospot'];
+      const sections = ['inicio', 'proposito', 'registro', 'minijuegos', 'photospot'];
       for (const sectionId of sections) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -72,6 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
   const navItems = [
     { id: 'inicio', label: 'Inicio' },
     { id: 'proposito', label: 'Propósito' },
+    { id: 'registro', label: 'Registro & Oración' },
     { id: 'minijuegos', label: 'Juegos' },
     { id: 'photospot', label: 'Fotos' },
   ];

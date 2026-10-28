@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, Lightbulb, Play, RotateCcw, Search, Sparkles, Timer, Trophy } from 'lucide-react';
 import { playCyberClick, playGameCorrect, playGameWrong, playNeonChime } from '../utils/audio';
+import { autoSyncUserScores } from '../services/googleSheets';
 
 type GameStep = 'idle' | 'playing' | 'won';
 
@@ -149,6 +150,7 @@ export const WordSearchGame: React.FC = () => {
         setHighScore(finalScore);
         try {
           localStorage.setItem('metanoia_wordsearch_high', String(finalScore));
+          autoSyncUserScores();
         } catch {
           // The game still works when private browsing blocks storage.
         }

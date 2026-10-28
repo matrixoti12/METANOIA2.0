@@ -30,6 +30,7 @@ import {
   playNeonChime,
 } from '../utils/audio';
 import { WordSearchGame } from './WordSearchGame';
+import { autoSyncUserScores } from '../services/googleSheets';
 
 /* -------------------------------------------------------------------------- */
 /* TRIVIA QUESTIONS DATA (EXPANDED TO 10 HIGH-IMPACT QUESTIONS)               */
@@ -311,6 +312,10 @@ export const CyberArcadeSection: React.FC = () => {
   const [selectedClueNumber, setSelectedClueNumber] = useState<number>(1);
   const [selectedCellKey, setSelectedCellKey] = useState<string>('0-2');
   const [crosswordWon, setCrosswordWon] = useState(false);
+  const [crosswordScore, setCrosswordScore] = useState<number>(0);
+  const [crosswordHighScore, setCrosswordHighScore] = useState<number>(() => {
+    return Number(localStorage.getItem('metanoia_crossword_high') || 0);
+  });
   const [hintsUsed, setHintsUsed] = useState(0);
   const [crosswordErrorKey, setCrosswordErrorKey] = useState<string | null>(null);
 
@@ -382,6 +387,13 @@ export const CyberArcadeSection: React.FC = () => {
       playNeonChime();
       playGameCorrect();
       setCrosswordWon(true);
+      const earned = Math.max(300, 1000 - hintsUsed * 150);
+      setCrosswordScore(earned);
+      if (earned > crosswordHighScore) {
+        setCrosswordHighScore(earned);
+        localStorage.setItem('metanoia_crossword_high', String(earned));
+        autoSyncUserScores();
+      }
     }
   };
 
@@ -424,6 +436,7 @@ export const CyberArcadeSection: React.FC = () => {
     playCyberClick();
     setUserLetters({});
     setCrosswordWon(false);
+    setCrosswordScore(0);
     setHintsUsed(0);
     setSelectedClueNumber(1);
     setSelectedCellKey('0-2');
@@ -490,6 +503,7 @@ export const CyberArcadeSection: React.FC = () => {
       if (newScore > triviaHighScore) {
         setTriviaHighScore(newScore);
         localStorage.setItem('metanoia_trivia_high', String(newScore));
+        autoSyncUserScores();
       }
     } else {
       playGameWrong();
@@ -593,6 +607,7 @@ export const CyberArcadeSection: React.FC = () => {
             if (scoreCalc > memoryHighScore) {
               setMemoryHighScore(scoreCalc);
               localStorage.setItem('metanoia_memory_high', String(scoreCalc));
+              autoSyncUserScores();
             }
           }
         }, 350);
@@ -923,6 +938,13 @@ export const CyberArcadeSection: React.FC = () => {
 
               <p className="font-body text-xs sm:text-sm text-purple-200/90 max-w-md mx-auto mb-6">
                 Has resuelto todos los conceptos clave de Metanoia 2026: RELOAD, MENTE, PABLO, FE y PAZ. ¡Tu entendimiento está alineado a la verdad!
+              </p>
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-[#00f0ff]/15 border border-[#00f0ff]/40 text-[#00f0ff] font-cyber text-sm font-bold mb-6">
+                <Trophy className="w-4 h-4 text-[#ffe600]" />
+                <span>+{crosswordScore} PUNTOS ACUMULADOS</span>
+              </div>
+              <p className="hidden">
               </p>
 
               <div className="flex flex-wrap items-center justify-center gap-3">

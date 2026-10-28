@@ -5,6 +5,11 @@ export interface UserProfile {
   ticketNumber: string;
   points: number;
   redeemedCodes: string[];
+  phone?: string;
+  age?: string;
+  church?: string;
+  isRegistered?: boolean;
+  registeredAt?: string;
 }
 
 export function useUserProfile() {
@@ -55,5 +60,11 @@ export function useUserProfile() {
     return true;
   };
 
-  return { profile, isLoaded, createProfile, addPoints };
+  const updateProfile = (partial: Partial<UserProfile>) => {
+    if (!profile) return;
+    const updated = { ...profile, ...partial };
+    saveProfile(updated);
+  };
+
+  return { profile, isLoaded, createProfile, addPoints, updateProfile };
 }

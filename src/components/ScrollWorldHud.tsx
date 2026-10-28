@@ -5,6 +5,7 @@ import {
   Gamepad2,
   Camera,
   BookOpen,
+  Ticket,
   Image as ImageIcon,
   ChevronUp,
 } from 'lucide-react';
@@ -21,6 +22,7 @@ interface SectionBeat {
 const BEATS: SectionBeat[] = [
   { id: 'inicio', number: '01', label: 'INICIO', icon: Compass, accentColor: '#c084fc' },
   { id: 'proposito', number: '02', label: 'PALABRA', icon: BookOpen, accentColor: '#00f0ff' },
+  { id: 'registro', number: '03', label: 'REGISTRO', icon: Ticket, accentColor: '#f4b6ff' },
   { id: 'minijuegos', number: '03', label: 'ARCADE', icon: Gamepad2, accentColor: '#f472b6' },
   { id: 'historias', number: '04', label: 'HISTORIAS', icon: Sparkles, accentColor: '#ffe600' },
   { id: 'photospot', number: '05', label: 'PHOTO BOOTH', icon: Camera, accentColor: '#00ff9d' },

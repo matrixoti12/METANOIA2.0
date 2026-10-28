@@ -1,7 +1,7 @@
 import React from 'react';
 import { MetanoiaRefinedHeroLogo } from './MetanoiaRefinedHeroLogo';
 import { HeroCrystal3D } from './HeroCrystal3D';
-import { Sparkles, Music, Zap } from 'lucide-react';
+import { Sparkles, Music, Zap, Ticket, HeartHandshake } from 'lucide-react';
 
 interface HeroSectionProps {
   userName?: string;
@@ -127,6 +127,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
                     <dt>Acceso</dt><dd className="text-emerald-300">Entrada libre</dd>
                   </div>
                 </dl>
+
+                {/* Acciones directas de Registro y Petición de Oración */}
+                <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full">
+                  <a
+                    href="#registro"
+                    className="flex-1 py-3 px-4 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#b01cc6] to-[#ff007f] hover:brightness-110 active:scale-95 transition-all text-center shadow-[0_0_20px_rgba(255,0,127,0.4)] flex items-center justify-center gap-2"
+                  >
+                    <Ticket className="w-4 h-4 text-white" />
+                    <span>Registrar Asistencia</span>
+                  </a>
+                  <a
+                    href="#registro"
+                    className="py-3 px-4 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider text-[#e4c5ff] bg-white/10 hover:bg-white/15 border border-[#c3a7ff]/30 active:scale-95 transition-all text-center flex items-center justify-center gap-2"
+                  >
+                    <HeartHandshake className="w-4 h-4 text-[#00f0ff]" />
+                    <span>Petición Incógnita</span>
+                  </a>
+                </div>
               </div>
 
             </div>

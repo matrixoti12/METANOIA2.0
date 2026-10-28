@@ -6,6 +6,7 @@ import { AboutSection } from './components/AboutSection';
 import { CyberArcadeSection } from './components/CyberArcadeSection';
 import { StoriesSection } from './components/StoriesSection';
 import { PhotoBoothSection } from './components/PhotoBoothSection';
+import { RegistrationSection } from './components/RegistrationSection';
 import { FooterSection } from './components/FooterSection';
 import { OnboardingModal } from './components/OnboardingModal';
 import { OfficialPosterModal } from './components/OfficialPosterModal';
@@ -13,7 +14,7 @@ import { ScrollWorldHud } from './components/ScrollWorldHud';
 import { useUserProfile } from './hooks/useUserProfile';
 
 export default function App() {
-  const { profile, isLoaded, createProfile } = useUserProfile();
+  const { profile, isLoaded, createProfile, updateProfile } = useUserProfile();
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showPosterModal, setShowPosterModal] = useState(false);
 
@@ -58,6 +59,12 @@ export default function App() {
 
         {/* Sección 2: Propósito & Mensaje Evangelístico con Selector Bíblico de Promesas */}
         <AboutSection userName={profile?.name} />
+
+        {/* Sección de Registro & Buzón de Oración Conectado a Google Sheets */}
+        <RegistrationSection 
+          userProfile={profile} 
+          onProfileUpdate={updateProfile} 
+        />
 
         {/* Sección 3: Cyber Arcade con 4 minijuegos optimizados para celular */}
         <CyberArcadeSection />
