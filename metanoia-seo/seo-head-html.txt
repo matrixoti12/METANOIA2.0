@@ -1,0 +1,18 @@
+<!-- Coloca estas etiquetas en el <head> del HTML PRINCIPAL. Reemplaza título/description existentes; no los dupliques. -->
+<title>Metanoia 2026 | Iglesia Pacto y Bendición – Guazapa</title>
+<meta name="description" content="Conoce Metanoia 2026, el evento juvenil de Iglesia Pacto y Bendición en Guazapa, El Salvador. Descubre horarios, ubicación y actividades." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://www.metanoiapyb.xyz/" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_SV" />
+<meta property="og:site_name" content="Metanoia | Iglesia Pacto y Bendición" />
+<meta property="og:title" content="Metanoia 2026 | Iglesia Pacto y Bendición" />
+<meta property="og:description" content="Conoce el evento juvenil Metanoia 2026 en Guazapa, El Salvador." />
+<meta property="og:url" content="https://www.metanoiapyb.xyz/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Metanoia 2026 | Iglesia Pacto y Bendición" />
+<meta name="twitter:description" content="Evento juvenil de Iglesia Pacto y Bendición en Guazapa, El Salvador." />
+<!-- OPCIONAL, solo al subir una imagen real, pública y con tamaño recomendado 1200x630: -->
+<!-- <meta property="og:image" content="https://www.metanoiapyb.xyz/metanoia-portada.jpg" /> -->
+<!-- <meta name="twitter:card" content="summary_large_image" /> -->
+<!-- El favicon se agrega al disponer del archivo real: <link rel="icon" href="/favicon.ico" /> -->

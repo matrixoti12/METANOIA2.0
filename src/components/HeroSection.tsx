@@ -38,14 +38,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
 
         {/* ── Subtítulo refinado sin fuentes robóticas ── */}
         <div className="text-center mt-4 sm:mt-6 select-none max-w-2xl mx-auto">
-          <h1 className="sr-only">METANOIA 2026 · RELOAD · Pablo Rosales</h1>
+          <h1 className="sr-only">METANOIA 2026 | Evento Juvenil · Iglesia Pacto y Bendición · Guazapa, El Salvador · Pablo Rosales</h1>
           
           <p className="hero-headline font-display text-xl sm:text-2xl md:text-3xl text-white">
             Una noche de transformación
           </p>
 
           <p className="font-body text-xs sm:text-sm md:text-base tracking-[0.09em] text-[#d9c7ff] font-semibold mt-2">
-            SÁBADO 28 NOVIEMBRE 2026 · 06:00 PM · GUAZAPA
+            SÁBADO 28 NOVIEMBRE 2026 · 06:00 PM · IGLESIA PACTO Y BENDICIÓN, GUAZAPA
           </p>
 
           <p className="text-purple-200/80 text-xs sm:text-sm font-body italic mt-2 max-w-lg mx-auto">
