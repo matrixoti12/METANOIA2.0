@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BlurText } from './BlurText';
 import { MetanoiaLogo } from './MetanoiaLogo';
+import { submitToGoogleSheets, getGameHighScores } from '../services/googleSheets';
 
 interface OnboardingModalProps {
   isOpen: boolean;
@@ -14,7 +15,14 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (name.trim().length > 1) {
-      onComplete(name.trim());
+      const cleanName = name.trim();
+      onComplete(cleanName);
+      const scores = getGameHighScores();
+      submitToGoogleSheets({
+        nombre: cleanName,
+        oracionIncognita: '',
+        puntajeTotal: scores.total,
+      }).catch((err) => console.warn('Error registrando participante:', err));
     }
   };
 

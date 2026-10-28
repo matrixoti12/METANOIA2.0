@@ -19,6 +19,7 @@ import {
   Lightbulb,
   Music,
   Search,
+  CloudUpload,
 } from 'lucide-react';
 import {
   playCyberClick,
@@ -30,7 +31,7 @@ import {
   playNeonChime,
 } from '../utils/audio';
 import { WordSearchGame } from './WordSearchGame';
-import { autoSyncUserScores } from '../services/googleSheets';
+import { autoSyncUserScores, getGameHighScores, submitToGoogleSheets } from '../services/googleSheets';
 
 /* -------------------------------------------------------------------------- */
 /* TRIVIA QUESTIONS DATA (EXPANDED TO 10 HIGH-IMPACT QUESTIONS)               */
@@ -304,6 +305,46 @@ const MEMORY_DEFINITIONS = [
 
 export const CyberArcadeSection: React.FC = () => {
   const [activeGame, setActiveGame] = useState<'crossword' | 'trivia' | 'memory' | 'wordsearch'>('crossword');
+  const [isSavingScore, setIsSavingScore] = useState(false);
+  const [scoreSavedSuccess, setScoreSavedSuccess] = useState(false);
+  const [totalArcadeScore, setTotalArcadeScore] = useState(0);
+  const [playerName, setPlayerName] = useState('');
+
+  useEffect(() => {
+    const updateScores = () => {
+      const scores = getGameHighScores();
+      setTotalArcadeScore(scores.total);
+      try {
+        const saved = localStorage.getItem('metanoia_user_profile');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed.name) setPlayerName(parsed.name);
+        }
+      } catch {}
+    };
+
+    updateScores();
+    const timer = setInterval(updateScores, 2000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleManualSaveScore = async () => {
+    playCyberClick('confirm');
+    setIsSavingScore(true);
+    const scores = getGameHighScores();
+    const name = playerName || 'Participante';
+
+    await submitToGoogleSheets({
+      nombre: name,
+      oracionIncognita: '',
+      puntajeTotal: scores.total,
+    });
+
+    playNeonChime();
+    setIsSavingScore(false);
+    setScoreSavedSuccess(true);
+    setTimeout(() => setScoreSavedSuccess(false), 3000);
+  };
 
   /* ------------------------------------------------------------------------ */
   /* CRUCIGRAMA STATE                                                         */
@@ -746,8 +787,54 @@ export const CyberArcadeSection: React.FC = () => {
           >
             <Search className="w-4 h-4 text-[#f4b6ff]" />
             <span>4. Sopa</span>
-          </button>
 
+          </button>
+        </div>
+
+        {/* BANNER DE PUNTAJE TOTAL Y GUARDAR EN GOOGLE SHEETS */}
+        <div className="mt-6 max-w-4xl mx-auto p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-[#1f0336]/90 via-[#280544]/90 to-[#120023]/90 border border-[#00f0ff]/40 shadow-[0_0_25px_rgba(0,240,255,0.2)] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3 text-center sm:text-left">
+            <div className="w-11 h-11 rounded-xl bg-[#00f0ff]/15 border border-[#00f0ff]/40 flex items-center justify-center text-[#00f0ff] shrink-0">
+              <Trophy className="w-6 h-6 text-[#ffe600]" />
+            </div>
+            <div>
+              <div className="flex items-center justify-center sm:justify-start gap-2">
+                <span className="font-cyber text-xs tracking-wider uppercase text-purple-200">
+                  {playerName ? `JUGADOR: ${playerName}` : 'PUNTAJE ACUMULADO'}
+                </span>
+                <span className="text-[10px] font-cyber bg-[#ff007f]/20 text-[#f4b6ff] border border-[#ff007f]/40 px-2 py-0.5 rounded-full font-bold">
+                  4 MINIJUEGOS
+                </span>
+              </div>
+              <div className="text-xl sm:text-2xl font-cyber-heavy text-white flex items-center justify-center sm:justify-start gap-2">
+                <span className="text-[#00f0ff] font-mono">{totalArcadeScore}</span>
+                <span className="text-xs font-cyber text-purple-300">PUNTOS TOTALES</span>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleManualSaveScore}
+            disabled={isSavingScore}
+            className="w-full sm:w-auto px-6 py-3 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#b01cc6] to-[#00f0ff] hover:opacity-95 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,240,255,0.4)] flex items-center justify-center gap-2 cursor-pointer shrink-0 disabled:opacity-50"
+          >
+            {isSavingScore ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Guardando...</span>
+              </>
+            ) : scoreSavedSuccess ? (
+              <>
+                <CheckCircle2 className="w-4 h-4 text-[#00ff9d]" />
+                <span>¡Puntaje Guardado en Google Sheets!</span>
+              </>
+            ) : (
+              <>
+                <CloudUpload className="w-4 h-4 text-[#00f0ff]" />
+                <span>Guardar Puntaje en Google Sheets</span>
+              </>
+            )}
+          </button>
         </div>
       </div>
 

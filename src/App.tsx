@@ -6,7 +6,7 @@ import { AboutSection } from './components/AboutSection';
 import { CyberArcadeSection } from './components/CyberArcadeSection';
 import { StoriesSection } from './components/StoriesSection';
 import { PhotoBoothSection } from './components/PhotoBoothSection';
-import { RegistrationSection } from './components/RegistrationSection';
+import { AnonymousPrayerSection } from './components/AnonymousPrayerSection';
 import { FooterSection } from './components/FooterSection';
 import { OnboardingModal } from './components/OnboardingModal';
 import { OfficialPosterModal } from './components/OfficialPosterModal';
@@ -60,11 +60,8 @@ export default function App() {
         {/* Sección 2: Propósito & Mensaje Evangelístico con Selector Bíblico de Promesas */}
         <AboutSection userName={profile?.name} />
 
-        {/* Sección de Registro & Buzón de Oración Conectado a Google Sheets */}
-        <RegistrationSection 
-          userProfile={profile} 
-          onProfileUpdate={updateProfile} 
-        />
+        {/* Sección de Oración Incógnita (100% Anónima) */}
+        <AnonymousPrayerSection />
 
         {/* Sección 3: Cyber Arcade con 4 minijuegos optimizados para celular */}
         <CyberArcadeSection />

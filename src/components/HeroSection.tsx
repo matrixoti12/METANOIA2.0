@@ -128,21 +128,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
                   </div>
                 </dl>
 
-                {/* Acciones directas de Registro y Petición de Oración */}
+                {/* Acciones directas hacia Oración Incógnita y Juegos */}
                 <div className="mt-6 flex flex-col sm:flex-row gap-2.5 w-full">
                   <a
-                    href="#registro"
+                    href="#oracion"
                     className="flex-1 py-3 px-4 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider text-white bg-gradient-to-r from-[#b01cc6] to-[#ff007f] hover:brightness-110 active:scale-95 transition-all text-center shadow-[0_0_20px_rgba(255,0,127,0.4)] flex items-center justify-center gap-2"
                   >
-                    <Ticket className="w-4 h-4 text-white" />
-                    <span>Registrar Asistencia</span>
+                    <HeartHandshake className="w-4 h-4 text-white" />
+                    <span>Dejar Oración Incógnita</span>
                   </a>
                   <a
-                    href="#registro"
+                    href="#minijuegos"
                     className="py-3 px-4 rounded-xl font-cyber text-xs font-bold uppercase tracking-wider text-[#e4c5ff] bg-white/10 hover:bg-white/15 border border-[#c3a7ff]/30 active:scale-95 transition-all text-center flex items-center justify-center gap-2"
                   >
-                    <HeartHandshake className="w-4 h-4 text-[#00f0ff]" />
-                    <span>Petición Incógnita</span>
+                    <Zap className="w-4 h-4 text-[#00f0ff]" />
+                    <span>Juegos Arcade</span>
                   </a>
                 </div>
               </div>
