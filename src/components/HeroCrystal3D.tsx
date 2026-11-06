@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import eventData from '../data/eventData.json';
 import {
   Sparkles,
   RotateCcw,
@@ -79,8 +80,8 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
   const [isSpinningFast, setIsSpinningFast] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  // Official Event Target: November 28, 2026 at 6:00 PM (18:00)
-  const targetDate = new Date('2026-11-28T18:00:00').getTime();
+  // Official Event Target: November 21, 2026 at 6:00 PM (18:00)
+  const targetDate = new Date(eventData.event.date).getTime();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -153,7 +154,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
 
   const handleCopyVerse = () => {
     playCyberClick();
-    const textToCopy = `«${currentAdvice.verse}» — ${currentAdvice.reference}\n✨ Declaración: ${currentAdvice.declaration}\n🔥 METANOIA 2026 • 28 de Noviembre | Iglepacben AD Guazapa`;
+    const textToCopy = `«${currentAdvice.verse}» — ${currentAdvice.reference}\n✨ Declaración: ${currentAdvice.declaration}\n🔥 METANOIA 2026 • 21 de Noviembre | Iglepacben AD Guazapa`;
     navigator.clipboard.writeText(textToCopy);
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
@@ -166,12 +167,17 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let inView = true;
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobile = window.matchMedia('(pointer: coarse), (max-width: 860px)').matches;
+    let dpr = 1;
     let angle = 0;
     let mouseX = 0;
     let mouseY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
+      if (!inView || motionPreference.matches) return;
       const rect = canvas.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -179,22 +185,11 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
       mouseY = y * 0.4;
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        const x = (touch.clientX - rect.left) / rect.width - 0.5;
-        const y = (touch.clientY - rect.top) / rect.height - 0.5;
-        mouseX = x * 0.5;
-        mouseY = y * 0.5;
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    // Native touch scrolling needs no per-move layout reads for a decorative prism.
+    canvas.addEventListener('mousemove', handleMouseMove);
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1 : 2);
       const rect = canvas.getBoundingClientRect();
       canvas.width = (rect.width || 360) * dpr;
       canvas.height = (rect.height || 360) * dpr;
@@ -225,7 +220,8 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
     ];
 
     const render = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      animationFrameId = 0;
+      if (!inView || document.hidden) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const cx = canvas.width / 2;
@@ -235,7 +231,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
       if (rotationSpeedRef.current > 0.015) {
         rotationSpeedRef.current *= 0.965;
       }
-      angle += rotationSpeedRef.current;
+      if (!motionPreference.matches) angle += rotationSpeedRef.current;
 
       const rotY = angle + mouseX * 2.2;
       const rotX = Math.sin(angle * 0.7) * 0.22 + mouseY * 2.0;
@@ -298,7 +294,7 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
         ctx.strokeStyle = face.stroke;
         ctx.lineWidth = 2 * dpr;
         ctx.shadowColor = face.glow;
-        ctx.shadowBlur = 16 * dpr;
+        ctx.shadowBlur = (mobile ? 6 : 16) * dpr;
         ctx.stroke();
 
         // Facet reflection edge
@@ -316,23 +312,36 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
         ctx.save();
         ctx.fillStyle = idx === 0 ? '#00f0ff' : '#c084fc';
         ctx.shadowColor = idx === 0 ? '#00f0ff' : '#a855f7';
-        ctx.shadowBlur = 10 * dpr;
+        ctx.shadowBlur = (mobile ? 4 : 10) * dpr;
         ctx.beginPath();
         ctx.arc(p.x, p.y, (idx === 0 ? 3.5 : 2.5) * dpr, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       });
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!motionPreference.matches) animationFrameId = requestAnimationFrame(render);
     };
 
-    render();
+    const syncAnimation = () => {
+      cancelAnimationFrame(animationFrameId);
+      render();
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      syncAnimation();
+    }, { rootMargin: '100px' });
+    observer.observe(canvas);
+    document.addEventListener('visibilitychange', syncAnimation);
+    motionPreference.addEventListener('change', syncAnimation);
+    syncAnimation();
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', syncAnimation);
+      motionPreference.removeEventListener('change', syncAnimation);
     };
   }, []);
 
@@ -396,11 +405,11 @@ export const HeroCrystal3D: React.FC<{ className?: string }> = ({ className = ''
                 </div>
               </div>
 
-              {/* Middle Bar: Official Date Pill (28 | NOVIEMBRE | 06:00PM) */}
+              {/* Middle Bar: Official Date Pill (21 | NOVIEMBRE | 06:00PM) */}
               <div className="event-date-line flex flex-wrap items-center justify-between gap-1.5 py-3">
                 <div className="flex items-center gap-2 text-white font-cyber text-xs sm:text-sm tracking-wide">
                   <span className="text-2xl sm:text-3xl text-[#f4b6ff] leading-none font-extrabold">
-                    28
+                    21
                   </span>
                   <span className="text-white/40 font-body">|</span>
                   <span className="text-xs sm:text-sm font-extrabold text-white tracking-wider uppercase">

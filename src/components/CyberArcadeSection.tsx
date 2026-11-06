@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useChapterActivity } from '../hooks/useChapterActivity';
 import {
   Gamepad2,
   Trophy,
@@ -84,7 +85,7 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
   {
     id: 4,
     question: '¿Quién es el invitado especial en la música y la palabra para Metanoia 2026 en Guazapa?',
-    scripture: '28 Noviembre • Guazapa',
+    scripture: '21 Noviembre • Guazapa',
     options: [
       'Pablo Rosales',
       'Marcos Witt',
@@ -92,7 +93,7 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
       'Jesús Adrián Romero',
     ],
     correctIndex: 0,
-    explanation: 'Pablo Rosales ministrará en la alabanza y la predicación este sábado 28 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa.',
+    explanation: 'Pablo Rosales ministrará en la alabanza y la predicación este sábado 21 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa.',
   },
   {
     id: 5,
@@ -160,12 +161,12 @@ const TRIVIA_QUESTIONS: TriviaQuestion[] = [
     scripture: 'Gran Noche de Poder',
     options: [
       '15 de Octubre • 07:00 PM • San Salvador',
-      '28 de Noviembre • 06:00 PM • IGLEPACBEN AD Guazapa',
+      '21 de Noviembre • 06:00 PM • IGLEPACBEN AD Guazapa',
       '10 de Diciembre • 05:00 PM • Santa Ana',
       '31 de Diciembre • 08:00 PM • San Miguel',
     ],
     correctIndex: 1,
-    explanation: '¡Sábado 28 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa! Entrada totalmente libre.',
+    explanation: '¡Sábado 21 de Noviembre a las 6:00 PM en IGLEPACBEN AD Guazapa! Entrada totalmente libre.',
   },
 ];
 
@@ -212,7 +213,7 @@ const CROSSWORD_CLUES: CrosswordClue[] = [
     row: 4,
     col: 1,
     length: 5,
-    hint: 'Ministro de adoración y predicación invitado a Guazapa este 28 de Noviembre.',
+    hint: 'Ministro de adoración y predicación invitado a Guazapa este 21 de Noviembre.',
     reference: 'Invitado Especial',
   },
   {
@@ -300,10 +301,11 @@ const MEMORY_DEFINITIONS = [
   { pairId: 5, label: 'Escudo de Fe', icon: '🛡️', sub: 'Protección' },
   { pairId: 5, label: 'Espada de Dios', icon: '⚔️', sub: 'Palabra Viva' },
   { pairId: 6, label: 'Pablo Rosales', icon: '🎸', sub: 'Alabanza & Palabra' },
-  { pairId: 6, label: '28 Noviembre', icon: '📅', sub: 'Guazapa 2026' },
+  { pairId: 6, label: '21 Noviembre', icon: '📅', sub: 'Guazapa 2026' },
 ];
 
 export const CyberArcadeSection: React.FC = () => {
+  const arcadeActive = useChapterActivity('minijuegos');
   const [activeGame, setActiveGame] = useState<'crossword' | 'trivia' | 'memory' | 'wordsearch'>('crossword');
   const [isSavingScore, setIsSavingScore] = useState(false);
   const [scoreSavedSuccess, setScoreSavedSuccess] = useState(false);
@@ -324,9 +326,10 @@ export const CyberArcadeSection: React.FC = () => {
     };
 
     updateScores();
+    if (!arcadeActive) return;
     const timer = setInterval(updateScores, 2000);
     return () => clearInterval(timer);
-  }, []);
+  }, [arcadeActive]);
 
   const handleManualSaveScore = async () => {
     playCyberClick('confirm');
@@ -501,7 +504,7 @@ export const CyberArcadeSection: React.FC = () => {
   const question = TRIVIA_QUESTIONS[currentQuestionIndex];
 
   useEffect(() => {
-    if (triviaStep !== 'playing' || isAnswerRevealed) return;
+    if (triviaStep !== 'playing' || isAnswerRevealed || !arcadeActive || activeGame !== 'trivia') return;
 
     if (triviaTimeLeft <= 0) {
       handleSelectOption(-1);
@@ -513,7 +516,7 @@ export const CyberArcadeSection: React.FC = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [triviaStep, isAnswerRevealed, triviaTimeLeft]);
+  }, [triviaStep, isAnswerRevealed, triviaTimeLeft, arcadeActive, activeGame]);
 
   const startTrivia = () => {
     playCyberClick();
@@ -602,12 +605,12 @@ export const CyberArcadeSection: React.FC = () => {
   };
 
   useEffect(() => {
-    if (memoryStep !== 'playing') return;
+    if (memoryStep !== 'playing' || !arcadeActive || activeGame !== 'memory') return;
     const interval = setInterval(() => {
       setMemoryTime((t) => t + 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [memoryStep]);
+  }, [memoryStep, arcadeActive, activeGame]);
 
   const handleCardClick = (index: number) => {
     if (isProcessingMatch) return;
@@ -667,7 +670,7 @@ export const CyberArcadeSection: React.FC = () => {
 
   const handleShareScore = (gameName: string, gameScore: number | string) => {
     playCyberClick();
-    const shareText = `🎮 ¡Completé ${gameName} (${gameScore}) en METANOIA 2026 // RELOAD! 🔥\n¿Puedes superarlo? Nos vemos este sábado 28 de Noviembre en IGLEPACBEN AD Guazapa con Pablo Rosales.`;
+    const shareText = `🎮 ¡Completé ${gameName} (${gameScore}) en METANOIA 2026 // RELOAD! 🔥\n¿Puedes superarlo? Nos vemos este sábado 21 de Noviembre en IGLEPACBEN AD Guazapa con Pablo Rosales.`;
 
     if (navigator.share) {
       navigator.share({ title: 'Récord Metanoia 2026', text: shareText, url: window.location.href }).catch(() => {});
@@ -700,7 +703,7 @@ export const CyberArcadeSection: React.FC = () => {
             <p className="font-body text-sm sm:text-base text-purple-100 leading-relaxed">
               Desbloquea conocimiento bíblico, completa misiones espirituales y agudiza tu entendimiento.
               <span className="text-[#f4b6ff] font-cyber font-bold tracking-wide text-xs sm:text-sm mt-2 block uppercase">
-                Cuatro experiencias interactivas para prepararte para el 28 de Noviembre
+                Cuatro experiencias interactivas para prepararte para el 21 de Noviembre
               </span>
             </p>
           </div>

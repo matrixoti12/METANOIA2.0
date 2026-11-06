@@ -10,6 +10,8 @@ import {
   toggleAmbientDrone,
 } from '../utils/audio';
 import { MetanoiaLogo } from './MetanoiaLogo';
+import { WORLD_CHAPTERS } from '../lib/scroll-world/journey';
+import { getWorldProgress, WORLD_PROGRESS_EVENT, type WorldProgress } from '../utils/scrollWorld';
 
 interface NavbarProps {
   activeSection?: string;
@@ -24,24 +26,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
   useEffect(() => {
     const isAudioOn = isSoundEnabled();
     setSoundOn(isAudioOn);
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
-      // Detect active section
-      const sections = ['inicio', 'proposito', 'oracion', 'minijuegos', 'photospot'];
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            setCurrentSection(sectionId);
-            break;
-          }
-        }
-      }
+    const apply = (frame: WorldProgress) => {
+      setScrolled(frame.scrollY > 40);
+      setCurrentSection(WORLD_CHAPTERS[Math.min(5, frame.chapterIndex)].id);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onFrame = (event: Event) => apply((event as CustomEvent<WorldProgress>).detail);
+    apply(getWorldProgress());
+    window.addEventListener(WORLD_PROGRESS_EVENT, onFrame);
+    return () => window.removeEventListener(WORLD_PROGRESS_EVENT, onFrame);
   }, []);
 
   const toggleAudio = () => {
@@ -65,7 +57,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
     if (element) {
       const yOffset = -80;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      const instant = matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 860px)').matches;
+      window.scrollTo({ top: y, behavior: instant ? 'instant' : 'smooth' });
     }
   };
 
@@ -74,6 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection = 'inicio' }) => {
     { id: 'proposito', label: 'Propósito' },
     { id: 'oracion', label: 'Oración' },
     { id: 'minijuegos', label: 'Juegos' },
+    { id: 'testimonios', label: 'Historias' },
     { id: 'photospot', label: 'Fotos' },
   ];
 

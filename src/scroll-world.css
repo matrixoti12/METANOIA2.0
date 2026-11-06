@@ -1,0 +1,122 @@
+/* Scroll World: original artwork, one video, a camera flight through live geometry. */
+.scroll-world { position: relative; height: calc(var(--page-height, 100svh) * 3); isolation: isolate; }
+.world-viewport {
+  position: sticky; top: 0;
+  width: var(--page-width, 100vw); margin-left: calc(50% - var(--page-width, 100vw) / 2);
+  height: var(--page-height, 100svh);
+  overflow: hidden; isolation: isolate;
+}
+.world-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; pointer-events: none; }
+.page-world-scene { position: fixed; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; contain: strict; }
+.page-world-scene .world-canvas { z-index: 1; }
+.world-scene-tint { position: absolute; inset: 0; z-index: 0; opacity: .6; pointer-events: none; }
+.page-world-scene::after { content: ''; position: absolute; inset: 0; z-index: 2; background: #170526; opacity: .22; transition: opacity 180ms ease; }
+.metanoia-site[data-world-chapter='inicio'] .page-world-scene::after { opacity: 0; }
+.world-chapter { position: relative; isolation: isolate; }
+.world-chapter:not(.world-near) *, .world-chapter:not(.world-near) *::before, .world-chapter:not(.world-near) *::after { animation-play-state: paused !important; }
+.world-chapter-gate { position: relative; height: calc(var(--page-height, 100svh) * .55); display: grid; place-items: center; overflow: clip; pointer-events: none; }
+.world-gate-copy { display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; max-width: 1100px; padding-inline: 24px; }
+.world-gate-title { font: 500 clamp(3.2rem, 8vw, 7.5rem)/1 'Outfit', sans-serif; letter-spacing: -.045em; color: #fff; text-shadow: 0 3px 35px #2c095aaa; }
+.world-gate-light { width: 42px; height: 2px; opacity: .7; box-shadow: 0 0 22px currentColor; }
+.world-gate-orbit { position: absolute; width: min(58vw, 580px); aspect-ratio: 1; border: 1px solid; border-radius: 50%; opacity: .12; rotate: -18deg; scale: 1 .42; }
+.world-depth-layer { transition-property: background-color, border-color, color, transform; transition-duration: 160ms; transition-timing-function: ease-out; }
+.world-chapter[data-world-chapter='cierre'] { z-index: 10; }
+.world-chapter[data-world-chapter='cierre'] .world-gate-title { text-wrap: balance; }
+.metanoia-site .site-footer { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
+.world-chapter .content-surface { border-color: color-mix(in srgb, var(--chapter-accent, #eacaff) 24%, transparent); }
+.world-intro {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: max(80px, env(safe-area-inset-top)) 20px 115px;
+  pointer-events: none;
+}
+.world-intro > div { width: 100%; max-width: 1120px; }
+.world-intro .world-brand { padding: 0; }
+.world-logo-image { display: block; width: 100%; max-width: 750px; height: auto; aspect-ratio: 675 / 320; margin-inline: auto; object-fit: contain; }
+.world-intro p { text-shadow: 0 2px 18px #300b56cc; }
+.world-arrival {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 90px 24px 115px;
+  visibility: hidden; opacity: 0;
+}
+.world-arrival-date { font: 500 .85rem/1.5 'Outfit', sans-serif; color: #f2d8ff; margin-bottom: 20px; }
+.world-arrival h2 { font: 600 clamp(2.8rem, 7vw, 6rem)/1.02 'Outfit', sans-serif; letter-spacing: -.045em; text-wrap: balance; text-shadow: 0 4px 40px #40106b88; }
+.world-arrival > p:last-of-type { margin-top: 24px; color: #f0e1ff; font: 400 clamp(.9rem, 1.4vw, 1.1rem)/1.8 'Plus Jakarta Sans', sans-serif; text-shadow: 0 2px 18px #300b56cc; }
+.metanoia-site .world-arrival-link { display: inline-flex; align-items: center; gap: 14px; padding: 14px 22px; margin-top: 30px; min-height: 48px; }
+.world-scroll-hint {
+  position: absolute; bottom: max(120px, calc(13svh + env(safe-area-inset-bottom))); z-index: 3;
+  left: 50%; translate: -50% 0;
+  display: flex; align-items: center; gap: 12px;
+  min-height: 44px; white-space: nowrap; color: #f0e1ff;
+  font: 400 .75rem/1.5 'Outfit', sans-serif; text-shadow: 0 2px 12px #300b56;
+}
+.world-scroll-hint svg { animation: world-scroll-nudge 1.8s ease-in-out 3; }
+.world-journey {
+  position: absolute; left: max(28px, calc((100vw - 1216px) / 2)); bottom: 95px; z-index: 3;
+  display: flex; flex-direction: column; gap: 9px; pointer-events: none;
+  font: 400 .7rem/1.5 'Outfit', sans-serif; color: #f2e6ff; text-shadow: 0 1px 10px #170526;
+}
+.world-journey ol { display: flex; gap: 5px; list-style: none; padding: 0; margin: 0; }
+.world-phase { width: 24px; height: 2px; border-radius: 2px; background: #ead5ff40; transition: background 180ms ease; }
+.world-phase[aria-current='step'] { background: #f6e7ff; box-shadow: 0 0 8px #dfbbff77; }
+.world-phase.is-complete { background: #d4b7f4a6; }
+.world-debug { position: absolute; right: 24px; top: 100px; z-index: 4; font-size: 12px; }
+.world-encounter { scroll-margin-top: 95px; }
+.world-encounter .guest-portrait { transform: perspective(1000px) rotateY(-3deg); transition: transform .35s cubic-bezier(.22,1,.36,1); }
+.metanoia-site .ambient-video, .metanoia-site .ambient-poster { transform: none; }
+@media (hover: hover) and (pointer: fine) {
+  .world-encounter .guest-portrait:hover { transform: perspective(1000px) rotateY(0) translateY(-4px); }
+}
+.route-chapter { position: absolute; bottom: calc(100% + 10px); left: 16px; display: flex; gap: 8px; align-items: center; font: 500 .7rem/1.5 'Outfit', sans-serif; color: #f4e9ff; text-shadow: 0 1px 8px #170526; }
+.route-chapter::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.route-dock .no-scrollbar { scrollbar-width: none; }
+.route-dock .no-scrollbar::-webkit-scrollbar { display: none; }
+@keyframes world-scroll-nudge { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
+@media (max-width: 640px) {
+  .scroll-world { height: calc(var(--page-height, 100svh) * 2.4); }
+  .world-chapter-gate { height: calc(var(--page-height, 100svh) * .42); }
+  .world-gate-title { font-size: clamp(2.7rem, 12vw, 4.4rem); }
+  .world-gate-orbit { width: 80vw; }
+  .metanoia-site .route-dock { padding: 6px; gap: 4px; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .route-dock .route-counter { display: none; }
+  .route-dock .route-scenes { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; min-width: 0; }
+  .route-scenes button { padding: 0; min-width: 0; min-height: 44px; width: 100%; }
+  .route-dock > button:last-child { width: 44px; min-height: 44px; padding: 0; justify-content: center; }
+  .metanoia-site .content-surface { box-shadow: none; }
+  .metanoia-site .background-playback { backdrop-filter: none; width: 44px; height: 44px; }
+  .world-chapter .blur-2xl, .world-chapter .blur-3xl { opacity: .35; animation: none; }
+  .world-chapter [class*="blur-["] { filter: none; opacity: .15; }
+  .world-chapter [class*="backdrop-blur"] { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .world-intro { padding: max(82px, env(safe-area-inset-top)) 20px 140px; }
+  .world-logo-image { max-width: 580px; }
+  .world-journey { left: 24px; bottom: 112px; }
+  .world-journey ol { gap: 4px; }
+  .world-phase { width: 16px; }
+  .world-phase-name { max-width: 120px; font-size: .65rem; }
+  .world-scroll-hint { bottom: 155px; }
+  .world-encounter .guest-portrait { transform: none; }
+}
+@media (max-height: 700px) {
+  .world-intro p.italic { display: none; }
+  .world-intro { padding-block: 82px 125px; }
+  .world-scroll-hint { bottom: 104px; }
+  .world-journey { bottom: 94px; }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .world-intro { padding-block: 70px 90px; }
+  .world-logo-image { max-width: 330px; }
+  .world-intro .hero-kicker { display: none; }
+  .world-scroll-hint { left: auto; right: 28px; translate: 0; bottom: 95px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-world { height: auto; }
+  .world-viewport { position: relative; height: auto; min-height: 90svh; overflow: visible; }
+  .world-intro { position: relative; min-height: 90svh; }
+  .world-canvas, .world-arrival, .world-journey { display: none; }
+  .world-chapter-gate, .page-world-scene { display: none; }
+  .world-depth-layer { opacity: 1 !important; translate: none !important; transition: none; }
+  .world-scroll-hint svg { animation: none; }
+  .world-encounter .guest-portrait { transform: none; }
+}

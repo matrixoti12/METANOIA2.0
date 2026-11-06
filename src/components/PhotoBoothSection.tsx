@@ -590,7 +590,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.font = `700 ${size * 0.028}px 'Outfit', sans-serif`;
         ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.015;
-        ctx.fillText('28 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
+        ctx.fillText('21 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
@@ -661,7 +661,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
         ctx.shadowBlur = 0;
         ctx.fillText(
-          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 28 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
+          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 21 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
           size / 2,
           size - margin * 1.8 + size * 0.092
         );
@@ -713,7 +713,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.textAlign = 'right';
         ctx.fillStyle = '#c3a7ff';
         ctx.font = `800 ${size * 0.024}px 'Outfit', sans-serif`;
-        ctx.fillText('28-NOV-2026', size * 0.9, barY + size * 0.022);
+        ctx.fillText('21-NOV-2026', size * 0.9, barY + size * 0.022);
         ctx.fillStyle = '#f4b6ff';
         ctx.font = `700 ${size * 0.019}px 'Outfit', sans-serif`;
         ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.042);
@@ -784,7 +784,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#c3a7ff';
         ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
-        ctx.fillText('28 NOVIEMBRE • IGLEPACBEN AD GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
+        ctx.fillText('21 NOVIEMBRE • IGLEPACBEN AD GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
@@ -845,7 +845,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#c3a7ff';
         ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
-        ctx.fillText('28 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
+        ctx.fillText('21 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
@@ -923,7 +923,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         ctx.fillStyle = '#C77DFF';
         ctx.font = `600 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('28 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
+        ctx.fillText('21 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
         break;
       }
     }
@@ -974,7 +974,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           await navigator.share({
             files: [file],
             title: 'Mi Foto Metanoia 2026',
-            text: '¡Listos para METANOIA 2026! 28 de noviembre en Guazapa.',
+            text: '¡Listos para METANOIA 2026! 21 de noviembre en Guazapa.',
           });
         } else {
           // Clipboard fallback
@@ -1590,7 +1590,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           {/* 5. Quick Specs & Details */}
           <div className="info-tag p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-xs font-cyber text-purple-300">
             <span>Resolución: 1080 x 1080 (HD)</span>
-            <span className="text-[#a9dff3] font-bold">28 NOVIEMBRE 2026</span>
+            <span className="text-[#a9dff3] font-bold">21 NOVIEMBRE 2026</span>
           </div>
         </div>
       </div>

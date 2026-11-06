@@ -24,7 +24,7 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
 
   const handleShare = () => {
     playCyberClick();
-    const eventDetails = `🔥 ¡METANOIA 2026! Gran Evento Juvenil 🔥\n\n🎤 EN LA MÚSICA Y PALABRA: Pablo Rosales\n📅 FECHA: 28 de Noviembre de 2026\n⏰ HORA: 06:00 PM\n📍 LUGAR: Iglesia Pacto y Bendición (IGLEPACBEN AD), Guazapa\n✨ ENTRADA TOTALMENTE LIBRE\n\n«Transformaos por medio de la renovación de vuestro entendimiento» — Romanos 12:2\n¡No te lo pierdas!`;
+    const eventDetails = `🔥 ¡METANOIA 2026! Gran Evento Juvenil 🔥\n\n🎤 EN LA MÚSICA Y PALABRA: Pablo Rosales\n📅 FECHA: 21 de Noviembre de 2026\n⏰ HORA: 06:00 PM\n📍 LUGAR: Iglesia Pacto y Bendición (IGLEPACBEN AD), Guazapa\n✨ ENTRADA TOTALMENTE LIBRE\n\n«Transformaos por medio de la renovación de vuestro entendimiento» — Romanos 12:2\n¡No te lo pierdas!`;
 
     if (navigator.share) {
       navigator.share({
@@ -42,8 +42,8 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
   const handleDownload = () => {
     playCyberClick();
     const link = document.createElement('a');
-    link.href = '/assets/metanoia-poster-pablo-rosales.jpg';
-    link.download = 'Metanoia-2026-Pablo-Rosales-Oficial.jpg';
+    link.href = '/assets/metanoia-poster-21-noviembre.jpg';
+    link.download = 'Metanoia-21-Noviembre-2026-Pablo-Rosales.jpg';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -95,7 +95,7 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
         <div className="relative overflow-y-auto p-3 sm:p-4 flex-1 flex flex-col items-center">
           <div className="relative rounded-2xl overflow-hidden border border-purple-500/40 shadow-2xl group w-full max-w-[400px]">
             <img
-              src="/assets/metanoia-poster-pablo-rosales.jpg"
+              src="/assets/metanoia-poster-21-noviembre.jpg"
               alt="Afiche Oficial Metanoia 2026 con Pablo Rosales"
               className="w-full h-auto object-cover rounded-2xl transition-transform duration-300 group-hover:scale-[1.02]"
             />
@@ -106,7 +106,7 @@ export const OfficialPosterModal: React.FC<OfficialPosterModalProps> = ({ isOpen
           <div className="w-full max-w-[400px] mt-3 p-3 rounded-2xl bg-[#140632]/90 border border-purple-500/30 text-xs font-mono-cyber space-y-2">
             <div className="flex items-center justify-between text-white font-cyber font-bold">
               <span className="flex items-center gap-1.5 text-[#00f0ff]">
-                <Calendar className="w-3.5 h-3.5" /> 28 NOVIEMBRE 2026
+                <Calendar className="w-3.5 h-3.5" /> 21 NOVIEMBRE 2026
               </span>
               <span className="text-[#c084fc]">06:00 PM</span>
             </div>

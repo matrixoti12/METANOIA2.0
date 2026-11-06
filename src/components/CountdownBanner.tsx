@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Clock, MapPin, Sparkles } from 'lucide-react';
+import eventData from '../data/eventData.json';
 
 export const CountdownBanner: React.FC = () => {
-  // Target: November 28, 2026 at 18:00 (6:00 PM)
-  const targetDate = new Date('2026-11-28T18:00:00').getTime();
+  // Target: November 21, 2026 at 18:00 (6:00 PM)
+  const targetDate = new Date(eventData.event.date).getTime();
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -49,7 +50,7 @@ export const CountdownBanner: React.FC = () => {
             <span className="tracking-wider uppercase text-[11px] sm:text-xs">Tiempo hacia el Evento</span>
           </div>
           <span className="text-[10px] sm:text-xs text-[#00f0ff] font-mono-cyber font-bold tracking-wider">
-            28 NOV 2026 • 06:00 PM
+            21 NOV 2026 • 06:00 PM
           </span>
         </div>
 

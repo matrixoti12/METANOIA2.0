@@ -1,6 +1,6 @@
 import React from 'react';
-import { MetanoiaRefinedHeroLogo } from './MetanoiaRefinedHeroLogo';
 import { HeroCrystal3D } from './HeroCrystal3D';
+import { MetanoiaScrollWorld } from './MetanoiaScrollWorld';
 import { Sparkles, Music, Zap, Ticket, HeartHandshake } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -8,14 +8,16 @@ interface HeroSectionProps {
   onOpenPosterModal?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ userName, onOpenPosterModal }) => {
   return (
-    <section id="inicio" className="relative pt-20 sm:pt-24 pb-16 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden">
+    <section id="inicio" className="relative pb-16 px-4 sm:px-8 max-w-7xl mx-auto">
+      <h1 className="sr-only">METANOIA 2026 | Evento Juvenil · Iglesia Pacto y Bendición · Guazapa, El Salvador · Pablo Rosales</h1>
       
       {/* ════════════════════════════════════════════════════════════════════
           1. LA PORTADA (LOGO REFINADO INTERACTIVO + TEMA "RELOAD")
           ════════════════════════════════════════════════════════════════════ */}
-      <div className="min-h-[66vh] sm:min-h-[76vh] flex flex-col items-center justify-center text-center relative z-10 py-4 sm:py-6">
+      <MetanoiaScrollWorld>
+      <div className="flex flex-col items-center justify-center text-center relative z-10 py-4 sm:py-6">
         
         {/* Lema y Palabra del Año: RELOAD */}
         <div className="hero-kicker mb-3 inline-flex items-center gap-2 px-4 py-1.5 rounded-full">
@@ -32,20 +34,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
         </div>
 
         {/* ── EL LOGO OFICIAL REFINADO COMO PORTADA ── */}
-        <div className="w-full max-w-4xl mx-auto px-2">
-          <MetanoiaRefinedHeroLogo />
+        <div className="world-brand w-full max-w-4xl mx-auto px-2">
+          <img data-world-logo className="world-logo-image" src="/assets/metanoia-logo-refinado.svg"
+            alt="Metanoia 2026 · Logo oficial" width="675" height="320" fetchPriority="high" />
         </div>
 
         {/* ── Subtítulo refinado sin fuentes robóticas ── */}
-        <div className="text-center mt-4 sm:mt-6 select-none max-w-2xl mx-auto">
-          <h1 className="sr-only">METANOIA 2026 | Evento Juvenil · Iglesia Pacto y Bendición · Guazapa, El Salvador · Pablo Rosales</h1>
+        <div className="world-intro-copy text-center mt-4 sm:mt-6 select-none max-w-2xl mx-auto">
           
           <p className="hero-headline font-display text-xl sm:text-2xl md:text-3xl text-white">
             Una noche de transformación
           </p>
 
           <p className="font-body text-xs sm:text-sm md:text-base tracking-[0.09em] text-[#d9c7ff] font-semibold mt-2">
-            SÁBADO 28 NOVIEMBRE 2026 · 06:00 PM · IGLESIA PACTO Y BENDICIÓN, GUAZAPA
+            SÁBADO 21 NOVIEMBRE 2026 · 06:00 PM · IGLESIA PACTO Y BENDICIÓN, GUAZAPA
           </p>
 
           <p className="text-purple-200/80 text-xs sm:text-sm font-body italic mt-2 max-w-lg mx-auto">
@@ -53,18 +55,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
           </p>
         </div>
 
-        {/* Indicador suave que une la portada con el invitado y el icosaedro */}
-        <div className="mt-8 flex flex-col items-center justify-center select-none opacity-80">
-          <div className="w-5 h-7 rounded-full border-2 border-[#c3a7ff]/50 flex items-start justify-center p-1 shadow-[0_0_12px_rgba(195,167,255,0.3)]">
-            <span className="w-1 h-2 rounded-full bg-[#c3a7ff] animate-bounce" />
-          </div>
-        </div>
       </div>
+      </MetanoiaScrollWorld>
 
       {/* ════════════════════════════════════════════════════════════════════
           2. IMAGEN PURA DEL INVITADO (SIN RECUADROS RÍGIDOS) + ICOSAEDRO 3D
           ════════════════════════════════════════════════════════════════════ */}
-      <div className="relative z-10 pt-4 pb-12 max-w-6xl mx-auto">
+      <div id="encuentro" className="world-encounter relative z-10 pt-4 pb-12 max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Columna Izquierda (Cols 6): Imagen Pura de Pablo Rosales + Info Bíblica Luminous */}
@@ -77,9 +74,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
               <div className="absolute -inset-6 bg-gradient-to-tr from-[#b01cc6]/40 via-[#c3a7ff]/30 to-[#4331ec]/40 rounded-full blur-[70px] pointer-events-none opacity-80 animate-pulse" />
 
               {/* Imagen pura con silueta orgánica y desvanecimiento suave */}
-              <div className="guest-portrait relative w-full aspect-[4/4.2] overflow-hidden group">
+              <button type="button" onClick={onOpenPosterModal} aria-label="Ver afiche oficial del 21 de noviembre" className="guest-portrait relative w-full aspect-[4/4.2] overflow-hidden group text-left cursor-zoom-in">
                 <img
-                  src="/assets/metanoia-poster-pablo-rosales.jpg"
+                  src="/assets/metanoia-poster-21-noviembre.jpg"
                   alt="Pablo Rosales • Ministro de la Música y la Palabra en Metanoia 2026 RELOAD"
                   className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
                 />
@@ -99,7 +96,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
                     EN VIVO 2026
                   </span>
                 </div>
-              </div>
+              </button>
 
               {/* Ficha descriptiva pura y luminosa */}
               <div className="content-surface hero-details mt-6 w-full text-left">
@@ -115,7 +112,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ userName }) => {
 
                 <dl className="event-facts mt-6 grid grid-cols-2 gap-x-5 text-left">
                   <div className="event-fact py-3.5">
-                    <dt>Fecha</dt><dd>28 noviembre 2026</dd>
+                    <dt>Fecha</dt><dd>21 noviembre 2026</dd>
                   </div>
                   <div className="event-fact py-3.5">
                     <dt>Hora</dt><dd className="text-[#f4b6ff]">06:00 PM</dd>

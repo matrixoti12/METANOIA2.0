@@ -206,7 +206,7 @@ export const MetanoiaGsap3DTitle: React.FC = () => {
             alt="Emblema Metanoia"
             className="w-3.5 h-3.5 object-contain filter drop-shadow-[0_0_6px_#C77DFF]"
           />
-          <span className="font-mono-cyber">NOCHE DE TRANSFORMACIÓN • 28 NOVIEMBRE 2026 • 06:00 PM</span>
+          <span className="font-mono-cyber">NOCHE DE TRANSFORMACIÓN • 21 NOVIEMBRE 2026 • 06:00 PM</span>
         </div>
       </div>
     </div>

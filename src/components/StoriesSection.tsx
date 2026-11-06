@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { ChevronLeft, ChevronRight, ArrowUpRight, Layers, BookmarkCheck, Compass } from 'lucide-react';
 import { playCyberClick, playCyberHover } from '../utils/audio';
 import { MetanoiaLogo } from './MetanoiaLogo';
@@ -14,7 +13,6 @@ interface Story {
 }
 
 export const StoriesSection: React.FC = () => {
-  const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.1 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
@@ -82,13 +80,10 @@ export const StoriesSection: React.FC = () => {
   return (
     <section
       id="testimonios"
-      ref={sectionRef}
       className="relative py-20 sm:py-28 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden"
     >
       <div
-        className={`transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className="world-stories-content"
       >
         {/* Section Header with Carousel Controls */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">

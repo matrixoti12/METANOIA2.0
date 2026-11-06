@@ -8,7 +8,6 @@ import {
   Sparkles,
   ShieldCheck,
 } from 'lucide-react';
-import { BlurText } from './BlurText';
 import { submitToGoogleSheets } from '../services/googleSheets';
 import { playCyberClick, playNeonChime } from '../utils/audio';
 
@@ -56,10 +55,9 @@ export const AnonymousPrayerSection: React.FC = () => {
           </span>
         </div>
 
-        <BlurText
-          text="¿POR QUÉ QUIERES QUE OREMOS POR VOS?"
-          className="section-heading text-white justify-center text-center text-2xl sm:text-3xl md:text-4xl"
-        />
+        <h2 className="section-heading text-white text-center text-2xl sm:text-3xl md:text-4xl">
+          ¿Por qué quieres que oremos por vos?
+        </h2>
 
         <p className="font-body text-purple-200/90 text-sm sm:text-base max-w-xl mx-auto mt-3">
           Esta oración es <strong className="text-[#00f0ff]">completamente incógnita</strong>. No te pedimos nombre ni ningún dato personal; llega directo al equipo de intercesión para orar en secreto por ti.
@@ -169,3 +167,4 @@ export const AnonymousPrayerSection: React.FC = () => {
     </section>
   );
 };
+

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useScrollReveal } from '../hooks/useScrollReveal';
 import { Sparkles, Heart, CheckCircle2, BookOpen, Zap, RefreshCw } from 'lucide-react';
 import { playCyberClick, playCyberHover, playNeonChime } from '../utils/audio';
 
@@ -66,7 +65,6 @@ interface AboutSectionProps {
 }
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
-  const { ref: sectionRef, isVisible } = useScrollReveal<HTMLElement>({ threshold: 0.1 });
   const [selectedPromise, setSelectedPromise] = useState<BiblicalPromise>(PROMISES[0]);
   const [hasPrayed, setHasPrayed] = useState(false);
 
@@ -84,16 +82,13 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ userName }) => {
   return (
     <section
       id="proposito"
-      ref={sectionRef}
       className="relative py-20 px-4 sm:px-8 max-w-7xl mx-auto overflow-hidden z-20"
     >
       {/* Resplandores cósmicos suaves de fondo */}
 
       {/* Encabezado y Romanos 12:2 */}
       <div
-        className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center transition-all duration-1000 mb-16 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-16"
       >
         {/* Columna Izquierda: Mensaje Central y Lema RELOAD */}
         <div className="lg:col-span-6 flex flex-col justify-center text-left">

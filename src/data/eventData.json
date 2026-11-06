@@ -2,8 +2,8 @@
   "event": {
     "name": "METANOIA 2026",
     "subtitle": "Noche Juvenil de Transformación Espiritual",
-    "date": "2026-11-28T18:00:00",
-    "displayDate": "28 de Noviembre de 2026",
+    "date": "2026-11-21T18:00:00-06:00",
+    "displayDate": "21 de Noviembre de 2026",
     "displayTime": "06:00 PM",
     "location": "IGLEPACBEN AD Guazapa (Iglesia Pacto y Bendición AD)",
     "specialGuest": "Pablo Rosales (En la música y la palabra)",
@@ -49,7 +49,7 @@
   ],
   "secretCodes": {
     "PABLOROSALES": 300,
-    "GUAZAPA28": 200,
+    "GUAZAPA21": 200,
     "METANOIA2026": 250,
     "ROMANOS12": 200,
     "IGLEPACBEN": 150,

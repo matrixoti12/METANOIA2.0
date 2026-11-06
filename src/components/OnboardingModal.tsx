@@ -7,9 +7,10 @@ import { submitToGoogleSheets, getGameHighScores } from '../services/googleSheet
 interface OnboardingModalProps {
   isOpen: boolean;
   onComplete: (name: string) => void;
+  onSkip: () => void;
 }
 
-export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComplete }) => {
+export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComplete, onSkip }) => {
   const [name, setName] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -71,6 +72,9 @@ export const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onComp
                 className="event-action mt-4 bg-gradient-to-r from-[#ff007f] to-[#00f0ff] text-white font-cyber font-bold py-4 rounded-lg tracking-widest uppercase hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_20px_rgba(255,0,127,0.3)]"
               >
                 Entrar a Metanoia
+              </button>
+              <button type="button" onClick={onSkip} className="py-2 text-sm text-purple-100 underline underline-offset-4 hover:text-white">
+                Explorar sin nombre
               </button>
             </form>
           </div>

@@ -27,7 +27,7 @@ const HIDDEN_WORDS: HiddenWord[] = [
   { word: 'GRACIA', clue: 'El regalo inmerecido de Dios.', reference: 'Efesios 2:8', start: { row: 10, col: 0 }, end: { row: 10, col: 5 } },
   { word: 'MENTE', clue: 'Lo que Dios quiere renovar.', reference: 'Romanos 12:2', start: { row: 2, col: 1 }, end: { row: 6, col: 1 } },
   { word: 'CRISTO', clue: 'En Él somos una nueva creación.', reference: '2 Corintios 5:17', start: { row: 11, col: 11 }, end: { row: 6, col: 6 } },
-  { word: 'PABLO', clue: 'Invitado especial de Metanoia 2026.', reference: '28 de noviembre', start: { row: 8, col: 1 }, end: { row: 8, col: 5 } },
+  { word: 'PABLO', clue: 'Invitado especial de Metanoia 2026.', reference: '21 de noviembre', start: { row: 8, col: 1 }, end: { row: 8, col: 5 } },
   { word: 'FE', clue: 'Certeza de lo que se espera.', reference: 'Hebreos 11:1', start: { row: 4, col: 11 }, end: { row: 5, col: 11 } },
   { word: 'PAZ', clue: 'Guarda el corazón y los pensamientos.', reference: 'Filipenses 4:7', start: { row: 9, col: 6 }, end: { row: 7, col: 8 } },
 ];
