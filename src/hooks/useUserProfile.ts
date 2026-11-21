@@ -17,7 +17,7 @@ export function useUserProfile() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('metanoia_user_profile');
+    const saved = localStorage.getItem('metanoia_user_profile_v2');
     if (saved) {
       try {
         setProfile(JSON.parse(saved));
@@ -29,7 +29,7 @@ export function useUserProfile() {
   }, []);
 
   const saveProfile = (newProfile: UserProfile) => {
-    localStorage.setItem('metanoia_user_profile', JSON.stringify(newProfile));
+    localStorage.setItem('metanoia_user_profile_v2', JSON.stringify(newProfile));
     setProfile(newProfile);
   };
 

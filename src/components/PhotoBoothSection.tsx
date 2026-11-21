@@ -28,6 +28,7 @@ import {
   playNeonChime,
 } from '../utils/audio';
 import { MetanoiaLogo } from './MetanoiaLogo';
+import { CameraPermissionGuide } from './CameraPermissionGuide';
 
 export type FrameId = 'neon-prime' | 'romanos-12' | 'squad-pass' | 'holo-crystal' | 'cyberwave' | 'minimal-obsidian';
 export type FilterId = 'normal' | 'cyber' | 'vivid' | 'noir' | 'golden';
@@ -129,6 +130,8 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
   const [isFlipped, setIsFlipped] = useState(false);
   const [isAutoEnhanced, setIsAutoEnhanced] = useState(false);
   const [showFineAdjustments, setShowFineAdjustments] = useState(false);
+  const [showPermissionGuide, setShowPermissionGuide] = useState(false);
+  const [permissionErrorType, setPermissionErrorType] = useState<'NotAllowedError' | 'SecurityError' | 'NotFoundError' | 'NotReadableError' | 'unknown'>('unknown');
 
   useEffect(() => {
     if (initialAttendeeName && !customName) {
@@ -509,24 +512,24 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Violeta outer border
         ctx.strokeStyle = '#7B2FBE';
-        ctx.lineWidth = size * 0.007;
+        ctx.lineWidth = size * 0.012;
         ctx.shadowColor = '#7B2FBE';
-        ctx.shadowBlur = size * 0.025;
+        ctx.shadowBlur = size * 0.035;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Lavanda inner hairline
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.8)';
-        ctx.lineWidth = size * 0.003;
+        ctx.strokeStyle = 'rgba(199, 125, 255, 0.95)';
+        ctx.lineWidth = size * 0.005;
         ctx.shadowColor = '#C77DFF';
-        ctx.shadowBlur = size * 0.015;
+        ctx.shadowBlur = size * 0.02;
         ctx.strokeRect(margin + size * 0.015, margin + size * 0.015, innerSize - size * 0.03, innerSize - size * 0.03);
 
         // Corner Cyber Brackets
         const bracketLen = size * 0.08;
         ctx.strokeStyle = '#C77DFF';
-        ctx.lineWidth = size * 0.008;
+        ctx.lineWidth = size * 0.012;
         ctx.shadowColor = '#C77DFF';
-        ctx.shadowBlur = size * 0.03;
+        ctx.shadowBlur = size * 0.04;
 
         // Top-Left
         ctx.beginPath();
@@ -566,17 +569,17 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Text
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.044}px 'Outfit', 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `800 ${size * 0.048}px 'Outfit', 'Plus Jakarta Sans', sans-serif`;
         ctx.textAlign = 'center';
         ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.015;
-        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.052);
+        ctx.shadowBlur = size * 0.018;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.055);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.019}px 'Outfit', sans-serif`;
+        ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
         ctx.shadowColor = '#b01cc6';
-        ctx.shadowBlur = size * 0.01;
-        ctx.fillText('REINICIA TU MENTE • PABLO ROSALES', size / 2, margin * 0.5 + size * 0.078);
+        ctx.shadowBlur = size * 0.012;
+        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.081);
 
         // Bottom Plaque
         ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
@@ -636,13 +639,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.strokeRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.025}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.035}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('«NO OS CONFORMÉIS A ESTE SIGLO»', size / 2, margin * 0.5 + size * 0.04);
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.045);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
-        ctx.fillText('SINO TRANSFORMAOS • ROMANOS 12:2 // RELOAD', size / 2, margin * 0.5 + size * 0.075);
+        ctx.font = `700 ${size * 0.023}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.078);
 
         // Bottom Footer Banner
         ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
@@ -652,10 +655,10 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
 
         ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.042}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.046}px 'Outfit', sans-serif`;
         ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.02;
-        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, size - margin * 1.8 + size * 0.055);
+        ctx.shadowBlur = size * 0.025;
+        ctx.fillText('METANOIA 2026', size / 2, size - margin * 1.8 + size * 0.062);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
@@ -684,13 +687,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.strokeRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.036}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.04}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA // SQUAD PASS • RELOAD', size / 2, margin * 0.4 + size * 0.045);
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.4 + size * 0.05);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
-        ctx.fillText('ESTADO: MENTE RENOVADA // GUERRERO DE FE', size / 2, margin * 0.4 + size * 0.072);
+        ctx.font = `700 ${size * 0.02}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.4 + size * 0.078);
 
         // Bottom Tactical Barcode & Data
         ctx.fillStyle = 'rgba(23, 5, 38, 0.95)';
@@ -702,21 +705,21 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         // Barcode
         const barX = size * 0.1;
         const barY = size - margin * 2.1 + size * 0.02;
-        const barH = size * 0.045;
+        const barH = size * 0.05;
         ctx.fillStyle = '#ffffff';
         for (let b = 0; b < 45; b++) {
-          const w = b % 4 === 0 ? 4 : b % 2 === 0 ? 2.5 : 1.5;
+          const w = b % 4 === 0 ? 5 : b % 2 === 0 ? 3 : 2;
           ctx.fillRect(barX + b * (size * 0.008), barY, w, barH);
         }
 
         // Tactical Data on the right
         ctx.textAlign = 'right';
         ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.024}px 'Outfit', sans-serif`;
-        ctx.fillText('21-NOV-2026', size * 0.9, barY + size * 0.022);
+        ctx.font = `800 ${size * 0.027}px 'Outfit', sans-serif`;
+        ctx.fillText('21-NOV-2026', size * 0.9, barY + size * 0.025);
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.019}px 'Outfit', sans-serif`;
-        ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.042);
+        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
+        ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.048);
 
         // Custom Name below
         ctx.textAlign = 'center';
@@ -747,33 +750,33 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.stroke();
 
         // HUD Crosshairs
-        ctx.strokeStyle = 'rgba(244, 182, 255, 0.6)';
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = 'rgba(244, 182, 255, 0.8)';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
-        ctx.moveTo(size / 2 - 20, size / 2);
-        ctx.lineTo(size / 2 + 20, size / 2);
-        ctx.moveTo(size / 2, size / 2 - 20);
-        ctx.lineTo(size / 2, size / 2 + 20);
+        ctx.moveTo(size / 2 - 25, size / 2);
+        ctx.lineTo(size / 2 + 25, size / 2);
+        ctx.moveTo(size / 2, size / 2 - 25);
+        ctx.lineTo(size / 2, size / 2 + 25);
         ctx.stroke();
         ctx.restore();
 
         // Top Header
         ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
+        ctx.fillRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.095);
         ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.085);
+        ctx.lineWidth = size * 0.005;
+        ctx.strokeRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.095);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.042}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.046}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
         ctx.shadowColor = '#c3a7ff';
         ctx.shadowBlur = size * 0.02;
-        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.048);
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
-        ctx.fillText('PRISMA DE TRANSFORMACIÓN • PABLO ROSALES', size / 2, margin * 0.5 + size * 0.073);
+        ctx.font = `700 ${size * 0.02}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.078);
 
         // Bottom Footer
         ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
@@ -804,55 +807,55 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         borderGrad.addColorStop(0.5, '#730bb3');
         borderGrad.addColorStop(1, '#b01cc6');
         ctx.strokeStyle = borderGrad;
-        ctx.lineWidth = size * 0.012;
+        ctx.lineWidth = size * 0.015;
         ctx.shadowColor = '#730bb3';
-        ctx.shadowBlur = size * 0.03;
+        ctx.shadowBlur = size * 0.04;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Horizon Grid lines at bottom
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.35)';
-        ctx.lineWidth = 1;
-        for (let i = 1; i <= 6; i++) {
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.5)';
+        ctx.lineWidth = 1.5;
+        for (let i = 1; i <= 8; i++) {
           ctx.beginPath();
-          ctx.moveTo(margin, size - margin - i * (size * 0.02));
-          ctx.lineTo(size - margin, size - margin - i * (size * 0.02));
+          ctx.moveTo(margin, size - margin - i * (size * 0.025));
+          ctx.lineTo(size - margin, size - margin - i * (size * 0.025));
           ctx.stroke();
         }
         ctx.restore();
 
         // Top Banner
         ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
+        ctx.fillRect(size * 0.1, margin * 0.5, size * 0.8, size * 0.1);
         ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.09);
+        ctx.lineWidth = size * 0.005;
+        ctx.strokeRect(size * 0.1, margin * 0.5, size * 0.8, size * 0.1);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.044}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.048}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA 2026 // RELOAD', size / 2, margin * 0.5 + size * 0.052);
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.058);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
-        ctx.fillText('REINICIA TU MENTE // GUAZAPA EN VIVO', size / 2, margin * 0.5 + size * 0.076);
+        ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.085);
 
         // Bottom Banner
         ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
-        ctx.fillRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
+        ctx.fillRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.125);
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.08, size - margin * 1.8, size * 0.84, size * 0.11);
+        ctx.lineWidth = size * 0.005;
+        ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.125);
 
         ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
-        ctx.fillText('21 NOVIEMBRE • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.8 + size * 0.048);
+        ctx.font = `800 ${size * 0.032}px 'Outfit', sans-serif`;
+        ctx.fillText('21 NOVIEMBRE 2026 • GUAZAPA', size / 2, size - margin * 1.8 + size * 0.052);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `600 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
-          attendeeName ? attendeeName.toUpperCase() : 'NOCHE DE ALABANZA Y TRANSFORMACIÓN',
+          attendeeName ? attendeeName.toUpperCase() : 'EXPERIENCIA DE ALABANZA Y TRANSFORMACIÓN',
           size / 2,
-          size - margin * 1.8 + size * 0.082
+          size - margin * 1.8 + size * 0.09
         );
         break;
       }
@@ -860,15 +863,17 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       case 'minimal-obsidian': {
         // High Fashion Cyber Minimalist
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = size * 0.005;
+        ctx.lineWidth = size * 0.008;
+        ctx.shadowColor = '#ffffff';
+        ctx.shadowBlur = size * 0.02;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Lavender Corner Tick Accents
         const tick = size * 0.04;
         ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.006;
+        ctx.lineWidth = size * 0.008;
         ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.015;
+        ctx.shadowBlur = size * 0.025;
 
         // 4 corners
         ctx.beginPath();
@@ -891,39 +896,45 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Top Minimalist Header
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.9)';
-        ctx.fillRect(size * 0.16, margin * 0.45, size * 0.68, size * 0.08);
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(size * 0.16, margin * 0.45, size * 0.68, size * 0.08);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
+        ctx.fillRect(size * 0.14, margin * 0.45, size * 0.72, size * 0.09);
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.6)';
+        ctx.lineWidth = size * 0.003;
+        ctx.strokeRect(size * 0.14, margin * 0.45, size * 0.72, size * 0.09);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.038}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.044}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('M E T A N O I A // R E L O A D', size / 2, margin * 0.45 + size * 0.048);
+        ctx.shadowColor = '#c3a7ff';
+        ctx.shadowBlur = size * 0.015;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.45 + size * 0.053);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.018}px 'Outfit', sans-serif`;
-        ctx.fillText('2 0 2 6 • G U A Z A P A', size / 2, margin * 0.45 + size * 0.07);
+        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
+        ctx.shadowBlur = 0;
+        ctx.fillText('RELOAD', size / 2, margin * 0.45 + size * 0.078);
 
         // Bottom Minimalist Text
         ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(size * 0.1, size - margin * 1.6, size * 0.8, size * 0.09);
+        ctx.fillRect(size * 0.08, size - margin * 1.65, size * 0.84, size * 0.105);
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.6)';
+        ctx.lineWidth = size * 0.003;
+        ctx.strokeRect(size * 0.08, size - margin * 1.65, size * 0.84, size * 0.105);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `700 ${size * 0.024}px 'Chakra Petch', sans-serif`;
+        ctx.font = `700 ${size * 0.028}px 'Chakra Petch', sans-serif`;
+        ctx.shadowColor = '#c3a7ff';
+        ctx.shadowBlur = size * 0.015;
         ctx.fillText(
-          attendeeName ? attendeeName.toUpperCase() : 'UNA MENTE RENOVADA. UN FUTURO TRANSFORMADO.',
+          attendeeName ? attendeeName.toUpperCase() : 'UNA MENTE RENOVADA',
           size / 2,
-          size - margin * 1.6 + size * 0.04
+          size - margin * 1.65 + size * 0.045
         );
 
         ctx.fillStyle = '#C77DFF';
-        ctx.font = `600 ${size * 0.018}px 'Chakra Petch', sans-serif`;
-        ctx.fillText('21 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.6 + size * 0.068);
+        ctx.font = `600 ${size * 0.021}px 'Chakra Petch', sans-serif`;
+        ctx.shadowBlur = 0;
+        ctx.fillText('21 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.65 + size * 0.08);
         break;
       }
     }
@@ -1594,6 +1605,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
           </div>
         </div>
       </div>
+
+      {/* Permission Guide Modal */}
+      <CameraPermissionGuide 
+        isOpen={showPermissionGuide} 
+        onClose={() => setShowPermissionGuide(false)} 
+        errorType={permissionErrorType}
+      />
     </section>
   );
 };

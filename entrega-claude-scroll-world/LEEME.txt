@@ -1,0 +1,36 @@
+METANOIA 2026 — PAQUETE PARA CLAUDE CODE
+=========================================
+
+CONTENIDO
+
+1. PROMPT-CLAUDE-SCROLL-WORLD.md
+   Prompt completo que debes copiar y pegar en Claude Code.
+
+2. assets/metanoia-mobile.mp4
+   Asset principal. La web está enfocada prioritariamente en móviles.
+
+3. assets/metanoia-desktop.mp4
+   Versión horizontal para escritorio y landscape.
+
+4. assets/metanoia-logo-refinado.svg
+   Logo oficial que debe conservarse sin alteraciones.
+
+USO RECOMENDADO
+
+1. Extrae este archivo RAR.
+2. Abre la carpeta extraída como proyecto o adjunta los tres assets a Claude Code.
+3. Abre PROMPT-CLAUDE-SCROLL-WORLD.md.
+4. Copia y pega el prompt completo.
+5. Permite que Claude instale la habilidad oso95/scroll-world.
+6. No apruebes gastos de generación de videos si Claude no explica antes el costo.
+7. Cuando Claude entregue el código, llévalo de regreso al proyecto original para adaptarlo a React + Vite.
+
+RUTAS FINALES EN EL PROYECTO
+
+/assets/backgrounds/metanoia-mobile.mp4
+/assets/backgrounds/metanoia-desktop.mp4
+/assets/metanoia-logo-refinado.svg
+
+PRIORIDAD DE DISEÑO
+
+El logo debe aparecer inmediatamente al abrir la página. La experiencia debe diseñarse primero para móviles de 360–430 px y después adaptarse a escritorio.
