@@ -510,26 +510,29 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, size, size);
 
-        // Violeta outer border
+        // Violeta outer border - MUCHO MÁS GRUESO
         ctx.strokeStyle = '#7B2FBE';
-        ctx.lineWidth = size * 0.012;
+        ctx.lineWidth = size * 0.035;
         ctx.shadowColor = '#7B2FBE';
-        ctx.shadowBlur = size * 0.035;
+        ctx.shadowBlur = size * 0.08;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Lavanda inner hairline
-        ctx.strokeStyle = 'rgba(199, 125, 255, 0.95)';
-        ctx.lineWidth = size * 0.005;
-        ctx.shadowColor = '#C77DFF';
-        ctx.shadowBlur = size * 0.02;
-        ctx.strokeRect(margin + size * 0.015, margin + size * 0.015, innerSize - size * 0.03, innerSize - size * 0.03);
-
-        // Corner Cyber Brackets
-        const bracketLen = size * 0.08;
+        // Lavanda inner glowing border
         ctx.strokeStyle = '#C77DFF';
-        ctx.lineWidth = size * 0.012;
+        ctx.lineWidth = size * 0.018;
         ctx.shadowColor = '#C77DFF';
-        ctx.shadowBlur = size * 0.04;
+        ctx.shadowBlur = size * 0.06;
+        ctx.strokeRect(margin + size * 0.012, margin + size * 0.012, innerSize - size * 0.024, innerSize - size * 0.024);
+
+        // Corner Cyber Brackets - MEGA GRUESOS
+        const bracketLen = size * 0.1;
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.04;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.08;
+        ctx.lineCap = 'round';
 
         // Top-Left
         ctx.beginPath();
@@ -559,66 +562,97 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.lineTo(size - margin + size * 0.01, size - margin - bracketLen);
         ctx.stroke();
 
+        // Logo pequeño en esquinas
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        
+        // Top-Left Logo circle
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Bottom-Right Logo circle
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+
         // Top Banner Plaque
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.095);
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.14, margin * 0.5, size * 0.72, size * 0.095);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.12, margin * 0.4, size * 0.76, size * 0.11);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.04;
+        ctx.strokeRect(size * 0.12, margin * 0.4, size * 0.76, size * 0.11);
 
         // Top Text
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.048}px 'Outfit', 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `900 ${size * 0.056}px 'Outfit', 'Plus Jakarta Sans', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.018;
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.055);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.025;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.4 + size * 0.065);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
+        ctx.font = `700 ${size * 0.027}px 'Outfit', sans-serif`;
         ctx.shadowColor = '#b01cc6';
-        ctx.shadowBlur = size * 0.012;
-        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.081);
+        ctx.shadowBlur = size * 0.015;
+        ctx.fillText('RELOAD', size / 2, margin * 0.4 + size * 0.095);
 
-        // Bottom Plaque
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
-        ctx.fillRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
+        // Bottom Plaque - MUCHO MÁS GRANDE
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.08, size - margin * 1.7, size * 0.84, size * 0.11);
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#b01cc6';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
 
         // Bottom Text: Date & Location
-        ctx.fillStyle = '#c3a7ff';
-        ctx.font = `700 ${size * 0.028}px 'Outfit', sans-serif`;
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.015;
-        ctx.fillText('21 NOVIEMBRE 2026 // GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.7 + size * 0.046);
+        ctx.fillStyle = '#C77DFF';
+        ctx.font = `700 ${size * 0.032}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('21 NOVIEMBRE 2026', size / 2, size - margin * 2.0 + size * 0.045);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `600 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
         ctx.shadowBlur = 0;
+        ctx.fillText('GUAZAPA, EL SALVADOR', size / 2, size - margin * 2.0 + size * 0.075);
+
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.023}px 'Outfit', sans-serif`;
         ctx.fillText(
-          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'UNA DECISIÓN • UNA MENTE RENOVADA EN CRISTO',
+          attendeeName ? `${attendeeName.toUpperCase()}` : 'UNA MENTE RENOVADA EN CRISTO',
           size / 2,
-          size - margin * 1.7 + size * 0.08
+          size - margin * 2.0 + size * 0.115
         );
         break;
       }
 
       case 'romanos-12': {
-        // Romanos 12:2 Transformación Frame
+        // Romanos 12:2 Transformación Frame - BORDES GRUESOS
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.01;
+        ctx.lineWidth = size * 0.032;
         ctx.shadowColor = '#b01cc6';
-        ctx.shadowBlur = size * 0.03;
+        ctx.shadowBlur = size * 0.08;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Corner Diamonds
-        const dSize = size * 0.025;
-        ctx.fillStyle = '#c3a7ff';
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.02;
+        // Inner glow
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.016;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.06;
+        ctx.strokeRect(margin + size * 0.015, margin + size * 0.015, innerSize - size * 0.03, innerSize - size * 0.03);
+
+        // Corner Diamonds - MÁS GRANDES
+        const dSize = size * 0.04;
+        ctx.fillStyle = '#C77DFF';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.06;
         [[margin, margin], [size - margin, margin], [margin, size - margin], [size - margin, size - margin]].forEach(
           ([x, y]) => {
             ctx.beginPath();
@@ -632,80 +666,127 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         );
 
         // Top Biblical Banner
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.06, margin * 0.5, size * 0.88, size * 0.095);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, margin * 0.35, size * 0.88, size * 0.12);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, margin * 0.35, size * 0.88, size * 0.12);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.035}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.044}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.045);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.35 + size * 0.055);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.023}px 'Outfit', sans-serif`;
-        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.078);
+        ctx.font = `700 ${size * 0.024}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.35 + size * 0.09);
+
+        // Logo circles
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
 
         // Bottom Footer Banner
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
-        ctx.fillRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.12);
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#b01cc6';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
 
-        ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.046}px 'Outfit', sans-serif`;
-        ctx.shadowColor = '#c3a7ff';
+        ctx.fillStyle = '#C77DFF';
+        ctx.font = `800 ${size * 0.038}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#C77DFF';
         ctx.shadowBlur = size * 0.025;
-        ctx.fillText('METANOIA 2026', size / 2, size - margin * 1.8 + size * 0.062);
+        ctx.fillText('METANOIA 2026', size / 2, size - margin * 2.0 + size * 0.048);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `600 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
         ctx.shadowBlur = 0;
         ctx.fillText(
-          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} // 21 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
+          attendeeName ? `ESCUADRA: ${attendeeName.toUpperCase()} • 21 NOV 2026` : 'RENOVAR LA MENTE PARA VIVIR LO ETERNO',
           size / 2,
-          size - margin * 1.8 + size * 0.092
+          size - margin * 2.0 + size * 0.085
         );
+
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
+        ctx.fillText('IGLESIA PACTO Y BENDICIÓN', size / 2, size - margin * 2.0 + size * 0.12);
         break;
       }
 
       case 'squad-pass': {
-        // Escuadra Juvenil Tactical HUD Pass
+        // Escuadra Juvenil Tactical HUD Pass - BORDES GRUESOS
         ctx.strokeStyle = '#730bb3';
-        ctx.lineWidth = size * 0.008;
+        ctx.lineWidth = size * 0.03;
         ctx.shadowColor = '#730bb3';
-        ctx.shadowBlur = size * 0.02;
+        ctx.shadowBlur = size * 0.07;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Caution Stripes Header
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.95)';
-        ctx.fillRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.004;
-        ctx.strokeRect(size * 0.08, margin * 0.4, size * 0.84, size * 0.085);
+        // Inner bright border
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.014;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(margin + size * 0.015, margin + size * 0.015, innerSize - size * 0.03, innerSize - size * 0.03);
+
+        // Header Banner
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.08, margin * 0.35, size * 0.84, size * 0.12);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.08, margin * 0.35, size * 0.84, size * 0.12);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.04}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.046}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.4 + size * 0.05);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.35 + size * 0.057);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.02}px 'Outfit', sans-serif`;
-        ctx.fillText('RELOAD', size / 2, margin * 0.4 + size * 0.078);
+        ctx.font = `700 ${size * 0.024}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.35 + size * 0.092);
+
+        // Logo circles
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
 
         // Bottom Tactical Barcode & Data
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.95)';
-        ctx.fillRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, size - margin * 2.05, size * 0.88, size * 0.16);
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.004;
-        ctx.strokeRect(size * 0.06, size - margin * 2.1, size * 0.88, size * 0.15);
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#b01cc6';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, size - margin * 2.05, size * 0.88, size * 0.16);
 
         // Barcode
-        const barX = size * 0.1;
-        const barY = size - margin * 2.1 + size * 0.02;
-        const barH = size * 0.05;
+        const barX = size * 0.12;
+        const barY = size - margin * 2.05 + size * 0.02;
+        const barH = size * 0.055;
         ctx.fillStyle = '#ffffff';
         for (let b = 0; b < 45; b++) {
           const w = b % 4 === 0 ? 5 : b % 2 === 0 ? 3 : 2;
@@ -714,227 +795,303 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
 
         // Tactical Data on the right
         ctx.textAlign = 'right';
-        ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.027}px 'Outfit', sans-serif`;
-        ctx.fillText('21-NOV-2026', size * 0.9, barY + size * 0.025);
+        ctx.fillStyle = '#C77DFF';
+        ctx.font = `800 ${size * 0.028}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('21-NOV-2026', size * 0.88, barY + size * 0.028);
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
-        ctx.fillText('GUAZAPA • SV', size * 0.9, barY + size * 0.048);
+        ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
+        ctx.shadowBlur = 0;
+        ctx.fillText('GUAZAPA • SV', size * 0.88, barY + size * 0.052);
 
         // Custom Name below
         ctx.textAlign = 'center';
         ctx.fillStyle = '#ffffff';
-        ctx.font = `700 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `700 ${size * 0.025}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
-          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'CREDENCIAL METANOIA 2026 // RELOAD',
+          attendeeName ? `ASISTENTE: ${attendeeName.toUpperCase()}` : 'CREDENCIAL METANOIA 2026',
           size / 2,
-          size - margin * 2.1 + size * 0.115
+          size - margin * 2.05 + size * 0.125
         );
         break;
       }
 
       case 'holo-crystal': {
-        // Holographic 3D Crystal & Violet Ring
+        // Holographic 3D Crystal & Violet Ring - BORDES GRUESOS
         ctx.save();
         ctx.strokeStyle = '#730bb3';
-        ctx.lineWidth = size * 0.015;
+        ctx.lineWidth = size * 0.035;
         ctx.shadowColor = '#730bb3';
-        ctx.shadowBlur = size * 0.04;
+        ctx.shadowBlur = size * 0.08;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
         // Inner glowing circle accent
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.4)';
-        ctx.lineWidth = size * 0.003;
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.7)';
+        ctx.lineWidth = size * 0.018;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.06;
         ctx.beginPath();
         ctx.arc(size / 2, size / 2, size * 0.42, 0, Math.PI * 2);
         ctx.stroke();
 
-        // HUD Crosshairs
-        ctx.strokeStyle = 'rgba(244, 182, 255, 0.8)';
-        ctx.lineWidth = 2.5;
+        // HUD Crosshairs - MÁS GRUESOS
+        ctx.strokeStyle = 'rgba(244, 182, 255, 0.9)';
+        ctx.lineWidth = size * 0.008;
+        ctx.lineCap = 'round';
         ctx.beginPath();
-        ctx.moveTo(size / 2 - 25, size / 2);
-        ctx.lineTo(size / 2 + 25, size / 2);
-        ctx.moveTo(size / 2, size / 2 - 25);
-        ctx.lineTo(size / 2, size / 2 + 25);
+        ctx.moveTo(size / 2 - 30, size / 2);
+        ctx.lineTo(size / 2 + 30, size / 2);
+        ctx.moveTo(size / 2, size / 2 - 30);
+        ctx.lineTo(size / 2, size / 2 + 30);
         ctx.stroke();
         ctx.restore();
 
         // Top Header
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.095);
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.005;
-        ctx.strokeRect(size * 0.12, margin * 0.5, size * 0.76, size * 0.095);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.1, margin * 0.35, size * 0.8, size * 0.12);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.1, margin * 0.35, size * 0.8, size * 0.12);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.046}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.052}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.02;
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.052);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.025;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.35 + size * 0.062);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.02}px 'Outfit', sans-serif`;
-        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.078);
+        ctx.font = `700 ${size * 0.024}px 'Outfit', sans-serif`;
+        ctx.shadowBlur = size * 0.015;
+        ctx.fillText('RELOAD', size / 2, margin * 0.35 + size * 0.095);
+
+        // Logo circles
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
 
         // Bottom Footer
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
-        ctx.fillRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
         ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.1, size - margin * 1.7, size * 0.8, size * 0.1);
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#b01cc6';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
 
-        ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.026}px 'Outfit', sans-serif`;
-        ctx.fillText('21 NOVIEMBRE • IGLEPACBEN AD GUAZAPA', size / 2, size - margin * 1.7 + size * 0.045);
+        ctx.fillStyle = '#C77DFF';
+        ctx.font = `800 ${size * 0.032}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('21 NOVIEMBRE 2026', size / 2, size - margin * 2.0 + size * 0.045);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.02}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.font = `600 ${size * 0.023}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.shadowBlur = 0;
+        ctx.fillText('GUAZAPA, EL SALVADOR', size / 2, margin + size * 0.78);
+
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
         ctx.fillText(
-          attendeeName ? `${attendeeName.toUpperCase()} • EN SINTONÍA` : 'EXPERIENCIA DE ALABANZA, PALABRA Y PODER',
+          attendeeName ? `${attendeeName.toUpperCase()}` : 'EXPERIENCIA DE ALABANZA Y PODER',
           size / 2,
-          size - margin * 1.7 + size * 0.078
+          size - margin * 2.0 + size * 0.115
         );
         break;
       }
 
       case 'cyberwave': {
-        // Synthwave Violet Gradient
+        // Synthwave Violet Gradient - BORDES GRUESOS
         ctx.save();
         const borderGrad = ctx.createLinearGradient(0, 0, size, size);
-        borderGrad.addColorStop(0, '#c3a7ff');
+        borderGrad.addColorStop(0, '#C77DFF');
         borderGrad.addColorStop(0.5, '#730bb3');
         borderGrad.addColorStop(1, '#b01cc6');
         ctx.strokeStyle = borderGrad;
-        ctx.lineWidth = size * 0.015;
+        ctx.lineWidth = size * 0.035;
         ctx.shadowColor = '#730bb3';
-        ctx.shadowBlur = size * 0.04;
+        ctx.shadowBlur = size * 0.08;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Horizon Grid lines at bottom
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.5)';
-        ctx.lineWidth = 1.5;
+        // Horizon Grid lines at bottom - MÁS VISIBLES
+        ctx.strokeStyle = 'rgba(195, 167, 255, 0.6)';
+        ctx.lineWidth = 2;
         for (let i = 1; i <= 8; i++) {
           ctx.beginPath();
-          ctx.moveTo(margin, size - margin - i * (size * 0.025));
-          ctx.lineTo(size - margin, size - margin - i * (size * 0.025));
+          ctx.moveTo(margin, size - margin - i * (size * 0.03));
+          ctx.lineTo(size - margin, size - margin - i * (size * 0.03));
           ctx.stroke();
         }
         ctx.restore();
 
         // Top Banner
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.1, margin * 0.5, size * 0.8, size * 0.1);
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.005;
-        ctx.strokeRect(size * 0.1, margin * 0.5, size * 0.8, size * 0.1);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.08, margin * 0.35, size * 0.84, size * 0.12);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.08, margin * 0.35, size * 0.84, size * 0.12);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.048}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.052}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.5 + size * 0.058);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.025;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.35 + size * 0.062);
+
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `700 ${size * 0.024}px 'Outfit', sans-serif`;
+        ctx.fillText('RELOAD', size / 2, margin * 0.35 + size * 0.095);
+
+        // Logo circles
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Bottom Banner
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+        ctx.fillRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
+        ctx.strokeStyle = '#b01cc6';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#b01cc6';
+        ctx.shadowBlur = size * 0.05;
+        ctx.strokeRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
+
+        ctx.fillStyle = '#C77DFF';
+        ctx.font = `800 ${size * 0.035}px 'Outfit', sans-serif`;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('21 NOVIEMBRE 2026', size / 2, size - margin * 2.0 + size * 0.048);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `600 ${size * 0.023}px 'Plus Jakarta Sans', sans-serif`;
+        ctx.shadowBlur = 0;
+        ctx.fillText('GUAZAPA, EL SALVADOR', size / 2, size - margin * 2.0 + size * 0.08);
 
         ctx.fillStyle = '#f4b6ff';
         ctx.font = `700 ${size * 0.022}px 'Outfit', sans-serif`;
-        ctx.fillText('RELOAD', size / 2, margin * 0.5 + size * 0.085);
-
-        // Bottom Banner
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
-        ctx.fillRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.125);
-        ctx.strokeStyle = '#b01cc6';
-        ctx.lineWidth = size * 0.005;
-        ctx.strokeRect(size * 0.06, size - margin * 1.8, size * 0.88, size * 0.125);
-
-        ctx.fillStyle = '#c3a7ff';
-        ctx.font = `800 ${size * 0.032}px 'Outfit', sans-serif`;
-        ctx.fillText('21 NOVIEMBRE 2026 • GUAZAPA', size / 2, size - margin * 1.8 + size * 0.052);
-
-        ctx.fillStyle = '#ffffff';
-        ctx.font = `600 ${size * 0.022}px 'Plus Jakarta Sans', sans-serif`;
         ctx.fillText(
           attendeeName ? attendeeName.toUpperCase() : 'EXPERIENCIA DE ALABANZA Y TRANSFORMACIÓN',
           size / 2,
-          size - margin * 1.8 + size * 0.09
+          size - margin * 2.0 + size * 0.115
         );
         break;
       }
 
       case 'minimal-obsidian': {
-        // High Fashion Cyber Minimalist
+        // High Fashion Cyber Minimalist - BORDES GRUESOS
         ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = size * 0.008;
+        ctx.lineWidth = size * 0.028;
         ctx.shadowColor = '#ffffff';
-        ctx.shadowBlur = size * 0.02;
+        ctx.shadowBlur = size * 0.06;
         ctx.strokeRect(margin, margin, innerSize, innerSize);
 
-        // Lavender Corner Tick Accents
-        const tick = size * 0.04;
-        ctx.strokeStyle = '#c3a7ff';
-        ctx.lineWidth = size * 0.008;
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.025;
+        // Lavender Corner Tick Accents - MÁS GRANDES
+        const tick = size * 0.05;
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.015;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.06;
+        ctx.lineCap = 'round';
 
         // 4 corners
         ctx.beginPath();
-        ctx.moveTo(margin - 4, margin + tick);
-        ctx.lineTo(margin - 4, margin - 4);
-        ctx.lineTo(margin + tick, margin - 4);
+        ctx.moveTo(margin - 6, margin + tick);
+        ctx.lineTo(margin - 6, margin - 6);
+        ctx.lineTo(margin + tick, margin - 6);
 
-        ctx.moveTo(size - margin + 4 - tick, margin - 4);
-        ctx.lineTo(size - margin + 4, margin - 4);
-        ctx.lineTo(size - margin + 4, margin + tick);
+        ctx.moveTo(size - margin + 6 - tick, margin - 6);
+        ctx.lineTo(size - margin + 6, margin - 6);
+        ctx.lineTo(size - margin + 6, margin + tick);
 
-        ctx.moveTo(margin - 4, size - margin - tick);
-        ctx.lineTo(margin - 4, size - margin + 4);
-        ctx.lineTo(margin + tick, size - margin + 4);
+        ctx.moveTo(margin - 6, size - margin - tick);
+        ctx.lineTo(margin - 6, size - margin + 6);
+        ctx.lineTo(margin + tick, size - margin + 6);
 
-        ctx.moveTo(size - margin + 4 - tick, size - margin + 4);
-        ctx.lineTo(size - margin + 4, size - margin + 4);
-        ctx.lineTo(size - margin + 4, size - margin + 4 - tick);
+        ctx.moveTo(size - margin + 6 - tick, size - margin + 6);
+        ctx.lineTo(size - margin + 6, size - margin + 6);
+        ctx.lineTo(size - margin + 6, size - margin + 6 - tick);
         ctx.stroke();
 
         // Top Minimalist Header
         ctx.shadowBlur = 0;
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.14, margin * 0.45, size * 0.72, size * 0.09);
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.6)';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.14, margin * 0.45, size * 0.72, size * 0.09);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
+        ctx.fillRect(size * 0.12, margin * 0.35, size * 0.76, size * 0.12);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.04;
+        ctx.strokeRect(size * 0.12, margin * 0.35, size * 0.76, size * 0.12);
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = `800 ${size * 0.044}px 'Outfit', sans-serif`;
+        ctx.font = `800 ${size * 0.052}px 'Outfit', sans-serif`;
         ctx.textAlign = 'center';
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.015;
-        ctx.fillText('METANOIA 2026', size / 2, margin * 0.45 + size * 0.053);
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
+        ctx.fillText('METANOIA 2026', size / 2, margin * 0.35 + size * 0.062);
 
         ctx.fillStyle = '#f4b6ff';
-        ctx.font = `700 ${size * 0.021}px 'Outfit', sans-serif`;
+        ctx.font = `700 ${size * 0.024}px 'Outfit', sans-serif`;
         ctx.shadowBlur = 0;
-        ctx.fillText('RELOAD', size / 2, margin * 0.45 + size * 0.078);
+        ctx.fillText('RELOAD', size / 2, margin * 0.35 + size * 0.097);
+
+        // Logo circles
+        const logoSize = size * 0.08;
+        ctx.fillStyle = 'rgba(195, 167, 255, 0.9)';
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.05;
+        ctx.beginPath();
+        ctx.arc(margin + logoSize * 0.6, margin + logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(size - margin - logoSize * 0.6, size - margin - logoSize * 0.6, logoSize * 0.35, 0, Math.PI * 2);
+        ctx.fill();
 
         // Bottom Minimalist Text
-        ctx.fillStyle = 'rgba(23, 5, 38, 0.92)';
-        ctx.fillRect(size * 0.08, size - margin * 1.65, size * 0.84, size * 0.105);
-        ctx.strokeStyle = 'rgba(195, 167, 255, 0.6)';
-        ctx.lineWidth = size * 0.003;
-        ctx.strokeRect(size * 0.08, size - margin * 1.65, size * 0.84, size * 0.105);
+        ctx.fillStyle = 'rgba(23, 5, 38, 0.94)';
+        ctx.fillRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
+        ctx.strokeStyle = '#C77DFF';
+        ctx.lineWidth = size * 0.006;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.04;
+        ctx.strokeRect(size * 0.06, size - margin * 2.0, size * 0.88, size * 0.15);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = `700 ${size * 0.028}px 'Chakra Petch', sans-serif`;
-        ctx.shadowColor = '#c3a7ff';
-        ctx.shadowBlur = size * 0.015;
+        ctx.shadowColor = '#C77DFF';
+        ctx.shadowBlur = size * 0.02;
         ctx.fillText(
           attendeeName ? attendeeName.toUpperCase() : 'UNA MENTE RENOVADA',
           size / 2,
-          size - margin * 1.65 + size * 0.045
+          size - margin * 2.0 + size * 0.05
         );
 
         ctx.fillStyle = '#C77DFF';
-        ctx.font = `600 ${size * 0.021}px 'Chakra Petch', sans-serif`;
+        ctx.font = `600 ${size * 0.023}px 'Chakra Petch', sans-serif`;
         ctx.shadowBlur = 0;
-        ctx.fillText('21 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 1.65 + size * 0.08);
+        ctx.fillText('21 NOV 2026 • GUAZAPA, EL SALVADOR', size / 2, size - margin * 2.0 + size * 0.09);
+
+        ctx.fillStyle = '#f4b6ff';
+        ctx.font = `600 ${size * 0.02}px 'Outfit', sans-serif`;
+        ctx.fillText('IGLESIA PACTO Y BENDICIÓN', size / 2, size - margin * 2.0 + size * 0.12);
         break;
       }
     }
