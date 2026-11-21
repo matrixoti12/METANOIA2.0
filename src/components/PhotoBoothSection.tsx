@@ -483,13 +483,13 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
       }
 
       // 2. Draw Frame Overlay based on selectedFrame
-      drawFrameOverlay(ctx, size, selectedFrame, customName);
+      await drawFrameOverlay(ctx, size, selectedFrame, customName);
     },
     [capturedImage, selectedFilter, selectedFrame, customName, zoom, panX, panY, rotation, brightness, contrast, isFlipped]
   );
 
-  // Helper to draw vector frames on canvas
-  const drawFrameOverlay = (
+  // Helper to draw vector frames on canvas - CLEAN, SYSTEMATIC APPROACH
+  const drawFrameOverlay = async (
     ctx: CanvasRenderingContext2D,
     size: number,
     frameId: FrameId,
@@ -498,10 +498,138 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
     ctx.save();
     const margin = size * 0.045;
     const innerSize = size - margin * 2;
+    const logoSize = size * 0.08;
 
+    // Frame configuration: border color, accent color, shadow blur
+    const frameConfigs: Record<FrameId, { borderColor: string; accentColor: string; shadowBlur: number }> = {
+      'neon-prime': { borderColor: '#7B2FBE', accentColor: '#C77DFF', shadowBlur: 0.1 },
+      'romanos-12': { borderColor: '#b01cc6', accentColor: '#C77DFF', shadowBlur: 0.08 },
+      'squad-pass': { borderColor: '#730bb3', accentColor: '#C77DFF', shadowBlur: 0.07 },
+      'holo-crystal': { borderColor: '#730bb3', accentColor: '#C77DFF', shadowBlur: 0.08 },
+      'cyberwave': { borderColor: '#ff00aa', accentColor: '#00e5ff', shadowBlur: 0.08 },
+      'minimal-obsidian': { borderColor: '#ffffff', accentColor: '#C77DFF', shadowBlur: 0.06 },
+    };
+
+    const config = frameConfigs[frameId];
+
+    // ========== STEP 1: GRUESO COLORED BORDER ==========
+    ctx.strokeStyle = config.borderColor;
+    ctx.lineWidth = size * 0.04;
+    ctx.shadowColor = config.borderColor;
+    ctx.shadowBlur = size * config.shadowBlur;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.strokeRect(margin, margin, innerSize, innerSize);
+
+    // Inner accent line (thinner)
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = config.accentColor;
+    ctx.lineWidth = size * 0.008;
+    ctx.strokeRect(margin + size * 0.02, margin + size * 0.02, innerSize - size * 0.04, innerSize - size * 0.04);
+
+    // ========== STEP 2: LOAD AND DRAW ACTUAL LOGO (2 CORNERS ONLY) ==========
+    try {
+      const logoImg = new Image();
+      logoImg.crossOrigin = 'anonymous';
+      
+      await new Promise<void>((resolve, reject) => {
+        logoImg.onload = () => resolve();
+        logoImg.onerror = () => {
+          console.warn('Logo image failed to load, trying alternative');
+          reject(new Error('Could not load logo'));
+        };
+        // Try multiple paths
+        logoImg.src = new URL('/assets/metanoia-emblem-square.png', window.location.href).href;
+      });
+
+      ctx.shadowColor = config.accentColor;
+      ctx.shadowBlur = size * 0.05;
+
+      // Top-Left Logo
+      ctx.drawImage(
+        logoImg,
+        margin + logoSize * 0.3,
+        margin + logoSize * 0.3,
+        logoSize,
+        logoSize
+      );
+
+      // Bottom-Right Logo
+      ctx.drawImage(
+        logoImg,
+        size - margin - logoSize * 1.3,
+        size - margin - logoSize * 1.3,
+        logoSize,
+        logoSize
+      );
+    } catch (err) {
+      // Fallback: draw placeholder circles if logo fails to load
+      console.warn('Using logo fallback circles', err);
+      ctx.fillStyle = config.accentColor.includes('00e5ff')
+        ? 'rgba(0, 229, 255, 0.85)'
+        : 'rgba(195, 167, 255, 0.9)';
+      ctx.shadowColor = config.accentColor;
+      ctx.shadowBlur = size * 0.04;
+
+      // Top-Left Logo placeholder
+      ctx.beginPath();
+      ctx.arc(margin + logoSize * 0.8, margin + logoSize * 0.8, logoSize * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bottom-Right Logo placeholder
+      ctx.beginPath();
+      ctx.arc(size - margin - logoSize * 0.8, size - margin - logoSize * 0.8, logoSize * 0.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // ========== STEP 3: TOP BANNER ==========
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+    ctx.fillRect(size * 0.12, size * 0.07, size * 0.76, size * 0.1);
+    ctx.strokeStyle = config.accentColor;
+    ctx.lineWidth = size * 0.004;
+    ctx.shadowColor = config.accentColor;
+    ctx.shadowBlur = size * 0.03;
+    ctx.strokeRect(size * 0.12, size * 0.07, size * 0.76, size * 0.1);
+
+    // Top Banner Text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `900 ${size * 0.052}px 'Outfit', sans-serif`;
+    ctx.textAlign = 'center';
+    ctx.shadowColor = config.accentColor;
+    ctx.shadowBlur = size * 0.02;
+    ctx.fillText('METANOIA 2026', size / 2, size * 0.07 + size * 0.058);
+
+    // ========== STEP 4: BOTTOM BANNER ==========
+    ctx.fillStyle = 'rgba(23, 5, 38, 0.96)';
+    ctx.fillRect(size * 0.1, size - size * 0.17, size * 0.8, size * 0.13);
+    ctx.strokeStyle = config.borderColor;
+    ctx.lineWidth = size * 0.004;
+    ctx.shadowColor = config.borderColor;
+    ctx.shadowBlur = size * 0.03;
+    ctx.strokeRect(size * 0.1, size - size * 0.17, size * 0.8, size * 0.13);
+
+    // Bottom Banner Text - Date
+    ctx.fillStyle = config.accentColor;
+    ctx.font = `700 ${size * 0.028}px 'Outfit', sans-serif`;
+    ctx.shadowColor = config.accentColor;
+    ctx.shadowBlur = size * 0.015;
+    ctx.fillText('21 NOVIEMBRE 2026', size / 2, size - size * 0.17 + size * 0.038);
+
+    // Bottom Banner Text - Attendee or Default
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `600 ${size * 0.023}px 'Plus Jakarta Sans', sans-serif`;
+    ctx.shadowBlur = 0;
+    const attendeeText = attendeeName
+      ? `${attendeeName.toUpperCase()}`
+      : 'UNA MENTE RENOVADA EN CRISTO';
+    ctx.fillText(attendeeText, size / 2, size - size * 0.17 + size * 0.09);
+
+    if (false) {
+    // OLD SWITCH CASES KEPT FOR REFERENCE BUT DISABLED
     switch (frameId) {
       case 'neon-prime': {
-        // Cyber Neon Prime Frame — paleta violeta/lavanda
+        // DEPRECATED - Cyber Neon Prime Frame — paleta violeta/lavanda
         // Outer dark vignette
         const grad = ctx.createRadialGradient(size / 2, size / 2, size * 0.35, size / 2, size / 2, size * 0.65);
         grad.addColorStop(0, 'transparent');
@@ -1094,6 +1222,7 @@ export const PhotoBoothSection: React.FC<PhotoBoothSectionProps> = ({ initialAtt
         ctx.fillText('IGLESIA PACTO Y BENDICIÓN', size / 2, size - margin * 2.0 + size * 0.12);
         break;
       }
+    }
     }
     ctx.restore();
   };
